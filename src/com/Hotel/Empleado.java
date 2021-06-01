@@ -9,14 +9,18 @@ public abstract class Empleado extends Persona{
     private String usuario;
     private String clave;
 
+
+
     //constructores
 
 
     public Empleado() { }
 
-    public Empleado(String nombre, String apellido) {
-        super(nombre, apellido);
+    public Empleado(String nombre, String apellido, String numeroTel) {
+        super(nombre, apellido, numeroTel);
     }
+
+
 
     //getters y setters
 
@@ -30,7 +34,8 @@ public abstract class Empleado extends Persona{
 
 
 
-    /// para modificar usuario y clave comparo si coincide el dato anterior con el actual, en ese caso se modifica
+    /// para modificar usuario y clave comparo si coincide el dato anterior con el actual,
+    // en ese caso se modifica
 
     public void modificarClave(Empleado empleado, String claveAnterior, String nuevaClave) {
         if (empleado.getClave().compareTo(claveAnterior) == 0) {

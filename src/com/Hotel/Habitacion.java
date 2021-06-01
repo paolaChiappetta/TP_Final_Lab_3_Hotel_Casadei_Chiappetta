@@ -84,16 +84,17 @@ public class Habitacion {
     Scanner scanner= new Scanner(System.in);
 
 
-    public void MenuTipoHabitacion() {
+    public void menuTipoHabitacion() {
         System.out.println("1: Single standard");
         System.out.println("2: Single superior");
         System.out.println("3: Doble standard");
-        System.out.println("4 Doble superior");
-        System.out.println("5 Triple standard");
-        System.out.println("6 Departamento 4 pasajeros");
-        System.out.println("7 Departamento 6 pasajeros");
-        System.out.println("8 Suite");
-        System.out.println("0 para finalizar");
+        System.out.println("4: Doble superior");
+        System.out.println("5: Triple standard");
+        System.out.println("6: Departamento 4 pasajeros");
+        System.out.println("7: Departamento 6 pasajeros");
+        System.out.println("8: Suite");
+
+        System.out.println("\n0 para finalizar");
 
     }
 
@@ -106,7 +107,7 @@ public class Habitacion {
 
 
         do {
-            MenuTipoHabitacion();
+            menuTipoHabitacion();
             opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
