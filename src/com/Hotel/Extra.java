@@ -53,10 +53,12 @@ public abstract class Extra {
 
     }
 
+
+
     @Override
     public String toString() {
-        return this.nombre + "      $" + this.precio  + "   "
-                + this.cantidad  +  "    "  + this.calculoExtraPorCantidad();
+        return "         " + this.nombre + "              $" + this.precio  + "             "
+                + this.cantidad  +  "               "  + this.calculoExtraPorCantidad() + "\n";
 
     }
 }
