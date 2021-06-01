@@ -4,15 +4,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class Recepcionista extends Empleado implements InterfazAccion{
+public class Recepcionista extends Empleado implements InterfazAccion {
 
     //constructores
 
-    public Recepcionista() { }
+    public Recepcionista() {
+    }
 
 
-    public Recepcionista(String nombre, String apellido) {
-        super(nombre, apellido);
+    public Recepcionista(String nombre, String apellido, String numeroTel) {
+        super(nombre, apellido, numeroTel);
 
     }
 
@@ -26,7 +27,6 @@ public class Recepcionista extends Empleado implements InterfazAccion{
     public void menuModificarHabitacion() {
 
         System.out.println("1: Estado");
-        System.out.println("2: Fecha proxima ocupacion");
 
         System.out.println("0 para Finalizar");
 
@@ -49,11 +49,6 @@ public class Recepcionista extends Empleado implements InterfazAccion{
                     habitacion.indicarEstadoHabitacion();
                     break;
 
-
-                case 2:
-                    System.out.println("Fecha de proxima ocupacion:");
-                    habitacion.getFechaProximaOcupacion(LocalDate.parse(scanner.next(), DateTimeFormatter.BASIC_ISO_DATE));
-                    break;
 
                 default:
                     System.out.println("Opcion incorrecta, ingrese nuevamente");
