@@ -20,9 +20,5 @@ public class Rotura extends Extra {
         this.causa = causa;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() +
-                "\nCausa: " + this.causa;
-    }
+
 }

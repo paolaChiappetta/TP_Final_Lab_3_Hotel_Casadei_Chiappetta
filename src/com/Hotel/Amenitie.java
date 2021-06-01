@@ -30,10 +30,5 @@ public class Amenitie extends Extra {
         this.horario = horario;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() +
-                "\nDescripción: " + this.descripcion +
-                "\nHorario: " + this.horario;
-    }
+
 }

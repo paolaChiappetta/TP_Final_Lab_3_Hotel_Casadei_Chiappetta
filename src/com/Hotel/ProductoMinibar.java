@@ -20,10 +20,6 @@ public class ProductoMinibar extends Extra {
         this.marca = marca;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() +
-                "\nMarca: " + this.marca;
-    }
+
 
 }

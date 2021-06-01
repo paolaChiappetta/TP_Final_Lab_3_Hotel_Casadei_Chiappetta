@@ -20,9 +20,5 @@ public class Servicio extends Extra {
         this.empleadoEncargado = empleadoEncargado;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() +
-                "\nSolicitar a:" + this.empleadoEncargado;
-    }
+
 }
