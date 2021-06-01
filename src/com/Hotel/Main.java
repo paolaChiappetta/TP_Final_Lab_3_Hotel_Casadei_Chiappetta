@@ -65,11 +65,16 @@ public class Main {
         productos.add(prod2);
         productos.add(prod3);
 
+        extras.add(servicio);
+        extras.add(amenitie);
+        extras.add(servicio);
+        extras.add(prod);
+
        Shop shop = new Shop(roturas,servicios,amenities,productos);
 
-       shop.verListaPorTipo();
+       //shop.verListaPorTipo();
 
-        /*Factura factura = new Factura(TipoFactura.FACTURA_A, ocup);
-        System.out.println(factura);*/
+        Factura factura = new Factura(TipoFactura.FACTURA_A, ocup);
+        System.out.println(factura);
     }
 }
