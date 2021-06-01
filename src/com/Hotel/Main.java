@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Pasajero pax = new Pasajero("Paola", "Chiappetta", "35418021",
+        Pasajero pax = new Pasajero("Paola", "Chiappetta", "15536583","35418021",
                 LocalDate.parse("1990-08-10"), "Estudiante",
                 "Argentina", "Gascon", 2330, 3,
                 "C", "Mar del Plata", "Bs As", "Argentina",
@@ -72,7 +72,7 @@ public class Main {
 
        Shop shop = new Shop(roturas,servicios,amenities,productos);
 
-       //shop.verListaPorTipo();
+       /shop.verListaPorTipo();
 
         Factura factura = new Factura(TipoFactura.FACTURA_A, ocup);
         System.out.println(factura);
