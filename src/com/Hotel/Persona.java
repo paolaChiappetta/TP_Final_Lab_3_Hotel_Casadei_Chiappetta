@@ -6,13 +6,15 @@ public abstract class Persona {
 
     private String nombre;
     private String apellido;
+    private String numeroTel;
 
 
     public Persona() {}
 
-    public Persona(String nombre, String apellido) {
+    public Persona(String nombre, String apellido, String numerotel) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.numeroTel= numerotel;
     }
 
     public String getNombre() {  return nombre;    }
@@ -23,12 +25,17 @@ public abstract class Persona {
 
     public void setApellido(String apellido) {    this.apellido = apellido;  }
 
+    public String getNumeroTel() {   return numeroTel;  }
+
+    public void setNumeroTel(String numeroTel) {   this.numeroTel = numeroTel;  }
+
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre +
-                "\nApellido: " + apellido;
+        return "Persona{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", numeroTel='" + numeroTel + '\'' +
+                '}';
     }
-
-
 }
