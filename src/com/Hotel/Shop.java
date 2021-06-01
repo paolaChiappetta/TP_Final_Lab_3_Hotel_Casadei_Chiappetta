@@ -73,6 +73,7 @@ public class Shop {
                         menuListas();
                         opcion = scanner.nextInt();
                         switch (opcion) {
+
                             case 1:
                                 for (ProductoMinibar lista : minibar) {
                                     if (lista.isAlta()) {
@@ -106,6 +107,7 @@ public class Shop {
                                 break;
 
                         }
+
                     } while (opcion != 0);
                     break;
                 case 2:
