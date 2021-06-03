@@ -96,7 +96,7 @@ public class Hotel {
                         } else if (encontrada == false && it == listaHabitaciones.get(i).getReservasHab().size() - 1 && ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) || ingreso.isEqual(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida())) {
                             habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());
                             encontrada = true;
-                        } else if (encontrada == false && it != 0 && it != listaHabitaciones.get(i).getReservasHab().size() - 1 && (ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) || ingreso.equals(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida())) && (salida.isEqual(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()) || salida.isBefore(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()))) {
+                        } else if (encontrada == false && (ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) || ingreso.equals(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida())) && (salida.isEqual(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()) || salida.isBefore(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()))) {
                             habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());
                             encontrada = true;
                         }

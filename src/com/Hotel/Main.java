@@ -109,7 +109,7 @@ public class Main {
 
         Hotel hotel = new Hotel();
         hotel.setListaHabitaciones(habitaciones);
-        List<Integer>libres = hotel.habsLibre(LocalDate.parse("2021-05-31"), LocalDate.parse("2021-06-01"));
+        List<Integer>libres = hotel.habsLibre(LocalDate.parse("2021-06-05"), LocalDate.parse("2021-06-10"));
       /* for (Habitacion habs : hotel.getListaHabitaciones()){
             Collections.sort(habs.getReservasHab());
             System.out.println(habs.getReservasHab().size() + "\n");
