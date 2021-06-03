@@ -2,10 +2,10 @@ package com.Hotel;
 
 import java.time.LocalDate;
 
-public class Reserva {
+public class Reserva implements Comparable<Reserva> {
 
 
-    private static long reservaId= 0;
+    private static long reservaId= 1;
 
     private String pasajeroNombre;
     private String pasajeroApellido;
@@ -74,6 +74,24 @@ public class Reserva {
 
     public Long getNumeroReserva() {     return numeroReserva;   }
 
+    @Override
+    public String toString() {
+        return "Reserva ID: " + this.numeroReserva +
+                "\nHabitación N°: " + this.numeroHabitacion +
+                "\nFecha de ingreso: " + this.fechaIngreso +
+                "\nFecha de salida: " + this.fechaSalida +
+                "\nTitular de reserva: " + this.pasajeroNombre + " " + this.pasajeroApellido +
+                "\nDepósito: $" + this.deposito + "\n";
+    }
 
-
+    @Override
+    public int compareTo(Reserva o) {
+        if (fechaIngreso.isBefore(o.getFechaIngreso())){
+            return -1;
+        }
+        if (fechaIngreso.isAfter(o.getFechaIngreso())){
+            return 1;
+        }
+        return 0;
+    }
 }
