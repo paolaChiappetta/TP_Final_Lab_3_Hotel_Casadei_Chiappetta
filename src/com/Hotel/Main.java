@@ -2,6 +2,7 @@ package com.Hotel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -19,12 +20,41 @@ public class Main {
 
         List<Extra>extras = new ArrayList<>();
 
+        List<Habitacion>habitaciones = new ArrayList<>();
+
+        List<Recepcionista>recepcionistas = new ArrayList<>();
+
         List<Reserva>reservas = new ArrayList<>();
-        Habitacion habitacion = new Habitacion(2025, 2, EstadoHabitacion.DISPONIBLE,
+        List<Reserva>reservas2 = new ArrayList<>();
+
+
+        Reserva reserva = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250, LocalDate.parse("2021-06-01"), LocalDate.parse("2021-06-03"));
+        reservas.add(reserva);
+        Reserva reserva2 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250, LocalDate.parse("2021-06-25"), LocalDate.parse("2021-06-28"));
+        reservas.add(reserva2);
+        Reserva reserva3 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250, LocalDate.parse("2021-07-01"), LocalDate.parse("2021-07-04"));
+        reservas.add(reserva3);
+
+        Reserva reserva4 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250, LocalDate.parse("2021-08-01"), LocalDate.parse("2021-08-03"));
+        reservas2.add(reserva4);
+        Reserva reserva5 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250, LocalDate.parse("2021-09-25"), LocalDate.parse("2021-09-28"));
+        reservas2.add(reserva5);
+        Reserva reserva6 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250, LocalDate.parse("2021-07-08"), LocalDate.parse("2021-07-12"));
+        reservas2.add(reserva6);
+
+        Habitacion habitacion1 = new Habitacion(101, 1, EstadoHabitacion.DISPONIBLE,
                 Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"), reservas);
+        Habitacion habitacion2 = new Habitacion(102, 1, EstadoHabitacion.DISPONIBLE,
+                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"), reservas2);
+        Habitacion habitacion11 = new Habitacion(111, 1, EstadoHabitacion.DISPONIBLE,
+                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"), null);
+
+        habitaciones.add(habitacion1);
+        habitaciones.add(habitacion2);
+        habitaciones.add(habitacion11);
 
         Ocupacion ocup = new Ocupacion(3, LocalDate.parse("2021-05-01"),
-                LocalDate.parse("2021-05-05"), extras, 1, habitacion, 1,
+                LocalDate.parse("2021-05-05"), extras, 1, habitacion1, 1,
                 TipoPension.MEDIA_PENSION, listaPax);
 
 
@@ -72,9 +102,22 @@ public class Main {
 
        Shop shop = new Shop(roturas,servicios,amenities,productos);
 
-       /shop.verListaPorTipo();
+       //shop.verListaPorTipo();
 
         Factura factura = new Factura(TipoFactura.FACTURA_A, ocup);
-        System.out.println(factura);
+        //System.out.println(factura);
+
+        Hotel hotel = new Hotel();
+        hotel.setListaHabitaciones(habitaciones);
+        List<Integer>libres = hotel.habsLibre(LocalDate.parse("2021-06-04"), LocalDate.parse("2021-06-10"));
+      /* for (Habitacion habs : hotel.getListaHabitaciones()){
+            Collections.sort(habs.getReservasHab());
+            System.out.println(habs.getReservasHab().size() + "\n");
+        }*/
+        for (Integer habs : libres){
+            System.out.println("Habitación N°: " + habs + "\n");
+        }
+
+
     }
 }
