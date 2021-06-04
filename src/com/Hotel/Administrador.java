@@ -82,6 +82,36 @@ public class Administrador extends Empleado implements InterfazAccion {
     }
 
 
+    public Empleado generarNuevoEmpleado (){
+
+        String nombre, apellido, telefono;
+        int opcion;
+
+        System.out.println("Nombre:");
+        nombre= scanner.nextLine();
+        System.out.println("Apellio:");
+        apellido= scanner.nextLine();
+        System.out.println("Telefono:");
+        telefono= scanner.nextLine();
+
+        System.out.println("Indique:  1= Recepcionista   2= Administrador");
+        opcion= scanner.nextInt();
+
+        if(opcion== 1){
+
+            Recepcionista recepcionista= new Recepcionista(nombre, apellido, telefono);
+
+            return recepcionista;
+        }else{
+
+            Administrador administrador= new Administrador(nombre, apellido, telefono);
+
+            return administrador;
+        }
+
+    }
+
+
 
     @Override
     public String toString() {
