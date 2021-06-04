@@ -11,7 +11,7 @@ public class Hotel {
     private List<Habitacion> listaHabitaciones;
     private List<Reserva> listaReservas;
     private List<Recepcionista> recepcionistas;
-    //private List<Ocupacion> listaOcupaciones;
+    private List<Ocupacion> listaOcupaciones;
 
     private Administrador administrador;
     private Recepcionista recpecionista;
@@ -111,5 +111,17 @@ public class Hotel {
         }
 
         return habitaciones;
+    }
+
+    public Ocupacion buscarOcupacionPorHabitacion (int numeroHab){
+        Ocupacion ocupacion=null;
+        if (this.listaOcupaciones!=null){
+            for(Ocupacion lista : this.listaOcupaciones){
+                if(lista.getHabitacion().getNumero()==numeroHab){
+                    ocupacion=lista;
+                }
+            }
+        }
+        return ocupacion;
     }
 }
