@@ -2,6 +2,7 @@ package com.Hotel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 public class Pasajero extends Persona {
@@ -23,8 +24,8 @@ public class Pasajero extends Persona {
     private String mail;
     private Integer id;                                     // o Long??   se asigna al generar un pasajero
     private Boolean titularReserva;
-    // private List<Reservas> listaDeReservas;
-    // private List<Hospedaje> listaHospedajeAnterior;
+    private List<Reserva> listaDeReservas;
+    private List<Ocupacion> listaOcupacionAnterior;
 
 
     //constructores
@@ -55,6 +56,7 @@ public class Pasajero extends Persona {
         this.pais = pais;
         this.mail = mail;
         this.titularReserva = titularreserva;
+
     }
 
     //getters y setters
@@ -167,7 +169,68 @@ public class Pasajero extends Persona {
         this.ciudad = ciudad;
     }
 
+    public List<Reserva> getListaDeReservas() {
+        return listaDeReservas;
+    }
+
+    public void setListaDeReservas(List<Reserva> listaDeReservas) {
+        this.listaDeReservas = listaDeReservas;
+    }
+
+    public List<Ocupacion> getListaOcupacionAnterior() {
+        return listaOcupacionAnterior;
+    }
+
+    public void setListaOcupacionAnterior(List<Ocupacion> listaOcupacionAnterior) {
+        this.listaOcupacionAnterior = listaOcupacionAnterior;
+    }
+
     Scanner scanner = new Scanner(System.in);
+
+
+    //FUNCION CARGA DE PASAJERO, pide datos devuelve pasajero
+
+    public Pasajero cargarPasajero (){
+        Pasajero pasajero= new Pasajero();
+
+
+        System.out.println("Nombre:");
+        pasajero.setNombre(scanner.next());
+        System.out.println("Apellido:");
+        pasajero.setApellido(scanner.next());
+        System.out.println("Dni:");
+        pasajero.setDni(scanner.next());
+        System.out.println("Telefono:");
+        pasajero.setNumeroTel(scanner.next());
+        System.out.println("Fecha de nacimiento:");
+        pasajero.setFechaNacimiento(LocalDate.parse(scanner.next(), DateTimeFormatter.BASIC_ISO_DATE));
+        System.out.println("Indique la profesion u ocupacion:");
+        pasajero.setProfesion_ocupacion(scanner.next());
+        System.out.println("Nacionalidad:");
+        pasajero.setNacionalidad(scanner.next());
+        System.out.println("Indique la Calle:");
+        pasajero.setCalle(scanner.next());
+        System.out.println("Numero:");
+        pasajero.setNumero(scanner.nextInt());
+        System.out.println("Piso:");
+        pasajero.setPiso(scanner.nextInt());
+        System.out.println("Departamento:");
+        pasajero.setDepartamento(scanner.next());
+        System.out.println("Ciudad:");
+        pasajero.setCiudad(scanner.next());
+        System.out.println("Provincia:");
+        pasajero.setProvincia(scanner.next());
+        System.out.println("Pais:");
+        pasajero.setPais(scanner.next());
+        System.out.println("Es titular de reserva? si: 1  / no: 0  ");
+        pasajero.setTitularreserva(scanner.nextBoolean());
+
+        return pasajero;
+    }
+
+
+
+
 
     //FUNCION MODIFICAR DATOS PASAJERO
 
@@ -225,7 +288,7 @@ public class Pasajero extends Persona {
                     this.setProfesion_ocupacion(scanner.next());
                     break;
                 case 6:
-                    System.out.println("Indique el Nacionalidad:");
+                    System.out.println("Indique la Nacionalidad:");
                     this.setNacionalidad(scanner.next());
                     break;
                 case 7:
@@ -267,14 +330,8 @@ public class Pasajero extends Persona {
                 default:
                     System.out.println("Opcion incorrecta, ingrese nuevamente");
                     break;
-
             }
-
-
         } while (opcion != 0);
-
-
-
     }
 
 
