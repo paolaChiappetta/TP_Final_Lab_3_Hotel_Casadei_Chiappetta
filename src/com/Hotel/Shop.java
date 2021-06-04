@@ -330,8 +330,9 @@ public class Shop {
                             if(servicios.get(i).getNombre().equalsIgnoreCase(nombre)){
                                 servicios.get(i).setAlta(false);
                                 encontrado=true;
-                                i++;
+
                             }
+                            i++;
                         }
                     }
                     break;
@@ -341,8 +342,9 @@ public class Shop {
                             if(amenities.get(i).getNombre().equalsIgnoreCase(nombre)){
                                 amenities.get(i).setAlta(false);
                                 encontrado=true;
-                                i++;
+
                             }
+                            i++;
                         }
                     }
                     break;
@@ -352,8 +354,9 @@ public class Shop {
                             if(minibar.get(i).getNombre().equalsIgnoreCase(nombre)){
                                 minibar.get(i).setAlta(false);
                                 encontrado=true;
-                                i++;
+
                             }
+                            i++;
                         }
                     }
                     break;
@@ -364,8 +367,9 @@ public class Shop {
                             if(roturas.get(i).getNombre().equalsIgnoreCase(nombre)){
                                 roturas.get(i).setAlta(false);
                                 encontrado=true;
-                                i++;
+
                             }
+                            i++;
                         }
                     }
                     break;
@@ -407,8 +411,9 @@ public class Shop {
                             if(servicios.get(i).getNombre().equalsIgnoreCase(nombre)){
                                 servicios.remove(servicios.get(i));
                                 encontrado=true;
-                                i++;
+
                             }
+                            i++;
                         }
                     }
                     break;
@@ -418,8 +423,9 @@ public class Shop {
                             if(amenities.get(i).getNombre().equalsIgnoreCase(nombre)){
                                 amenities.remove(amenities.get(i));
                                 encontrado=true;
-                                i++;
+
                             }
+                            i++;
                         }
                     }
                     break;
@@ -429,8 +435,9 @@ public class Shop {
                             if(minibar.get(i).getNombre().equalsIgnoreCase(nombre)){
                                 minibar.remove(minibar.get(i));
                                 encontrado=true;
-                                i++;
+
                             }
+                            i++;
                         }
                     }
                     break;
@@ -441,8 +448,9 @@ public class Shop {
                             if(roturas.get(i).getNombre().equalsIgnoreCase(nombre)){
                                 roturas.remove(roturas.get(i));
                                 encontrado=true;
-                                i++;
+
                             }
+                            i++;
                         }
                     }
                     break;
@@ -462,5 +470,309 @@ public class Shop {
         } while (continuar.equalsIgnoreCase("s"));
 
 
+    }
+
+    public void modificarExtra() {
+        String nombre;
+        int opcion;
+        String continuar = "s";
+        boolean encontrado = false;
+
+        do {
+            System.out.println("Qué tipo de extra desea modificar?");
+            opcionesExtras();
+            opcion = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("Ingrese el nombre del extra");
+            nombre = scanner.nextLine();
+            int i=0;
+
+
+            switch (opcion) {
+                case 1:
+                    if (this.servicios != null) {
+                        while (encontrado==false && i<servicios.size()){
+                            if(servicios.get(i).getNombre().equalsIgnoreCase(nombre)){
+                                do{
+                                    System.out.println("Qué desea modificar: ");
+                                    System.out.println("1- Nombre");
+                                    System.out.println("2- Precio");
+                                    System.out.println("3- Empleado a cargo");
+                                    opcion=scanner.nextInt();
+                                    scanner.nextLine();
+                                    switch (opcion){
+                                        case 1:
+                                            System.out.println("Ingrese el nuevo nombre");
+                                            servicios.get(i).setNombre(scanner.nextLine());
+                                            break;
+                                        case 2:
+                                            System.out.println("Ingrese el nuevo precio");
+                                            servicios.get(i).setPrecio(scanner.nextDouble());
+                                            break;
+                                        case 3:
+                                            System.out.println("Ingrese el nuevo empleado a cargo");
+                                            servicios.get(i).setEmpleadoEncargado(scanner.nextLine());
+                                            break;
+                                        default:
+                                            System.out.println("Opción incorrecta. Ingrese nuevamente");
+                                            break;
+                                    }
+                                    if(encontrado==true){
+                                        System.out.println("El extra fue modificado correctamente");
+                                    }else{
+                                        System.out.println("No se encontraron coincidencias con el nombre indicado");
+                                    }
+
+                                    scanner.nextLine();
+                                    System.out.println("Desea hacer otra modificación sobre este producto? s/n");
+                                    continuar=scanner.nextLine();
+
+                                }while (continuar.equalsIgnoreCase("s"));
+
+                                encontrado=true;
+
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+                case 2:
+                    if (this.amenities != null) {
+                        while (encontrado==false && i<amenities.size()){
+                            if(amenities.get(i).getNombre().equalsIgnoreCase(nombre)){
+                                do{
+                                    System.out.println("Qué desea modificar: ");
+                                    System.out.println("1- Nombre");
+                                    System.out.println("2- Precio");
+                                    System.out.println("3- Descripción");
+                                    System.out.println("4- Horario");
+                                    opcion=scanner.nextInt();
+                                    scanner.nextLine();
+                                    switch (opcion){
+                                        case 1:
+                                            System.out.println("Ingrese el nuevo nombre");
+                                            amenities.get(i).setNombre(scanner.nextLine());
+                                            break;
+                                        case 2:
+                                            System.out.println("Ingrese el nuevo precio");
+                                            amenities.get(i).setPrecio(scanner.nextDouble());
+                                            break;
+                                        case 3:
+                                            System.out.println("Ingrese la nueva descripción");
+                                            amenities.get(i).setDescripcion(scanner.nextLine());
+                                            break;
+                                        case 4:
+                                            System.out.println("Ingrese el nuevo horario");
+                                            amenities.get(i).setHorario(scanner.nextLine());
+                                        default:
+                                            System.out.println("Opción incorrecta. Ingrese nuevamente");
+                                            break;
+                                    }
+                                    if(encontrado==true){
+                                        System.out.println("El extra fue modificado correctamente");
+                                    }else{
+                                        System.out.println("No se encontraron coincidencias con el nombre indicado");
+                                    }
+
+                                    scanner.nextLine();
+                                    System.out.println("Desea hacer otra modificación sobre este producto? s/n");
+                                    continuar=scanner.nextLine();
+
+                                }while (continuar.equalsIgnoreCase("s"));
+
+                                encontrado=true;
+
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+                case 3:
+                    if (this.minibar != null) {
+                        while (encontrado==false && i<minibar.size()){
+                            if(minibar.get(i).getNombre().equalsIgnoreCase(nombre)){
+                                do{
+                                    System.out.println("Qué desea modificar: ");
+                                    System.out.println("1- Nombre");
+                                    System.out.println("2- Precio");
+                                    System.out.println("3- Marca");
+                                    opcion=scanner.nextInt();
+                                    scanner.nextLine();
+                                    switch (opcion){
+                                        case 1:
+                                            System.out.println("Ingrese el nuevo nombre");
+                                            minibar.get(i).setNombre(scanner.nextLine());
+                                            break;
+                                        case 2:
+                                            System.out.println("Ingrese el nuevo precio");
+                                            minibar.get(i).setPrecio(scanner.nextDouble());
+                                            break;
+                                        case 3:
+                                            System.out.println("Ingrese la nueva marca");
+                                            minibar.get(i).setMarca(scanner.nextLine());
+                                            break;
+                                        default:
+                                            System.out.println("Opción incorrecta. Ingrese nuevamente");
+                                            break;
+                                    }
+                                    if(encontrado==true){
+                                        System.out.println("El extra fue modificado correctamente");
+                                    }else{
+                                        System.out.println("No se encontraron coincidencias con el nombre indicado");
+                                    }
+
+                                    scanner.nextLine();
+                                    System.out.println("Desea hacer otra modificación sobre este producto? s/n");
+                                    continuar=scanner.nextLine();
+
+                                }while (continuar.equalsIgnoreCase("s"));
+
+                                encontrado=true;
+
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+
+                case 4:
+                    if (this.roturas != null) {
+                        while (encontrado==false && i<roturas.size()){
+                            if(roturas.get(i).getNombre().equalsIgnoreCase(nombre)){
+                                do{
+                                    System.out.println("Qué desea modificar: ");
+                                    System.out.println("1- Nombre");
+                                    System.out.println("2- Precio");
+                                    System.out.println("3- Causa");
+                                    opcion=scanner.nextInt();
+                                    scanner.nextLine();
+                                    switch (opcion){
+                                        case 1:
+                                            System.out.println("Ingrese el nuevo nombre");
+                                            roturas.get(i).setNombre(scanner.nextLine());
+                                            break;
+                                        case 2:
+                                            System.out.println("Ingrese el nuevo precio");
+                                            roturas.get(i).setPrecio(scanner.nextDouble());
+                                            break;
+                                        case 3:
+                                            System.out.println("Ingrese la nueva causa");
+                                           roturas.get(i).setCausa(scanner.nextLine());
+                                            break;
+                                        default:
+                                            System.out.println("Opción incorrecta. Ingrese nuevamente");
+                                            break;
+                                    }
+                                    if(encontrado==true){
+                                        System.out.println("El extra fue modificado correctamente");
+                                    }else{
+                                        System.out.println("No se encontraron coincidencias con el nombre indicado");
+                                    }
+
+                                    scanner.nextLine();
+                                    System.out.println("Desea hacer otra modificación sobre este producto? s/n");
+                                    continuar=scanner.nextLine();
+
+                                }while (continuar.equalsIgnoreCase("s"));
+
+                                encontrado=true;
+
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println("La opción ingresada es incorrecta. Ingrese nuevamente");
+                    break;
+            }
+            scanner.nextLine();
+            System.out.println("Desea modificar otro extra? s/n");
+            scanner.nextLine();
+
+        } while (continuar.equalsIgnoreCase("s"));
+
+
+    }
+
+    public void altaExtra() {
+        String nombre;
+        int opcion;
+        String continuar = "s";
+        boolean encontrado = false;
+
+        do {
+            System.out.println("Qué tipo de extra desea dar de alta?");
+            opcionesExtras();
+            opcion = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("Ingrese el nombre del extra");
+            nombre = scanner.nextLine();
+            int i=0;
+
+            switch (opcion) {
+                case 1:
+                    if (this.servicios != null) {
+                        while (encontrado==false && i<servicios.size()){
+                            if(servicios.get(i).getNombre().equalsIgnoreCase(nombre)){
+                                servicios.get(i).setAlta(true);
+                                encontrado=true;
+
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+                case 2:
+                    if (this.amenities != null) {
+                        while (encontrado==false && i<amenities.size()){
+                            if(amenities.get(i).getNombre().equalsIgnoreCase(nombre)){
+                                amenities.get(i).setAlta(true);
+                                encontrado=true;
+
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+                case 3:
+                    if (this.minibar != null) {
+                        while (encontrado==false && i<minibar.size()){
+                            if(minibar.get(i).getNombre().equalsIgnoreCase(nombre)){
+                                minibar.get(i).setAlta(true);
+                                encontrado=true;
+
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+
+                case 4:
+                    if (this.roturas != null) {
+                        while (encontrado==false && i<roturas.size()){
+                            if(roturas.get(i).getNombre().equalsIgnoreCase(nombre)){
+                                roturas.get(i).setAlta(true);
+                                encontrado=true;
+
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println("La opción ingresada es incorrecta. Ingrese nuevamente");
+                    break;
+            }
+            if(encontrado==true){
+                System.out.println("El extra fue dado de alta correctamente");
+            }else{
+                System.out.println("No se encontraron coincidencias con el nombre indicado");
+            }
+            scanner.nextLine();
+            System.out.println("Desea dar de alta otro extra? s/n");
+            scanner.nextLine();
+
+        } while (continuar.equalsIgnoreCase("s"));
     }
 }
