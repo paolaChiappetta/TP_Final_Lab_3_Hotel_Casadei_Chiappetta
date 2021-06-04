@@ -135,6 +135,8 @@ public class Main {
         //hotel.getListaEmpleados().add(admin.generarNuevoEmpleado());
         System.out.println(admin.generarNuevoEmpleado());
 
+        System.out.println(admin);
+
 
     }
 
