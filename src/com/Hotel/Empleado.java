@@ -15,7 +15,7 @@ public abstract class Empleado extends Persona{
     public Empleado(String nombre, String apellido, String numeroTel) {
 
         super(nombre, apellido, numeroTel);
-        this.generarUsuario();
+        this.generarUsuarioyClave();
     }
 
 
@@ -23,10 +23,14 @@ public abstract class Empleado extends Persona{
 
     //genero usuario concatenando 3 primeras letras de nombre y apellido, se mantienen las mayusculas
 
-    public void generarUsuario() {
+    public void generarUsuarioyClave() {
         GeneradorClaveUsuario claveUsuario= new GeneradorClaveUsuario();
         String usuarioNuevo= claveUsuario.crearStringUsuario(this);
-        this.usuario = usuarioNuevo;  }
+        this.usuario = usuarioNuevo;
+        String claveNueva = claveUsuario.crarContrasenia();
+        this.clave=claveNueva;
+
+    }
 
 
 
