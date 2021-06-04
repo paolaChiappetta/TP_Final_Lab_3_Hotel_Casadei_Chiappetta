@@ -107,6 +107,7 @@ public class Menu {
         System.out.println("6- Eliminar extra de una habitación");
         System.out.println("7- Nuevo extra");
         System.out.println("8- Modificar un extra");
+        System.out.println("9- Dar de baja un extra");
         System.out.println("9- Eliminar un extra");
         System.out.println("10- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
