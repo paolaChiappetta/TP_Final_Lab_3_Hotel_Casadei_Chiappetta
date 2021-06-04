@@ -20,98 +20,120 @@ public class Menu {
         this.empleadoActual = empleadoActual;
     }
 
-    public void opcionesPrincipales() {
+    public void ingreso (){
+        System.out.println("1- Iniciar sesión");
+        System.out.println("Ingrese 0 para salir");
+
+    }
+
+    public void opcionesInicioRecepcionista (){
         System.out.println("Ingrese una opción");
-        System.out.println("1- Pasajero");
-        System.out.println("2- Empleado");
-        System.out.println("3- Hotel");
-        System.out.println("4- Shop");
+        System.out.println("1- Hotel");
+        System.out.println("2- Mis datos");  //modif clave
         System.out.println("Ingrese 0 para salir");
     }
 
-    public void opcionesPasajero() {
-        System.out.println("1- Nuevo Pasajero");
-        System.out.println("2- Modificar de datos de pasajero");
-        System.out.println("3- Ver datos de pasajero");
-        System.out.println("4- Ver lista de hospedajes de pasajero");
-        System.out.println("5- Ver lista de reservas de pasajero");
+    public void opcionesInicioAdministrador (){
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Administración Hotel");
+        System.out.println("2- Mis datos");  //modif clave
+        System.out.println("3- Backup");
+        System.out.println("Ingrese 0 para salir");
+    }
+
+    public void opcionesHotel() {
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Check-in");
+        System.out.println("2- Check-out");
+        System.out.println("3- Reservas");
+        System.out.println("4- Shop");
+        System.out.println("5- Listados");
         System.out.println("6- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
 
-    public void opcionesEmpleadoRecepcionista() {
-        System.out.println("1- Modificar mis datos");
-        System.out.println("2- Cambiar mi contraseña");
-        System.out.println("3- Volver al menú anterior");
+    public void opcionesReservas(){
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Nueva reserva");
+        System.out.println("2- Modificar una reserva");
+        System.out.println("3- Eliminar una reserva");
+        System.out.println("4- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
 
-    public void opcionesEmpleadoAdministrador() {
-        System.out.println("1- Modificar mis datos");
-        System.out.println("2- Cambiar mi contraseña");
-        System.out.println("3- Nuevo empleado");
-        System.out.println("4- Modificar datos de empleado");
-        System.out.println("6- Eliminar empleado");
-        System.out.println("5- Volver al menú anterior");
-        System.out.println("Ingrese 0 para salir");
-    }
-
-    public void opcionesHotelRecepcionista() {
-        System.out.println("1- Ver lista de ingresos del día");
-        System.out.println("2- Ver lista de egresos del día");
-        System.out.println("3- Ver lista de habitaciones");
-        System.out.println("4- Ver lista de ocupaciones actuales");
-        System.out.println("5- Nueva reserva");
-        System.out.println("6- Modificar una reserva");
-        System.out.println("7- Eliminar una reserva");
-        System.out.println("8- Nueva ocupación sin reserva");
-        System.out.println("9- Volver al menú anterior");
-        System.out.println("Ingrese 0 para salir");
-
-    }
-
-    public void opcionesHotelAdministrador() {
-        System.out.println("1- Ver lista de ingresos del día");
-        System.out.println("2- Ver lista de egresos del día");
-        System.out.println("3- Ver lista de habitaciones");
-        System.out.println("4- Ver lista de ocupaciones actuales");
-        System.out.println("5- Nueva reserva");
-        System.out.println("6- Modificar una reserva");
-        System.out.println("7- Eliminar una reserva");
-        System.out.println("8- Nueva ocupación sin reserva");
-        System.out.println("9- Nueva habitación");
-        System.out.println("10- Modificar datos de una habitación");
-        System.out.println("11- Eliminar una habitación");
-        System.out.println("12- Volver al menú anterior");
-        System.out.println("Ingrese 0 para salir");
-
-    }
-
-    public void opcionesShopRecepcionista() {
-        System.out.println("1- Ver lista de servicios");
-        System.out.println("2- Ver Ver lista de amenities");
-        System.out.println("3- Ver lista de productos del minibar");
-        System.out.println("4- Ver lista de roturas");
-        System.out.println("5- Cargar extra a una habitación");
-        System.out.println("6- Eliminar extra de una habitación");
+    public void opcionesShop() {
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Cargar extra a una habitación");
+        System.out.println("2- Eliminar extra de una habitación");
+        System.out.println("3- Ver lista de servicios");
+        System.out.println("4- Ver Ver lista de amenities");
+        System.out.println("5- Ver lista de productos del minibar");
+        System.out.println("6- Ver lista de roturas");
         System.out.println("7- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
 
-    public void opcionesShopAdministrador() {
-        System.out.println("1- Ver lista de servicios");
-        System.out.println("2- Ver Ver lista de amenities");
-        System.out.println("3- Ver lista de productos del minibar");
-        System.out.println("4- Ver lista de roturas");
-        System.out.println("5- Cargar extra a una habitación");
-        System.out.println("6- Eliminar extra de una habitación");
-        System.out.println("7- Nuevo extra");
-        System.out.println("8- Modificar un extra");
-        System.out.println("9- Dar de baja un extra");
-        System.out.println("9- Eliminar un extra");
-        System.out.println("10- Volver al menú anterior");
+    public void opcionesListados(){
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Ver lista de ingresos del día");
+        System.out.println("2- Ver lista de egresos del día");
+        System.out.println("3- Ver lista de habitaciones");
+        System.out.println("4- Ver lista de ocupaciones actuales");
+        System.out.println("5- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
+
+    public void opcionesAdministracionHotelAdministrador(){
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Administración");
+        System.out.println("2- Hotel");
+        System.out.println("3- Volver al menú anterior");
+        System.out.println("Ingrese 0 para salir");
+    }
+
+    public void opcionesAdministracionAdministrador(){
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Empleados");
+        System.out.println("2- Habitaciones");
+        System.out.println("3- Shop");
+        System.out.println("4- Volver al menú anterior");
+        System.out.println("Ingrese 0 para salir");
+
+    }
+
+    public void opcionesEmpleadosAdministrador(){
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Nuevo empleado");
+        System.out.println("2- Modificar datos empleado");
+        System.out.println("3- Eliminar empleado");
+        System.out.println("4- Volver al menú anterior");
+        System.out.println("Ingrese 0 para salir");
+    }
+
+    public void opcionesHabitacionesAdministrador(){
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Nueva habitación");
+        System.out.println("2- Modificar habitación");
+        System.out.println("3- Eliminar habitación");
+        System.out.println("4- Volver al menú anterior");
+        System.out.println("Ingrese 0 para salir");
+    }
+
+    public void opcionesShopAdministracionAdministrador(){
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Nuevo extra");
+        System.out.println("2- Modificar un extra");
+        System.out.println("3- Dar de baja un extra");
+        System.out.println("4- Dar de alta un extra");
+        System.out.println("5- Eliminar un extra");
+        System.out.println("6- Volver al menú anterior");
+        System.out.println("Ingrese 0 para salir");
+    }
+
+
+
+
+
 
     public void menuPrincipal() {
         System.out.print("\033[H\033[2J");
