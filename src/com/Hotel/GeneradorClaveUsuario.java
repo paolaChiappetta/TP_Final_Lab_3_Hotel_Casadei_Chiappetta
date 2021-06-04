@@ -2,51 +2,36 @@ package com.Hotel;
 
 public class GeneradorClaveUsuario {
 
-    /*
-// private static String [] numeros= {"0","1","2","3","4","a","b", "c", "d"};
- private static String caracteres= "1234567890abcdefghijklmnopqrstuvwxyz";
+    public String crearStringUsuario(Persona persona) {
+        char[] car = new char[persona.getApellido().length() + 1];
+        persona.getNombre().getChars(0, 1, car, 0);
+        persona.getApellido().getChars(0, persona.getApellido().length(), car, 1);
 
 
-    ///constructor
-
-  public GeneradorClave() { }
-
-
-
-    // funciones generar clave
-
-
-    public String generarClave(){
-        return generarClave(8);
-    }
-
-    public String generarClave(int tamanio){
-
-        return generarClave( caracteres, tamanio);
-    }
-
-    public String generarClave(String caracteres, int tamanio) {
-
-        String clave = "";
-        for (int i = 0; i < tamanio; i++) {
-              clave+= (caracteres.charAt((int)Math.random()));
-        }
-        return clave;
-    }
-*/
-
-
-    public String crearStringUsuario(Persona persona){
-        char[]car= new char[6];
-        persona.getNombre().getChars(0,3,car,0);
-        persona.getApellido().getChars(0,3,car, 3);
-
-
-        String usuario= String.valueOf(car);
+        String usuario = String.valueOf(car);
         return usuario;
     }
 
+    public char randomContrasenia() {
+        int random = (int) (Math.random() * 62);
+        int ascii;
+        if (random <= 9) {
+            ascii = random + 48;
+        } else if (random <= 35) {
+            ascii = random + 55;
+        } else {
+            ascii = random + 61;
+        }
+        return (char) ascii;
+    }
 
+    public String crarContrasenia() {
+        String contrasenia = "";
+        for (int i = 0; i < 6; i++) {
+            contrasenia += randomContrasenia();
+        }
+        return contrasenia;
+    }
 
 
 }
