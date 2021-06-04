@@ -14,7 +14,9 @@ public class Administrador extends Empleado implements InterfazAccion {
     public Administrador() { }
 
     public Administrador(String nombre, String apellido, String numeroTel) {
+
         super(nombre, apellido, numeroTel);
+
     }
 
 
