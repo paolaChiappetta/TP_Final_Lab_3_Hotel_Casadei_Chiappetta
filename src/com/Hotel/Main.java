@@ -2,7 +2,6 @@ package com.Hotel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -119,5 +118,13 @@ public class Main {
         }
 
 
+        //probando generar usuario
+
+       Recepcionista rec= new Recepcionista("Micaela", "Casadei", "155750401");
+
+        System.out.println(rec.getUsuario());
+
     }
+
+
 }
