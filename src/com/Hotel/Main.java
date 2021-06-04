@@ -1,5 +1,7 @@
 package com.Hotel;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -122,9 +124,14 @@ public class Main {
 
        Recepcionista rec= new Recepcionista("Micaela", "Casadei", "155750401");
 
-        System.out.println(rec.getUsuario());
+        //System.out.println(rec.getUsuario());
+        //System.out.println(rec.getClave());
+
+        Menu menu = new Menu(rec);
+        menu.menuPrincipal();
 
     }
+
 
 
 }
