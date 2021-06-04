@@ -29,6 +29,7 @@ public class Main {
         List<Reserva>reservas2 = new ArrayList<>();
 
 
+
         Reserva reserva = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250, LocalDate.parse("2021-06-01"), LocalDate.parse("2021-06-03"));
         reservas.add(reserva);
         Reserva reserva2 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250, LocalDate.parse("2021-06-25"), LocalDate.parse("2021-06-28"));
@@ -127,10 +128,16 @@ public class Main {
         //System.out.println(rec.getUsuario());
         //System.out.println(rec.getClave());
 
-        Menu menu = new Menu(rec);
-        menu.menuPrincipal();
+      //  Menu menu = new Menu(rec);
+       // menu.menuPrincipal();
+
+        Administrador admin= new Administrador("Sofia", "Diaz", "155478962");
+        //hotel.getListaEmpleados().add(admin.generarNuevoEmpleado());
+        System.out.println(admin.generarNuevoEmpleado());
+
 
     }
+
 
 
 

@@ -1,5 +1,7 @@
 package com.Hotel;
 
+import java.util.Scanner;
+
 public abstract class Empleado extends Persona{
 
     private String usuario;
@@ -68,7 +70,6 @@ public abstract class Empleado extends Persona{
             System.out.println("Usuario incorrecto");
         }
     }
-
 
 
 
