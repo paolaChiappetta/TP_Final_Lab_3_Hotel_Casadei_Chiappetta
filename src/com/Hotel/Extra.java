@@ -53,6 +53,10 @@ public abstract class Extra {
 
     }
 
+    public String mostrarExtra (){
+        return this.nombre + "\nPrecio $" + this.precio + "\n";
+    }
+
 
     @Override
     public String toString() {

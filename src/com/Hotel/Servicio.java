@@ -1,5 +1,7 @@
 package com.Hotel;
 
+import org.w3c.dom.ls.LSOutput;
+
 public class Servicio extends Extra {
 
     private String empleadoEncargado;
@@ -21,4 +23,8 @@ public class Servicio extends Extra {
     }
 
 
+    @Override
+    public String mostrarExtra() {
+        return super.mostrarExtra() + "Solicitar a la/el" + this.empleadoEncargado;
+    }
 }

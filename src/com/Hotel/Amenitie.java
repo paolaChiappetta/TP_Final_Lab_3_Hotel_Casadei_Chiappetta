@@ -30,5 +30,9 @@ public class Amenitie extends Extra {
         this.horario = horario;
     }
 
-
+    @Override
+    public String mostrarExtra() {
+        return super.mostrarExtra() + "\nDescripción: " + this.descripcion +
+                "\nHorario: " + this.horario;
+    }
 }
