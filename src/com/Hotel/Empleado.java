@@ -1,9 +1,5 @@
 package com.Hotel;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-
 public abstract class Empleado extends Persona{
 
     private String usuario;
@@ -11,26 +7,39 @@ public abstract class Empleado extends Persona{
 
 
 
-    //constructores
+    //constructores al principio se crean con generar usuario, despues se puede modificar con set
 
 
     public Empleado() { }
 
     public Empleado(String nombre, String apellido, String numeroTel) {
+
         super(nombre, apellido, numeroTel);
+        this.generarUsuario();
     }
+
+
+
+
+    //genero usuario concatenando 3 primeras letras de nombre y apellido, se mantienen las mayusculas
+
+    public void generarUsuario() {
+        GeneradorClaveUsuario claveUsuario= new GeneradorClaveUsuario();
+        String usuarioNuevo= claveUsuario.crearStringUsuario(this);
+        this.usuario = usuarioNuevo;  }
+
 
 
 
     //getters y setters
 
-    public String getUsuario() {   return usuario; }
-
-    public void setUsuario(String usuario) {   this.usuario = usuario;  }
-
     public String getClave() {     return clave;  }
 
     public void setClave(String clave) {    this.clave = clave; }
+
+    public void setUsuario(String usuario) { this.usuario = usuario;   }
+
+    public String getUsuario() {   return usuario; }
 
 
 
