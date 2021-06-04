@@ -25,6 +25,6 @@ public class Servicio extends Extra {
 
     @Override
     public String mostrarExtra() {
-        return super.mostrarExtra() + "Solicitar a la/el" + this.empleadoEncargado;
+        return super.mostrarExtra() + "Solicitar a el/la " + this.empleadoEncargado + "\n";
     }
 }
