@@ -32,7 +32,7 @@ public class Amenitie extends Extra {
 
     @Override
     public String mostrarExtra() {
-        return super.mostrarExtra() + "\nDescripción: " + this.descripcion +
-                "\nHorario: " + this.horario;
+        return super.mostrarExtra() + "Descripción: " + this.descripcion +
+                "\nHorario: " + this.horario + "\n";
     }
 }
