@@ -78,10 +78,9 @@ public class Habitacion {
     }
 
 
-
     ///agrego funciones para asignar tipo y etsaod de habitaciones
 
-    Scanner scanner= new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
 
     public void menuTipoHabitacion() {
@@ -99,7 +98,7 @@ public class Habitacion {
     }
 
 
-    public void indicarTipoHabitacion (){
+    public void indicarTipoHabitacion() {
 
 
         System.out.println("Indique tipo de habitacion: ");
@@ -149,7 +148,7 @@ public class Habitacion {
 
     }
 
-    public void menuEstadoHabitacion () {
+    public void menuEstadoHabitacion() {
 
         System.out.println("1: Disponible");
         System.out.println("2: Ocupada");
@@ -158,7 +157,7 @@ public class Habitacion {
     }
 
 
-    public void indicarEstadoHabitacion (){
+    public void indicarEstadoHabitacion() {
 
 
         System.out.println("Indique estado de habitacion: ");
@@ -189,20 +188,6 @@ public class Habitacion {
         } while (opcion != 0);
 
     }
-
-
-    public Habitacion buscarHabitacionPorNumero (List<Habitacion> listaHabitaciones, int numero){
-        Habitacion habitacionEncontrada= new Habitacion();
-        if(listaHabitaciones != null)
-        for(Habitacion habitacion : listaHabitaciones){
-            if(habitacion.numero.compareTo(numero)==0){
-                habitacionEncontrada= habitacion;
-            }else{
-                habitacionEncontrada= null;
-            }
-        }return  habitacionEncontrada;
-    }
-
 
 
     @Override

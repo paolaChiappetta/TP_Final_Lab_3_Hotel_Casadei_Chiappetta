@@ -3,6 +3,7 @@ package com.Hotel;
 import org.w3c.dom.ls.LSOutput;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class Ocupacion {
     private Integer cantidadPax;
     private TipoPension tipoPension;
     private Long numeroOcupacion;
-    private List<Pasajero> listaPaxs;
+    private List<Pasajero> listaPaxs = new ArrayList<>();
     private Double deposito;
 
     public Ocupacion() {
@@ -38,7 +39,7 @@ public class Ocupacion {
         this.cantidadPax = cantidadPax;
         this.tipoPension = tipoPension;
         this.listaPaxs = listaPaxs;
-        this.deposito= deposito;
+        this.deposito = deposito;
         this.numeroOcupacion = ocupacionId++;
     }
 
@@ -114,9 +115,13 @@ public class Ocupacion {
         this.listaPaxs = listaPaxs;
     }
 
-    public Double getDeposito() {         return deposito;   }
+    public Double getDeposito() {
+        return deposito;
+    }
 
-    public void setDeposito(Double deposito) {    this.deposito = deposito;   }
+    public void setDeposito(Double deposito) {
+        this.deposito = deposito;
+    }
 
     public void verListaPaxsHabitacion() {
         for (Pasajero lista : this.listaPaxs) {
@@ -126,12 +131,12 @@ public class Ocupacion {
         }
     }
 
-    public Pasajero titularHabitacion (){
-        Pasajero titular=null;
-        for (Pasajero lista : this.listaPaxs){
-            if(this.listaPaxs!=null){
-                if(lista.getTitularreserva()==true){
-                    titular=lista;
+    public Pasajero titularHabitacion() {
+        Pasajero titular = null;
+        for (Pasajero lista : this.listaPaxs) {
+            if (this.listaPaxs != null) {
+                if (lista.getTitularreserva() == true) {
+                    titular = lista;
                 }
             }
         }
@@ -143,7 +148,7 @@ public class Ocupacion {
 
     /// metodos para asignar tipo de pension en ocupacion
 
-    public void menuTipoPension (){
+    public void menuTipoPension() {
         System.out.println("1: Desayuno");
         System.out.println("2: Media pension");
         System.out.println("3: Pension Completa");
@@ -151,77 +156,129 @@ public class Ocupacion {
 
     }
 
-    public void asignarTipoPension (Ocupacion ocupacion){
-
+    public void asignarTipoPension() {
         int opcion = 0;
 
+        menuTipoPension();
+        opcion = scanner.nextInt();
+        switch (opcion) {
+            case 1:
+                this.setTipoPension(TipoPension.DESAYUNO);
+                break;
+
+            case 2:
+                this.setTipoPension(TipoPension.MEDIA_PENSION);
+                break;
+            case 3:
+                this.setTipoPension(TipoPension.PENSION_COMPLETA);
+
+                break;
+            default:
+                this.setTipoPension(TipoPension.DESAYUNO);
+                break;
+        }
+
+    }
+
+    public void agregarPasajerosLista(Reserva reserva, List<Pasajero> pasajeros) {
+        boolean encontrado = false;
+        int i = 0;
+        boolean existe = buscarPasajeroDni(reserva.getPasajeroDni(), pasajeros);
+
+        if (existe) {
+            while (!encontrado && i < pasajeros.size()) {
+                if (reserva.getPasajeroDni() == pasajeros.get(i).getDni()) {
+                    if (pasajeros.get(i).getTitularreserva()) {
+                        this.listaPaxs.add(pasajeros.get(i));
+                    } else {
+                        pasajeros.get(i).setTitularreserva(true);
+                        System.out.println(pasajeros.get(i));
+                        System.out.println("\nDesea modificar algún dato?\n1-Si\n2-No");
+                        if (scanner.nextInt() == 1) {
+                            pasajeros.get(i).modificarPasajero(pasajeros.get(i));
+                        }
+                        this.listaPaxs.add(pasajeros.get(i));
+
+                    }
+
+
+                }
+                i++;
+            }
+        }
+        Pasajero pasajero = new Pasajero();
+        this.listaPaxs.add(pasajero.cargarPasajeroTitular(reserva));
+
+    }
+
+    public void agregarPasajerosLista(List<Pasajero> pasajeros) {
+        int rta = 1;
+        boolean encontrado = false;
+        int i = 0;
+
         do {
-            menuTipoPension();
-            opcion = scanner.nextInt();
-            switch (opcion) {
-                case 1:
-                    ocupacion.setTipoPension(TipoPension.DESAYUNO);
-                    break;
+            String dni;
+            System.out.println("\nAgregar acompañantes:");
+            scanner.nextLine();
+            System.out.println("\nIngrese el Dni:");
+            dni = scanner.nextLine();
+            boolean existe = buscarPasajeroDni(dni, pasajeros);
+            if (existe) {
+                while (!encontrado && i < pasajeros.size()) {
+                    if (dni == pasajeros.get(i).getDni()) {
+                        pasajeros.get(i).setTitularreserva(false);
+                        this.listaPaxs.add(pasajeros.get(i));
+                    }
+                }
+                i++;
+            } else {
+                Pasajero pasajero = new Pasajero();
+                this.listaPaxs.add(pasajero.cargarPasajeroAcompaniante());
+            }
+            System.out.println("\nDesea agregar otro acompañante?:\n1- Si\n2- No");
+            rta = scanner.nextInt();
 
-                case 2:
-                    ocupacion.setTipoPension(TipoPension.MEDIA_PENSION);
-                    break;
-                case 3:
-                    ocupacion.setTipoPension(TipoPension.PENSION_COMPLETA);
+        } while (rta == 1);
+    }
 
-                    break;
-                default:
-                    System.out.println("Opcion incorrecta, ingrese nuevamente");
-                    break;
+            public boolean buscarPasajeroDni (String dni, List < Pasajero > pasajeros){
+                int i = 0;
+                boolean encontrado = false;
+
+                while (!encontrado && i < pasajeros.size()) {
+
+                    if (pasajeros.get(i).getDni() == dni) {
+                        encontrado = true;
+                    }
+                }
+                return encontrado;
             }
 
-        } while (opcion != 0);                     // dejo el opcion 0 para salir
-
-    }
-
-
-    public void agregarPasajerosLista (){
-        int rta=1;
-        do {
-            System.out.println("Agregar pasajero:");
-            Pasajero pasajero= new Pasajero();
-            this.listaPaxs.add(pasajero.cargarPasajero());
-            System.out.println("Agregar otro pasajero: 1= si  / 0= no");
-            rta=scanner.nextInt();
-        }while(rta==1);
-
-    }
-
-    /// nueva ocupacion con reserva previa
-
-    public Ocupacion nuevaOcupacion (List <Habitacion> listHabitaciones, Reserva reserva){
+            public String mostrarListaPaxs () {
+                String s = "";
+                for (Pasajero lista : this.listaPaxs) {
+                    if (lista.getTitularreserva()) {
+                        s = "\nTitular: " + lista.getNombre() + " " + lista.getApellido();
+                    }
+                }
+                for (Pasajero lista : this.listaPaxs) {
+                    if (!lista.getTitularreserva()) {
+                        s += "\nAcompañante: " + lista.getNombre() + " " + lista.getApellido();
+                    }
+                }
+                return s;
+            }
 
 
-        this.idReserva=reserva.getNumeroReserva();
-        this.fechaIngreso=reserva.getFechaIngreso();
-        this.fechaSalida=reserva.getFechaSalida();
-        System.out.println("Cantidad cocheras: ");
-        this.cochera= scanner.nextInt();
-        this.habitacion= habitacion.buscarHabitacionPorNumero(listHabitaciones, reserva.getNumeroHabitacion());
-        this.cantidadPax= reserva.getNumeroPasajeros();
-        System.out.println("tipo de pesion");
-        asignarTipoPension(this);
-        agregarPasajerosLista();
-        this.deposito= reserva.getDeposito();
+            @Override
+            public String toString () {
+                return "Ocupación: \nHabitación: " + habitacion.getNumero() +
+                        "\nFecha de ingreso: " + this.fechaIngreso +
+                        "\nFecha de Salida: " + this.fechaSalida +
+                        "\nTipo de pensión: " + this.tipoPension +
+                        "\nCantidad de cocheras: " + this.cochera +
+                        "\nPasajeros: " + this.mostrarListaPaxs();
 
 
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Ocupación: \nHabitación: " + habitacion.getNumero() +
-                "\nFecha de ingreso: " + this.fechaIngreso +
-                "\nFecha de Salida: " + this.fechaSalida +
-                "\nTipo de pensión: " + this.tipoPension +
-                "\nCantidad de cocheras: " + this.cochera +
-                "\nPasajeros: " + listaPaxs.toString();
-
-
-    }
-}
+            }
+        }
