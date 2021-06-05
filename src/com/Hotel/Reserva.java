@@ -18,6 +18,7 @@ public class Reserva implements Comparable<Reserva> {
     private LocalDate fechaIngreso;
     private LocalDate fechaSalida;
     private Long numeroReserva;
+    private String telefono;
 
 
     //constructores
@@ -28,7 +29,7 @@ public class Reserva implements Comparable<Reserva> {
 
     public Reserva(String pasajeroNombre, String pasajeroApellido, String pasajeroDni,
                    Integer numeroHabitacion, Integer numeroPasajeros, Double deposito,
-                   LocalDate fechaIngreso, LocalDate fechaSalida) {
+                   LocalDate fechaIngreso, LocalDate fechaSalida, String telefono) {
 
         this.numeroReserva = reservaId++;                // se asigna num de reserva
         this.pasajeroNombre = pasajeroNombre;
@@ -39,6 +40,7 @@ public class Reserva implements Comparable<Reserva> {
         this.deposito = deposito;
         this.fechaIngreso = fechaIngreso;
         this.fechaSalida = fechaSalida;
+        this.telefono = telefono;
     }
 
 
@@ -112,6 +114,14 @@ public class Reserva implements Comparable<Reserva> {
         return numeroReserva;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
     public void cargarReserva(Reserva reserva, int numeroHabitacion, LocalDate ingreso, LocalDate salida) {
         Scanner scanner = new Scanner(System.in);
         reserva.setNumeroHabitacion(numeroHabitacion);
@@ -123,6 +133,8 @@ public class Reserva implements Comparable<Reserva> {
         reserva.setPasajeroApellido(scanner.nextLine());
         System.out.println("Ingrese el DNI del pasajero");
         reserva.setPasajeroDni(scanner.nextLine());
+        System.out.println("Ingrese el teléfono");
+        reserva.setTelefono(scanner.nextLine());
         System.out.println("Ingrese la cantidad de pasajeros");
         reserva.setNumeroPasajeros(scanner.nextInt());
         System.out.println("Ingrese el monto del depósito");
@@ -139,6 +151,7 @@ public class Reserva implements Comparable<Reserva> {
                 "\nFecha de salida: " + this.fechaSalida +
                 "\nTitular de reserva: " + this.pasajeroNombre + " " + this.pasajeroApellido +
                 "\nDNI: " + this.pasajeroDni +
+                "\nTeléfono: " + this.telefono +
                 "\nDepósito: $" + this.deposito + "\n";
     }
 
