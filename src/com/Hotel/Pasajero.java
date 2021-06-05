@@ -191,41 +191,39 @@ public class Pasajero extends Persona {
     //FUNCION CARGA DE PASAJERO, pide datos devuelve pasajero
 
     public Pasajero cargarPasajero() {
-        Pasajero pasajero = new Pasajero();
-
 
         System.out.println("Nombre:");
-        pasajero.setNombre(scanner.next());
+        this.setNombre(scanner.next());
         System.out.println("Apellido:");
-        pasajero.setApellido(scanner.next());
+        this.setApellido(scanner.next());
         System.out.println("Dni:");
-        pasajero.setDni(scanner.next());
+        this.setDni(scanner.next());
         System.out.println("Telefono:");
-        pasajero.setNumeroTel(scanner.next());
+        this.setNumeroTel(scanner.next());
         System.out.println("Fecha de nacimiento:");
-        pasajero.setFechaNacimiento(LocalDate.parse(scanner.next(), DateTimeFormatter.BASIC_ISO_DATE));
+        this.setFechaNacimiento(LocalDate.parse(scanner.next(), DateTimeFormatter.BASIC_ISO_DATE));
         System.out.println("Indique la profesion u ocupacion:");
-        pasajero.setProfesion_ocupacion(scanner.next());
+        this.setProfesion_ocupacion(scanner.next());
         System.out.println("Nacionalidad:");
-        pasajero.setNacionalidad(scanner.next());
+        this.setNacionalidad(scanner.next());
         System.out.println("Indique la Calle:");
-        pasajero.setCalle(scanner.next());
+        this.setCalle(scanner.next());
         System.out.println("Numero:");
-        pasajero.setNumero(scanner.nextInt());
+        this.setNumero(scanner.nextInt());
         System.out.println("Piso:");
-        pasajero.setPiso(scanner.nextInt());
+        this.setPiso(scanner.nextInt());
         System.out.println("Departamento:");
-        pasajero.setDepartamento(scanner.next());
+        this.setDepartamento(scanner.next());
         System.out.println("Ciudad:");
-        pasajero.setCiudad(scanner.next());
+        this.setCiudad(scanner.next());
         System.out.println("Provincia:");
-        pasajero.setProvincia(scanner.next());
+        this.setProvincia(scanner.next());
         System.out.println("Pais:");
-        pasajero.setPais(scanner.next());
+        this.setPais(scanner.next());
         System.out.println("Es titular de reserva? si: 1  / no: 0  ");
-        pasajero.setTitularreserva(scanner.nextBoolean());
+        this.setTitularreserva(scanner.nextBoolean());
 
-        return pasajero;
+        return this;
     }
 
 
@@ -337,7 +335,7 @@ public class Pasajero extends Persona {
         System.out.println("Indique Dni:");
         String dni = scanner.next();
 
-        for (Pasajero pasajero : listaPasajeros) {
+        for (Pasajero pasajero : listaPasajeros) {      //usar while
 
             if (pasajero.dni.compareTo(dni) == 0) {
                 System.out.println("Datos pasajero: ");
