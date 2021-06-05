@@ -21,13 +21,20 @@ public class Hotel {
     private Scanner scanner = new Scanner(System.in);
 
     public Hotel() {
-        this.listaHabitaciones=new ArrayList<>();
+        this.listaHabitaciones = new ArrayList<>();
         this.listaReservas = new ArrayList<>();
-        this.recepcionistas=new ArrayList<>();
-        this.administradores=new ArrayList<>();
-        this.listaOcupaciones =new ArrayList<>();
-        this.pasajeros=new ArrayList<>();
-        this.shop=new Shop();
+        this.recepcionistas = new ArrayList<>();
+        this.administradores = new ArrayList<>();
+        this.listaOcupaciones = new ArrayList<>();
+        this.pasajeros = new ArrayList<>();
+        this.shop = new Shop();
+    }
+
+    public Hotel(List<Habitacion> listaHabitaciones, List<Reserva> listaReservas) {
+        this.listaHabitaciones = listaHabitaciones;
+        this.listaReservas = listaReservas;
+        this.listaOcupaciones = new ArrayList();
+        this.pasajeros = new ArrayList();
     }
 
     public Hotel(List<Habitacion> listaHabitaciones,
@@ -226,56 +233,13 @@ public class Hotel {
         return ocupacionEncontrada;
     }
 
-    public void nuevaReserva() {
+    public boolean nuevaReserva() {
         LocalDate ingreso;
         LocalDate salida;
         int nroHab;
         String continuar = "s";
         boolean habLibre = false;
-
-        do {
-            System.out.println("Ingrese fecha de ingreso de la nueva reserva (AAAA-MM-DD)");
-            ingreso = LocalDate.parse(scanner.nextLine());
-            System.out.println("Ingrese fecha de salida de la nueva reserva (AAAA-MM-DD)");
-            salida = LocalDate.parse(scanner.nextLine());
-
-            List<Integer> libres = this.habitacionesLibres(ingreso, salida);
-            if (libres == null) {
-                System.out.println("No hay habitaciones disponibles en las fechas indicadas");
-            } else {
-                Reserva reserva = new Reserva();
-                System.out.println("\nIndique el número de la habitación elegida");
-                nroHab = scanner.nextInt();
-                for (Integer lista : libres) {
-                    if (lista == nroHab) {
-                        reserva.cargarReserva(reserva, nroHab, ingreso, salida);
-                        System.out.println("Reserva cargada satisfactoriamente");
-                        System.out.println(reserva);
-                        this.listaReservas.add(reserva);
-                        habLibre = true;
-                    }
-                }
-                if (habLibre == false) {
-                    System.out.println("La habitación no existe o no está libre en las fechas indicadas");
-                }
-
-            }
-
-            scanner.nextLine();
-            System.out.println("Desea seguir cargando reservas? s/n");
-            continuar = scanner.nextLine();
-
-        } while (continuar.equalsIgnoreCase("s"));
-
-    }
-
-
-    public Boolean realizarUnaNuevaReservaBoolean() {
-        LocalDate ingreso;
-        LocalDate salida;
-        int nroHab;
-        boolean habLibre = false;
-        boolean reservaBoolean = false;
+        boolean reservaCargada = false;
 
 
         System.out.println("Ingrese fecha de ingreso de la nueva reserva (AAAA-MM-DD)");
@@ -284,7 +248,7 @@ public class Hotel {
         salida = LocalDate.parse(scanner.nextLine());
 
         List<Integer> libres = this.habitacionesLibres(ingreso, salida);
-        if (libres == null) {
+        if (libres.isEmpty()) {
             System.out.println("No hay habitaciones disponibles en las fechas indicadas");
         } else {
             Reserva reserva = new Reserva();
@@ -297,150 +261,164 @@ public class Hotel {
                     System.out.println(reserva);
                     this.listaReservas.add(reserva);
                     habLibre = true;
-                    reservaBoolean = true;
+                    reservaCargada = true;
                 }
             }
             if (habLibre == false) {
                 System.out.println("La habitación no existe o no está libre en las fechas indicadas");
             }
+
         }
-        return reservaBoolean;
+        return reservaCargada;
+
     }
 
-
-    public Reserva buscarReservaIdReserva(Long idReserva) {
-        int encontrado = 0;
+    public boolean verificarExistenciaReserva(Long idReserva) {
+        boolean encontrada = false;
         int i = 0;
-        Reserva reserva = null;
-        if (this.listaReservas != null) {
 
-            while (encontrado == 0 && i < this.listaReservas.size()) {
+        if (!this.listaReservas.isEmpty()) {
 
-                if (this.listaReservas.get(i).equals(idReserva)) {
-                    encontrado = 1;
-                    reserva = this.listaReservas.get(i);
+            while (!encontrada && i < this.listaReservas.size()) {
+
+                if (this.listaReservas.get(i).getNumeroReserva().equals(idReserva)) {
+                    encontrada = true;
                 }
                 i++;
             }
 
         }
-        return reserva;
+        return encontrada;
+    }
+
+    //METODO REALIZAR CHECK IN CON O SIN RESERVA PREVIA
+
+    public void checkIn() {
+        int tieneReserva;
+        Long idReserva;
+
+        System.out.println("Indique si el pasajero tiene reserva: \n1- Si\n2- No");
+        tieneReserva = scanner.nextInt();
+        scanner.nextLine();
+
+        if (tieneReserva == 1) {
+            System.out.println("Indique el Id de la reserva: ");
+            idReserva = scanner.nextLong();
+            if (verificarExistenciaReserva(idReserva)) {
+
+                boolean encontrada = false;
+                int i = 0;
+                while (!encontrada && i < listaReservas.size()) {
+                    if (listaReservas.get(i).getNumeroReserva() == idReserva) {
+                        nuevaOcupacion(listaReservas.get(i));
+                        encontrada = true;
+                    }
+                    i++;
+                }
+
+            } else {
+                System.out.println("No hay reservas que coincidan con el id indicado");
+            }
+        } else {
+            Boolean res = nuevaReserva();
+            if (res == true) {
+                nuevaOcupacion(listaReservas.get(listaReservas.size() - 1));
+            } else {
+                System.out.println("no se pudo realizar check in");
+            }
+        }
     }
 
 
-        //METODO REALIZAR CHECK IN CON O SIN RESERVA PREVIA
-
-        public void checkIn () {
-            System.out.println("Indique si tiene reserva  1= si  / 0= no");
-            int tieneReserva = scanner.nextInt();
-            Ocupacion ocupacion = new Ocupacion();
-
-            if (tieneReserva == 1) {
-                System.out.println("Id reserva:");
-                ocupacion.nuevaOcupacion(listaHabitaciones, buscarReservaIdReserva(scanner.nextLong()));
-
-                System.out.println("ocupacion:");
-                System.out.println(ocupacion);
-            } else {
-                Boolean res = realizarUnaNuevaReservaBoolean();
-                if (res == true) {
-                    ocupacion.nuevaOcupacion(listaHabitaciones, listaReservas.get(listaReservas.size() - 1));
-                } else {
-                    System.out.println("no se pudo realizar check in");
-                }
-            }
-        }
-
-
     //MUESTRA EL LISTADO DE INGRESOS DEL DIA DE HOY
-    public void listadoIngresosDelDia (){
-        if(!this.listaReservas.isEmpty()){ //busca en la lista de reservas
-            for (Reserva lista : listaReservas){
+    public void listadoIngresosDelDia() {
+        if (!this.listaReservas.isEmpty()) { //busca en la lista de reservas
+            for (Reserva lista : listaReservas) {
                 System.out.println("\nIngresos del día\n");
-                if (lista.getFechaIngreso().isEqual(LocalDate.now())){ //coincidencias en la fecha de ingreso
+                if (lista.getFechaIngreso().isEqual(LocalDate.now())) { //coincidencias en la fecha de ingreso
                     System.out.println(lista);
                 }
             }
-        }else{
+        } else {
             System.out.println("El hotel no posee reservas");
         }
     }
 
     //MUESTRA EL LISTADO DE EGRESOS DEL DIA DE HOY
-    public void listadoEgresosDelDia (){
-        if(!this.listaOcupaciones.isEmpty()){
-            for (Ocupacion lista : listaOcupaciones){ //busca en la lista de ocupaciones
+    public void listadoEgresosDelDia() {
+        if (!this.listaOcupaciones.isEmpty()) {
+            for (Ocupacion lista : listaOcupaciones) { //busca en la lista de ocupaciones
                 System.out.println("\nEgresos del día\n");
-                if (lista.getFechaSalida().isEqual(LocalDate.now())){ //coincidencias en la fecha de salida
+                if (lista.getFechaSalida().isEqual(LocalDate.now())) { //coincidencias en la fecha de salida
                     System.out.println(lista);
                 }
             }
-        }else{
+        } else {
             System.out.println("El hotel no posee habitaciones ocupadas");
         }
     }
 
     //MUESTRA EL LISTADO DE INGRESOS DE UN DIA DETERMINADO
-    public void listadoIngresosDeReservasDeDiaDeterminado (LocalDate dia){
-        if(!this.listaReservas.isEmpty()){
-            for (Reserva lista : listaReservas){ //busca en la lista de reservas
+    public void listadoIngresosDeReservasDeDiaDeterminado(LocalDate dia) {
+        if (!this.listaReservas.isEmpty()) {
+            for (Reserva lista : listaReservas) { //busca en la lista de reservas
                 System.out.println("\nIngresos del día: " + dia + "\n");
-                if (lista.getFechaIngreso().isEqual(dia)){ //coincidencias en la fecha de ingreso indicada
+                if (lista.getFechaIngreso().isEqual(dia)) { //coincidencias en la fecha de ingreso indicada
                     System.out.println(lista);
                 }
             }
-        }else{
+        } else {
             System.out.println("El hotel no posee ingresos el día " + dia);
         }
     }
 
     //MUESTRA EL LISTADO DE EGRESOS DE UN DIA DETERMINADO
-    public void listadoEgresosDeDiaDeterminado (LocalDate dia) {
-        if(!this.listaReservas.isEmpty()){
-            for (Reserva lista : listaReservas){ //busca en la lista de reservas
+    public void listadoEgresosDeDiaDeterminado(LocalDate dia) {
+        if (!this.listaReservas.isEmpty()) {
+            for (Reserva lista : listaReservas) { //busca en la lista de reservas
                 System.out.println("\nEgresos del día: " + dia + "\n");
-                if (lista.getFechaSalida().isEqual(dia)){ //coincidencias en la fecha de egreso indicada
+                if (lista.getFechaSalida().isEqual(dia)) { //coincidencias en la fecha de egreso indicada
                     System.out.println(lista);
                 }
             }
-        }else{
+        } else {
             System.out.println("El hotel no posee egresos el día " + dia);
         }
     }
 
     //MUESTRA EL LISTADO DE HABITACIONES
-    public void listadoHabitaciones (){
-        if(!this.listaHabitaciones.isEmpty()){
+    public void listadoHabitaciones() {
+        if (!this.listaHabitaciones.isEmpty()) {
             System.out.println("Listado de habitaciones\n");
-            for(Habitacion lista : listaHabitaciones){
+            for (Habitacion lista : listaHabitaciones) {
                 System.out.println(lista);
             }
-        }else{
+        } else {
             System.out.println("El hotel no tiene habitaciones cargadas");
         }
     }
 
     //MUESTRA EL LISTADO DE HABITACIONES OCUPADAS Y SUS DATOS
-    public void listadoOcupaciones (){
-        if(!this.listaOcupaciones.isEmpty()){
+    public void listadoOcupaciones() {
+        if (!this.listaOcupaciones.isEmpty()) {
             System.out.println("Listado de ocupaciones\n");
-            for(Ocupacion lista : listaOcupaciones){
+            for (Ocupacion lista : listaOcupaciones) {
                 System.out.println(lista);
             }
-        }else{
+        } else {
             System.out.println("El hotel no tiene habitaciones ocupadas");
         }
     }
 
-    public LocalDate fechaProximaOcupacionHabitacion (int nroHabitacion){
+    public LocalDate fechaProximaOcupacionHabitacion(int nroHabitacion) {
         boolean habEncontrada = false;
         int i = 0;
-        LocalDate fecha=null;
-        if(!this.listaReservas.isEmpty()){
-            while(!habEncontrada && i<listaReservas.size()){
-                if(listaReservas.get(i).getNumeroHabitacion()==nroHabitacion){
-                    fecha=listaReservas.get(0).getFechaIngreso();
-                    habEncontrada=true;
+        LocalDate fecha = null;
+        if (!this.listaReservas.isEmpty()) {
+            while (!habEncontrada && i < listaReservas.size()) {
+                if (listaReservas.get(i).getNumeroHabitacion() == nroHabitacion) {
+                    fecha = listaReservas.get(0).getFechaIngreso();
+                    habEncontrada = true;
                 }
                 i++;
             }
@@ -448,5 +426,52 @@ public class Hotel {
         return fecha;
     }
 
-
+    public boolean verifarExistenciaHabitacionPorNumero(List<Habitacion> listaHabitaciones, int numero) {
+        boolean encontrada = false;
+        int i = 0;
+        if (!listaHabitaciones.isEmpty()) {
+            while (!encontrada && i < listaHabitaciones.size()) {
+                if (listaHabitaciones.get(i).getNumero() == numero) {
+                    encontrada = true;
+                }
+            }
+            i++;
+        }
+        return encontrada;
     }
+
+    /// nueva ocupacion con reserva previa
+
+
+    public void nuevaOcupacion(Reserva reserva) {
+        Ocupacion ocupacion = new Ocupacion();
+
+        ocupacion.setIdReserva(reserva.getNumeroReserva());
+        ocupacion.setFechaIngreso(reserva.getFechaIngreso());
+        ocupacion.setFechaSalida(reserva.getFechaSalida());
+        System.out.println("Cantidad cocheras: ");
+        ocupacion.setCochera(scanner.nextInt());
+        boolean encontrada = false;
+        int i = 0;
+        while (!encontrada && i < this.listaHabitaciones.size()) {
+            if (this.listaHabitaciones.get(i).getNumero() == reserva.getNumeroHabitacion()) {
+                ocupacion.setHabitacion(this.listaHabitaciones.get(i));
+            }
+            i++;
+        }
+
+        ocupacion.setCantidadPax(reserva.getNumeroPasajeros());
+        System.out.println("Tipo de pensión");
+        ocupacion.asignarTipoPension();
+        ocupacion.agregarPasajerosLista(reserva, this.pasajeros);
+        ocupacion.agregarPasajerosLista(this.pasajeros);
+        ocupacion.setDeposito(reserva.getDeposito());
+
+        this.listaOcupaciones.add(ocupacion);
+        System.out.println("\nOcupación cargada satisfactoriamente");
+        System.out.println(ocupacion);
+    }
+
+
+
+}
