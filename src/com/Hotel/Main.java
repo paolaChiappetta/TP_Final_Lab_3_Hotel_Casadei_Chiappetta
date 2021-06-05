@@ -28,18 +28,18 @@ public class Main {
 
 
 
-        Reserva reserva = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-06-01"), LocalDate.parse("2021-06-03"));
+        Reserva reserva = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-06-01"), LocalDate.parse("2021-06-03"), "55");
         reservas.add(reserva);
-        Reserva reserva2 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-06-25"), LocalDate.parse("2021-06-28"));
+        Reserva reserva2 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-06-25"), LocalDate.parse("2021-06-28"), "");
         reservas.add(reserva2);
-        Reserva reserva3 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-07-01"), LocalDate.parse("2021-07-04"));
+        Reserva reserva3 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-07-01"), LocalDate.parse("2021-07-04"), "");
         reservas.add(reserva3);
 
-        Reserva reserva4 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-08-01"), LocalDate.parse("2021-08-03"));
+        Reserva reserva4 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-08-01"), LocalDate.parse("2021-08-03"), "");
         reservas2.add(reserva4);
-        Reserva reserva5 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-09-25"), LocalDate.parse("2021-09-28"));
+        Reserva reserva5 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-09-25"), LocalDate.parse("2021-09-28"), "");
         reservas2.add(reserva5);
-        Reserva reserva6 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-07-08"), LocalDate.parse("2021-07-12"));
+        Reserva reserva6 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-07-08"), LocalDate.parse("2021-07-12"), "");
         reservas2.add(reserva6);
 
         Habitacion habitacion1 = new Habitacion(101, 1, EstadoHabitacion.DISPONIBLE,
@@ -138,7 +138,7 @@ public class Main {
 
 
         System.out.println(reserva2);
-        Hotel hotelito= new Hotel(reservas);
+        Hotel hotelito= new Hotel(habitaciones, reservas);
         hotelito.checkIn();
 
 

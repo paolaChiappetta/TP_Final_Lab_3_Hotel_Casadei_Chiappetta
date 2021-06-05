@@ -130,11 +130,11 @@ public class Hotel {
         List<Integer> habitaciones = new ArrayList<>();
         boolean encontrada = false;
 
-        if (listaHabitaciones != null) { //si hay lista de habitaciones
+        if (!listaHabitaciones.isEmpty()) { //si hay lista de habitaciones
 
             for (int i = 0; i < listaHabitaciones.size(); i++) { //recorro la lista de hab
 
-                if (listaHabitaciones.get(i).getReservasHab() != null) { //si cada hab tiene su lista de reservas
+                if (!listaHabitaciones.get(i).getReservasHab().isEmpty()) { //si cada hab tiene su lista de reservas
                     Collections.sort(listaHabitaciones.get(i).getReservasHab()); //las ordeno por fecha en orden ascendente
                     encontrada = false;
 
@@ -164,7 +164,7 @@ public class Hotel {
 
                             encontrada = true;
 
-                        } else if (encontrada == false && (ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) || //si estoy en una reserva del medio
+                        } else if (!encontrada && (ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) || //si estoy en una reserva del medio
                                 ingreso.equals(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida())) &&                           //verifico si ingreso es <=a la fecha de salida
                                 (salida.isEqual(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()) ||                      //de la reserva y <= a la fecha de ingreso de
                                         salida.isBefore(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()))) {             //la proxima reserva
@@ -199,7 +199,7 @@ public class Hotel {
 
     public Ocupacion buscarOcupacionPorHabitacion(int numeroHab) {
         Ocupacion ocupacion = null;
-        if (this.listaOcupaciones != null) {
+        if (!this.listaOcupaciones.isEmpty()) {
             for (Ocupacion lista : this.listaOcupaciones) {
                 if (lista.getHabitacion().getNumero() == numeroHab) {
                     ocupacion = lista;
@@ -211,7 +211,7 @@ public class Hotel {
 
     public boolean verificarHabitacionExistente(int nroHabitacion) {
         boolean habEncontrada = false;
-        if (this.listaHabitaciones != null) {  //verifico que exista la hab
+        if (!this.listaHabitaciones.isEmpty()) {  //verifico que exista la hab
             for (Habitacion lista : listaHabitaciones) {
                 if (lista.getNumero() == nroHabitacion) {
                     habEncontrada = true;
@@ -223,7 +223,7 @@ public class Hotel {
 
     public boolean verificarOcupacionExistente(int nroHabitacion) {
         boolean ocupacionEncontrada = false;
-        if (this.listaOcupaciones != null) {  //verifico que exista la hab
+        if (!this.listaOcupaciones.isEmpty()) {  //verifico que exista la hab
             for (Ocupacion lista : listaOcupaciones) {
                 if (lista.getHabitacion().getNumero() == nroHabitacion) {
                     ocupacionEncontrada = true;

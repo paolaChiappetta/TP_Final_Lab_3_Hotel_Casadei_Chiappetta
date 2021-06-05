@@ -125,7 +125,7 @@ public class Factura {
 
     //CALCULA EL TOTAL DE LA OCUPACION + IVA
     public double calculoFinalOcupacionConIva() {
-        return calculoFinalOcupacionSinIva() + calculoIva();
+        return calculoFinalOcupacionSinIva() + calculoIva() - this.ocupacion.getDeposito();
 
     }
 
@@ -170,6 +170,7 @@ public class Factura {
                 "\n-------------------------------------------------------------------------" +
                 "\n                                                       Importe: " + calculoFinalOcupacionSinIva() +
                 String.format("\n                                                           Iva: %.2f", calculoIva()) +
+                "\n                                                           Depósito: " + this.ocupacion.getDeposito() +
                 "\n\n                                                         Total: " + calculoFinalOcupacionConIva() +
                 "\n-------------------------------------------------------------------------";
 

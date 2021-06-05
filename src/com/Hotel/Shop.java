@@ -54,7 +54,7 @@ public class Shop {
 
     //LISTA DE SERVICIOS
     public void verListaServicios(Empleado empleado) {
-        if (this.servicios != null) {
+        if (!this.servicios.isEmpty()) {
             System.out.println(">>Servicios<<\n");
             for (Servicio lista : servicios) {  //Recorro la lista de servicios
                 if (empleado instanceof Recepcionista) { //si el empleado es recepcionista
@@ -77,7 +77,7 @@ public class Shop {
 
     //LISTA DE AMENITIES
     public void verListaAmenities(Empleado empleado) {
-        if (this.amenities != null) {
+        if (!this.amenities.isEmpty()) {
             System.out.println(">>Amenities<<\n");
             for (Amenitie lista : amenities) { //Recorro la lista de amenities
                 if (empleado instanceof Recepcionista) { //si el empleado es recepcionista
@@ -100,7 +100,7 @@ public class Shop {
 
     //LISTA DEL MINIBAR
     public void verListaMinibar(Empleado empleado) {
-        if (this.minibar != null) {
+        if (!this.minibar.isEmpty()) {
             System.out.println(">>Minibar<<\n");
             for (ProductoMinibar lista : minibar) { //Recorro la lista del minibar
                 if (empleado instanceof Recepcionista) {//si el empleado es recepcionista
@@ -123,7 +123,7 @@ public class Shop {
 
     //LISTA DE ROTURAS
     public void verListaRotura(Empleado empleado) {
-        if (this.roturas != null) {
+        if (!this.roturas.isEmpty()) {
             System.out.println(">>Roturas<<\n");
             for (Rotura lista : roturas) { //Recorro la lista de roturas
                 if (empleado instanceof Recepcionista) { //si el empleado es recepcionista
@@ -196,7 +196,7 @@ public class Shop {
 
                 switch (opcion) {
                     case 1:
-                        if (this.servicios != null) {
+                        if (!this.servicios.isEmpty()) {
                             for (Servicio lista : servicios) {
                                 if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
                                     if (lista.isAlta()) {
@@ -210,7 +210,7 @@ public class Shop {
                         }
                         break;
                     case 2:
-                        if (this.amenities != null) {
+                        if (!this.amenities.isEmpty()) {
                             for (Amenitie lista : this.amenities) {
                                 if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
                                     if (lista.isAlta()) {
@@ -223,7 +223,7 @@ public class Shop {
                         }
                         break;
                     case 3:
-                        if (this.minibar != null) {
+                        if (!this.minibar.isEmpty()) {
                             for (ProductoMinibar lista : minibar) {
                                 if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
                                     if (lista.isAlta()) {
@@ -236,7 +236,7 @@ public class Shop {
                         }
                         break;
                     case 4:
-                        if (this.roturas != null) {
+                        if (!this.roturas.isEmpty()) {
                             for (Rotura lista : roturas) {
                                 if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
                                     if (lista.isAlta()) {
@@ -303,7 +303,7 @@ public class Shop {
             if (hotel.buscarOcupacionPorHabitacion(nroHab).getExtras() != null) {
                 boolean encontrado = false;
                 for (Extra lista : hotel.buscarOcupacionPorHabitacion(nroHab).getExtras()) { //busca el extra en la lista de la ocupación
-                    if (encontrado == false && lista.getNombre().equalsIgnoreCase(nombre)) { //busca por nombre
+                    if (!encontrado && lista.getNombre().equalsIgnoreCase(nombre)) { //busca por nombre
                         hotel.buscarOcupacionPorHabitacion(nroHab).getExtras().remove(lista); //lo elimina de la lista
                         encontrado = true; //se pone un booleano para no eliminar + de un extra idéntico
                     }
@@ -408,8 +408,8 @@ public class Shop {
 
             switch (opcion) {
                 case 1:
-                    if (this.servicios != null) {
-                        while (encontrado == false && i < servicios.size()) {
+                    if (!this.servicios.isEmpty()) {
+                        while (!encontrado && i < servicios.size()) {
                             if (servicios.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 servicios.get(i).setAlta(false); //cuando lo encuentra, lo da de baja
                                 encontrado = true;
@@ -420,8 +420,8 @@ public class Shop {
                     }
                     break;
                 case 2:
-                    if (this.amenities != null) {
-                        while (encontrado == false && i < amenities.size()) {
+                    if (!this.amenities.isEmpty()) {
+                        while (!encontrado && i < amenities.size()) {
                             if (amenities.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 amenities.get(i).setAlta(false); //cuando lo encuentra, lo da de baja
                                 encontrado = true;
@@ -432,8 +432,8 @@ public class Shop {
                     }
                     break;
                 case 3:
-                    if (this.minibar != null) {
-                        while (encontrado == false && i < minibar.size()) {
+                    if (!this.minibar.isEmpty()) {
+                        while (!encontrado && i < minibar.size()) {
                             if (minibar.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 minibar.get(i).setAlta(false); //cuando lo encuentra, lo da de baja
                                 encontrado = true;
@@ -445,8 +445,8 @@ public class Shop {
                     break;
 
                 case 4:
-                    if (this.roturas != null) {
-                        while (encontrado == false && i < roturas.size()) {
+                    if (!this.roturas.isEmpty()) {
+                        while (!encontrado && i < roturas.size()) {
                             if (roturas.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 roturas.get(i).setAlta(false); //cuando lo encuentra, lo da de baja
                                 encontrado = true;
@@ -460,7 +460,7 @@ public class Shop {
                     System.out.println("La opción ingresada es incorrecta. Ingrese nuevamente");
                     break;
             }
-            if (encontrado == true) {
+            if (encontrado) {
                 System.out.println("El extra fue dado de baja correctamente");
             } else {
                 System.out.println("No se encontraron coincidencias con el nombre indicado");
@@ -490,8 +490,8 @@ public class Shop {
 
             switch (opcion) {
                 case 1:
-                    if (this.servicios != null) {
-                        while (encontrado == false && i < servicios.size()) {
+                    if (!this.servicios.isEmpty()) {
+                        while (!encontrado && i < servicios.size()) {
                             if (servicios.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 servicios.remove(servicios.get(i)); //cuando lo encuentro se elimina de la lista
                                 encontrado = true;
@@ -502,8 +502,8 @@ public class Shop {
                     }
                     break;
                 case 2:
-                    if (this.amenities != null) {
-                        while (encontrado == false && i < amenities.size()) {
+                    if (!this.amenities.isEmpty()) {
+                        while (!encontrado && i < amenities.size()) {
                             if (amenities.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 amenities.remove(amenities.get(i)); //cuando lo encuentro se elimina de la lista
                                 encontrado = true;
@@ -514,8 +514,8 @@ public class Shop {
                     }
                     break;
                 case 3:
-                    if (this.minibar != null) {
-                        while (encontrado == false && i < minibar.size()) {
+                    if (!this.minibar.isEmpty()) {
+                        while (!encontrado && i < minibar.size()) {
                             if (minibar.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 minibar.remove(minibar.get(i)); //cuando lo encuentro se elimina de la lista
                                 encontrado = true;
@@ -527,8 +527,8 @@ public class Shop {
                     break;
 
                 case 4:
-                    if (this.roturas != null) {
-                        while (encontrado == false && i < roturas.size()) {
+                    if (!this.roturas.isEmpty()) {
+                        while (!encontrado && i < roturas.size()) {
                             if (roturas.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 roturas.remove(roturas.get(i)); //cuando lo encuentro se elimina de la lista
                                 encontrado = true;
@@ -542,7 +542,7 @@ public class Shop {
                     System.out.println("La opción ingresada es incorrecta. Ingrese nuevamente");
                     break;
             }
-            if (encontrado == true) {
+            if (encontrado) {
                 System.out.println("El extra fue eliminado correctamente");
             } else {
                 System.out.println("No se encontraron coincidencias con el nombre indicado");
@@ -575,8 +575,8 @@ public class Shop {
 
             switch (opcion) {
                 case 1:
-                    if (this.servicios != null) {
-                        while (encontrado == false && i < servicios.size()) {
+                    if (!this.servicios.isEmpty()) {
+                        while (!encontrado && i < servicios.size()) {
                             if (servicios.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 do { //según el tipo, se puden modificar distintos atributos
                                     System.out.println("Qué desea modificar: ");
@@ -622,8 +622,8 @@ public class Shop {
                     }
                     break;
                 case 2:
-                    if (this.amenities != null) {
-                        while (encontrado == false && i < amenities.size()) {
+                    if (!this.amenities.isEmpty()) {
+                        while (!encontrado && i < amenities.size()) {
                             if (amenities.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 do { //según el tipo, se puden modificar distintos atributos
                                     System.out.println("Qué desea modificar: ");
@@ -673,8 +673,8 @@ public class Shop {
                     }
                     break;
                 case 3:
-                    if (this.minibar != null) {
-                        while (encontrado == false && i < minibar.size()) {
+                    if (!this.minibar.isEmpty()) {
+                        while (!encontrado && i < minibar.size()) {
                             if (minibar.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 do { //según el tipo, se puden modificar distintos atributos
                                     System.out.println("Qué desea modificar: ");
@@ -721,8 +721,8 @@ public class Shop {
                     break;
 
                 case 4:
-                    if (this.roturas != null) {
-                        while (encontrado == false && i < roturas.size()) {
+                    if (!this.roturas.isEmpty()) {
+                        while (!encontrado && i < roturas.size()) {
                             if (roturas.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 do { //según el tipo, se puden modificar distintos atributos
                                     System.out.println("Qué desea modificar: ");
@@ -748,7 +748,7 @@ public class Shop {
                                             System.out.println("Opción incorrecta. Ingrese nuevamente");
                                             break;
                                     }
-                                    if (encontrado == true) {
+                                    if (encontrado) {
                                         System.out.println("El extra fue modificado correctamente");
                                     } else {
                                         System.out.println("No se encontraron coincidencias con el nombre indicado");
@@ -798,8 +798,8 @@ public class Shop {
 
             switch (opcion) {
                 case 1:
-                    if (this.servicios != null) {
-                        while (encontrado == false && i < servicios.size()) {
+                    if (!this.servicios.isEmpty()) {
+                        while (!encontrado && i < servicios.size()) {
                             if (servicios.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 servicios.get(i).setAlta(true); //cuando lo encuentro lo doy de alta
                                 encontrado = true;
@@ -810,8 +810,8 @@ public class Shop {
                     }
                     break;
                 case 2:
-                    if (this.amenities != null) {
-                        while (encontrado == false && i < amenities.size()) {
+                    if (!this.amenities.isEmpty()) {
+                        while (!encontrado && i < amenities.size()) {
                             if (amenities.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 amenities.get(i).setAlta(true); //cuando lo encuentro lo doy de alta
                                 encontrado = true;
@@ -822,8 +822,8 @@ public class Shop {
                     }
                     break;
                 case 3:
-                    if (this.minibar != null) {
-                        while (encontrado == false && i < minibar.size()) {
+                    if (!this.minibar.isEmpty()) {
+                        while (!encontrado && i < minibar.size()) {
                             if (minibar.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 minibar.get(i).setAlta(true); //cuando lo encuentro lo doy de alta
                                 encontrado = true;
@@ -835,8 +835,8 @@ public class Shop {
                     break;
 
                 case 4:
-                    if (this.roturas != null) {
-                        while (encontrado == false && i < roturas.size()) {
+                    if (!this.roturas.isEmpty()) {
+                        while (!encontrado && i < roturas.size()) {
                             if (roturas.get(i).getNombre().equalsIgnoreCase(nombre)) {
                                 roturas.get(i).setAlta(true); //cuando lo encuentro lo doy de alta
                                 encontrado = true;
@@ -850,7 +850,7 @@ public class Shop {
                     System.out.println("La opción ingresada es incorrecta. Ingrese nuevamente");
                     break;
             }
-            if (encontrado == true) {
+            if (encontrado) {
                 System.out.println("El extra fue dado de alta correctamente");
             } else {
                 System.out.println("No se encontraron coincidencias con el nombre indicado");

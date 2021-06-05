@@ -61,7 +61,8 @@ public class Menu {
         System.out.println("1- Nueva reserva");
         System.out.println("2- Modificar una reserva");
         System.out.println("3- Eliminar una reserva");
-        System.out.println("4- Volver al menú anterior");
+        System.out.println("4- Ver una reserva");
+        System.out.println("5- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
 
@@ -255,7 +256,7 @@ public class Menu {
                     System.exit(0);
                     break;
                 case 1:
-                    //check in
+                    hotel.checkIn();
                     break;
                 case 2:
                     //check out
@@ -376,6 +377,9 @@ public class Menu {
                     //eliminar reserva
                     break;
                 case 4:
+                    //ver reserva
+                    break;
+                case 5:
                     menuHotel();
                     break;
                 default:
@@ -490,7 +494,7 @@ public class Menu {
                     System.exit(0);
                     break;
                 case 1:
-                    //modif contraseña
+                    //empleadoActual.modificarClave();
                     break;
                 case 2:
                     if(empleadoActual instanceof Recepcionista){
