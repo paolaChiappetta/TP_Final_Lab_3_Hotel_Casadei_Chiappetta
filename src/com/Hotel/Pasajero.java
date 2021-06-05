@@ -190,8 +190,8 @@ public class Pasajero extends Persona {
 
     //FUNCION CARGA DE PASAJERO, pide datos devuelve pasajero
 
-    public Pasajero cargarPasajero (){
-        Pasajero pasajero= new Pasajero();
+    public Pasajero cargarPasajero() {
+        Pasajero pasajero = new Pasajero();
 
 
         System.out.println("Nombre:");
@@ -227,9 +227,6 @@ public class Pasajero extends Persona {
 
         return pasajero;
     }
-
-
-
 
 
     //FUNCION MODIFICAR DATOS PASAJERO
@@ -334,10 +331,32 @@ public class Pasajero extends Persona {
         } while (opcion != 0);
     }
 
+    public void buscarPasajeroDni(List<Pasajero> listaPasajeros) {
+        //Pasajero pasajero= new Pasajero();
+        int encontrado = 0;
+        System.out.println("Indique Dni:");
+        String dni = scanner.next();
 
+        for (Pasajero pasajero : listaPasajeros) {
 
+            if (pasajero.dni.compareTo(dni) == 0) {
+                System.out.println("Datos pasajero: ");
+                System.out.println(pasajero);
+                System.out.println("Desea modificar datos 1=si  /  0= no " );
+                int mod= scanner.nextInt();
+                if (mod == 1) {
+                    modificarPasajero(pasajero);
+                }else{
+                    System.out.println("Es el pasajero titular de reserva?  si=1 / no= 0 ");
+                    pasajero.titularReserva= scanner.nextBoolean();
 
+                }
+            }else{
+                listaPasajeros.add(cargarPasajero());
+            }
+        }
 
+    }
 
 
     @Override
