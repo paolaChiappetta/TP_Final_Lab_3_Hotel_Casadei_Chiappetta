@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Pasajero extends Persona {
 
 
-    private static int identificador = 1;     /// variable static para id
+    private static int identificador = 0;     /// variable static para id
 
     private String dni;
     private LocalDate fechaNacimiento;
@@ -22,9 +22,8 @@ public class Pasajero extends Persona {
     private String provincia;
     private String pais;
     private String mail;
-    private Integer id;                                     // o Long??   se asigna al generar un pasajero
+    private Integer id;
     private Boolean titularReserva;
-    private List<Reserva> listaDeReservas;
     private List<Ocupacion> listaOcupacionAnterior;
 
 
@@ -169,14 +168,6 @@ public class Pasajero extends Persona {
         this.ciudad = ciudad;
     }
 
-    public List<Reserva> getListaDeReservas() {
-        return listaDeReservas;
-    }
-
-    public void setListaDeReservas(List<Reserva> listaDeReservas) {
-        this.listaDeReservas = listaDeReservas;
-    }
-
     public List<Ocupacion> getListaOcupacionAnterior() {
         return listaOcupacionAnterior;
     }
@@ -190,42 +181,53 @@ public class Pasajero extends Persona {
 
     //FUNCION CARGA DE PASAJERO, pide datos devuelve pasajero
 
-    public Pasajero cargarPasajero() {
+    public Pasajero cargarPasajeroTitular(Reserva reserva) {
 
-        System.out.println("Nombre:");
-        this.setNombre(scanner.next());
-        System.out.println("Apellido:");
-        this.setApellido(scanner.next());
-        System.out.println("Dni:");
-        this.setDni(scanner.next());
-        System.out.println("Telefono:");
-        this.setNumeroTel(scanner.next());
+        this.setNombre(reserva.getPasajeroNombre());
+        this.setApellido(reserva.getPasajeroApellido());
+        this.setDni(reserva.getPasajeroDni());
+        this.setNumeroTel(reserva.getTelefono());
         System.out.println("Fecha de nacimiento:");
-        this.setFechaNacimiento(LocalDate.parse(scanner.next(), DateTimeFormatter.BASIC_ISO_DATE));
+        LocalDate nacimiento;
+        nacimiento=LocalDate.parse(scanner.nextLine());
+        this.setFechaNacimiento(nacimiento);
         System.out.println("Indique la profesion u ocupacion:");
-        this.setProfesion_ocupacion(scanner.next());
+        this.setProfesion_ocupacion(scanner.nextLine());
         System.out.println("Nacionalidad:");
-        this.setNacionalidad(scanner.next());
+        this.setNacionalidad(scanner.nextLine());
         System.out.println("Indique la Calle:");
-        this.setCalle(scanner.next());
+        this.setCalle(scanner.nextLine());
         System.out.println("Numero:");
         this.setNumero(scanner.nextInt());
         System.out.println("Piso:");
         this.setPiso(scanner.nextInt());
+        scanner.nextLine();
         System.out.println("Departamento:");
-        this.setDepartamento(scanner.next());
+        this.setDepartamento(scanner.nextLine());
         System.out.println("Ciudad:");
-        this.setCiudad(scanner.next());
+        this.setCiudad(scanner.nextLine());
         System.out.println("Provincia:");
-        this.setProvincia(scanner.next());
+        this.setProvincia(scanner.nextLine());
         System.out.println("Pais:");
-        this.setPais(scanner.next());
-        System.out.println("Es titular de reserva? si: 1  / no: 0  ");
-        this.setTitularreserva(scanner.nextBoolean());
+        this.setPais(scanner.nextLine());
+        this.setTitularreserva(true);
 
         return this;
     }
 
+    public Pasajero cargarPasajeroAcompaniante() {
+
+
+        System.out.println("Nombre:");
+        this.setNombre(scanner.nextLine());
+        System.out.println("Apellido:");
+        this.setApellido(scanner.nextLine());
+        System.out.println("Telefono:");
+        this.setNumeroTel(scanner.nextLine());
+        this.setTitularreserva(false);
+
+        return this;
+    }
 
     //FUNCION MODIFICAR DATOS PASAJERO
 
@@ -327,33 +329,6 @@ public class Pasajero extends Persona {
                     break;
             }
         } while (opcion != 0);
-    }
-
-    public void buscarPasajeroDni(List<Pasajero> listaPasajeros) {
-        //Pasajero pasajero= new Pasajero();
-        int encontrado = 0;
-        System.out.println("Indique Dni:");
-        String dni = scanner.next();
-
-        for (Pasajero pasajero : listaPasajeros) {      //usar while
-
-            if (pasajero.dni.compareTo(dni) == 0) {
-                System.out.println("Datos pasajero: ");
-                System.out.println(pasajero);
-                System.out.println("Desea modificar datos 1=si  /  0= no " );
-                int mod= scanner.nextInt();
-                if (mod == 1) {
-                    modificarPasajero(pasajero);
-                }else{
-                    System.out.println("Es el pasajero titular de reserva?  si=1 / no= 0 ");
-                    pasajero.titularReserva= scanner.nextBoolean();
-
-                }
-            }else{
-                listaPasajeros.add(cargarPasajero());
-            }
-        }
-
     }
 
 
