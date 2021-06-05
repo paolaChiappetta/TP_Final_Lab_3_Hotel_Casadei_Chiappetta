@@ -1,12 +1,13 @@
 package com.Hotel;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class Reserva implements Comparable<Reserva> {
 
 
-    private static long reservaId= 1;
+    private static long reservaId = 1;
 
     private String pasajeroNombre;
     private String pasajeroApellido;
@@ -21,13 +22,15 @@ public class Reserva implements Comparable<Reserva> {
 
     //constructores
 
-    public Reserva (){ this.numeroReserva= reservaId ++; }
+    public Reserva() {
+        this.numeroReserva = reservaId++;
+    }
 
     public Reserva(String pasajeroNombre, String pasajeroApellido, String pasajeroDni,
                    Integer numeroHabitacion, Integer numeroPasajeros, Double deposito,
                    LocalDate fechaIngreso, LocalDate fechaSalida) {
 
-        this.numeroReserva= reservaId++;                // se asigna num de reserva
+        this.numeroReserva = reservaId++;                // se asigna num de reserva
         this.pasajeroNombre = pasajeroNombre;
         this.pasajeroApellido = pasajeroApellido;
         this.pasajeroDni = pasajeroDni;
@@ -41,41 +44,75 @@ public class Reserva implements Comparable<Reserva> {
 
     ///getters y setters
 
-    public String getPasajeroNombre() {        return pasajeroNombre;    }
+    public String getPasajeroNombre() {
+        return pasajeroNombre;
+    }
 
-    public void setPasajeroNombre(String pasajeroNombre) {   this.pasajeroNombre = pasajeroNombre;    }
+    public void setPasajeroNombre(String pasajeroNombre) {
+        this.pasajeroNombre = pasajeroNombre;
+    }
 
-    public String getPasajeroApellido() {   return pasajeroApellido;    }
+    public String getPasajeroApellido() {
+        return pasajeroApellido;
+    }
 
-    public void setPasajeroApellido(String pasajeroApellido) {    this.pasajeroApellido = pasajeroApellido;   }
+    public void setPasajeroApellido(String pasajeroApellido) {
+        this.pasajeroApellido = pasajeroApellido;
+    }
 
-    public String getPasajeroDni() {     return pasajeroDni;   }
+    public String getPasajeroDni() {
+        return pasajeroDni;
+    }
 
-    public void setPasajeroDni(String pasajeroDni) {     this.pasajeroDni = pasajeroDni;   }
+    public void setPasajeroDni(String pasajeroDni) {
+        this.pasajeroDni = pasajeroDni;
+    }
 
-    public Integer getNumeroHabitacion() {    return numeroHabitacion;   }
+    public Integer getNumeroHabitacion() {
+        return numeroHabitacion;
+    }
 
-    public void setNumeroHabitacion(Integer numeroHabitacion) {    this.numeroHabitacion = numeroHabitacion;   }
+    public void setNumeroHabitacion(Integer numeroHabitacion) {
+        this.numeroHabitacion = numeroHabitacion;
+    }
 
-    public Integer getNumeroPasajeros() {     return numeroPasajeros;   }
+    public Integer getNumeroPasajeros() {
+        return numeroPasajeros;
+    }
 
-    public void setNumeroPasajeros(Integer numeroPasajeros) {   this.numeroPasajeros = numeroPasajeros;   }
+    public void setNumeroPasajeros(Integer numeroPasajeros) {
+        this.numeroPasajeros = numeroPasajeros;
+    }
 
-    public Double getDeposito() {   return deposito;  }
+    public Double getDeposito() {
+        return deposito;
+    }
 
-    public void setDeposito(Double deposito) {    this.deposito = deposito;  }
+    public void setDeposito(Double deposito) {
+        this.deposito = deposito;
+    }
 
-    public LocalDate getFechaIngreso() {    return fechaIngreso;  }
+    public LocalDate getFechaIngreso() {
+        return fechaIngreso;
+    }
 
-    public void setFechaIngreso(LocalDate fechaIngreso) {   this.fechaIngreso = fechaIngreso;  }
+    public void setFechaIngreso(LocalDate fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
 
-    public LocalDate getFechaSalida() {     return fechaSalida;  }
+    public LocalDate getFechaSalida() {
+        return fechaSalida;
+    }
 
-    public void setFechaSalida(LocalDate fechaSalida) {    this.fechaSalida = fechaSalida;  }
+    public void setFechaSalida(LocalDate fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
 
-    public Long getNumeroReserva() {     return numeroReserva;   }
+    public Long getNumeroReserva() {
+        return numeroReserva;
+    }
 
-    public void cargarReserva (Reserva reserva, int numeroHabitacion, LocalDate ingreso, LocalDate salida){
+    public void cargarReserva(Reserva reserva, int numeroHabitacion, LocalDate ingreso, LocalDate salida) {
         Scanner scanner = new Scanner(System.in);
         reserva.setNumeroHabitacion(numeroHabitacion);
         reserva.setFechaIngreso(ingreso);
@@ -92,6 +129,8 @@ public class Reserva implements Comparable<Reserva> {
         reserva.setDeposito(scanner.nextDouble());
     }
 
+
+
     @Override
     public String toString() {
         return "Reserva ID: " + this.numeroReserva +
@@ -105,10 +144,10 @@ public class Reserva implements Comparable<Reserva> {
 
     @Override
     public int compareTo(Reserva o) {
-        if (fechaIngreso.isBefore(o.getFechaIngreso())){
+        if (fechaIngreso.isBefore(o.getFechaIngreso())) {
             return -1;
         }
-        if (fechaIngreso.isAfter(o.getFechaIngreso())){
+        if (fechaIngreso.isAfter(o.getFechaIngreso())) {
             return 1;
         }
         return 0;
