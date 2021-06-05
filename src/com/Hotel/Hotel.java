@@ -260,5 +260,15 @@ public class Hotel {
 
     }
 
+    public void checkIn (){
+        System.out.println("Indique si tiene reserva  1= si  / 0= no");
+        int reserva= scanner.nextInt();
+        if(reserva==1){
+            System.out.println("Dni:");
+            
+    }
+
+
+
 
 }
