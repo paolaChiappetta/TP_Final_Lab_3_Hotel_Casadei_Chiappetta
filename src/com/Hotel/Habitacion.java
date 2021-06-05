@@ -191,6 +191,19 @@ public class Habitacion {
     }
 
 
+    public Habitacion buscarHabitacionPorNumero (List<Habitacion> listaHabitaciones, int numero){
+        Habitacion habitacionEncontrada= new Habitacion();
+        if(listaHabitaciones != null)
+        for(Habitacion habitacion : listaHabitaciones){
+            if(habitacion.numero.compareTo(numero)==0){
+                habitacionEncontrada= habitacion;
+            }else{
+                habitacionEncontrada= null;
+            }
+        }return  habitacionEncontrada;
+    }
+
+
 
     @Override
     public String toString() {

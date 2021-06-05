@@ -52,11 +52,11 @@ public class Main {
         habitaciones.add(habitacion1);
         habitaciones.add(habitacion2);
         habitaciones.add(habitacion11);
-
+/*
         Ocupacion ocup = new Ocupacion(3, LocalDate.parse("2021-05-01"),
                 LocalDate.parse("2021-05-05"), extras, 1, habitacion1, 1,
                 TipoPension.MEDIA_PENSION, listaPax);
-
+*/
 
         Servicio servicio = new Servicio("Plancha", 400.00, "Mucama");
         Servicio servicio2 = new Servicio("Bata", 200.00, "Mucama");
@@ -104,7 +104,7 @@ public class Main {
 
        //shop.verListaPorTipo();
 
-        Factura factura = new Factura(TipoFactura.FACTURA_A, ocup);
+       // Factura factura = new Factura(TipoFactura.FACTURA_A, ocup);
         //System.out.println(factura);
 
         Hotel hotel = new Hotel();
@@ -135,6 +135,15 @@ public class Main {
         //System.out.println(admin.generarNuevoEmpleado());
 
         //System.out.println(admin);
+
+
+        System.out.println(reserva2);
+        Hotel hotelito= new Hotel(reservas);
+        hotelito.checkIn();
+
+
+
+
 
 
     }
