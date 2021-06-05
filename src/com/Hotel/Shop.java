@@ -10,6 +10,9 @@ public class Shop {
     private List<ProductoMinibar> minibar;
     private Scanner scanner = new Scanner(System.in);
 
+    public Shop() {
+    }
+
     public Shop(List<Rotura> roturas, List<Servicio> servicios, List<Amenitie> amenities, List<ProductoMinibar> minibar) {
         this.roturas = roturas;
         this.servicios = servicios;

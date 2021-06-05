@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Hotel {
 
     private List<Habitacion> listaHabitaciones;
-    private List<Reserva> listaReservas = new ArrayList<>();
+    private List<Reserva> listaReservas;
     private List<Recepcionista> recepcionistas;
     private List<Administrador> administradores;
     private List<Ocupacion> listaOcupaciones;
@@ -21,10 +21,13 @@ public class Hotel {
     private Scanner scanner = new Scanner(System.in);
 
     public Hotel() {
-    }
-
-    public Hotel(List<Reserva> listaReservas) {
-        this.listaReservas = listaReservas;
+        this.listaHabitaciones=new ArrayList<>();
+        this.listaReservas = new ArrayList<>();
+        this.recepcionistas=new ArrayList<>();
+        this.administradores=new ArrayList<>();
+        this.listaOcupaciones =new ArrayList<>();
+        this.pasajeros=new ArrayList<>();
+        this.shop=new Shop();
     }
 
     public Hotel(List<Habitacion> listaHabitaciones,
@@ -349,6 +352,101 @@ public class Hotel {
         }
 
 
+    //MUESTRA EL LISTADO DE INGRESOS DEL DIA DE HOY
+    public void listadoIngresosDelDia (){
+        if(!this.listaReservas.isEmpty()){ //busca en la lista de reservas
+            for (Reserva lista : listaReservas){
+                System.out.println("\nIngresos del día\n");
+                if (lista.getFechaIngreso().isEqual(LocalDate.now())){ //coincidencias en la fecha de ingreso
+                    System.out.println(lista);
+                }
+            }
+        }else{
+            System.out.println("El hotel no posee reservas");
+        }
+    }
+
+    //MUESTRA EL LISTADO DE EGRESOS DEL DIA DE HOY
+    public void listadoEgresosDelDia (){
+        if(!this.listaOcupaciones.isEmpty()){
+            for (Ocupacion lista : listaOcupaciones){ //busca en la lista de ocupaciones
+                System.out.println("\nEgresos del día\n");
+                if (lista.getFechaSalida().isEqual(LocalDate.now())){ //coincidencias en la fecha de salida
+                    System.out.println(lista);
+                }
+            }
+        }else{
+            System.out.println("El hotel no posee habitaciones ocupadas");
+        }
+    }
+
+    //MUESTRA EL LISTADO DE INGRESOS DE UN DIA DETERMINADO
+    public void listadoIngresosDeReservasDeDiaDeterminado (LocalDate dia){
+        if(!this.listaReservas.isEmpty()){
+            for (Reserva lista : listaReservas){ //busca en la lista de reservas
+                System.out.println("\nIngresos del día: " + dia + "\n");
+                if (lista.getFechaIngreso().isEqual(dia)){ //coincidencias en la fecha de ingreso indicada
+                    System.out.println(lista);
+                }
+            }
+        }else{
+            System.out.println("El hotel no posee ingresos el día " + dia);
+        }
+    }
+
+    //MUESTRA EL LISTADO DE EGRESOS DE UN DIA DETERMINADO
+    public void listadoEgresosDeDiaDeterminado (LocalDate dia) {
+        if(!this.listaReservas.isEmpty()){
+            for (Reserva lista : listaReservas){ //busca en la lista de reservas
+                System.out.println("\nEgresos del día: " + dia + "\n");
+                if (lista.getFechaSalida().isEqual(dia)){ //coincidencias en la fecha de egreso indicada
+                    System.out.println(lista);
+                }
+            }
+        }else{
+            System.out.println("El hotel no posee egresos el día " + dia);
+        }
+    }
+
+    //MUESTRA EL LISTADO DE HABITACIONES
+    public void listadoHabitaciones (){
+        if(!this.listaHabitaciones.isEmpty()){
+            System.out.println("Listado de habitaciones\n");
+            for(Habitacion lista : listaHabitaciones){
+                System.out.println(lista);
+            }
+        }else{
+            System.out.println("El hotel no tiene habitaciones cargadas");
+        }
+    }
+
+    //MUESTRA EL LISTADO DE HABITACIONES OCUPADAS Y SUS DATOS
+    public void listadoOcupaciones (){
+        if(!this.listaOcupaciones.isEmpty()){
+            System.out.println("Listado de ocupaciones\n");
+            for(Ocupacion lista : listaOcupaciones){
+                System.out.println(lista);
+            }
+        }else{
+            System.out.println("El hotel no tiene habitaciones ocupadas");
+        }
+    }
+
+    public LocalDate fechaProximaOcupacionHabitacion (int nroHabitacion){
+        boolean habEncontrada = false;
+        int i = 0;
+        LocalDate fecha=null;
+        if(!this.listaReservas.isEmpty()){
+            while(!habEncontrada && i<listaReservas.size()){
+                if(listaReservas.get(i).getNumeroHabitacion()==nroHabitacion){
+                    fecha=listaReservas.get(0).getFechaIngreso();
+                    habEncontrada=true;
+                }
+                i++;
+            }
+        }
+        return fecha;
+    }
 
 
     }
