@@ -1,7 +1,5 @@
 package com.Hotel;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,18 +28,18 @@ public class Main {
 
 
 
-        Reserva reserva = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250, LocalDate.parse("2021-06-01"), LocalDate.parse("2021-06-03"));
+        Reserva reserva = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-06-01"), LocalDate.parse("2021-06-03"));
         reservas.add(reserva);
-        Reserva reserva2 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250, LocalDate.parse("2021-06-25"), LocalDate.parse("2021-06-28"));
+        Reserva reserva2 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-06-25"), LocalDate.parse("2021-06-28"));
         reservas.add(reserva2);
-        Reserva reserva3 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250, LocalDate.parse("2021-07-01"), LocalDate.parse("2021-07-04"));
+        Reserva reserva3 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-07-01"), LocalDate.parse("2021-07-04"));
         reservas.add(reserva3);
 
-        Reserva reserva4 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250, LocalDate.parse("2021-08-01"), LocalDate.parse("2021-08-03"));
+        Reserva reserva4 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-08-01"), LocalDate.parse("2021-08-03"));
         reservas2.add(reserva4);
-        Reserva reserva5 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250, LocalDate.parse("2021-09-25"), LocalDate.parse("2021-09-28"));
+        Reserva reserva5 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-09-25"), LocalDate.parse("2021-09-28"));
         reservas2.add(reserva5);
-        Reserva reserva6 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250, LocalDate.parse("2021-07-08"), LocalDate.parse("2021-07-12"));
+        Reserva reserva6 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-07-08"), LocalDate.parse("2021-07-12"));
         reservas2.add(reserva6);
 
         Habitacion habitacion1 = new Habitacion(101, 1, EstadoHabitacion.DISPONIBLE,
@@ -111,11 +109,12 @@ public class Main {
 
         Hotel hotel = new Hotel();
         hotel.setListaHabitaciones(habitaciones);
-        List<Integer>libres = hotel.habsLibre(LocalDate.parse("2021-06-05"), LocalDate.parse("2021-06-10"));
+        List<Integer>libres = hotel.habitacionesLibres(LocalDate.parse("2021-06-03"), LocalDate.parse("2021-06-10"));
       /* for (Habitacion habs : hotel.getListaHabitaciones()){
             Collections.sort(habs.getReservasHab());
             System.out.println(habs.getReservasHab().size() + "\n");
         }*/
+        System.out.println("------------------------------");
         for (Integer habs : libres){
             System.out.println("Habitación N°: " + habs + "\n");
         }
@@ -123,7 +122,7 @@ public class Main {
 
         //probando generar usuario
 
-       Recepcionista rec= new Recepcionista("Micaela", "Casadei", "155750401");
+       //Recepcionista rec= new Recepcionista("Micaela", "Casadei", "155750401");
 
         //System.out.println(rec.getUsuario());
         //System.out.println(rec.getClave());
@@ -131,11 +130,11 @@ public class Main {
       //  Menu menu = new Menu(rec);
        // menu.menuPrincipal();
 
-        Administrador admin= new Administrador("Sofia", "Diaz", "155478962");
+        //Administrador admin= new Administrador("Sofia", "Diaz", "155478962");
         //hotel.getListaEmpleados().add(admin.generarNuevoEmpleado());
-        System.out.println(admin.generarNuevoEmpleado());
+        //System.out.println(admin.generarNuevoEmpleado());
 
-        System.out.println(admin);
+        //System.out.println(admin);
 
 
     }

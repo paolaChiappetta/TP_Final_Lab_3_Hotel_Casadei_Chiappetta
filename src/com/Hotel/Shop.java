@@ -381,7 +381,7 @@ public class Shop {
 
             scanner.nextLine();
             System.out.println("Desea cargar otro extra? s/n");
-            scanner.nextLine();
+            continuar=scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
 
@@ -464,7 +464,7 @@ public class Shop {
             }
             scanner.nextLine();
             System.out.println("Desea dar de baja otro extra? s/n");
-            scanner.nextLine();
+            continuar=scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
     }
@@ -546,7 +546,7 @@ public class Shop {
             }
             scanner.nextLine();
             System.out.println("Desea eliminar otro extra? s/n");
-            scanner.nextLine();
+            continuar=scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
 
@@ -770,7 +770,7 @@ public class Shop {
             }
             scanner.nextLine();
             System.out.println("Desea modificar otro extra? s/n");
-            scanner.nextLine();
+            continuar=scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
 
@@ -854,7 +854,7 @@ public class Shop {
             }
             scanner.nextLine();
             System.out.println("Desea dar de alta otro extra? s/n");
-            scanner.nextLine();
+            continuar=scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
     }

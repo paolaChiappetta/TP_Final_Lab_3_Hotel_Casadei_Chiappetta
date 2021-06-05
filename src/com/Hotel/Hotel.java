@@ -1,9 +1,11 @@
 package com.Hotel;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class Hotel {
 
@@ -15,8 +17,8 @@ public class Hotel {
     private Administrador administrador;
     private Recepcionista recepcionista;
     private List<Pasajero>pasajeros;
-
     private Shop shop;
+    private Scanner scanner = new Scanner(System.in);
 
     public Hotel() {
     }
@@ -109,29 +111,68 @@ public class Hotel {
         this.pasajeros = pasajeros;
     }
 
-    public List<Integer> habsLibre(LocalDate ingreso, LocalDate salida) {
-        List<Integer> habitaciones = new ArrayList<>();
+    //BUSCA HABS LIBRES CON DETERMINADA FECHA DE INGRESO O DE SALIDA
+    public List<Integer> habitacionesLibres(LocalDate ingreso, LocalDate salida) {
+        List<Integer> habitaciones=null;
         boolean encontrada = false;
 
-        if (listaHabitaciones != null) {
-            for (int i = 0; i < listaHabitaciones.size(); i++) {
-                if (listaHabitaciones.get(i).getReservasHab() != null) {
-                    Collections.sort(listaHabitaciones.get(i).getReservasHab());
+        if (listaHabitaciones != null) { //si hay lista de habitaciones
+
+            for (int i = 0; i < listaHabitaciones.size(); i++) { //recorro la lista de hab
+
+                if (listaHabitaciones.get(i).getReservasHab() != null) { //si cada hab tiene su lista de reservas
+                    Collections.sort(listaHabitaciones.get(i).getReservasHab()); //las ordeno por fecha en orden ascendente
                     encontrada = false;
-                    for (int it = 0; it < listaHabitaciones.get(i).getReservasHab().size(); it++) {
-                        if (it == 0 && salida.isBefore(listaHabitaciones.get(i).getReservasHab().get(it).getFechaIngreso()) || salida.isEqual(listaHabitaciones.get(i).getReservasHab().get(it).getFechaIngreso())) {
-                            habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());
+
+                    for (int it = 0; it < listaHabitaciones.get(i).getReservasHab().size(); it++) {                             //recorro la lista de reservas de  esa hab
+                        if (it == 0 && salida.isBefore(listaHabitaciones.get(i).getReservasHab().get(it).getFechaIngreso()) || //si es la 1er reserva y salida
+                                salida.isEqual(listaHabitaciones.get(i).getReservasHab().get(it).getFechaIngreso())) {         //es <= que la fecha de ingreso de la reserva
+
+                            System.out.println("\nHabitación: " + listaHabitaciones.get(i).getNumero() +                                                  //muestro nro de hab y tarifa
+                                    "\nTarifa: " + listaHabitaciones.get(i).getTarifa() + "\nNoches desde la reserva anterior: sin reservas anteriores" + //muestro cuantas noches hay hasta la prox reserva
+                                    "\nNoches hasta la reserva siguiente: " +
+                                    ChronoUnit.DAYS.between(salida, listaHabitaciones.get(i).getReservasHab().get(it).getFechaIngreso()));
+
+                            habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());        //agrego esa hab a la lista de habs disponibles
+
                             encontrada = true;
-                        } else if (encontrada == false && it == listaHabitaciones.get(i).getReservasHab().size() - 1 && ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) || ingreso.isEqual(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida())) {
+
+                        } else if (encontrada == false && it == listaHabitaciones.get(i).getReservasHab().size() - 1 &&       //si es la última reserva e ingreso es >=
+                                ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) ||        //a la fecha de salida de la reserva
+                                ingreso.isEqual(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida())) {
+
+                            System.out.println("\nHabitación: " + listaHabitaciones.get(i).getNumero() +                            //muestro nro de hab y tarifa
+                                    "\nTarifa: " + listaHabitaciones.get(i).getTarifa() + "\nNoches desde la reserva anterior: " +  //muestro cuantas noches hay desde la última reserva
+                                     + ChronoUnit.DAYS.between(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida(), ingreso) +
+                                    "\nNoches hasta la reserva siguiente: sin reservas posteriores");
+
                             habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());
+
                             encontrada = true;
-                        } else if (encontrada == false && (ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) || ingreso.equals(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida())) && (salida.isEqual(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()) || salida.isBefore(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()))) {
+
+                        } else if (encontrada == false && (ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) || //si estoy en una reserva del medio
+                                ingreso.equals(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida())) &&                           //verifico si ingreso es <=a la fecha de salida
+                                (salida.isEqual(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()) ||                      //de la reserva y <= a la fecha de ingreso de
+                                        salida.isBefore(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()))) {             //la proxima reserva
+
+                            System.out.println("\nHabitación: " + listaHabitaciones.get(i).getNumero() +                                      //muestro nro de hab y tarifa
+                                    "\nTarifa: " + listaHabitaciones.get(i).getTarifa() + "\nNoches desde la reserva anterior: " +            //muestro cuantas noches hay desde la última reserva
+                                    + ChronoUnit.DAYS.between(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida(), ingreso) +  //y muestro cuantas noches hay hasta la prox reserva
+                                    "\nNoches hasta la reserva siguiente: " +                                                                 //sirve para ver qué hab conviene reservar
+                                    ChronoUnit.DAYS.between(salida, listaHabitaciones.get(i).getReservasHab().get(it+1).getFechaIngreso()));
+
                             habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());
+
                             encontrada = true;
                         }
+
                     }
                 } else {
-                    habitaciones.add(listaHabitaciones.get(i).getNumero());
+                    System.out.println("\nHabitación: " + listaHabitaciones.get(i).getNumero() +
+                            "\nTarifa: " + listaHabitaciones.get(i).getTarifa() + "\nNoches desde la reserva anterior: sin reservas anteriores" +
+                            "\nNoches hasta la reserva siguiente: sin reservas posteriores" );
+
+                    habitaciones.add(listaHabitaciones.get(i).getNumero()); //si no tiene reservas la agrego a la lista de habitaciones libres
                 }
             }
 
@@ -177,4 +218,47 @@ public class Hotel {
         }
         return ocupacionEncontrada;
     }
+
+    public void nuevaReserva (){
+        LocalDate ingreso;
+        LocalDate salida;
+        int nroHab;
+        String continuar = "s";
+        boolean habLibre=false;
+
+        do{
+            System.out.println("Ingrese fecha de ingreso de la nueva reserva (AAAA-MM-DD");
+            ingreso=LocalDate.parse(scanner.nextLine());
+            System.out.println("Ingrese fecha de salida de la nueva reserva (AAAA-MM-DD");
+            salida=LocalDate.parse(scanner.nextLine());
+
+            List<Integer> libres=this.habitacionesLibres(ingreso, salida);
+            if(libres==null){
+                System.out.println("No hay habitaciones disponibles en las fechas indicadas");
+            }else{
+                Reserva reserva = new Reserva();
+                System.out.println("\nIndique el número de la habitación elegida");
+                nroHab=scanner.nextInt();
+                for (Integer lista : libres){
+                    if(lista==nroHab){
+                        reserva.cargarReserva(reserva, nroHab, ingreso, salida);
+                        this.listaReservas.add(reserva);
+                        habLibre=true;
+                    }
+                }
+                if(!habLibre){
+                    System.out.println("La habitación no está libre en las fechas indicadas");
+                }
+
+            }
+
+            scanner.nextLine();
+            System.out.println("Desea seguir cargando reservas? s/n");
+            continuar=scanner.nextLine();
+
+        }while (continuar.equalsIgnoreCase("s"));
+
+    }
+
+
 }
