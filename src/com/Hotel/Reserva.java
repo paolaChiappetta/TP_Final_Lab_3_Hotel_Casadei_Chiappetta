@@ -1,6 +1,7 @@
 package com.Hotel;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Reserva implements Comparable<Reserva> {
 
@@ -12,7 +13,7 @@ public class Reserva implements Comparable<Reserva> {
     private String pasajeroDni;
     private Integer numeroHabitacion;
     private Integer numeroPasajeros;
-    private Integer deposito;
+    private Double deposito;
     private LocalDate fechaIngreso;
     private LocalDate fechaSalida;
     private Long numeroReserva;
@@ -23,7 +24,7 @@ public class Reserva implements Comparable<Reserva> {
     public Reserva (){ this.numeroReserva= reservaId ++; }
 
     public Reserva(String pasajeroNombre, String pasajeroApellido, String pasajeroDni,
-                   Integer numeroHabitacion, Integer numeroPasajeros, Integer deposito,
+                   Integer numeroHabitacion, Integer numeroPasajeros, Double deposito,
                    LocalDate fechaIngreso, LocalDate fechaSalida) {
 
         this.numeroReserva= reservaId++;                // se asigna num de reserva
@@ -60,9 +61,9 @@ public class Reserva implements Comparable<Reserva> {
 
     public void setNumeroPasajeros(Integer numeroPasajeros) {   this.numeroPasajeros = numeroPasajeros;   }
 
-    public Integer getDeposito() {   return deposito;  }
+    public Double getDeposito() {   return deposito;  }
 
-    public void setDeposito(Integer deposito) {    this.deposito = deposito;  }
+    public void setDeposito(Double deposito) {    this.deposito = deposito;  }
 
     public LocalDate getFechaIngreso() {    return fechaIngreso;  }
 
@@ -74,6 +75,25 @@ public class Reserva implements Comparable<Reserva> {
 
     public Long getNumeroReserva() {     return numeroReserva;   }
 
+    public void cargarReserva (Reserva reserva, int numeroHabitacion, LocalDate ingreso, LocalDate salida){
+        Scanner scanner = new Scanner(System.in);
+        reserva.setNumeroHabitacion(numeroHabitacion);
+        reserva.setFechaIngreso(ingreso);
+        reserva.setFechaSalida(salida);
+        System.out.println("Ingrese el nombre del pasajero");
+        reserva.setPasajeroNombre(scanner.nextLine());
+        System.out.println("Ingrese el apellido del pasajero");
+        reserva.setPasajeroApellido(scanner.nextLine());
+        System.out.println("Ingrese el DNI del pasajero");
+        reserva.setPasajeroDni(scanner.nextLine());
+        System.out.println("Ingrese la cantidad de pasajeros");
+        reserva.setNumeroPasajeros(scanner.nextInt());
+        System.out.println("Ingrese el monto del depósito");
+        reserva.setDeposito(scanner.nextDouble());
+        System.out.println("\n");
+        reserva.toString();
+    }
+
     @Override
     public String toString() {
         return "Reserva ID: " + this.numeroReserva +
@@ -81,6 +101,7 @@ public class Reserva implements Comparable<Reserva> {
                 "\nFecha de ingreso: " + this.fechaIngreso +
                 "\nFecha de salida: " + this.fechaSalida +
                 "\nTitular de reserva: " + this.pasajeroNombre + " " + this.pasajeroApellido +
+                "\nDNI: " + this.pasajeroDni +
                 "\nDepósito: $" + this.deposito + "\n";
     }
 
