@@ -90,8 +90,6 @@ public class Reserva implements Comparable<Reserva> {
         reserva.setNumeroPasajeros(scanner.nextInt());
         System.out.println("Ingrese el monto del depósito");
         reserva.setDeposito(scanner.nextDouble());
-        System.out.println("\n");
-        reserva.toString();
     }
 
     @Override

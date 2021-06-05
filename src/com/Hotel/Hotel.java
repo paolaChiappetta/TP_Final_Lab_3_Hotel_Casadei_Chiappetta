@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Hotel {
 
     private List<Habitacion> listaHabitaciones;
-    private List<Reserva> listaReservas;
+    private List<Reserva> listaReservas = new ArrayList<>();;
     private List<Recepcionista> recepcionistas;
     private List<Administrador> administradores;
     private List<Ocupacion> listaOcupaciones;
@@ -113,7 +113,7 @@ public class Hotel {
 
     //BUSCA HABS LIBRES CON DETERMINADA FECHA DE INGRESO O DE SALIDA
     public List<Integer> habitacionesLibres(LocalDate ingreso, LocalDate salida) {
-        List<Integer> habitaciones=null;
+        List<Integer> habitaciones= new ArrayList<>();
         boolean encontrada = false;
 
         if (listaHabitaciones != null) { //si hay lista de habitaciones
@@ -227,9 +227,9 @@ public class Hotel {
         boolean habLibre=false;
 
         do{
-            System.out.println("Ingrese fecha de ingreso de la nueva reserva (AAAA-MM-DD");
+            System.out.println("Ingrese fecha de ingreso de la nueva reserva (AAAA-MM-DD)");
             ingreso=LocalDate.parse(scanner.nextLine());
-            System.out.println("Ingrese fecha de salida de la nueva reserva (AAAA-MM-DD");
+            System.out.println("Ingrese fecha de salida de la nueva reserva (AAAA-MM-DD)");
             salida=LocalDate.parse(scanner.nextLine());
 
             List<Integer> libres=this.habitacionesLibres(ingreso, salida);
@@ -242,12 +242,14 @@ public class Hotel {
                 for (Integer lista : libres){
                     if(lista==nroHab){
                         reserva.cargarReserva(reserva, nroHab, ingreso, salida);
+                        System.out.println("Reserva cargada satisfactoriamente");
+                        System.out.println(reserva);
                         this.listaReservas.add(reserva);
-                        habLibre=true;
+                        habLibre = true;
                     }
                 }
-                if(!habLibre){
-                    System.out.println("La habitación no está libre en las fechas indicadas");
+                if (habLibre == false) {
+                    System.out.println("La habitación no existe o no está libre en las fechas indicadas");
                 }
 
             }
@@ -260,15 +262,15 @@ public class Hotel {
 
     }
 
-    public void checkIn (){
+    public void checkIn () {
         System.out.println("Indique si tiene reserva  1= si  / 0= no");
-        int reserva= scanner.nextInt();
-        if(reserva==1){
+        int reserva = scanner.nextInt();
+        if (reserva == 1) {
             System.out.println("Dni:");
-            
+
+        }
+
     }
-
-
 
 
 }
