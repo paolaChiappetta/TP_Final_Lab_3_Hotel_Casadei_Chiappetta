@@ -18,6 +18,7 @@ public class Factura {
     //CONSTRUCTORES
     public Factura() {
         this.numeroFactura = idFactura + 1;
+        this.fechaEmision = LocalDate.now();
     }
 
     public Factura(TipoFactura tipoFactura, Ocupacion ocupacion) {
@@ -170,7 +171,7 @@ public class Factura {
                 "\n-------------------------------------------------------------------------" +
                 "\n                                                       Importe: " + calculoFinalOcupacionSinIva() +
                 String.format("\n                                                           Iva: %.2f", calculoIva()) +
-                "\n                                                           Depósito: " + this.ocupacion.getDeposito() +
+                "\n                                                      Depósito: " + this.ocupacion.getDeposito() +
                 "\n\n                                                         Total: " + calculoFinalOcupacionConIva() +
                 "\n-------------------------------------------------------------------------";
 

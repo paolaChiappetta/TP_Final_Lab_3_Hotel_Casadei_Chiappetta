@@ -259,7 +259,9 @@ public class Menu {
                     hotel.checkIn();
                     break;
                 case 2:
-                    //check out
+                    System.out.println("Check-Out");
+                    System.out.println("\nIngrese el número de habitación: ");
+                    hotel.checkOut(scanner.nextInt());
                     break;
                 case 3:
                     menuReservas();
@@ -377,7 +379,9 @@ public class Menu {
                     //eliminar reserva
                     break;
                 case 4:
-                    //ver reserva
+                    scanner.nextLine();
+                    System.out.println("\nIngrese el Dni del pasajero");
+                    hotel.listadoReservasPorDni(scanner.nextLine());
                     break;
                 case 5:
                     menuHotel();

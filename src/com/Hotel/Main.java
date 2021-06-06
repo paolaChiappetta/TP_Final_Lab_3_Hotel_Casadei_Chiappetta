@@ -140,7 +140,7 @@ public class Main {
         Hotel hotelito= new Hotel(habitaciones, reservas);
         //hotelito.checkIn();
 
-        hotelito.listadoReservasPorDiaIngreso (LocalDate.parse("2021-06-01"));
+       // hotelito.listadoReservasPorDiaIngreso (LocalDate.parse("2021-06-01"));
 
 
 
