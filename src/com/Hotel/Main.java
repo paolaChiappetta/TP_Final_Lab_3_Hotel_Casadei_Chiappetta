@@ -46,12 +46,11 @@ public class Main {
                 Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"), reservas);
         Habitacion habitacion2 = new Habitacion(102, 1, EstadoHabitacion.DISPONIBLE,
                 Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"), reservas2);
-        Habitacion habitacion11 = new Habitacion(111, 1, EstadoHabitacion.DISPONIBLE,
-                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"), null);
+
 
         habitaciones.add(habitacion1);
         habitaciones.add(habitacion2);
-        habitaciones.add(habitacion11);
+
 /*
         Ocupacion ocup = new Ocupacion(3, LocalDate.parse("2021-05-01"),
                 LocalDate.parse("2021-05-05"), extras, 1, habitacion1, 1,
@@ -114,11 +113,11 @@ public class Main {
             Collections.sort(habs.getReservasHab());
             System.out.println(habs.getReservasHab().size() + "\n");
         }*/
-        System.out.println("------------------------------");
+      /*  System.out.println("------------------------------");
         for (Integer habs : libres){
             System.out.println("Habitación N°: " + habs + "\n");
         }
-
+*/
 
         //probando generar usuario
 
@@ -137,9 +136,11 @@ public class Main {
         //System.out.println(admin);
 
 
-        System.out.println(reserva2);
+        //System.out.println(reserva2);
         Hotel hotelito= new Hotel(habitaciones, reservas);
-        hotelito.checkIn();
+        //hotelito.checkIn();
+
+        hotelito.listadoReservasPorDiaIngreso (LocalDate.parse("2021-06-01"));
 
 
 

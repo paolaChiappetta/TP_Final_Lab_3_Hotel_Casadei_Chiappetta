@@ -1,6 +1,7 @@
 package com.Hotel;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class Habitacion {
     private EstadoHabitacion estado;
     private Tarifa tarifa;
     private LocalDate fechaProximaOcupacion;
-    private List<Reserva> reservasHab;
+    private List<Reserva> reservasHab= new ArrayList<>();
 
 
     public Habitacion() {
