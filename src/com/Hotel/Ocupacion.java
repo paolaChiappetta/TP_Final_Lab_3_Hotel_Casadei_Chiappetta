@@ -212,33 +212,37 @@ public class Ocupacion {
     }
 
     public void agregarPasajerosLista(List<Pasajero> pasajeros) {
-        int rta = 1;
+        int rta = 0;
         boolean encontrado = false;
         int i = 0;
+        System.out.println("\nDesea agregar acompañantes?\n1- Si\n2- No");
+        scanner.nextInt();
 
-        do {
-            String dni;
-            System.out.println("\nAgregar acompañantes:");
-            scanner.nextLine();
-            System.out.println("\nIngrese el Dni:");
-            dni = scanner.nextLine();
-            boolean existe = buscarPasajeroDni(dni, pasajeros);
-            if (existe) {
-                while (!encontrado && i < pasajeros.size()) {
-                    if (dni == pasajeros.get(i).getDni()) {
-                        pasajeros.get(i).setTitularreserva(false);
-                        this.listaPaxs.add(pasajeros.get(i));
+        if(rta==1){
+            do {
+                scanner.nextLine();
+                String dni;
+                System.out.println("\nIngrese el Dni:");
+                dni = scanner.nextLine();
+                boolean existe = buscarPasajeroDni(dni, pasajeros);
+                if (existe) {
+                    while (!encontrado && i < pasajeros.size()) {
+                        if (dni == pasajeros.get(i).getDni()) {
+                            pasajeros.get(i).setTitularreserva(false);
+                            this.listaPaxs.add(pasajeros.get(i));
+                        }
                     }
+                    i++;
+                } else {
+                    Pasajero pasajero = new Pasajero();
+                    this.listaPaxs.add(pasajero.cargarPasajeroAcompaniante());
                 }
-                i++;
-            } else {
-                Pasajero pasajero = new Pasajero();
-                this.listaPaxs.add(pasajero.cargarPasajeroAcompaniante());
-            }
-            System.out.println("\nDesea agregar otro acompañante?:\n1- Si\n2- No");
-            rta = scanner.nextInt();
+                System.out.println("\nDesea agregar otro acompañante?:\n1- Si\n2- No");
+                rta = scanner.nextInt();
 
-        } while (rta == 1);
+            } while (rta == 1);
+        }
+
     }
 
             public boolean buscarPasajeroDni (String dni, List < Pasajero > pasajeros){
