@@ -472,6 +472,22 @@ public class Hotel {
         System.out.println(ocupacion);
     }
 
+    //LISTADO RESERVAS POR DNI
+
+    public void listadoReservasPorDni( String dni) {
+        if (!this.listaReservas.isEmpty()) {
+
+            System.out.println("\nReservas por dni: \n");
+            for (Reserva reserva : this.listaReservas) { //busca en la lista de reservas
+                if (reserva.getPasajeroDni().compareTo(dni)==0) {
+                    System.out.println(reserva);
+                }
+            }
+        } else {
+            System.out.println("El pasajero no posee reservas");
+        }
+    }
+
 
 
 }
