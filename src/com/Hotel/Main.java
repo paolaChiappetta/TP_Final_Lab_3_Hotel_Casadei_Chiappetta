@@ -42,7 +42,7 @@ public class Main {
         Reserva reserva6 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-07-08"), LocalDate.parse("2021-07-12"), "");
         reservas2.add(reserva6);
 
-        Habitacion habitacion1 = new Habitacion(101, 1, EstadoHabitacion.DISPONIBLE,
+        Habitacion habitacion1 = new Habitacion(101, 1, EstadoHabitacion.FUERA_DE_SERVICIO,
                 Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"), reservas);
         Habitacion habitacion2 = new Habitacion(102, 1, EstadoHabitacion.DISPONIBLE,
                 Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"), reservas2);
@@ -113,11 +113,11 @@ public class Main {
             Collections.sort(habs.getReservasHab());
             System.out.println(habs.getReservasHab().size() + "\n");
         }*/
-      /*  System.out.println("------------------------------");
+      System.out.println("------------------------------");
         for (Integer habs : libres){
             System.out.println("Habitación N°: " + habs + "\n");
         }
-*/
+
 
         //probando generar usuario
 
@@ -142,7 +142,7 @@ public class Main {
 
        // hotelito.listadoReservasPorDiaIngreso (LocalDate.parse("2021-06-01"));
 
-
+hotelito.listadoHabitacionesPorEstado(EstadoHabitacion.DISPONIBLE);
 
 
 

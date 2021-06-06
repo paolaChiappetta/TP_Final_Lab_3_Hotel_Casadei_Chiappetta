@@ -19,7 +19,7 @@ public class Hotel {
     private List<Pasajero> pasajeros;
     private Shop shop;
     private Scanner scanner = new Scanner(System.in);
-    private List<String>facturasEmitidas;
+    private List<String> facturasEmitidas;
 
     public Hotel() {
         this.listaHabitaciones = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Hotel {
         this.listaReservas = listaReservas;
         this.listaOcupaciones = new ArrayList();
         this.pasajeros = new ArrayList();
-        this.facturasEmitidas=new ArrayList<>();
+        this.facturasEmitidas = new ArrayList<>();
     }
 
     public Hotel(List<Habitacion> listaHabitaciones,
@@ -144,12 +144,15 @@ public class Hotel {
                         if (it == 0 && salida.isBefore(listaHabitaciones.get(i).getReservasHab().get(it).getFechaIngreso()) || //si es la 1er reserva y salida
                                 salida.isEqual(listaHabitaciones.get(i).getReservasHab().get(it).getFechaIngreso())) {         //es <= que la fecha de ingreso de la reserva
 
-                            System.out.println("\nHabitación: " + listaHabitaciones.get(i).getNumero() +                                                  //muestro nro de hab y tarifa
-                                    "\nTarifa: " + listaHabitaciones.get(i).getTarifa() + "\nNoches desde la reserva anterior: sin reservas anteriores" + //muestro cuantas noches hay hasta la prox reserva
-                                    "\nNoches hasta la reserva siguiente: " +
-                                    ChronoUnit.DAYS.between(salida, listaHabitaciones.get(i).getReservasHab().get(it).getFechaIngreso()));
+                            if (listaHabitaciones.get(i).getEstado().compareTo(EstadoHabitacion.FUERA_DE_SERVICIO) != 0) {  //si la hab no está fuera de servicio
+                                System.out.println("\nHabitación: " + listaHabitaciones.get(i).getNumero() +                                                  //muestro nro de hab y tarifa
+                                        "\nTarifa: " + listaHabitaciones.get(i).getTarifa() + "\nNoches desde la reserva anterior: sin reservas anteriores" + //muestro cuantas noches hay hasta la prox reserva
+                                        "\nNoches hasta la reserva siguiente: " +
+                                        ChronoUnit.DAYS.between(salida, listaHabitaciones.get(i).getReservasHab().get(it).getFechaIngreso()));
 
-                            habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());        //agrego esa hab a la lista de habs disponibles
+                                habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion()); //agrego esa hab a la lista de habs disponibles
+
+                            }
 
                             encontrada = true;
 
@@ -157,27 +160,32 @@ public class Hotel {
                                 ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) ||        //a la fecha de salida de la reserva
                                 ingreso.isEqual(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida())) {
 
-                            System.out.println("\nHabitación: " + listaHabitaciones.get(i).getNumero() +                            //muestro nro de hab y tarifa
-                                    "\nTarifa: " + listaHabitaciones.get(i).getTarifa() + "\nNoches desde la reserva anterior: " +  //muestro cuantas noches hay desde la última reserva
-                                    +ChronoUnit.DAYS.between(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida(), ingreso) +
-                                    "\nNoches hasta la reserva siguiente: sin reservas posteriores");
+                            if (listaHabitaciones.get(i).getEstado().compareTo(EstadoHabitacion.FUERA_DE_SERVICIO) != 0) {              //si la hab no está fuera de servicio
+                                System.out.println("\nHabitación: " + listaHabitaciones.get(i).getNumero() +                            //muestro nro de hab y tarifa
+                                        "\nTarifa: " + listaHabitaciones.get(i).getTarifa() + "\nNoches desde la reserva anterior: " +  //muestro cuantas noches hay desde la última reserva
+                                        +ChronoUnit.DAYS.between(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida(), ingreso) +
+                                        "\nNoches hasta la reserva siguiente: sin reservas posteriores");
 
-                            habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());
-
+                                habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());
+                            }
                             encontrada = true;
+
 
                         } else if (!encontrada && (ingreso.isAfter(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida()) || //si estoy en una reserva del medio
                                 ingreso.equals(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida())) &&                           //verifico si ingreso es <=a la fecha de salida
                                 (salida.isEqual(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()) ||                      //de la reserva y <= a la fecha de ingreso de
                                         salida.isBefore(listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()))) {             //la proxima reserva
+                            if (listaHabitaciones.get(i).getEstado().compareTo(EstadoHabitacion.FUERA_DE_SERVICIO) != 0) {        //si la hab no está fuera de servicio
 
-                            System.out.println("\nHabitación: " + listaHabitaciones.get(i).getNumero() +                                      //muestro nro de hab y tarifa
-                                    "\nTarifa: " + listaHabitaciones.get(i).getTarifa() + "\nNoches desde la reserva anterior: " +            //muestro cuantas noches hay desde la última reserva
-                                    +ChronoUnit.DAYS.between(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida(), ingreso) +  //y muestro cuantas noches hay hasta la prox reserva
-                                    "\nNoches hasta la reserva siguiente: " +                                                                 //sirve para ver qué hab conviene reservar
-                                    ChronoUnit.DAYS.between(salida, listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()));
+                                System.out.println("\nHabitación: " + listaHabitaciones.get(i).getNumero() +                                      //muestro nro de hab y tarifa
+                                        "\nTarifa: " + listaHabitaciones.get(i).getTarifa() + "\nNoches desde la reserva anterior: " +            //muestro cuantas noches hay desde la última reserva
+                                        +ChronoUnit.DAYS.between(listaHabitaciones.get(i).getReservasHab().get(it).getFechaSalida(), ingreso) +  //y muestro cuantas noches hay hasta la prox reserva
+                                        "\nNoches hasta la reserva siguiente: " +                                                                 //sirve para ver qué hab conviene reservar
+                                        ChronoUnit.DAYS.between(salida, listaHabitaciones.get(i).getReservasHab().get(it + 1).getFechaIngreso()));
 
-                            habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());
+                                habitaciones.add(listaHabitaciones.get(i).getReservasHab().get(it).getNumeroHabitacion());
+                            }
+
 
                             encontrada = true;
                         }
@@ -262,8 +270,8 @@ public class Hotel {
                     System.out.println("Reserva cargada satisfactoriamente");
                     System.out.println(reserva);
                     this.listaReservas.add(reserva);
-                    for (Habitacion listaHab : this.listaHabitaciones){
-                        if(listaHab.getNumero()==nroHab){
+                    for (Habitacion listaHab : this.listaHabitaciones) {
+                        if (listaHab.getNumero() == nroHab) {
                             listaHab.getReservasHab().add(reserva);
                         }
                     }
@@ -337,52 +345,53 @@ public class Hotel {
     }
 
     //CHECK OUT DE OCUPACIÓN - SE ELIMINA LA OCUPACION/RESERVA/SE EMITE FACTURA/SE CARGA FACTURA A LA LISTA DE EMITIDAS DEL HOTEL
-    public void checkOut (int nroHabitacion){
+    public void checkOut(int nroHabitacion) {
         boolean ocupacionEncontrada = false;
-        int i=0;
+        int i = 0;
 
-        if(!this.listaOcupaciones.isEmpty()){ //verifica que existan ocupaciones
+        if (!this.listaOcupaciones.isEmpty()) { //verifica que existan ocupaciones
 
-            while(!ocupacionEncontrada && i<this.listaOcupaciones.size()){ //recorro la lista para hacer el check Out de la hab indicada
+            while (!ocupacionEncontrada && i < this.listaOcupaciones.size()) { //recorro la lista para hacer el check Out de la hab indicada
 
-                if(this.listaOcupaciones.get(i).getHabitacion().getNumero()==nroHabitacion){ //cuando la encuentra
+                if (this.listaOcupaciones.get(i).getHabitacion().getNumero() == nroHabitacion) { //cuando la encuentra
                     Factura nuevaFactura = new Factura();                                    //genera nueva factura
                     String factura;
                     nuevaFactura.setOcupacion(this.listaOcupaciones.get(i));                 //le paso la ocupacion a la factura
                     int tipoFactura = 0;
                     System.out.println("\nQué tipo de factura desea emitir?");               //solicito el tipo de factura a emitir
                     System.out.println("\n1- Factura Tipo A\n2- Factura Tipo B\n3- Factura Tipo C");
-                    tipoFactura=scanner.nextInt();
-                    if(tipoFactura==1){                                                      //le paso el tipo a la factura
+                    tipoFactura = scanner.nextInt();
+                    if (tipoFactura == 1) {                                                      //le paso el tipo a la factura
                         nuevaFactura.setTipoFactura(TipoFactura.FACTURA_A);
-                    }else if(tipoFactura==2){
+                    } else if (tipoFactura == 2) {
                         nuevaFactura.setTipoFactura(TipoFactura.FACTURA_B);
-                    }else{
+                    } else {
                         nuevaFactura.setTipoFactura(TipoFactura.FACTURA_C);
                     }
                     System.out.println(nuevaFactura);                                      //muestro la factura
-                    facturasEmitidas.add(factura=nuevaFactura.toString());                 //la guardo como string en el listado de facturas del hotel
+                    facturasEmitidas.add(factura = nuevaFactura.toString());                 //la guardo como string en el listado de facturas del hotel
                     this.listaOcupaciones.remove(this.listaOcupaciones.get(i));            //elimino la ocupación de la lista
 
-                    if(!this.listaReservas.isEmpty()){
-                        int j=0;
+                    if (!this.listaReservas.isEmpty()) {
+                        int j = 0;
                         boolean reservaEncontrada = false;
 
-                        while(!reservaEncontrada && j<this.listaReservas.size()){
+                        while (!reservaEncontrada && j < this.listaReservas.size()) {
 
-                            if(this.listaReservas.get(j).getNumeroReserva()==this.listaOcupaciones.get(i).getIdReserva()){ //busco reserva por id
+                            if (this.listaReservas.get(j).getNumeroReserva() == this.listaOcupaciones.get(i).getIdReserva()) { //busco reserva por id
                                 this.listaReservas.remove(this.listaReservas.get(j));       //elimino la reserva de la lista general de reservas
-                                reservaEncontrada=true;
+                                reservaEncontrada = true;
 
-                                for (Habitacion listaHab : this.listaHabitaciones){
+                                for (Habitacion listaHab : this.listaHabitaciones) {
 
-                                    if(listaHab.getNumero()==this.listaReservas.get(j).getNumeroHabitacion()){
+                                    if (listaHab.getNumero() == this.listaReservas.get(j).getNumeroHabitacion()) {
 
-                                        for(Reserva listaReservasHab : listaHab.getReservasHab()){
-                                            if(listaReservasHab.getNumeroReserva()==this.listaOcupaciones.get(i).getIdReserva()){ //busco la reserva por id
+                                        for (Reserva listaReservasHab : listaHab.getReservasHab()) {
+                                            if (listaReservasHab.getNumeroReserva() == this.listaOcupaciones.get(i).getIdReserva()) { //busco la reserva por id
                                                 listaHab.getReservasHab().remove(listaReservasHab);  //elimino la reserva de la lista de la hab
                                             }
                                         }
+                                        listaHab.setEstado(EstadoHabitacion.DISPONIBLE);
                                     }
                                 }
                             }
@@ -390,14 +399,14 @@ public class Hotel {
                             j++;
                         }
                     }
-                    ocupacionEncontrada=true;
+                    ocupacionEncontrada = true;
                 }
                 i++;
             }
-        }else{
+        } else {
             System.out.println("El hotel no tiene habitaciones ocupadas");
         }
-        if(!ocupacionEncontrada){
+        if (!ocupacionEncontrada) {
             System.out.println("No se encontró la ocupación");
         }
     }
@@ -482,54 +491,54 @@ public class Hotel {
         }
     }
 
-    public LocalDate fechaProximaOcupacion (int nroHabitacion){
+    public LocalDate fechaProximaOcupacion(int nroHabitacion) {
         LocalDate proxima = null;
 
-        for (Habitacion listaHab : this.listaHabitaciones){  //Busco la habitación
-            if(listaHab.getNumero()==nroHabitacion){
+        for (Habitacion listaHab : this.listaHabitaciones) {  //Busco la habitación
+            if (listaHab.getNumero() == nroHabitacion) {
                 Collections.sort(listaHab.getReservasHab()); //ordeno sus reservas
-                if(listaHab.getEstado().compareTo(EstadoHabitacion.OCUPADA)==0){ //si la habitación está ocupada
+                if (listaHab.getEstado().compareTo(EstadoHabitacion.OCUPADA) == 0) { //si la habitación está ocupada
                     boolean encontrada = false;
-                    int i=0;
-                    while(!encontrada && i<listaHab.getReservasHab().size() ){  //busca en su lista de reservas el próximo ingreso
-                        for (Ocupacion listaOcup : this.listaOcupaciones){
-                            if(listaOcup.getIdReserva()==listaHab.getReservasHab().get(i).getNumeroReserva()){
-                                proxima=listaHab.getReservasHab().get(i+1).getFechaIngreso(); //si no hay proxima, queda en null
-                                encontrada=true;
+                    int i = 0;
+                    while (!encontrada && i < listaHab.getReservasHab().size()) {  //busca en su lista de reservas el próximo ingreso
+                        for (Ocupacion listaOcup : this.listaOcupaciones) {
+                            if (listaOcup.getIdReserva() == listaHab.getReservasHab().get(i).getNumeroReserva()) {
+                                proxima = listaHab.getReservasHab().get(i + 1).getFechaIngreso(); //si no hay proxima, queda en null
+                                encontrada = true;
                             }
                         }
                         i++;
                     }
-                }else if (listaHab.getEstado().compareTo(EstadoHabitacion.DISPONIBLE)==0){ //si está disponible
-                    proxima=listaHab.getReservasHab().get(0).getFechaIngreso();   //se indica la primer reserva, si no hay queda en null
+                } else if (listaHab.getEstado().compareTo(EstadoHabitacion.DISPONIBLE) == 0) { //si está disponible
+                    proxima = listaHab.getReservasHab().get(0).getFechaIngreso();   //se indica la primer reserva, si no hay queda en null
                 }
             }
         }
         return proxima;
     }
 
-    public void extenderFechaSalida (int nroHabitacion, long nochesExtra){
+    public void extenderFechaSalida(int nroHabitacion, long nochesExtra) {
         LocalDate fecha = fechaProximaOcupacion(nroHabitacion);
         boolean posible = false;
-        long diasExtendibles=0;
-        if(fecha==null){
-            for (Ocupacion ocupacion : this.listaOcupaciones){
-                if(ocupacion.getHabitacion().getNumero()==nroHabitacion){
+        long diasExtendibles = 0;
+        if (fecha == null) {
+            for (Ocupacion ocupacion : this.listaOcupaciones) {
+                if (ocupacion.getHabitacion().getNumero() == nroHabitacion) {
                     diasExtendibles = 300;
-                    posible=true;
+                    posible = true;
                 }
             }
-        }else{
-            for (Ocupacion ocupacion : this.listaOcupaciones){
-                if(ocupacion.getHabitacion().getNumero()==nroHabitacion){
+        } else {
+            for (Ocupacion ocupacion : this.listaOcupaciones) {
+                if (ocupacion.getHabitacion().getNumero() == nroHabitacion) {
                     diasExtendibles = ChronoUnit.DAYS.between(ocupacion.getFechaSalida(), fecha);
-                    posible=true;
+                    posible = true;
                 }
             }
         }
 
-        if(posible){
-            if (fecha==null || diasExtendibles>=nochesExtra){
+        if (posible) {
+            if (fecha == null || diasExtendibles >= nochesExtra) {
                 for (Ocupacion listaOcup : this.listaOcupaciones) {
                     if (listaOcup.getHabitacion().getNumero() == nroHabitacion) {
                         listaOcup.setFechaSalida(listaOcup.getFechaSalida().plusDays(nochesExtra));
@@ -551,10 +560,10 @@ public class Hotel {
                     }
 
                 }
-            }else {
+            } else {
                 System.out.println("La habitación no posee " + nochesExtra + " noches disponibles");
             }
-        }else{
+        } else {
             System.out.println("La habitación indicada no se encuentra ocupada");
         }
     }
@@ -575,6 +584,7 @@ public class Hotel {
         while (!encontrada && i < this.listaHabitaciones.size()) {
             if (this.listaHabitaciones.get(i).getNumero() == reserva.getNumeroHabitacion()) {
                 ocupacion.setHabitacion(this.listaHabitaciones.get(i));  //se le agrega la hab a la ocupación
+                this.listaHabitaciones.get(i).setEstado(EstadoHabitacion.OCUPADA); //cambio el estado de la hab
             }
             i++;
         }
@@ -593,25 +603,46 @@ public class Hotel {
 
     //LISTADO RESERVAS POR DNI
 
-    public void listadoReservasPorDni( String dni) {
+    public void listadoReservasPorDni(String dni) {
         boolean encontrada = false;
         if (!this.listaReservas.isEmpty()) {
 
             System.out.println("\nReservas del pasajero: \n");
             for (Reserva reserva : this.listaReservas) { //busca en la lista de reservas
-                if (reserva.getPasajeroDni().compareTo(dni)==0) {  //si hay coincidencias del dni
+                if (reserva.getPasajeroDni().compareTo(dni) == 0) {  //si hay coincidencias del dni
                     System.out.println(reserva);  //muestra sus reservas (puede ser una o más de una para el mismo pasajero
-                encontrada=true;
+                    encontrada = true;
                 }
             }
         } else {
             System.out.println("El hotel no posee reservas");
         }
-        if(!encontrada){
+        if (!encontrada) {
             System.out.println("El pasajero no tiene reservas");
         }
     }
 
+    //LISTADO DE HABITACIONES POR ESTADO: DISPONIBLE/OCUPADA/FUERA DE SERVICIO
+    public void listadoHabitacionesPorEstado(EstadoHabitacion estado){
+        int contador = 0;
+        if(!this.listaHabitaciones.isEmpty()){
+            System.out.println("Habitaciones de estado " + estado + "\n");
+            for(Habitacion lista : this.listaHabitaciones){
+                if(lista.getEstado().compareTo(estado)==0){
+                    System.out.println(lista);
+                    contador++;
+                }
+            }
+        }else{
+            System.out.println("El hotel no posee habitaciones cargadas");
+        }
+        if(contador==0){
+            System.out.println("El hotel no posee habitaciones de estado " + estado);
+        }else{
+            System.out.println("\nCantidad de habitaciones de estado " + estado + ": " + contador);
+        }
+
+    }
 
 
 }

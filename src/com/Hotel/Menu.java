@@ -1,5 +1,6 @@
 package com.Hotel;
 
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -85,8 +86,9 @@ public class Menu {
         System.out.println("3- Ver lista de ingresos de un día determinado");
         System.out.println("4- Ver lista de egresos de un día determinado");
         System.out.println("5- Ver lista de habitaciones");
-        System.out.println("6- Ver lista de ocupaciones actuales");
-        System.out.println("7- Volver al menú anterior");
+        System.out.println("6- Ver lista de habitaciones por estado");
+        System.out.println("7- Ver lista de ocupaciones actuales");
+        System.out.println("8- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
 
@@ -470,9 +472,19 @@ public class Menu {
                     hotel.listadoHabitaciones();
                     break;
                 case 6:
-                    hotel.listadoOcupaciones();
+                    System.out.println("\nPara qué tipo de estado desea ver habitaciones?");
+                    System.out.println("\n1- DISPONIBLE\n2- OCUPADA\n3- FUERA DE SERVICIO\n");
+                    if(scanner.nextInt()==1){
+                        hotel.listadoHabitacionesPorEstado(EstadoHabitacion.DISPONIBLE);
+                    }else if(scanner.nextInt()==2){
+                        hotel.listadoHabitacionesPorEstado(EstadoHabitacion.OCUPADA);
+                    }else
+                        hotel.listadoHabitacionesPorEstado(EstadoHabitacion.FUERA_DE_SERVICIO);
                     break;
                 case 7:
+                    hotel.listadoOcupaciones();
+                    break;
+                case 8:
                     menuHotel();
                     break;
                 default:
