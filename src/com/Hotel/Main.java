@@ -137,13 +137,21 @@ public class Main {
 
 
         //System.out.println(reserva2);
-        Hotel hotelito= new Hotel(habitaciones, reservas);
+        //Hotel hotelito= new Hotel(habitaciones, reservas);
         //hotelito.checkIn();
 
        // hotelito.listadoReservasPorDiaIngreso (LocalDate.parse("2021-06-01"));
 
-hotelito.listadoHabitacionesPorEstado(EstadoHabitacion.DISPONIBLE);
+      //hotelito.listadoHabitacionesPorEstado(EstadoHabitacion.DISPONIBLE);
 
+        Archivo archivo = new Archivo();
+
+        archivo.writerGsonLista("reservas.json", reservas);
+        reservas= archivo.readerGsonLista("reservas.json", reservas);
+
+        for(Reserva r : reservas){
+            System.out.println(r);
+        }
 
 
 

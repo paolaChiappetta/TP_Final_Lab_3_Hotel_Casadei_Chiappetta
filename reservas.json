@@ -1,0 +1,38 @@
+[
+  {
+    "pasajeroNombre": "Paola",
+    "pasajeroApellido": "Chiappetta",
+    "pasajeroDni": "35425589",
+    "numeroHabitacion": 101,
+    "numeroPasajeros": 2,
+    "deposito": 250.0,
+    "fechaIngreso": "2021-06-01",
+    "fechaSalida": "2021-06-03",
+    "numeroReserva": 1,
+    "telefono": "55"
+  },
+  {
+    "pasajeroNombre": "Paola",
+    "pasajeroApellido": "Chiappetta",
+    "pasajeroDni": "35425589",
+    "numeroHabitacion": 101,
+    "numeroPasajeros": 2,
+    "deposito": 250.0,
+    "fechaIngreso": "2021-06-25",
+    "fechaSalida": "2021-06-28",
+    "numeroReserva": 2,
+    "telefono": ""
+  },
+  {
+    "pasajeroNombre": "Paola",
+    "pasajeroApellido": "Chiappetta",
+    "pasajeroDni": "35425589",
+    "numeroHabitacion": 101,
+    "numeroPasajeros": 2,
+    "deposito": 250.0,
+    "fechaIngreso": "2021-07-01",
+    "fechaSalida": "2021-07-04",
+    "numeroReserva": 3,
+    "telefono": ""
+  }
+]
