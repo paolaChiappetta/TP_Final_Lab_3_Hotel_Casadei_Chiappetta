@@ -21,8 +21,6 @@ public class Main {
 
         List<Habitacion>habitaciones = new ArrayList<>();
 
-        List<Recepcionista>recepcionistas = new ArrayList<>();
-
         List<Reserva>reservas = new ArrayList<>();
         List<Reserva>reservas2 = new ArrayList<>();
 
@@ -101,59 +99,31 @@ public class Main {
 
        Shop shop = new Shop(roturas,servicios,amenities,productos);
 
-       //shop.verListaPorTipo();
 
-       // Factura factura = new Factura(TipoFactura.FACTURA_A, ocup);
-        //System.out.println(factura);
-
-        Hotel hotel = new Hotel();
-        hotel.setListaHabitaciones(habitaciones);
-        List<Integer>libres = hotel.habitacionesLibres(LocalDate.parse("2021-06-03"), LocalDate.parse("2021-06-10"));
-      /* for (Habitacion habs : hotel.getListaHabitaciones()){
-            Collections.sort(habs.getReservasHab());
-            System.out.println(habs.getReservasHab().size() + "\n");
-        }*/
-      System.out.println("------------------------------");
-        for (Integer habs : libres){
-            System.out.println("Habitación N°: " + habs + "\n");
-        }
-
-
-        //probando generar usuario
-
-       //Recepcionista rec= new Recepcionista("Micaela", "Casadei", "155750401");
-
-        //System.out.println(rec.getUsuario());
-        //System.out.println(rec.getClave());
-
-      //  Menu menu = new Menu(rec);
-       // menu.menuPrincipal();
-
-        //Administrador admin= new Administrador("Sofia", "Diaz", "155478962");
-        //hotel.getListaEmpleados().add(admin.generarNuevoEmpleado());
-        //System.out.println(admin.generarNuevoEmpleado());
-
-        //System.out.println(admin);
-
-
-        //System.out.println(reserva2);
-        //Hotel hotelito= new Hotel(habitaciones, reservas);
-        //hotelito.checkIn();
-
-       // hotelito.listadoReservasPorDiaIngreso (LocalDate.parse("2021-06-01"));
-
-      //hotelito.listadoHabitacionesPorEstado(EstadoHabitacion.DISPONIBLE);
 
         Archivo archivo = new Archivo();
+        List<Reserva>reservas22;
 
-        archivo.writerGsonLista("reservas.json", reservas);
-        reservas= archivo.readerGsonLista("reservas.json", reservas);
+        archivo.writerArchivoReserva("reservas.json", reservas);
+        reservas22= archivo.readerArchivoReserva("reservas.json");
 
-        for(Reserva r : reservas){
+        for(Reserva r : reservas22){
             System.out.println(r);
         }
 
+        Recepcionista recepcionista1 = new Recepcionista("Carla", "Perez", "555444");
+        Recepcionista recepcionista2 = new Recepcionista("Maria", "Garcia", "552822244");
+        Recepcionista recepcionista3 = new Recepcionista("Facundo", "Gonzalez", "552552111");
+        List<Recepcionista>recepcionistas = new ArrayList<>();
+        recepcionistas.add(recepcionista1);
+        recepcionistas.add(recepcionista2);
+        recepcionistas.add(recepcionista3);
+        List<Recepcionista>recepcionistas2 = new ArrayList<>();
 
+        Archivo archivo2 = new Archivo();
+
+        archivo2.writerArchivoRecepcionista("recepcionista.json", recepcionistas);
+        recepcionistas2= archivo2.readerArchivoRecepcionista("recepcionista.json");
 
     }
 

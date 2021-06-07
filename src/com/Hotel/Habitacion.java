@@ -100,12 +100,8 @@ public class Habitacion {
 
 
     public void indicarTipoHabitacion() {
-
-
         System.out.println("Indique tipo de habitacion: ");
         int opcion = 0;
-
-
         do {
             menuTipoHabitacion();
             opcion = scanner.nextInt();
