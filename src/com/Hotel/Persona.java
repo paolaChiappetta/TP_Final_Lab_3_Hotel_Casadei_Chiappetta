@@ -32,10 +32,7 @@ public abstract class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" +
-                "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", numeroTel='" + numeroTel + '\'' +
-                '}';
+        return "Nombre: " + this.nombre + " " + this.apellido +
+                "\nTeléfono: " + this.numeroTel;
     }
 }

@@ -334,25 +334,16 @@ public class Pasajero extends Persona {
 
     @Override
     public String toString() {
-        return "Pasajero{" + super.toString() +
-                "dni='" + dni + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", profesion_ocupacion='" + profesion_ocupacion + '\'' +
-                ", nacionalidad='" + nacionalidad + '\'' +
-                ", calle='" + calle + '\'' +
-                ", numero=" + numero +
-                ", piso=" + piso +
-                ", departamento='" + departamento + '\'' +
-                ", ciudad='" + ciudad + '\'' +
-                ", provincia='" + provincia + '\'' +
-                ", pais='" + pais + '\'' +
-                ", mail='" + mail + '\'' +
-                ", id=" + id +
-                ", titularReserva=" + titularReserva +
-                ", scanner=" + scanner +
-                '}';
-
-
+        return super.toString() +
+                "\nDni: " + this.dni +
+                "\nFecha de nacimiento: "  + this.fechaNacimiento +
+                "\nProfesión-ocupación: " + this.profesion_ocupacion +
+                "\nDomicilio: " + this.calle + " " + this.numero + " " + this.piso + " " + this.departamento +
+                "\nCiudad: " + this.ciudad +
+                "\nProvincia: " + this.provincia +
+                "\nNacionalidad: " + this.nacionalidad +
+                "\nE-mail: " + this.mail +
+                "\nID: " + this.id;
     }
 
 }
