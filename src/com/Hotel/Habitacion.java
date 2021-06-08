@@ -81,7 +81,13 @@ public class Habitacion implements Serializable {
     ///agrego funciones para asignar tipo y etsaod de habitaciones
 
 
+    ///agrego funciones para asignar tipo y etsaod de habitaciones
+
+    Scanner scanner = new Scanner(System.in);
+
+
     public void menuTipoHabitacion() {
+
         System.out.println("1: Single standard");
         System.out.println("2: Single superior");
         System.out.println("3: Doble standard");
@@ -91,58 +97,51 @@ public class Habitacion implements Serializable {
         System.out.println("7: Departamento 6 pasajeros");
         System.out.println("8: Suite");
 
-        System.out.println("\n0 para finalizar");
-
     }
 
 
     public void indicarTipoHabitacion() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Indique tipo de habitacion: ");
         int opcion = 0;
-        do {
-            menuTipoHabitacion();
-            opcion = scanner.nextInt();
-            switch (opcion) {
-                case 1:
-                    this.setTarifa(Tarifa.SINGLE_STANDAR);
-                    break;
 
-                case 2:
-                    this.setTarifa(Tarifa.SINGLE_SUPERIOR);
-                    break;
-                case 3:
-                    this.setTarifa(Tarifa.DOBLE_STANDAR);
-                    break;
+        menuTipoHabitacion();
+        opcion = scanner.nextInt();
 
-                case 4:
-                    this.setTarifa(Tarifa.DOBLE_SUPERIOR);
-                    break;
-                case 5:
-                    this.setTarifa(Tarifa.TRIPLE_STANDAR);
-                    break;
-                case 6:
-                    this.setTarifa(Tarifa.DEPARTAMENTO_4PAX);
-                    break;
-                case 7:
-                    this.setTarifa(Tarifa.DEPARTAMENTO_6PAX);
-                    break;
-                case 8:
-                    this.setTarifa(Tarifa.SUITE);
-                    break;
+        switch (opcion) {
+            case 1:
+                this.setTarifa(Tarifa.SINGLE_STANDAR);
+                break;
 
-                default:
-                    System.out.println("Opcion incorrecta, ingrese nuevamente");
-                    break;
+            case 2:
+                this.setTarifa(Tarifa.SINGLE_SUPERIOR);
+                break;
+            case 3:
+                this.setTarifa(Tarifa.DOBLE_STANDAR);
+                break;
 
-            }
+            case 4:
+                this.setTarifa(Tarifa.DOBLE_SUPERIOR);
+                break;
+            case 5:
+                this.setTarifa(Tarifa.TRIPLE_STANDAR);
+                break;
+            case 6:
+                this.setTarifa(Tarifa.DEPARTAMENTO_4PAX);
+                break;
+            case 7:
+                this.setTarifa(Tarifa.DEPARTAMENTO_6PAX);
+                break;
+            case 8:
+                this.setTarifa(Tarifa.SUITE);
+                break;
 
-
-        } while (opcion != 0);
+            default:
+                this.setTarifa(Tarifa.DOBLE_STANDAR);
+                break;
 
 
+        }
     }
-
     public void menuEstadoHabitacion() {
 
         System.out.println("1: Disponible");
@@ -155,36 +154,36 @@ public class Habitacion implements Serializable {
 
 
     public void indicarEstadoHabitacion() {
-        Scanner scanner = new Scanner(System.in);
+
 
         System.out.println("Indique estado de habitacion: ");
         int opcion = 0;
 
+        menuEstadoHabitacion();
+        opcion = scanner.nextInt();
+        switch (opcion) {
+            case 1:
+                this.setEstado(EstadoHabitacion.DISPONIBLE);
+                break;
 
-        do {
-            menuEstadoHabitacion();
-            opcion = scanner.nextInt();
-            switch (opcion) {
-                case 1:
-                    this.setEstado(EstadoHabitacion.DISPONIBLE);
-                    break;
+            case 2:
+                this.setEstado(EstadoHabitacion.OCUPADA);
+                break;
+            case 3:
+                this.setEstado(EstadoHabitacion.FUERA_DE_SERVICIO);
+                break;
+            default:
+                this.setEstado(EstadoHabitacion.DISPONIBLE);
 
-                case 2:
-                    this.setEstado(EstadoHabitacion.OCUPADA);
-                    break;
-                case 3:
-                    this.setEstado(EstadoHabitacion.FUERA_DE_SERVICIO);
-                    break;
-                default:
-                    System.out.println("Opcion incorrecta, ingrese nuevamente");
-                    break;
+                break;
 
-            }
-
-
-        } while (opcion != 0);
+        }
 
     }
+
+
+
+
 /*
     public JSONObject crearJson (){
         JSONObject habitacion = new JSONObject();
