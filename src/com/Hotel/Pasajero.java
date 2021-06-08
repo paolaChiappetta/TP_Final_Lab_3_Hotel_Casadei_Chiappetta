@@ -11,7 +11,6 @@ public class Pasajero extends Persona implements Serializable {
 
     private static int identificador = 0;     /// variable static para id
 
-    private String dni;
     private LocalDate fechaNacimiento;
     private String profesion_ocupacion;
     private String nacionalidad;
@@ -41,9 +40,8 @@ public class Pasajero extends Persona implements Serializable {
                     Integer piso, String departamento, String ciudad, String provincia,
                     String pais, String mail, Boolean titularreserva) {
 
-        super(nombre, apellido, numeroTel);
+        super(nombre, apellido, numeroTel, dni);
         this.id = identificador++;
-        this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
         this.profesion_ocupacion = profesion_ocupacion;
         this.nacionalidad = nacionalidad;
@@ -65,9 +63,8 @@ public class Pasajero extends Persona implements Serializable {
                     Integer piso, String departamento, String ciudad, String provincia,
                     String pais, String mail, Integer id, Boolean titularreserva) {
 
-        super(nombre, apellido, numeroTel);
+        super(nombre, apellido, numeroTel, dni);
         this.id = id;
-        this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
         this.profesion_ocupacion = profesion_ocupacion;
         this.nacionalidad = nacionalidad;
@@ -83,14 +80,6 @@ public class Pasajero extends Persona implements Serializable {
     }
 
     //getters y setters
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
 
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
@@ -353,7 +342,6 @@ public class Pasajero extends Persona implements Serializable {
     @Override
     public String toString() {
         return "Pasajero ID " + this.id + "\n" + super.toString() +
-                "\nDni: " + this.dni +
                 "\nFecha de nacimiento: "  + this.fechaNacimiento +
                 "\nProfesión-ocupación: " + this.profesion_ocupacion +
                 "\nDomicilio: " + this.calle + " " + this.numero + " " + this.piso + " " + this.departamento +

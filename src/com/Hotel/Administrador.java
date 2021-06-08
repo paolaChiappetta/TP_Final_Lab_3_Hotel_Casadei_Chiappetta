@@ -11,13 +11,13 @@ public class Administrador extends Empleado implements InterfazAccion, Serializa
     public Administrador() { }
 
     //constructor con datos p/ generación de usuario y contraseña
-    public Administrador(String nombre, String apellido, String numeroTel) {
-        super(nombre, apellido, numeroTel);
+    public Administrador(String nombre, String apellido, String numeroTel, String dni) {
+        super(nombre, apellido, numeroTel, dni);
     }
 
     //constructor completo
-    public Administrador(String nombre, String apellido, String numerotel, String usuario, String clave) {
-        super(nombre, apellido, numerotel, usuario, clave);
+    public Administrador(String nombre, String apellido, String numerotel, String dni, String usuario, String clave) {
+        super(nombre, apellido, numerotel, dni, usuario, clave);
     }
 
     ///Override de la interfazAccion
@@ -80,7 +80,7 @@ public class Administrador extends Empleado implements InterfazAccion, Serializa
 
     }
 
-
+/*
     public Empleado generarNuevoEmpleado (){
         Scanner scanner = new Scanner(System.in);
         String nombre, apellido, telefono;
@@ -108,7 +108,7 @@ public class Administrador extends Empleado implements InterfazAccion, Serializa
             return administrador;
         }
 
-    }
+    }*/
 
 }
 

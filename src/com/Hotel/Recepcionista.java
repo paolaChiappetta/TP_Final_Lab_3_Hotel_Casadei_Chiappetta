@@ -12,13 +12,13 @@ public class Recepcionista extends Empleado implements InterfazAccion, Serializa
     }
 
     //constructor con datos p/ generación de usuario y contraseña
-    public Recepcionista(String nombre, String apellido, String numeroTel) {
-        super(nombre, apellido, numeroTel);
+    public Recepcionista(String nombre, String apellido, String numeroTel, String dni) {
+        super(nombre, apellido, numeroTel, dni);
     }
 
     //constructor completo
-    public Recepcionista(String nombre, String apellido, String numerotel, String usuario, String clave) {
-        super(nombre, apellido, numerotel, usuario, clave);
+    public Recepcionista(String nombre, String apellido, String numerotel, String dni, String usuario, String clave) {
+        super(nombre, apellido, numerotel, dni, usuario, clave);
     }
 
     //Overrides de InterfazAccion
@@ -62,9 +62,5 @@ public class Recepcionista extends Empleado implements InterfazAccion, Serializa
 
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 
 }

@@ -11,48 +11,31 @@ public class Hotel {
 
     private List<Habitacion> listaHabitaciones;
     private List<Reserva> listaReservas;
-    private List<Recepcionista> recepcionistas;
-    private List<Administrador> administradores;
+    private List<Empleado> empleados;
+    private List<Pasajero>pasajeros;
     private List<Ocupacion> listaOcupaciones;
-    private Administrador administrador;
-    private Recepcionista recepcionista;
-    private List<Pasajero> pasajeros;
     private Shop shop;
-    private Scanner scanner = new Scanner(System.in);
     private List<String> facturasEmitidas;
 
     public Hotel() {
         this.listaHabitaciones = new ArrayList<>();
         this.listaReservas = new ArrayList<>();
-        this.recepcionistas = new ArrayList<>();
-        this.administradores = new ArrayList<>();
         this.listaOcupaciones = new ArrayList<>();
+        this.empleados = new ArrayList<>();
         this.pasajeros = new ArrayList<>();
         this.shop = new Shop();
     }
 
-    public Hotel(List<Habitacion> listaHabitaciones, List<Reserva> listaReservas) {
+    public Hotel(List<Habitacion> listaHabitaciones, List<Reserva> listaReservas,
+                 List<Empleado> empleados, List<Pasajero> pasajeros, List<Ocupacion> listaOcupaciones,
+                 Shop shop, List<String> facturasEmitidas) {
         this.listaHabitaciones = listaHabitaciones;
         this.listaReservas = listaReservas;
-        this.listaOcupaciones = new ArrayList();
-        this.pasajeros = new ArrayList();
-        this.facturasEmitidas = new ArrayList<>();
-    }
-
-    public Hotel(List<Habitacion> listaHabitaciones,
-                 List<Reserva> listaReservas, List<Recepcionista> recepcionistas,
-                 List<Administrador> administradores, List<Pasajero> pasajeros,
-                 Administrador administrador, Recepcionista recepcionista, Shop shop,
-                 List<Ocupacion> listaOcupaciones) {
-        this.listaHabitaciones = listaHabitaciones;
-        this.listaReservas = listaReservas;
-        this.recepcionistas = recepcionistas;
-        this.administrador = administrador;
-        this.recepcionista = recepcionista;
-        this.shop = shop;
-        this.listaOcupaciones = listaOcupaciones;
-        this.administradores = administradores;
+        this.empleados = empleados;
         this.pasajeros = pasajeros;
+        this.listaOcupaciones = listaOcupaciones;
+        this.shop = shop;
+        this.facturasEmitidas = facturasEmitidas;
     }
 
     public List<Habitacion> getListaHabitaciones() {
@@ -71,36 +54,20 @@ public class Hotel {
         this.listaReservas = listaReservas;
     }
 
-    public List<Recepcionista> getRecepcionistas() {
-        return recepcionistas;
+    public List<Empleado> getEmpleados() {
+        return empleados;
     }
 
-    public void setRecepcionistas(List<Recepcionista> recepcionistas) {
-        this.recepcionistas = recepcionistas;
+    public void setEmpleados(List<Empleado> empleados) {
+        this.empleados = empleados;
     }
 
-    public Administrador getAdministrador() {
-        return administrador;
+    public List<Pasajero> getPasajeros() {
+        return pasajeros;
     }
 
-    public void setAdministrador(Administrador administrador) {
-        this.administrador = administrador;
-    }
-
-    public Recepcionista getRecepcionista() {
-        return recepcionista;
-    }
-
-    public void setRecepcionista(Recepcionista recepcionista) {
-        this.recepcionista = recepcionista;
-    }
-
-    public Shop getShop() {
-        return shop;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
+    public void setPasajeros(List<Pasajero> pasajeros) {
+        this.pasajeros = pasajeros;
     }
 
     public List<Ocupacion> getListaOcupaciones() {
@@ -111,20 +78,20 @@ public class Hotel {
         this.listaOcupaciones = listaOcupaciones;
     }
 
-    public List<Administrador> getAdministradores() {
-        return administradores;
+    public Shop getShop() {
+        return shop;
     }
 
-    public void setAdministradores(List<Administrador> administradores) {
-        this.administradores = administradores;
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
-    public List<Pasajero> getPasajeros() {
-        return pasajeros;
+    public List<String> getFacturasEmitidas() {
+        return facturasEmitidas;
     }
 
-    public void setPasajeros(List<Pasajero> pasajeros) {
-        this.pasajeros = pasajeros;
+    public void setFacturasEmitidas(List<String> facturasEmitidas) {
+        this.facturasEmitidas = facturasEmitidas;
     }
 
     //BUSCA HABS LIBRES CON DETERMINADA FECHA DE INGRESO O DE SALIDA
@@ -244,6 +211,7 @@ public class Hotel {
     }
 
     public boolean nuevaReserva() {
+        Scanner scanner = new Scanner(System.in);
         LocalDate ingreso;
         LocalDate salida;
         int nroHab;
@@ -309,6 +277,7 @@ public class Hotel {
     //METODO REALIZAR CHECK IN CON O SIN RESERVA PREVIA
 
     public void checkIn() {
+        Scanner scanner = new Scanner(System.in);
         int tieneReserva;
         Long idReserva;
 
@@ -346,6 +315,7 @@ public class Hotel {
 
     //CHECK OUT DE OCUPACIÓN - SE ELIMINA LA OCUPACION/RESERVA/SE EMITE FACTURA/SE CARGA FACTURA A LA LISTA DE EMITIDAS DEL HOTEL
     public void checkOut(int nroHabitacion) {
+        Scanner scanner = new Scanner(System.in);
         boolean ocupacionEncontrada = false;
         int i = 0;
 
@@ -572,6 +542,7 @@ public class Hotel {
 
 
     public void nuevaOcupacion(Reserva reserva) {
+        Scanner scanner = new Scanner(System.in);
         Ocupacion ocupacion = new Ocupacion();
 
         ocupacion.setIdReserva(reserva.getNumeroReserva());  //se toman estos datos de la reserva

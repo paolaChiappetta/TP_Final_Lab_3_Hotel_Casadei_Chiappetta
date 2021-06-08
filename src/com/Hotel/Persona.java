@@ -8,14 +8,16 @@ public abstract class Persona implements Serializable {
     private String nombre;
     private String apellido;
     private String numeroTel;
+    private String dni;
 
 
     public Persona() {}
 
-    public Persona(String nombre, String apellido, String numerotel) {
+    public Persona(String nombre, String apellido, String numeroTel, String dni) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.numeroTel= numerotel;
+        this.numeroTel = numeroTel;
+        this.dni = dni;
     }
 
     public String getNombre() {  return nombre;    }
@@ -30,10 +32,18 @@ public abstract class Persona implements Serializable {
 
     public void setNumeroTel(String numeroTel) {   this.numeroTel = numeroTel;  }
 
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 
     @Override
     public String toString() {
         return "Nombre: " + this.nombre + " " + this.apellido +
+                "\nDni: " + this.dni +
                 "\nTeléfono: " + this.numeroTel;
     }
 }

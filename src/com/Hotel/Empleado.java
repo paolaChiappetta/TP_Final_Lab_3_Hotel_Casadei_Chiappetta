@@ -12,15 +12,15 @@ public abstract class Empleado extends Persona implements Serializable {
     public Empleado() { }
 
     //constructor con datos y generación de usuario y contraseña
-    public Empleado(String nombre, String apellido, String numeroTel) {
+    public Empleado(String nombre, String apellido, String numeroTel, String dni) {
 
-        super(nombre, apellido, numeroTel);
+        super(nombre, apellido, numeroTel, dni);
         this.generarUsuarioyClave();
     }
 
     //constructor completo
-    public Empleado(String nombre, String apellido, String numerotel, String usuario, String clave) {
-        super(nombre, apellido, numerotel);
+    public Empleado(String nombre, String apellido, String numerotel, String dni, String usuario, String clave) {
+        super(nombre, apellido, numerotel, dni);
         this.usuario = usuario;
         this.clave = clave;
     }
