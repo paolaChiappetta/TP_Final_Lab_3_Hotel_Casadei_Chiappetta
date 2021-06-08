@@ -15,18 +15,25 @@ public class Factura {
     private TipoFactura tipoFactura;
     private Ocupacion ocupacion;
 
-    //CONSTRUCTORES
+    //Constructor vacío
     public Factura() {
         this.numeroFactura = idFactura + 1;
         this.fechaEmision = LocalDate.now();
     }
-
+    //Constructor con día de hoy y asignación de nro de factura
     public Factura(TipoFactura tipoFactura, Ocupacion ocupacion) {
         this.fechaEmision = LocalDate.now();
         this.tipoFactura = tipoFactura;
         this.ocupacion = ocupacion;
         this.numeroFactura = idFactura + 1;
 
+    }
+    //constructor completo
+    public Factura(int numeroFactura, LocalDate fechaEmision, TipoFactura tipoFactura, Ocupacion ocupacion) {
+        this.numeroFactura = numeroFactura;
+        this.fechaEmision = fechaEmision;
+        this.tipoFactura = tipoFactura;
+        this.ocupacion = ocupacion;
     }
 
     //GETTERS Y SETTERS

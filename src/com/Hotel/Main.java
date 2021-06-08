@@ -1,5 +1,7 @@
 package com.Hotel;
 
+import com.google.gson.Gson;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,38 +24,34 @@ public class Main {
         List<Habitacion>habitaciones = new ArrayList<>();
 
         List<Reserva>reservas = new ArrayList<>();
-        List<Reserva>reservas2 = new ArrayList<>();
 
 
 
         Reserva reserva = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-06-01"), LocalDate.parse("2021-06-03"), "55");
         reservas.add(reserva);
-        Reserva reserva2 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-06-25"), LocalDate.parse("2021-06-28"), "");
+        Reserva reserva2 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-06-25"), LocalDate.parse("2021-06-28"), "");
         reservas.add(reserva2);
-        Reserva reserva3 = new Reserva("Paola", "Chiappetta", "35425589", 101, 2, 250.00, LocalDate.parse("2021-07-01"), LocalDate.parse("2021-07-04"), "");
+        Reserva reserva3 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-07-01"), LocalDate.parse("2021-07-04"), "");
         reservas.add(reserva3);
 
-        Reserva reserva4 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-08-01"), LocalDate.parse("2021-08-03"), "");
-        reservas2.add(reserva4);
-        Reserva reserva5 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-09-25"), LocalDate.parse("2021-09-28"), "");
-        reservas2.add(reserva5);
-        Reserva reserva6 = new Reserva("Paola", "Chiappetta", "35425589", 102, 2, 250.00, LocalDate.parse("2021-07-08"), LocalDate.parse("2021-07-12"), "");
-        reservas2.add(reserva6);
 
         Habitacion habitacion1 = new Habitacion(101, 1, EstadoHabitacion.FUERA_DE_SERVICIO,
-                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"), reservas);
+                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"));
         Habitacion habitacion2 = new Habitacion(102, 1, EstadoHabitacion.DISPONIBLE,
-                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"), reservas2);
+                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"));
 
 
         habitaciones.add(habitacion1);
         habitaciones.add(habitacion2);
 
-/*
+
         Ocupacion ocup = new Ocupacion(3, LocalDate.parse("2021-05-01"),
                 LocalDate.parse("2021-05-05"), extras, 1, habitacion1, 1,
-                TipoPension.MEDIA_PENSION, listaPax);
-*/
+                TipoPension.MEDIA_PENSION, listaPax, 200.00);
+
+        List<Ocupacion>ocupaciones = new ArrayList<>();
+        ocupaciones.add(ocup);
+
 
         Servicio servicio = new Servicio("Plancha", 400.00, "Mucama");
         Servicio servicio2 = new Servicio("Bata", 200.00, "Mucama");
@@ -111,21 +109,81 @@ public class Main {
             System.out.println(r);
         }
 
-        Recepcionista recepcionista1 = new Recepcionista("Carla", "Perez", "555444");
-        Recepcionista recepcionista2 = new Recepcionista("Maria", "Garcia", "552822244");
-        Recepcionista recepcionista3 = new Recepcionista("Facundo", "Gonzalez", "552552111");
+        Recepcionista recepcionista1 = new Recepcionista("Carla", "Perez", "555444", "444");
+        Recepcionista recepcionista2 = new Recepcionista("Maria", "Garcia", "552822244", " ");
+        Recepcionista recepcionista3 = new Recepcionista("Facundo", "Gonzalez", "552552111", " ");
         List<Recepcionista>recepcionistas = new ArrayList<>();
         recepcionistas.add(recepcionista1);
         recepcionistas.add(recepcionista2);
         recepcionistas.add(recepcionista3);
         List<Recepcionista>recepcionistas2 = new ArrayList<>();
 
+        List<Empleado>empleados = new ArrayList<>();
+        empleados.add(recepcionista1);
+        empleados.add(recepcionista2);
+        empleados.add(recepcionista3);
+
         Archivo archivo2 = new Archivo();
 
         archivo2.writerArchivoRecepcionista("recepcionista.json", recepcionistas);
         recepcionistas2= archivo2.readerArchivoRecepcionista("recepcionista.json");
 
+        for(Recepcionista r : recepcionistas){
+            System.out.println(r);
+        }
+
+        List<String>facturas=new ArrayList<>();
+        String factura1= "pp";
+        facturas.add(factura1);
+
+
+        Administrador adm1 = new Administrador("Carla", "Perez", "555444", "444");
+        Administrador adm2 = new Administrador("Maria", "Garcia", "552822244", " ");
+        Administrador adm3 = new Administrador("Facundo", "Gonzalez", "552552111", " ");
+
+
+        empleados.add(adm1);
+        empleados.add(adm2);
+        empleados.add(adm3);
+        List<Empleado>empleados2 = new ArrayList<>();
+
+        Archivo archivo3 = new Archivo();
+        archivo3.writerArchivoEmpleado("empleado.json", empleados);
+        empleados2=archivo3.readerArchivoEmpleado("empleado.json");
+        System.out.println("\nEmpleados");
+
+        for(Empleado r : empleados2){
+                System.out.println(r);
+        }
+/*
+
+        List<Habitacion>habitaciones2 = new ArrayList<>();
+
+        Archivo archivo4 = new Archivo();
+        archivo3.writerArchivoHabitaciones("habitacion.json", habitaciones);
+        habitaciones2=archivo3.readerArchivoHabitaciones("habitacion.json");
+        System.out.println("\nHabs");
+
+        for(Habitacion r : habitaciones2){
+            System.out.println(r);
+        }*/
+
+        List<Ocupacion>ocupaciones2 = new ArrayList<>();
+
+        Archivo archivo4 = new Archivo();
+        archivo3.writerArchivoOcupaciones("ocupacion.json", ocupaciones);
+        ocupaciones2=archivo3.readerArchivoOcupaciones("ocupacion.json");
+        System.out.println("\nHabs");
+
+        for(Ocupacion r : ocupaciones2){
+            System.out.println(r);
+        }
+
+        
+
     }
+
+
 
 
 

@@ -3,13 +3,18 @@ package com.Hotel;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public abstract class Empleado extends Persona implements Serializable {
+public class Empleado extends Persona implements Serializable {
+
+    //esta clase debería ser abstracta, pero se sacó para poder leer el archivo
 
     private String usuario;
     private String clave;
 
     //constructor vacío
-    public Empleado() { }
+
+
+    public Empleado() {
+    }
 
     //constructor con datos y generación de usuario y contraseña
     public Empleado(String nombre, String apellido, String numeroTel, String dni) {

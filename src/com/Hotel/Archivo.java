@@ -123,5 +123,163 @@ public class Archivo {
         return lista;
     }
 
+    public void writerArchivoEmpleado(String archivo, List<Empleado> lista) {
+        BufferedWriter writer = null;
+
+        try {
+            writer = new BufferedWriter(new FileWriter(archivo));
+
+            gson.toJson(lista, lista.getClass(), writer);
+
+
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public List<Empleado> readerArchivoEmpleado(String archivo) {
+        BufferedReader reader = null;
+        List<Empleado>lista=null;
+
+        try {
+            reader = new BufferedReader(new FileReader(archivo));
+
+
+            lista = gson.fromJson(reader, (new TypeToken<List<Empleado>>() {}.getType()));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return lista;
+    }
+
+    public void writerArchivoHabitaciones(String archivo, List<Habitacion> lista) {
+        BufferedWriter writer = null;
+
+        try {
+            writer = new BufferedWriter(new FileWriter(archivo));
+
+            gson.toJson(lista, lista.getClass(), writer);
+
+
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public List<Habitacion> readerArchivoHabitaciones(String archivo) {
+        BufferedReader reader = null;
+        List<Habitacion>lista=null;
+
+        try {
+            reader = new BufferedReader(new FileReader(archivo));
+
+
+            lista = gson.fromJson(reader, (new TypeToken<List<Habitacion>>() {}.getType()));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return lista;
+    }
+
+    public void writerArchivoOcupaciones(String archivo, List<Ocupacion> lista) {
+        BufferedWriter writer = null;
+
+        try {
+            writer = new BufferedWriter(new FileWriter(archivo));
+
+            gson.toJson(lista, lista.getClass(), writer);
+
+
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public List<Ocupacion> readerArchivoOcupaciones(String archivo) {
+        BufferedReader reader = null;
+        List<Ocupacion>lista=null;
+
+        try {
+            reader = new BufferedReader(new FileReader(archivo));
+
+
+            lista = gson.fromJson(reader, (new TypeToken<List<Ocupacion>>() {}.getType()));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return lista;
+    }
 
 }

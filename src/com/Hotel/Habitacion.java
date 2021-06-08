@@ -1,18 +1,18 @@
 package com.Hotel;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Habitacion {
+public class Habitacion implements Serializable {
 
     private Integer numero;
     private Integer piso;
     private EstadoHabitacion estado;
     private Tarifa tarifa;
     private LocalDate fechaProximaOcupacion;
-    private List<Reserva> reservasHab= new ArrayList<>();
 
 
     public Habitacion() {
@@ -20,14 +20,12 @@ public class Habitacion {
 
     public Habitacion(Integer numero, Integer piso,
                       EstadoHabitacion estado, Tarifa tarifa,
-                      LocalDate fechaProximaOcupacion,
-                      List<Reserva> reservasHab) {
+                      LocalDate fechaProximaOcupacion) {
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
         this.tarifa = tarifa;
         this.fechaProximaOcupacion = fechaProximaOcupacion;
-        this.reservasHab = reservasHab;
     }
 
     public Integer getNumero() {
@@ -68,14 +66,6 @@ public class Habitacion {
 
     public void setFechaProximaOcupacion(LocalDate fechaProximaOcupacion) {
         this.fechaProximaOcupacion = fechaProximaOcupacion;
-    }
-
-    public List<Reserva> getReservasHab() {
-        return reservasHab;
-    }
-
-    public void setReservasHab(List<Reserva> reservasHab) {
-        this.reservasHab = reservasHab;
     }
 
 

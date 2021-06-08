@@ -2,12 +2,13 @@ package com.Hotel;
 
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Ocupacion {
+public class Ocupacion implements Serializable {
     private static long ocupacionId = 0;
 
     private long idReserva = 0;  /// Si es 0, es porque no se realizó reserva anticipada
@@ -41,6 +42,23 @@ public class Ocupacion {
         this.listaPaxs = listaPaxs;
         this.deposito = deposito;
         this.numeroOcupacion = ocupacionId++;
+    }
+
+    public Ocupacion(long idReserva, LocalDate fechaIngreso,
+                     LocalDate fechaSalida, List<Extra> extras, Integer cochera,
+                     Habitacion habitacion, Integer cantidadPax, TipoPension tipoPension,
+                     Long numeroOcupacion, List<Pasajero> listaPaxs, Double deposito) {
+        this.idReserva = idReserva;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaSalida = fechaSalida;
+        this.extras = extras;
+        this.cochera = cochera;
+        this.habitacion = habitacion;
+        this.cantidadPax = cantidadPax;
+        this.tipoPension = tipoPension;
+        this.numeroOcupacion = numeroOcupacion;
+        this.listaPaxs = listaPaxs;
+        this.deposito = deposito;
     }
 
     public long getIdReserva() {
@@ -281,7 +299,5 @@ public class Ocupacion {
                         "\nTipo de pensión: " + this.tipoPension +
                         "\nCantidad de cocheras: " + this.cochera +
                         "\nPasajeros: " + this.mostrarListaPaxs();
-
-
             }
         }

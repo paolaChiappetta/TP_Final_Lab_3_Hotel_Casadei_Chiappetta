@@ -22,5 +22,29 @@
     "apellido": "Gonzalez",
     "numeroTel": "552552111",
     "dni": " "
+  },
+  {
+    "usuario": "CPerez",
+    "clave": "TgxMIT",
+    "nombre": "Carla",
+    "apellido": "Perez",
+    "numeroTel": "555444",
+    "dni": "444"
+  },
+  {
+    "usuario": "MGarcia",
+    "clave": "zQFvWS",
+    "nombre": "Maria",
+    "apellido": "Garcia",
+    "numeroTel": "552822244",
+    "dni": " "
+  },
+  {
+    "usuario": "FGonzalez",
+    "clave": "8EoUsf",
+    "nombre": "Facundo",
+    "apellido": "Gonzalez",
+    "numeroTel": "552552111",
+    "dni": " "
   }
 ]
