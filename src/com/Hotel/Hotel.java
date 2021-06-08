@@ -696,4 +696,146 @@ public class Hotel implements Serializable {
     }
 
 
+
+    // CREAR NUEVA HABITACION, LA CREA EN EL INTERIOR DEL METODO
+
+    public void crearNuevaHabitacion (){
+        Habitacion habitacion= new Habitacion();
+        Scanner scanner= new Scanner(System.in);
+
+        System.out.println("Nueva habitacion:\n");
+
+        System.out.println("Numero de habitacion:");
+        habitacion.setNumero(scanner.nextInt());
+        System.out.println("Piso:");
+        habitacion.setPiso(scanner.nextInt());
+        System.out.println("Tarifa:");
+        habitacion.indicarTipoHabitacion();
+        System.out.println("Estado de la habitacion:");
+        habitacion.indicarEstadoHabitacion();
+
+        System.out.println("Datos nueva habitacion: ");
+        System.out.println(habitacion);
+    }
+
+    //CREA UNA HABITACION Y LA DEVUELVE
+
+    public Habitacion crearYdevolverHabitacion (){
+
+        Habitacion habitacion= new Habitacion();
+        Scanner scanner= new Scanner(System.in);
+
+        System.out.println("Nueva habitacion:\n");
+
+        System.out.println("Numero de habitacion:");
+        habitacion.setNumero(scanner.nextInt());
+        System.out.println("Piso:");
+        habitacion.setPiso(scanner.nextInt());
+        System.out.println("Tarifa:");
+        habitacion.indicarTipoHabitacion();
+        System.out.println("Estado de la habitacion:");
+        habitacion.indicarEstadoHabitacion();
+
+
+        System.out.println("Datos nueva habitacion: ");
+        System.out.println(habitacion);
+
+        return habitacion;
+    }
+
+
+    //MENU MODIFICAR HABITACION
+
+
+    public void menuModificarHabitacion() {
+
+        System.out.println("1: Numero habitacion");
+        System.out.println("2: Piso");
+        System.out.println("3: Tipo de Habitacion- Tarifa");
+        System.out.println("4: Estado de habitacion");
+
+        System.out.println("\n0 para finalizar");
+
+    }
+
+    //MODIFICAR UNA HABITACION, la recibe por parametro
+
+    public void modificarHabitacion (Habitacion habitacion) {
+
+        Scanner scanner= new Scanner(System.in);
+
+        System.out.println("Indique que datos desea modificar: ");
+        int opcion = 0;
+
+
+        do {
+            menuModificarHabitacion();
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    System.out.println("Numero:");
+                    habitacion.setNumero(scanner.nextInt());
+                    break;
+                case 2:
+                    System.out.println("Piso:");
+                    habitacion.setPiso(scanner.nextInt());
+                    break;
+                case 3:
+                    System.out.println("Tarifa:");
+                    habitacion.indicarTipoHabitacion();
+                    break;
+                case 4:
+                    System.out.println("Estado:");
+                    habitacion.indicarEstadoHabitacion();
+                    break;
+
+                default:
+                    System.out.println("Opcion incorrecta, ingrese nuevamente");
+                    break;
+            }
+        } while (opcion != 0);
+    }
+
+
+    //MUESTRA EL LISTADO DE RESERVAS X HABITACION
+
+    public void listadoReservasPorHabitacion (int numeroHab) {
+        if (!this.listaReservas.isEmpty()) {
+            for (Reserva reserva : listaReservas) { //busca en la lista de reservas
+                System.out.println("\nReservas de Habitacion numero " + numeroHab + "\n");
+                if (reserva.getNumeroHabitacion()== numeroHab) { //coincidencias en num d ehab
+                    System.out.println(reserva);
+                }
+            }
+        } else {
+            System.out.println("La habitacion numero " + numeroHab + " no tiene reservas");
+        }
+    }
+
+
+
+
+    public Reserva proximaOcupacionDeHabitacion (int numeroHab) {
+        List<Reserva> listReservaHab= new ArrayList<>();
+
+        if (!this.listaReservas.isEmpty()) {
+            for (Reserva lista : listaReservas) { //busca en la lista de reservas
+                System.out.println("\nReservas de Habitacion numero " + numeroHab + "\n");
+                if (lista.getNumeroHabitacion()== numeroHab) { //coincidencias en la fecha de ingreso indicada
+                    listReservaHab.add(lista);
+                }
+            }
+
+            Collections.sort(listReservaHab);                   //ordena la lista de las reservas de esa hab
+
+        } else {
+            System.out.println("La habitacion numero " + numeroHab + " no tiene reservas");
+        }
+        return listReservaHab.get(0);           //devuelve lña primera reserva
+    }
+
+
+
+
+
 }
