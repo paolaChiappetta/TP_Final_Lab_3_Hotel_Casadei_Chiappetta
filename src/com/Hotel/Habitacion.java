@@ -1,10 +1,19 @@
 package com.Hotel;
 
-import java.io.Serializable;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import org.json.JSONException;
+import org.json.simple.JSONObject;
+
+
 
 public class Habitacion implements Serializable {
 
@@ -144,6 +153,8 @@ public class Habitacion implements Serializable {
     }
 
 
+
+
     public void indicarEstadoHabitacion() {
 
 
@@ -175,6 +186,86 @@ public class Habitacion implements Serializable {
         } while (opcion != 0);
 
     }
+/*
+    public JSONObject crearJson (){
+        JSONObject habitacion = new JSONObject();
+try {
+    habitacion.put("Numero", this.getNumero());
+    habitacion.put("Piso", this.getPiso());
+    habitacion.put("Estado", this.getEstado());
+    habitacion.put("Tarifa", this.getTarifa());
+    habitacion.put("Fecha", this.fechaProximaOcupacion);
+}catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return habitacion;
+    }
+
+
+    public void writerArchivoHab(String archivo, JSONObject jsonHabitacion) {
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
+                .create();
+
+        BufferedWriter writer = null;
+
+        try {
+            writer = new BufferedWriter(new FileWriter(archivo));
+
+            gson.toJson(jsonHabitacion);
+
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public Habitacion readerArchivoHab(String archivo) {
+
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
+                .create();
+
+        BufferedReader reader = null;
+        Habitacion habitacion = null;
+
+
+        try {
+            reader = new BufferedReader(new FileReader(archivo));
+
+
+            habitacion = gson.fromJson(reader, Habitacion.class);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return habitacion;
+    }
 
 
     @Override
@@ -185,5 +276,5 @@ public class Habitacion implements Serializable {
                 "\nTarifa: $" + this.tarifa.getPrecio() +
                 "\nEstado: " + this.estado +
                 "\nPróxima ocupación: " + this.fechaProximaOcupacion;
-    }
+    }*/
 }

@@ -1,6 +1,7 @@
 package com.Hotel;
 
 import com.google.gson.Gson;
+import org.json.simple.JSONObject;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -157,7 +158,7 @@ public class Main {
         }
 
 
-        List<Habitacion>habitaciones2 = new ArrayList<>();
+        /*List<Habitacion>habitaciones2 = new ArrayList<>();
 
         Archivo archivo4 = new Archivo();
         archivo3.writerArchivoHabitaciones("habitacion.json", habitaciones);
@@ -166,7 +167,7 @@ public class Main {
 
         for(Habitacion r : habitaciones2){
             System.out.println(r);
-        }
+        }*/
 /*
         List<Ocupacion>ocupaciones2 = new ArrayList<>();
 
@@ -180,8 +181,32 @@ public class Main {
         }
 
         */
+        /*
+        String hab;
+        hab=habitacion1.objetoGsonHabitacion();
+
+        habitacion1.writerArchivoHab("habitacion.json", hab);
+
+        Habitacion habPrueba = new Habitacion();
+        habPrueba=habPrueba.readerArchivoHab("habitacion.json");
+
+        System.out.println(habPrueba);*/
+
+       // List<Pasajero>paxs=new ArrayList<>();
+
+       /*Archivo archivoP = new Archivo();
+        archivoP.writerArchivoPasajeros("pasajero.json", listaPax);
+        paxs=archivoP.readerArchivoPasajeros("pasajero.json");*/
+
+
+
+
+
 
     }
+
+
+
 
 
 

@@ -1,6 +1,8 @@
 package com.Hotel;
 
-public enum Tarifa {
+import java.io.Serializable;
+
+public enum Tarifa implements Serializable {
 
     SINGLE_STANDAR ("Single Standar","Cama individual, vista al contrafrente", 2350),
     SINGLE_SUPERIOR ("Single Superior","Cama individual, vista al mar y balcón", 2850),

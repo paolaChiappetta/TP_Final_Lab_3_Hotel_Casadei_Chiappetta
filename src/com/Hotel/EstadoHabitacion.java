@@ -1,6 +1,8 @@
 package com.Hotel;
 
-public enum EstadoHabitacion {
+import java.io.Serializable;
+
+public enum EstadoHabitacion implements Serializable {
 
     DISPONIBLE,
     OCUPADA,

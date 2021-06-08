@@ -12,7 +12,7 @@ public class Archivo {
 
     private com.google.gson.Gson gson = new GsonBuilder()
             .setPrettyPrinting()
-            .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
+            .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe()).registerTypeAdapter(Tarifa.class, new EnumTarifaAdapter())
             .create();
 
     public Archivo() {
@@ -182,6 +182,7 @@ public class Archivo {
         try {
             writer = new BufferedWriter(new FileWriter(archivo));
 
+
             gson.toJson(lista, lista.getClass(), writer);
 
 
@@ -282,4 +283,56 @@ public class Archivo {
         return lista;
     }
 
+    public void writerArchivoPasajeros(String archivo, List<Pasajero> lista) {
+        BufferedWriter writer = null;
+
+        try {
+            writer = new BufferedWriter(new FileWriter(archivo));
+
+            gson.toJson(lista, lista.getClass(), writer);
+
+
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public List<Pasajero> readerArchivoPasajeros(String archivo) {
+        BufferedReader reader = null;
+        List<Pasajero>lista=null;
+
+        try {
+            reader = new BufferedReader(new FileReader(archivo));
+
+
+            lista = gson.fromJson(reader, (new TypeToken<List<Ocupacion>>() {}.getType()));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return lista;
+    }
 }
