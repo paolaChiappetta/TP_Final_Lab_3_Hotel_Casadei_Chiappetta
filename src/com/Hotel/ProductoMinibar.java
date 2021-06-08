@@ -1,6 +1,8 @@
 package com.Hotel;
 
-public class ProductoMinibar extends Extra {
+import java.io.Serializable;
+
+public class ProductoMinibar extends Extra implements Serializable {
     
     private String marca;
 
@@ -9,6 +11,11 @@ public class ProductoMinibar extends Extra {
 
     public ProductoMinibar(String nombre, Double precio, String marca) {
         super(nombre, precio);
+        this.marca = marca;
+    }
+
+    public ProductoMinibar(String nombre, Double precio, boolean alta, Integer cantidad, String marca) {
+        super(nombre, precio, alta, cantidad);
         this.marca = marca;
     }
 

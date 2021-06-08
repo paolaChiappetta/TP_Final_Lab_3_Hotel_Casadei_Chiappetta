@@ -1,6 +1,8 @@
 package com.Hotel;
 
-public abstract class Extra {
+import java.io.Serializable;
+
+public class Extra implements Serializable {
 
     private String nombre;
     private Double precio;
@@ -14,6 +16,13 @@ public abstract class Extra {
         this.nombre = nombre;
         this.precio = precio;
 
+    }
+
+    public Extra(String nombre, Double precio, boolean alta, Integer cantidad) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.alta = alta;
+        this.cantidad = cantidad;
     }
 
     public String getNombre() {

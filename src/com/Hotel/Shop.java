@@ -8,7 +8,6 @@ public class Shop {
     private List<Servicio> servicios;
     private List<Amenitie> amenities;
     private List<ProductoMinibar> minibar;
-    private Scanner scanner = new Scanner(System.in);
 
     public Shop() {
     }
@@ -155,6 +154,7 @@ public class Shop {
 
     //CARGAR UN EXTRA AL LISTADO DE LA HABITACION OCUPADA
     public void cargarExtraHabitacion(Hotel hotel, Empleado empleado) {
+        Scanner scanner = new Scanner(System.in);
         int opcion;
         Extra extra = null;
         String continuar = "s";
@@ -279,6 +279,7 @@ public class Shop {
 
     //ELIMINAR UN EXTRA CARGADO EN UNA HABITACION (EJ: SE CARGÓ EN UNA HAB POR ERROR - SE CARGÓ MAL EL EXTRA)
     public void eliminarExtraHabitacion(Hotel hotel) {
+        Scanner scanner = new Scanner(System.in);
         int nroHab;
         String nombre;
         boolean habEncontrada = false;
@@ -323,6 +324,7 @@ public class Shop {
 
     // CARGAR UN NUEVO EXTRA
     public void nuevoExtra() {
+        Scanner scanner = new Scanner(System.in);
         String nombre;
         Double precio;
         int opcion;
@@ -392,6 +394,7 @@ public class Shop {
 
     //DAR DE BAJA UN EXTRA MOMENTANEAMENTE (EJ: FALTA DE STOCK - FALTA DE ALGÚN EMPLEADO, ETC)
     public void bajaExtra() {
+        Scanner scanner = new Scanner(System.in);
         String nombre;
         int opcion;
         String continuar = "s";
@@ -474,6 +477,7 @@ public class Shop {
 
     //ELIMINAR EXTRA YA CARGADO
     public void eliminarExtra() {
+        Scanner scanner = new Scanner(System.in);
         String nombre;
         int opcion;
         String continuar = "s";
@@ -558,6 +562,7 @@ public class Shop {
 
     //MODIFICAR DATOS DE EXTRAS YA CREADOS
     public void modificarExtra() {
+        Scanner scanner = new Scanner(System.in);
         String nombre;
         int opcion;
         String continuar = "s";
@@ -782,6 +787,7 @@ public class Shop {
 
     //DAR DE ALTA EXTRA QUE SE DIO DE BAJA EN ALGUN MOMENTO (EJ: POR FALTA DE STOCK)
     public void altaExtra() {
+        Scanner scanner = new Scanner(System.in);
         String nombre;
         int opcion;
         String continuar = "s";

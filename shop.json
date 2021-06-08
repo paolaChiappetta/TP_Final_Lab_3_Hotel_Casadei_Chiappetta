@@ -1,0 +1,99 @@
+[
+  {
+    "roturas": [
+      {
+        "causa": " ",
+        "nombre": "Vidrio",
+        "precio": 300.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "causa": " ",
+        "nombre": "Espejo",
+        "precio": 300.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "causa": " ",
+        "nombre": "Toalla",
+        "precio": 300.0,
+        "alta": true,
+        "cantidad": 1
+      }
+    ],
+    "servicios": [
+      {
+        "empleadoEncargado": "Mucama",
+        "nombre": "Plancha",
+        "precio": 400.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "empleadoEncargado": "Mucama",
+        "nombre": "Bata",
+        "precio": 200.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "empleadoEncargado": "Mucama",
+        "nombre": "Toalla",
+        "precio": 150.0,
+        "alta": true,
+        "cantidad": 1
+      }
+    ],
+    "amenities": [
+      {
+        "descripcion": "con piedras calientes",
+        "horario": "de 10 a 18",
+        "nombre": "Masaje",
+        "precio": 1500.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "descripcion": "seco",
+        "horario": "de 10 a 18",
+        "nombre": "Sauna 1",
+        "precio": 800.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "descripcion": "húmedo",
+        "horario": "de 10 a 18",
+        "nombre": "Sauna 2",
+        "precio": 800.0,
+        "alta": true,
+        "cantidad": 1
+      }
+    ],
+    "minibar": [
+      {
+        "marca": "Coca Cola",
+        "nombre": "Gaseosa",
+        "precio": 110.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "marca": "Fanta",
+        "nombre": "Gaseosa",
+        "precio": 120.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "marca": "Sprite",
+        "nombre": "Gaseosa",
+        "precio": 115.0,
+        "alta": true,
+        "cantidad": 1
+      }
+    ]
+  }
+]

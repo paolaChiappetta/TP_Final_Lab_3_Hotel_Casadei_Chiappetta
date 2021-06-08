@@ -1,6 +1,8 @@
 package com.Hotel;
 
-public class Amenitie extends Extra {
+import java.io.Serializable;
+
+public class Amenitie extends Extra  implements Serializable {
 
     private String descripcion;
     private String horario;
@@ -10,6 +12,12 @@ public class Amenitie extends Extra {
 
     public Amenitie(String nombre, Double precio, String descripcion, String horario) {
         super(nombre, precio);
+        this.descripcion = descripcion;
+        this.horario = horario;
+    }
+
+    public Amenitie(String nombre, Double precio, boolean alta, Integer cantidad, String descripcion, String horario) {
+        super(nombre, precio, alta, cantidad);
         this.descripcion = descripcion;
         this.horario = horario;
     }

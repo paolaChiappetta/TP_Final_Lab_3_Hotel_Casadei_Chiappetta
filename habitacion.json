@@ -1,1 +1,16 @@
 [
+  {
+    "numero": 101,
+    "piso": 1,
+    "estado": "FUERA_DE_SERVICIO",
+    "tarifa": "DOBLE_STANDAR",
+    "fechaProximaOcupacion": "2021-05-31"
+  },
+  {
+    "numero": 102,
+    "piso": 1,
+    "estado": "DISPONIBLE",
+    "tarifa": "DOBLE_STANDAR",
+    "fechaProximaOcupacion": "2021-05-31"
+  }
+]

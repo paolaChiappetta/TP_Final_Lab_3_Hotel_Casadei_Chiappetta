@@ -168,7 +168,7 @@ public class Ocupacion implements Serializable {
         return titular;
     }
 
-    Scanner scanner = new Scanner(System.in);
+
 
 
     /// metodos para asignar tipo de pension en ocupacion
@@ -183,7 +183,7 @@ public class Ocupacion implements Serializable {
 
     public void asignarTipoPension() {
         int opcion = 0;
-
+        Scanner scanner = new Scanner(System.in);
         menuTipoPension();
         opcion = scanner.nextInt();
         switch (opcion) {
@@ -206,6 +206,7 @@ public class Ocupacion implements Serializable {
     }
 
     public void agregarPasajerosLista(Reserva reserva, List<Pasajero> pasajeros) {
+        Scanner scanner = new Scanner(System.in);
         boolean encontrado = false;
         int i = 0;
         boolean existe = buscarPasajeroDni(reserva.getPasajeroDni(), pasajeros);
@@ -236,6 +237,7 @@ public class Ocupacion implements Serializable {
     }
 
     public void agregarPasajerosLista(List<Pasajero> pasajeros) {
+        Scanner scanner = new Scanner(System.in);
         int rta = 0;
         boolean encontrado = false;
         int i = 0;
@@ -303,7 +305,7 @@ public class Ocupacion implements Serializable {
                 return "Ocupación: \nHabitación: " +this.nroHabitacion +
                         "\nFecha de ingreso: " + this.fechaIngreso +
                         "\nFecha de Salida: " + this.fechaSalida +
-                        "\nTipo de pensión: " + this.tipoPension +
+                        "\nTipo de pensión: " + this.tipoPension.getNombre() +
                         "\nCantidad de cocheras: " + this.cochera +
                         "\nPasajeros: " + this.mostrarListaPaxs();
             }

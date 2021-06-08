@@ -2,7 +2,9 @@ package com.Hotel;
 
 import org.w3c.dom.ls.LSOutput;
 
-public class Servicio extends Extra {
+import java.io.Serializable;
+
+public class Servicio extends Extra  implements Serializable {
 
     private String empleadoEncargado;
 
@@ -11,6 +13,11 @@ public class Servicio extends Extra {
 
     public Servicio(String nombre, Double precio, String empleadoEncargado) {
         super(nombre, precio);
+        this.empleadoEncargado = empleadoEncargado;
+    }
+
+    public Servicio(String nombre, Double precio, boolean alta, Integer cantidad, String empleadoEncargado) {
+        super(nombre, precio, alta, cantidad);
         this.empleadoEncargado = empleadoEncargado;
     }
 

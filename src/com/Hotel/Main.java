@@ -22,7 +22,7 @@ public class Main {
 
         List<Extra>extras = new ArrayList<>();
 
-        List<Habitacion>habitaciones = new ArrayList<>();
+
 
         List<Reserva>reservas = new ArrayList<>();
 
@@ -36,14 +36,8 @@ public class Main {
         reservas.add(reserva3);
 
 
-        Habitacion habitacion1 = new Habitacion(101, 1, EstadoHabitacion.FUERA_DE_SERVICIO,
-                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"));
-        Habitacion habitacion2 = new Habitacion(102, 1, EstadoHabitacion.DISPONIBLE,
-                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"));
 
 
-        habitaciones.add(habitacion1);
-        habitaciones.add(habitacion2);
 
 
         Ocupacion ocup = new Ocupacion(3, LocalDate.parse("2021-05-01"),
@@ -147,7 +141,7 @@ public class Main {
         empleados.add(adm2);
         empleados.add(adm3);
         List<Empleado>empleados2 = new ArrayList<>();
-
+/*
         Archivo archivo3 = new Archivo();
         archivo3.writerArchivoEmpleado("empleado.json", empleados);
         empleados2=archivo3.readerArchivoEmpleado("empleado.json");
@@ -156,31 +150,37 @@ public class Main {
         for(Empleado r : empleados2){
                 System.out.println(r);
         }
+        List<Habitacion>habitaciones = new ArrayList<>();
+        Habitacion habitacion1 = new Habitacion(101, 1, EstadoHabitacion.FUERA_DE_SERVICIO,
+                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"));
+        Habitacion habitacion2 = new Habitacion(102, 1, EstadoHabitacion.DISPONIBLE,
+                Tarifa.DOBLE_STANDAR, LocalDate.parse("2021-05-31"));
+        habitaciones.add(habitacion1);
+        habitaciones.add(habitacion2);
 
-
-        /*List<Habitacion>habitaciones2 = new ArrayList<>();
+        List<Habitacion>habitaciones2 = new ArrayList<>();
 
         Archivo archivo4 = new Archivo();
         archivo3.writerArchivoHabitaciones("habitacion.json", habitaciones);
         habitaciones2=archivo3.readerArchivoHabitaciones("habitacion.json");
-        System.out.println("\nHabs");
+        System.out.println("\nHabitaciones");
 
         for(Habitacion r : habitaciones2){
             System.out.println(r);
-        }*/
+        }
 /*
         List<Ocupacion>ocupaciones2 = new ArrayList<>();
 
-        Archivo archivo4 = new Archivo();
-        archivo3.writerArchivoOcupaciones("ocupacion.json", ocupaciones);
-        ocupaciones2=archivo3.readerArchivoOcupaciones("ocupacion.json");
-        System.out.println("\nHabs");
+        Archivo archivo5 = new Archivo();
+        archivo5.writerArchivoOcupaciones("ocupacion.json", ocupaciones);
+        ocupaciones2=archivo5.readerArchivoOcupaciones("ocupacion.json");
+        System.out.println("\nOcupaciones");
 
         for(Ocupacion r : ocupaciones2){
             System.out.println(r);
         }
+*/
 
-        */
         /*
         String hab;
         hab=habitacion1.objetoGsonHabitacion();
@@ -191,14 +191,38 @@ public class Main {
         habPrueba=habPrueba.readerArchivoHab("habitacion.json");
 
         System.out.println(habPrueba);*/
+/*
+        List<Pasajero>paxs=new ArrayList<>();
 
-       // List<Pasajero>paxs=new ArrayList<>();
-
-       /*Archivo archivoP = new Archivo();
+       Archivo archivoP = new Archivo();
         archivoP.writerArchivoPasajeros("pasajero.json", listaPax);
-        paxs=archivoP.readerArchivoPasajeros("pasajero.json");*/
+        paxs=archivoP.readerArchivoPasajeros("pasajero.json");
+        for(Pasajero r : paxs){
+            System.out.println(r);
+        }
+*/
+        /*
 
+        HabPrueba habPrueba = new HabPrueba(102, 1, LocalDate.parse("2020-05-21"), EstadoHabitacion.DISPONIBLE, Tarifa.DOBLE_STANDAR);
+        List<HabPrueba>habsPrueba = new ArrayList<>();
+        habsPrueba.add(habPrueba);
+        List<HabPrueba> habPrueba2=null;
+        Archivo archivo8=new Archivo();
 
+        archivo8.writerArchivoHabPrueba("habnueva.json", habsPrueba);
+        habPrueba2=archivo8.readerArchivoHabPrueba("habnueva.json");
+for(HabPrueba h : habPrueba2){
+    System.out.println(h);}*/
+
+        Archivo archivo99 = new Archivo();
+        List<Shop>shop1=new ArrayList<>();
+        List<Shop>shop2=new ArrayList<>();
+        shop1.add(shop);
+        archivo99.writerArchivoShop("shop.json", shop1);
+        shop2=archivo99.readerArchivoShop("shop.json");
+        for(Shop h : shop2){
+            System.out.println(h);}
+}
 
 
 
@@ -214,4 +238,4 @@ public class Main {
 
 
 
-}
+

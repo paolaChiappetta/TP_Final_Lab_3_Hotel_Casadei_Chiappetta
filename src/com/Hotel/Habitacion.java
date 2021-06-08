@@ -80,8 +80,6 @@ public class Habitacion implements Serializable {
 
     ///agrego funciones para asignar tipo y etsaod de habitaciones
 
-    Scanner scanner = new Scanner(System.in);
-
 
     public void menuTipoHabitacion() {
         System.out.println("1: Single standard");
@@ -99,6 +97,7 @@ public class Habitacion implements Serializable {
 
 
     public void indicarTipoHabitacion() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Indique tipo de habitacion: ");
         int opcion = 0;
         do {
@@ -156,7 +155,7 @@ public class Habitacion implements Serializable {
 
 
     public void indicarEstadoHabitacion() {
-
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Indique estado de habitacion: ");
         int opcion = 0;
@@ -265,16 +264,16 @@ try {
             }
         }
         return habitacion;
-    }
+    }*/
 
 
     @Override
     public String toString() {
         return "Habitación " + this.numero + ":" +
                 "\nPiso: " + this.piso +
-                "\nDescripción: " + this.tarifa.getDescripcion() +
+                "\nDescripción: " + this.tarifa.getNombre() +
                 "\nTarifa: $" + this.tarifa.getPrecio() +
                 "\nEstado: " + this.estado +
                 "\nPróxima ocupación: " + this.fechaProximaOcupacion;
-    }*/
+    }
 }

@@ -1,6 +1,8 @@
 package com.Hotel;
 
-public class Rotura extends Extra {
+import java.io.Serializable;
+
+public class Rotura extends Extra  implements Serializable {
 
     private String causa;
 
@@ -9,6 +11,11 @@ public class Rotura extends Extra {
 
     public Rotura(String nombre, Double precio, String causa) {
         super(nombre, precio);
+        this.causa = causa;
+    }
+
+    public Rotura(String nombre, Double precio, boolean alta, Integer cantidad, String causa) {
+        super(nombre, precio, alta, cantidad);
         this.causa = causa;
     }
 
