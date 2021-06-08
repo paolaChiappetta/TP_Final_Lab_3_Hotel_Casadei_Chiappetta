@@ -46,7 +46,7 @@ public class Main {
 
 
         Ocupacion ocup = new Ocupacion(3, LocalDate.parse("2021-05-01"),
-                LocalDate.parse("2021-05-05"), extras, 1, habitacion1, 1,
+                LocalDate.parse("2021-05-05"), extras, 1, 102, Tarifa.DOBLE_STANDAR, 1,
                 TipoPension.MEDIA_PENSION, listaPax, 200.00);
 
         List<Ocupacion>ocupaciones = new ArrayList<>();
@@ -155,7 +155,7 @@ public class Main {
         for(Empleado r : empleados2){
                 System.out.println(r);
         }
-/*
+
 
         List<Habitacion>habitaciones2 = new ArrayList<>();
 
@@ -166,8 +166,8 @@ public class Main {
 
         for(Habitacion r : habitaciones2){
             System.out.println(r);
-        }*/
-
+        }
+/*
         List<Ocupacion>ocupaciones2 = new ArrayList<>();
 
         Archivo archivo4 = new Archivo();
@@ -179,7 +179,7 @@ public class Main {
             System.out.println(r);
         }
 
-        
+        */
 
     }
 

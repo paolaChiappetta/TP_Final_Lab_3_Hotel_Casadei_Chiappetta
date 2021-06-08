@@ -71,7 +71,7 @@ public class Factura {
 
     //CALCULA LA CANTIDAD DE NOCHES x LA TARIFA DE LA HABITACION
     public Double calculoAlojamiento() {
-        return this.calculoCantidadNoches() * this.getOcupacion().getHabitacion().getTarifa().getPrecio();
+        return this.calculoCantidadNoches() * this.ocupacion.getTarifa().getPrecio();
     }
 
     //CALCULA EL PRECIO DEL TIPO DE PENSION x LA CANT DE PASAJEROS x LA CANT DE NOCHES
@@ -159,8 +159,8 @@ public class Factura {
                 "                 Fecha de salida: " + this.ocupacion.getFechaSalida() +
                 "\n-------------------------------------------------------------------------" +
                 "\n     Alojamiento     |      Tarifa     |     Noches      |       Total     " +
-                "\n    " + this.ocupacion.getHabitacion().getTarifa().getNombre() + "           " +
-                this.ocupacion.getHabitacion().getTarifa().getPrecio() + "             "
+                "\n    " + this.ocupacion.getTarifa().getNombre() + "           " +
+                this.ocupacion.getTarifa().getPrecio() + "             "
                 + this.calculoCantidadNoches() + "                " + this.calculoAlojamiento() +
 
                 "\n\n\n     Pensión     |   Precio Unit.  |   Paxs   |  Noches   |      Total     " +

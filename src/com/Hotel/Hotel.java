@@ -261,7 +261,7 @@ public class Hotel implements Serializable {
         Ocupacion ocupacion = null;
         if (!this.listaOcupaciones.isEmpty()) {
             for (Ocupacion lista : this.listaOcupaciones) {
-                if (lista.getHabitacion().getNumero() == numeroHab) {
+                if (lista.getNroHabitacion() == numeroHab) {
                     ocupacion = lista;
                 }
             }
@@ -285,7 +285,7 @@ public class Hotel implements Serializable {
         boolean ocupacionEncontrada = false;
         if (!this.listaOcupaciones.isEmpty()) {  //verifico que exista la hab
             for (Ocupacion lista : listaOcupaciones) {
-                if (lista.getHabitacion().getNumero() == nroHabitacion) {
+                if (lista.getNroHabitacion() == nroHabitacion) {
                     ocupacionEncontrada = true;
                 }
             }
@@ -401,7 +401,7 @@ public class Hotel implements Serializable {
 
             while (!ocupacionEncontrada && i < this.listaOcupaciones.size()) { //recorro la lista para hacer el check Out de la hab indicada
 
-                if (this.listaOcupaciones.get(i).getHabitacion().getNumero() == nroHabitacion) { //cuando la encuentra
+                if (this.listaOcupaciones.get(i).getNroHabitacion() == nroHabitacion) { //cuando la encuentra
                     Factura nuevaFactura = new Factura();                                    //genera nueva factura
                     String factura;
                     nuevaFactura.setOcupacion(this.listaOcupaciones.get(i));                 //le paso la ocupacion a la factura
@@ -622,7 +622,7 @@ public class Hotel implements Serializable {
         int i = 0;
         while (!encontrada && i < this.listaHabitaciones.size()) {
             if (this.listaHabitaciones.get(i).getNumero() == reserva.getNumeroHabitacion()) {
-                ocupacion.setHabitacion(this.listaHabitaciones.get(i));  //se le agrega la hab a la ocupación
+                ocupacion.setNroHabitacion(this.listaHabitaciones.get(i).getNumero());  //se le agrega la hab a la ocupación
                 this.listaHabitaciones.get(i).setEstado(EstadoHabitacion.OCUPADA); //cambio el estado de la hab
             }
             i++;
@@ -681,6 +681,18 @@ public class Hotel implements Serializable {
             System.out.println("\nCantidad de habitaciones de estado " + estado + ": " + contador);
         }
 
+    }
+
+    public Habitacion buscarHabPorNro(int nroHabitacion){
+        Habitacion habitacion = null;
+        if(!this.listaHabitaciones.isEmpty()){
+            for(Habitacion lista : this.listaHabitaciones){
+                if(lista.getNumero()==nroHabitacion){
+                    habitacion=lista;
+                }
+            }
+        }
+        return habitacion;
     }
 
 

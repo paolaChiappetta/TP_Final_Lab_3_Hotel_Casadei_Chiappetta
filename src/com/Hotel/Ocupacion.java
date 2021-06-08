@@ -16,7 +16,8 @@ public class Ocupacion implements Serializable {
     private LocalDate fechaSalida;
     private List<Extra> extras;
     private Integer cochera = 0;
-    private Habitacion habitacion;
+    private Integer nroHabitacion;
+    private Tarifa tarifa;
     private Integer cantidadPax;
     private TipoPension tipoPension;
     private Long numeroOcupacion;
@@ -29,14 +30,15 @@ public class Ocupacion implements Serializable {
 
     public Ocupacion(long idReserva, LocalDate fechaIngreso,
                      LocalDate fechaSalida, List<Extra> extras,
-                     int cochera, Habitacion habitacion, int cantidadPax,
+                     int cochera, Integer nroHabitacion, Tarifa tarifa, int cantidadPax,
                      TipoPension tipoPension, List<Pasajero> listaPaxs, Double deposito) {
         this.idReserva = idReserva;
         this.fechaIngreso = fechaIngreso;
         this.fechaSalida = fechaSalida;
         this.extras = extras;
         this.cochera = cochera;
-        this.habitacion = habitacion;
+        this.nroHabitacion = nroHabitacion;
+        this.tarifa = tarifa;
         this.cantidadPax = cantidadPax;
         this.tipoPension = tipoPension;
         this.listaPaxs = listaPaxs;
@@ -46,14 +48,15 @@ public class Ocupacion implements Serializable {
 
     public Ocupacion(long idReserva, LocalDate fechaIngreso,
                      LocalDate fechaSalida, List<Extra> extras, Integer cochera,
-                     Habitacion habitacion, Integer cantidadPax, TipoPension tipoPension,
+                     Integer nroHabitacion, Tarifa tarifa, Integer cantidadPax, TipoPension tipoPension,
                      Long numeroOcupacion, List<Pasajero> listaPaxs, Double deposito) {
         this.idReserva = idReserva;
         this.fechaIngreso = fechaIngreso;
         this.fechaSalida = fechaSalida;
         this.extras = extras;
         this.cochera = cochera;
-        this.habitacion = habitacion;
+        this.nroHabitacion = nroHabitacion;
+        this.tarifa = tarifa;
         this.cantidadPax = cantidadPax;
         this.tipoPension = tipoPension;
         this.numeroOcupacion = numeroOcupacion;
@@ -101,12 +104,16 @@ public class Ocupacion implements Serializable {
         this.cochera = cochera;
     }
 
-    public Habitacion getHabitacion() {
-        return habitacion;
+    public Integer getNroHabitacion() {
+        return nroHabitacion;
     }
 
-    public void setHabitacion(Habitacion habitacion) {
-        this.habitacion = habitacion;
+    public void setNroHabitacion(Integer nroHabitacion) {
+        this.nroHabitacion = nroHabitacion;
+    }
+
+    public Tarifa getTarifa() {
+        return tarifa;
     }
 
     public Integer getCantidadPax() {
@@ -293,7 +300,7 @@ public class Ocupacion implements Serializable {
 
             @Override
             public String toString () {
-                return "Ocupación: \nHabitación: " + habitacion.getNumero() +
+                return "Ocupación: \nHabitación: " +this.nroHabitacion +
                         "\nFecha de ingreso: " + this.fechaIngreso +
                         "\nFecha de Salida: " + this.fechaSalida +
                         "\nTipo de pensión: " + this.tipoPension +
