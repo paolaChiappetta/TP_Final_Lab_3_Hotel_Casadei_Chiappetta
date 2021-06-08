@@ -1,29 +1,31 @@
 package com.Hotel;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public abstract class Empleado extends Persona{
+public abstract class Empleado extends Persona implements Serializable {
 
     private String usuario;
     private String clave;
 
-
-
-    //constructores al principio se crean con generar usuario, despues se puede modificar con set
-
-
+    //constructor vacío
     public Empleado() { }
 
+    //constructor con datos y generación de usuario y contraseña
     public Empleado(String nombre, String apellido, String numeroTel) {
 
         super(nombre, apellido, numeroTel);
         this.generarUsuarioyClave();
     }
 
+    //constructor completo
+    public Empleado(String nombre, String apellido, String numerotel, String usuario, String clave) {
+        super(nombre, apellido, numerotel);
+        this.usuario = usuario;
+        this.clave = clave;
+    }
 
-
-
-    //genero usuario concatenando 3 primeras letras de nombre y apellido, se mantienen las mayusculas
+    //genero usuario concatenando primeras letra del nombre + el apellido, se mantienen las mayusculas
 
     public void generarUsuarioyClave() {
         GeneradorClaveUsuario claveUsuario= new GeneradorClaveUsuario();
@@ -31,11 +33,7 @@ public abstract class Empleado extends Persona{
         this.usuario = usuarioNuevo;
         String claveNueva = claveUsuario.crarContrasenia();
         this.clave=claveNueva;
-
     }
-
-
-
 
     //getters y setters
 
@@ -46,7 +44,6 @@ public abstract class Empleado extends Persona{
     public void setUsuario(String usuario) { this.usuario = usuario;   }
 
     public String getUsuario() {   return usuario; }
-
 
 
     /// para modificar usuario y clave comparo si coincide el dato anterior con el actual,
@@ -70,16 +67,5 @@ public abstract class Empleado extends Persona{
             System.out.println("Usuario incorrecto");
         }
     }
-
-
-
-
-    /// mo agregue nada porq no se deben mostrar uruario y contraseña
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
 
 }

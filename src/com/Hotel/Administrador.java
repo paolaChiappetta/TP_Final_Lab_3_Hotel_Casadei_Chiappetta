@@ -1,24 +1,24 @@
 package com.Hotel;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class Administrador extends Empleado implements InterfazAccion {
+public class Administrador extends Empleado implements InterfazAccion, Serializable {
 
-
-    Scanner scanner = new Scanner(System.in);
-
-    //constructores
-
+    //constructor vacío
     public Administrador() { }
 
+    //constructor con datos p/ generación de usuario y contraseña
     public Administrador(String nombre, String apellido, String numeroTel) {
-
         super(nombre, apellido, numeroTel);
-
     }
 
+    //constructor completo
+    public Administrador(String nombre, String apellido, String numerotel, String usuario, String clave) {
+        super(nombre, apellido, numerotel, usuario, clave);
+    }
 
     ///Override de la interfazAccion
 
@@ -35,13 +35,12 @@ public class Administrador extends Empleado implements InterfazAccion {
 
     }
 
-
     @Override
     public void modificarHabitacion(Habitacion habitacion) {
 
         System.out.println("Indique el dato que desea modificar: ");
         int opcion = 0;
-
+        Scanner scanner = new Scanner(System.in);
 
         do {
             menuModificarHabitacion();
@@ -83,7 +82,7 @@ public class Administrador extends Empleado implements InterfazAccion {
 
 
     public Empleado generarNuevoEmpleado (){
-
+        Scanner scanner = new Scanner(System.in);
         String nombre, apellido, telefono;
         int opcion;
 
@@ -110,14 +109,6 @@ public class Administrador extends Empleado implements InterfazAccion {
         }
 
     }
-
-
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
 
 }
 

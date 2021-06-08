@@ -1,11 +1,12 @@
 package com.Hotel;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
-public class Pasajero extends Persona {
+public class Pasajero extends Persona implements Serializable {
 
 
     private static int identificador = 0;     /// variable static para id
@@ -24,15 +25,15 @@ public class Pasajero extends Persona {
     private String mail;
     private Integer id;
     private Boolean titularReserva;
-    private List<Ocupacion> listaOcupacionAnterior;
 
 
-    //constructores
+    //constructor vacío con asignación de ID
 
     public Pasajero() {
         this.id = identificador++;
-    }  /// asignar un id??
+    }
 
+    //constructor con datos y asignación de ID
 
     public Pasajero(String nombre, String apellido, String numeroTel, String dni,
                     LocalDate fechaNacimiento, String profesion_ocupacion,
@@ -55,7 +56,30 @@ public class Pasajero extends Persona {
         this.pais = pais;
         this.mail = mail;
         this.titularReserva = titularreserva;
+    }
 
+    //constructor completo
+    public Pasajero(String nombre, String apellido, String numeroTel, String dni,
+                    LocalDate fechaNacimiento, String profesion_ocupacion,
+                    String nacionalidad, String calle, Integer numero,
+                    Integer piso, String departamento, String ciudad, String provincia,
+                    String pais, String mail, Integer id, Boolean titularreserva) {
+
+        super(nombre, apellido, numeroTel);
+        this.id = id;
+        this.dni = dni;
+        this.fechaNacimiento = fechaNacimiento;
+        this.profesion_ocupacion = profesion_ocupacion;
+        this.nacionalidad = nacionalidad;
+        this.calle = calle;
+        this.numero = numero;
+        this.piso = piso;
+        this.ciudad = ciudad;
+        this.departamento = departamento;
+        this.provincia = provincia;
+        this.pais = pais;
+        this.mail = mail;
+        this.titularReserva = titularreserva;
     }
 
     //getters y setters
@@ -168,20 +192,12 @@ public class Pasajero extends Persona {
         this.ciudad = ciudad;
     }
 
-    public List<Ocupacion> getListaOcupacionAnterior() {
-        return listaOcupacionAnterior;
-    }
-
-    public void setListaOcupacionAnterior(List<Ocupacion> listaOcupacionAnterior) {
-        this.listaOcupacionAnterior = listaOcupacionAnterior;
-    }
-
-    Scanner scanner = new Scanner(System.in);
-
 
     //FUNCION CARGA DE PASAJERO, pide datos devuelve pasajero
 
     public Pasajero cargarPasajeroTitular(Reserva reserva) {
+
+        Scanner scanner = new Scanner(System.in);
 
         this.setNombre(reserva.getPasajeroNombre());
         this.setApellido(reserva.getPasajeroApellido());
@@ -217,6 +233,7 @@ public class Pasajero extends Persona {
 
     public Pasajero cargarPasajeroAcompaniante() {
 
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Nombre:");
         this.setNombre(scanner.nextLine());
@@ -258,6 +275,7 @@ public class Pasajero extends Persona {
 
         System.out.println("Indique que datos desea modificar: ");
         int opcion = 0;
+        Scanner scanner = new Scanner(System.in);
 
 
         do {
@@ -334,7 +352,7 @@ public class Pasajero extends Persona {
 
     @Override
     public String toString() {
-        return super.toString() +
+        return "Pasajero ID " + this.id + "\n" + super.toString() +
                 "\nDni: " + this.dni +
                 "\nFecha de nacimiento: "  + this.fechaNacimiento +
                 "\nProfesión-ocupación: " + this.profesion_ocupacion +
@@ -342,8 +360,7 @@ public class Pasajero extends Persona {
                 "\nCiudad: " + this.ciudad +
                 "\nProvincia: " + this.provincia +
                 "\nNacionalidad: " + this.nacionalidad +
-                "\nE-mail: " + this.mail +
-                "\nID: " + this.id;
+                "\nE-mail: " + this.mail;
     }
 
 }

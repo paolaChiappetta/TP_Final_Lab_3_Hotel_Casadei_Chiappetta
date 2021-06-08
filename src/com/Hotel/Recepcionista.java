@@ -5,24 +5,25 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class Recepcionista extends Empleado implements InterfazAccion {
+public class Recepcionista extends Empleado implements InterfazAccion, Serializable {
 
-    //constructores
-
+    //constructor vacío
     public Recepcionista() {
     }
 
-
+    //constructor con datos p/ generación de usuario y contraseña
     public Recepcionista(String nombre, String apellido, String numeroTel) {
         super(nombre, apellido, numeroTel);
+    }
 
+    //constructor completo
+    public Recepcionista(String nombre, String apellido, String numerotel, String usuario, String clave) {
+        super(nombre, apellido, numerotel, usuario, clave);
     }
 
     //Overrides de InterfazAccion
 
     /// modificar estado de habitacion
-
-    Scanner scanner = new Scanner(System.in);
 
     @Override
     public void menuModificarHabitacion() {
@@ -36,6 +37,7 @@ public class Recepcionista extends Empleado implements InterfazAccion {
 
     @Override
     public void modificarHabitacion(Habitacion habitacion) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Indique el dato que desea modificar: ");
         int opcion = 0;
 
@@ -59,7 +61,6 @@ public class Recepcionista extends Empleado implements InterfazAccion {
         } while (opcion != 0);
 
     }
-
 
     @Override
     public String toString() {

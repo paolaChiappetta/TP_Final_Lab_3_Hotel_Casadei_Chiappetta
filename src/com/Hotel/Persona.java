@@ -1,8 +1,9 @@
 package com.Hotel;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Persona {
+public abstract class Persona implements Serializable {
 
     private String nombre;
     private String apellido;
