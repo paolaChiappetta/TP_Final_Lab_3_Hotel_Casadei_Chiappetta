@@ -1,6 +1,7 @@
 package com.Hotel;
 
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -159,11 +160,15 @@ public class Menu {
                     System.exit(0);
                     break;
                 case 1:
+                    scanner.reset();
+                    /*
                     System.out.println("Ingrese nombre de usuario");
                     usuario = scanner.nextLine();
                     System.out.println("Ingrese su contraseña");
                     contrasenia = scanner.nextLine();
-                    this.setEmpleadoActual(hotel.verificarUsuarioyContrasenia(usuario, contrasenia));
+                    this.setEmpleadoActual(hotel.verificarUsuarioyContrasenia(usuario, contrasenia));*/
+                    Administrador administrador = new Administrador();
+                    this.setEmpleadoActual(administrador);
                     if(empleadoActual!=null){
                         cargaListas();
                         if (empleadoActual instanceof Recepcionista) {
@@ -177,7 +182,7 @@ public class Menu {
                     System.out.println("Opción incorrecta. Ingrese nuevamente");
                     break;
             }
-            scanner.nextLine();
+
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -190,6 +195,7 @@ public class Menu {
         do {
             opcionesInicioRecepcionista();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
@@ -208,7 +214,7 @@ public class Menu {
                     break;
 
             }
-            scanner.nextLine();
+
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -221,6 +227,7 @@ public class Menu {
         do {
             opcionesInicioAdministrador();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
@@ -243,7 +250,7 @@ public class Menu {
 
             }
 
-            scanner.nextLine();
+
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -256,6 +263,7 @@ public class Menu {
         do {
             opcionesHotel();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
@@ -267,6 +275,7 @@ public class Menu {
                     System.out.println("Check-Out");
                     System.out.println("\nIngrese el número de habitación: ");
                     hotel.checkOut(scanner.nextInt());
+                    scanner.nextLine();
                     break;
                 case 3:
                     menuReservas();
@@ -290,7 +299,7 @@ public class Menu {
 
             }
 
-            scanner.nextLine();
+
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -303,6 +312,7 @@ public class Menu {
         do {
             opcionesAdministracionHotelAdministrador();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
@@ -322,7 +332,6 @@ public class Menu {
 
             }
 
-            scanner.nextLine();
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -335,6 +344,7 @@ public class Menu {
         do {
             opcionesAdministracionAdministrador();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
@@ -357,7 +367,6 @@ public class Menu {
 
             }
 
-            scanner.nextLine();
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -370,6 +379,7 @@ public class Menu {
         do {
             opcionesReservas();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
@@ -378,13 +388,14 @@ public class Menu {
                     hotel.nuevaReserva();
                     break;
                 case 2:
-                    //modif reserva
+                    hotel.modificarReserva();
                     break;
                 case 3:
-                    //eliminar reserva
+                    System.out.println("Ingrese el ID de la reserva que desea eliminar");
+                   hotel.eliminarReserva(scanner.nextLong());
+                    scanner.nextLine();
                     break;
                 case 4:
-                    scanner.nextLine();
                     System.out.println("\nIngrese el Dni del pasajero");
                     hotel.listadoReservasPorDni(scanner.nextLine());
                     break;
@@ -397,7 +408,6 @@ public class Menu {
 
             }
 
-            scanner.nextLine();
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -410,6 +420,7 @@ public class Menu {
         do {
             opcionesShop();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
@@ -440,7 +451,6 @@ public class Menu {
                     break;
             }
 
-            scanner.nextLine();
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -453,6 +463,7 @@ public class Menu {
         do {
             opcionesListados();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
@@ -481,8 +492,10 @@ public class Menu {
                         hotel.listadoHabitacionesPorEstado(EstadoHabitacion.DISPONIBLE);
                     }else if(scanner.nextInt()==2){
                         hotel.listadoHabitacionesPorEstado(EstadoHabitacion.OCUPADA);
-                    }else
+                    }else{
                         hotel.listadoHabitacionesPorEstado(EstadoHabitacion.FUERA_DE_SERVICIO);
+                    }
+                    scanner.nextLine();
                     break;
                 case 7:
                     hotel.listadoOcupaciones();
@@ -494,8 +507,6 @@ public class Menu {
                     System.out.println("Opción incorrecta. Ingrese nuevamente");
                     break;
             }
-
-            scanner.nextLine();
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -508,12 +519,19 @@ public class Menu {
         do {
             opcionesMisDatos();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
                     break;
                 case 1:
-                    //empleadoActual.modificarClave();
+                    String claveActual;
+                    String claveNueva;
+                    System.out.println("Ingrese su contraseña actual");
+                    claveActual=scanner.nextLine();
+                    System.out.println("Ingrese la nueva contraseña");
+                    claveNueva=scanner.nextLine();
+                    empleadoActual.modificarClave(empleadoActual, claveActual, claveNueva);
                     break;
                 case 2:
                     if(empleadoActual instanceof Recepcionista){
@@ -527,7 +545,6 @@ public class Menu {
                     break;
             }
 
-            scanner.nextLine();
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -541,18 +558,20 @@ public class Menu {
         do {
             opcionesEmpleadosAdministrador();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
                     break;
                 case 1:
-                    //nuevo empleado
+                   hotel.nuevoEmpleado();
                     break;
                 case 2:
-                    //modif empleado
+                    hotel.llamadaModificarEmpleado(empleadoActual);
                     break;
                 case 3:
-                    //eliminar empleado
+                    System.out.println("Ingrese el DNI del empleado que desea eliminar");
+                    hotel.eliminarEmpleado(scanner.nextLine());
                     break;
                 case 4:
                     menuAdministracionAdministrador();
@@ -562,7 +581,6 @@ public class Menu {
                     break;
             }
 
-            scanner.nextLine();
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -575,20 +593,23 @@ public class Menu {
         do {
             opcionesHabitacionesAdministrador();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
                     break;
                 case 1:
-                    hotel.crearNuevaHabitacion();
+                    hotel.llamadaNuevaHabitacion();
                     break;
                 case 2:
                     System.out.println("\nIngrese el número de habitación que desea modificar");
-                    //hotel.modificarHabitacion(scanner.nextInt());
+                  hotel.llamadaModificarHabitacion(scanner.nextInt(), empleadoActual);
+                    scanner.nextLine();
                     break;
                 case 3:
                     System.out.println("\nIngrese el número de habitación que desea eliminar");
-                    //eliminar hab
+                    hotel.eliminarHabitacion(scanner.nextInt());
+                    scanner.nextLine();
                     break;
                 case 4:
                     menuAdministracionAdministrador();
@@ -598,7 +619,7 @@ public class Menu {
                     break;
             }
 
-            scanner.nextLine();
+
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -611,6 +632,7 @@ public class Menu {
         do {
             opcionesShopAdministracionAdministrador();
             opcion=scanner.nextInt();
+            scanner.nextLine();
             switch (opcion){
                 case 0:
                     System.exit(0);
@@ -638,7 +660,6 @@ public class Menu {
                     break;
             }
 
-            scanner.nextLine();
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
 
@@ -650,10 +671,10 @@ public class Menu {
     public void cargaListas (){
         Archivo archivo = new Archivo();
         hotel.setListaHabitaciones(archivo.readerArchivoHabitaciones("habitacion.json"));
-        hotel.setListaReservas(archivo.readerArchivoReserva("reserva.json"));
+        hotel.setListaReservas(archivo.readerArchivoReserva("reservas.json"));
         hotel.setListaOcupaciones(archivo.readerArchivoOcupaciones("ocupacion.json"));
         hotel.setPasajeros(archivo.readerArchivoPasajeros("pasajero.json"));
-        hotel.setFacturasEmitidas(archivo.readerArchivoFacturas("factura.json"));
+        //hotel.setFacturasEmitidas(archivo.readerArchivoFacturas("factura.json"));
         hotel.setShop(archivo.readerArchivoShop("shop.json"));
 
     }

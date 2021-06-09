@@ -102,19 +102,22 @@ public class Hotel implements Serializable {
         List<Reserva> reservasHab = new ArrayList<>();
         List<Integer> habslibres = new ArrayList<>();
         if (!listaHabitaciones.isEmpty()) {
+            System.out.println("\nHabitaciones libres: ");
             for (Habitacion listaHab : this.listaHabitaciones) {  //recorro las habitaciones
+                reservasHab.removeAll(reservasHab);
                 for (Reserva listaRva : this.listaReservas) {  //recorro las reservas
                     if (listaHab.getNumero() == listaRva.getNumeroHabitacion()) {  //filtro por habitación
                         reservasHab.add(listaRva);  //se arma lista de reservas por habitación
                     }
                 }
+
                 if (!reservasHab.isEmpty()) {
                     Collections.sort(reservasHab);  //se ordena la lista
                     boolean encontrada = false;
                     for (int i = 0; i < reservasHab.size(); i++) {  //a partir de ahí se busca el espacio
 
-                        if (i == 0 && salida.isBefore(reservasHab.get(i).getFechaIngreso()) || //si es la 1er reserva y salida
-                                salida.isEqual(reservasHab.get(i).getFechaIngreso())) {         //es <= que la fecha de ingreso de la reserva
+                        if (i==0 && (salida.isBefore(reservasHab.get(i).getFechaIngreso()) || //si es la 1er reserva y salida
+                                salida.isEqual(reservasHab.get(i).getFechaIngreso()))) {         //es <= que la fecha de ingreso de la reserva
 
                             if (listaHab.getEstado().compareTo(EstadoHabitacion.FUERA_DE_SERVICIO) != 0) {  //si la hab no está fuera de servicio
                                 System.out.println("\nHabitación: " + listaHab.getNumero() +                                                  //muestro nro de hab y tarifa
@@ -127,14 +130,14 @@ public class Hotel implements Serializable {
                             }
                             encontrada = true;
 
-                        } else if (encontrada == false && i == reservasHab.size() - 1 &&       //si es la última reserva e ingreso es >=
-                                ingreso.isAfter(reservasHab.get(i).getFechaSalida()) ||        //a la fecha de salida de la reserva
-                                ingreso.isEqual(reservasHab.get(i).getFechaSalida())) {
+                        } else if (!encontrada && i == reservasHab.size() - 1 &&       //si es la última reserva e ingreso es >=
+                                (ingreso.isAfter(reservasHab.get(i).getFechaSalida()) ||        //a la fecha de salida de la reserva
+                                ingreso.isEqual(reservasHab.get(i).getFechaSalida()))) {
 
                             if (listaHab.getEstado().compareTo(EstadoHabitacion.FUERA_DE_SERVICIO) != 0) {              //si la hab no está fuera de servicio
                                 System.out.println("\nHabitación: " + listaHab.getNumero() +                            //muestro nro de hab y tarifa
                                         "\nTarifa: " + listaHab.getTarifa() + "\nNoches desde la reserva anterior: " +  //muestro cuantas noches hay desde la última reserva
-                                        +ChronoUnit.DAYS.between(reservasHab.get(i).getFechaSalida(), ingreso) +
+                                        ChronoUnit.DAYS.between(reservasHab.get(i).getFechaSalida(), ingreso) +
                                         "\nNoches hasta la reserva siguiente: sin reservas posteriores");
 
                                 habslibres.add(listaHab.getNumero());
@@ -149,7 +152,7 @@ public class Hotel implements Serializable {
 
                                 System.out.println("\nHabitación: " + listaHab.getNumero() +                                      //muestro nro de hab y tarifa
                                         "\nTarifa: " + listaHab.getTarifa() + "\nNoches desde la reserva anterior: " +            //muestro cuantas noches hay desde la última reserva
-                                        +ChronoUnit.DAYS.between(reservasHab.get(i).getFechaSalida(), ingreso) +                  //y muestro cuantas noches hay hasta la prox reserva
+                                        ChronoUnit.DAYS.between(reservasHab.get(i).getFechaSalida(), ingreso) +                  //y muestro cuantas noches hay hasta la prox reserva
                                         "\nNoches hasta la reserva siguiente: " +                                                 //sirve para ver qué hab conviene reservar
                                         ChronoUnit.DAYS.between(salida, reservasHab.get(i + 1).getFechaIngreso()));
 
@@ -420,7 +423,7 @@ public class Hotel implements Serializable {
             if (res) {
                 nuevaOcupacion(listaReservas.get(listaReservas.size() - 1));  //y se genera una nueva ocupación a partir de la reserva
             } else {
-                System.out.println("no se pudo realizar check in");
+                System.out.println("\nNo se pudo realizar check in");
             }
         }
     }
@@ -661,14 +664,12 @@ public class Hotel implements Serializable {
             }
             i++;
         }
-
-        ocupacion.setCantidadPax(reserva.getNumeroPasajeros());  //cantidad de pasajeros
         System.out.println("Tipo de pensión");
         ocupacion.asignarTipoPension(); //tipo de pensión (desayuno, media pensión o pensión completa)
         ocupacion.agregarPasajerosLista(reserva, this.pasajeros); //agrego pasajero titular
         ocupacion.agregarPasajerosLista(this.pasajeros);         //agrego acompañantes
         ocupacion.setDeposito(reserva.getDeposito());  //monto del depósito
-
+        ocupacion.setCantidadPax(ocupacion.getListaPaxs().size());  //cantidad de pasajeros
         this.listaOcupaciones.add(ocupacion);  //se agrega la nueva ocupación a la lista
         System.out.println("\nOcupación cargada satisfactoriamente");
         System.out.println(ocupacion);  //se muestra
@@ -923,7 +924,7 @@ public class Hotel implements Serializable {
         if (!this.empleados.isEmpty()) {
             int i = 0;
             while (!encontrado && i < empleados.size()) {
-                if (empleados.get(i).getDni() == dni) {
+                if (empleados.get(i).getDni().compareTo(dni)== 0) {
                     empleados.remove(empleados.get(i));
                     System.out.println("Empleado eliminado");
                     encontrado = true;
@@ -979,24 +980,67 @@ public class Hotel implements Serializable {
         }
     }
 
-    public void llamadaNuevoEmpleado(){
-        Empleado empleado=null;
-        empleados.add(empleado.nuevoEmpleado());
+    public void nuevoEmpleado() {
+        Scanner scanner = new Scanner(System.in);
+        String nombre, apellido, telefono, dni;
+        int opcion;
+        System.out.println("Ingrese el nombre:");
+        nombre = scanner.nextLine();
+        System.out.println("Ingrese el apellido:");
+        apellido = scanner.nextLine();
+        System.out.println("Ingrese el dni:");
+        dni = scanner.nextLine();
+        System.out.println("Ingrese el teléfono:");
+        telefono = scanner.nextLine();
+
+        System.out.println("Indique:\n1- Recepcionista\n2- Administrador");
+        opcion = scanner.nextInt();
+        System.out.println("Nuevo empleado: \n");
+        if (opcion == 1) {
+            Recepcionista recepcionista = new Recepcionista(nombre, apellido, telefono, dni);
+            empleados.add(recepcionista);
+            System.out.println(recepcionista);
+        } else {
+            Administrador administrador = new Administrador(nombre, apellido, telefono, dni);
+            empleados.add(administrador);
+            System.out.println(administrador);
+        }
+    }
+
+    public void llamadaModificarEmpleado(Empleado empleado){
+        Scanner scanner=new Scanner(System.in);
+        String dni;
+        boolean encontrado=false;
+        System.out.println("Ingrese el DNI del empleado que desea modificar");
+        dni=scanner.nextLine();
+        if(!this.empleados.isEmpty()){
+            for(Empleado lista : this.empleados){
+                if(lista.getDni().compareTo(dni)==0){
+                    empleado.modificarEmpleado(lista);
+                    encontrado=true;
+                }
+            }
+            if(!encontrado){
+                System.out.println("No se encontró empleado con el DNI " + dni);
+            }
+        }
+
     }
 
     public Empleado verificarUsuarioyContrasenia(String usuario, String clave) {
         Empleado empleado = null;
+        boolean aceptado=false;
         if (!this.empleados.isEmpty()) {
             for (Empleado lista : this.empleados) {
                 if (lista.getUsuario().compareTo(usuario) == 0) {
                     if (lista.getClave().compareTo(clave) == 0) {
                         empleado = lista;
-                    } else {
-                        System.out.println("\nContraseña incorrecta. Intente nuevamente");
+                        aceptado=true;
                     }
-                } else {
-                    System.out.println("\nUsuario incorrecto. Intente nuevamente");
                 }
+            }
+            if(!aceptado){
+                System.out.println("Usuario o contraseña incorrecta. Intente nuevamente");
             }
         }
         return empleado;

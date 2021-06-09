@@ -48,6 +48,7 @@ public class Archivo {
         BufferedReader reader = null;
         List<Reserva> lista=null;
 
+
         try {
             reader = new BufferedReader(new FileReader(archivo));
 
@@ -58,6 +59,7 @@ public class Archivo {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+
         } finally {
             try {
                 if (reader != null) {
