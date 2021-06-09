@@ -118,14 +118,7 @@ public class Main {
         empleados.add(recepcionista2);
         empleados.add(recepcionista3);
 
-        Archivo archivo2 = new Archivo();
 
-        archivo2.writerArchivoRecepcionista("recepcionista.json", recepcionistas);
-        recepcionistas2= archivo2.readerArchivoRecepcionista("recepcionista.json");
-
-        for(Recepcionista r : recepcionistas){
-            System.out.println(r);
-        }
 
         List<String>facturas=new ArrayList<>();
         String factura1= "pp";

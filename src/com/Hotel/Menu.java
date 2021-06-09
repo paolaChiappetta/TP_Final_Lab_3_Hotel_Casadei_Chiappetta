@@ -32,7 +32,7 @@ public class Menu {
     public void opcionesInicioRecepcionista() {
         System.out.println("Ingrese una opción");
         System.out.println("1- Hotel");
-        System.out.println("2- Mis datos");  //modif clave
+        System.out.println("2- Mis datos");
         System.out.println("3- Cerrar sesión");
         System.out.println("Ingrese 0 para salir");
     }
@@ -146,9 +146,7 @@ public class Menu {
         System.out.println("Ingrese 0 para salir");
     }
 
-
-
-    public void inicio (Empleado empleado) {
+    public void inicio () {
         Archivo archivo=new Archivo();
         hotel.setEmpleados(archivo.readerArchivoEmpleado("empleado.json"));
         String usuario, contrasenia;
@@ -165,7 +163,7 @@ public class Menu {
                     usuario = scanner.nextLine();
                     System.out.println("Ingrese su contraseña");
                     contrasenia = scanner.nextLine();
-                    this.setEmpleadoActual(empleado);
+                    this.setEmpleadoActual(hotel.verificarUsuarioyContrasenia(usuario, contrasenia));
                     if(empleadoActual!=null){
                         cargaListas();
                         if (empleadoActual instanceof Recepcionista) {
@@ -203,7 +201,7 @@ public class Menu {
                     menuMisDatos();
                     break;
                 case 3:
-                    inicio(empleadoActual);
+                    inicio();
                     break;
                 default:
                     System.out.println("Opción incorrecta. Ingrese nuevamente");
@@ -216,7 +214,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void menuInicioAdministrador() {
@@ -237,7 +235,7 @@ public class Menu {
                     //backup
                     break;
                 case 4:
-                    inicio(empleadoActual);
+                    inicio();
                     break;
                 default:
                     System.out.println("Opción incorrecta. Ingrese nuevamente");
@@ -251,7 +249,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void menuHotel() {
@@ -298,7 +296,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void menuAdministracionHotelAdministrador(){
@@ -330,7 +328,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void menuAdministracionAdministrador (){
@@ -365,7 +363,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void menuReservas (){
@@ -405,7 +403,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void menuShop (){
@@ -448,7 +446,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void menuListados (){
@@ -503,7 +501,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void menuMisDatos (){
@@ -535,7 +533,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
 
@@ -570,7 +568,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void menuHabitacionesAdministrador (){
@@ -606,7 +604,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void menuShopAdministrador (){
@@ -646,7 +644,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
-        inicio(empleadoActual);
+        inicio();
     }
 
     public void cargaListas (){
