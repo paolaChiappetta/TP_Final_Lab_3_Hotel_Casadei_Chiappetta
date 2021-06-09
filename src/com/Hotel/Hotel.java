@@ -994,6 +994,23 @@ public class Hotel implements Serializable {
         }
     }
 
+    public Empleado verificarUsuarioyContrasenia(String usuario, String clave){
+        Empleado empleado=null;
+        if(!this.empleados.isEmpty()){
+            for(Empleado lista : this.empleados){
+                if(lista.getUsuario().compareTo(usuario)==0){
+                    if(lista.getClave().compareTo(clave)==0){
+                        empleado=lista;
+                    }else{
+                        System.out.println("\nContraseña incorrecta. Intente nuevamente");
+                    }
+                }else{
+                    System.out.println("\nUsuario incorrecto. Intente nuevamente");
+                }
+            }
+        }
+        return empleado;
+    }
 
 
 
