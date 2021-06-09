@@ -6,8 +6,6 @@ public class GeneradorClaveUsuario {
         char[] car = new char[persona.getApellido().length() + 1];
         persona.getNombre().getChars(0, 1, car, 0);
         persona.getApellido().getChars(0, persona.getApellido().length(), car, 1);
-
-
         String usuario = String.valueOf(car);
         return usuario;
     }

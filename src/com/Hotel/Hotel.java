@@ -102,16 +102,16 @@ public class Hotel implements Serializable {
         List<Reserva> reservasHab = new ArrayList<>();
         List<Integer> habslibres = new ArrayList<>();
         if (!listaHabitaciones.isEmpty()) {
-            for (Habitacion listaHab : this.listaHabitaciones) {
-                for (Reserva listaRva : this.listaReservas) {
-                    if (listaHab.getNumero() == listaRva.getNumeroHabitacion()) {
-                        reservasHab.add(listaRva);
+            for (Habitacion listaHab : this.listaHabitaciones) {  //recorro las habitaciones
+                for (Reserva listaRva : this.listaReservas) {  //recorro las reservas
+                    if (listaHab.getNumero() == listaRva.getNumeroHabitacion()) {  //filtro por habitación
+                        reservasHab.add(listaRva);  //se arma lista de reservas por habitación
                     }
                 }
                 if (!reservasHab.isEmpty()) {
-                    Collections.sort(reservasHab);
+                    Collections.sort(reservasHab);  //se ordena la lista
                     boolean encontrada = false;
-                    for (int i = 0; i < reservasHab.size(); i++) {
+                    for (int i = 0; i < reservasHab.size(); i++) {  //a partir de ahí se busca el espacio
 
                         if (i == 0 && salida.isBefore(reservasHab.get(i).getFechaIngreso()) || //si es la 1er reserva y salida
                                 salida.isEqual(reservasHab.get(i).getFechaIngreso())) {         //es <= que la fecha de ingreso de la reserva
@@ -141,7 +141,7 @@ public class Hotel implements Serializable {
                             }
                             encontrada = true;
 
-                        } else if (!encontrada && (ingreso.isAfter(reservasHab.get(i).getFechaSalida()) || //si estoy en una reserva del medio
+                        } else if (!encontrada && (ingreso.isAfter(reservasHab.get(i).getFechaSalida()) ||        //si estoy en una reserva del medio
                                 ingreso.equals(reservasHab.get(i).getFechaSalida())) &&                           //verifico si ingreso es <=a la fecha de salida
                                 (salida.isEqual(reservasHab.get(i + 1).getFechaIngreso()) ||                      //de la reserva y <= a la fecha de ingreso de
                                         salida.isBefore(reservasHab.get(i + 1).getFechaIngreso()))) {             //la proxima reserva
@@ -149,8 +149,8 @@ public class Hotel implements Serializable {
 
                                 System.out.println("\nHabitación: " + listaHab.getNumero() +                                      //muestro nro de hab y tarifa
                                         "\nTarifa: " + listaHab.getTarifa() + "\nNoches desde la reserva anterior: " +            //muestro cuantas noches hay desde la última reserva
-                                        +ChronoUnit.DAYS.between(reservasHab.get(i).getFechaSalida(), ingreso) +  //y muestro cuantas noches hay hasta la prox reserva
-                                        "\nNoches hasta la reserva siguiente: " +                                                                 //sirve para ver qué hab conviene reservar
+                                        +ChronoUnit.DAYS.between(reservasHab.get(i).getFechaSalida(), ingreso) +                  //y muestro cuantas noches hay hasta la prox reserva
+                                        "\nNoches hasta la reserva siguiente: " +                                                 //sirve para ver qué hab conviene reservar
                                         ChronoUnit.DAYS.between(salida, reservasHab.get(i + 1).getFechaIngreso()));
 
                                 habslibres.add(listaHab.getNumero());
@@ -175,6 +175,38 @@ public class Hotel implements Serializable {
 
         return habslibres;
 
+    }
+
+//Busca si una habitación en particular está libre en determinada fecha para modificar las fechas de la reserva
+    public boolean habitacionLibre(LocalDate ingreso, LocalDate salida, int nroHabitacion) {
+        boolean libre = false;
+        List<Reserva> reservas = new ArrayList<>();
+        for (Reserva lista : this.listaReservas) {
+            if (lista.getNumeroHabitacion() == nroHabitacion) {
+                reservas.add(lista);
+            }
+        }
+        Collections.sort(reservas);
+        for (int i = 0; i < reservas.size(); i++) {  //a partir de ahí se busca el espacio
+
+            if (i == 0 && salida.isBefore(reservas.get(i).getFechaIngreso()) || //si es la 1er reserva y salida
+                    salida.isEqual(reservas.get(i).getFechaIngreso())) {         //es <= que la fecha de ingreso de la reserva
+                libre = true;
+
+            } else if (!libre && i == reservas.size() - 1 &&       //si es la última reserva e ingreso es >=
+                    ingreso.isAfter(reservas.get(i).getFechaSalida()) ||        //a la fecha de salida de la reserva
+                    ingreso.isEqual(reservas.get(i).getFechaSalida())) {
+
+                libre = true;
+
+            } else if (!libre && (ingreso.isAfter(reservas.get(i).getFechaSalida()) ||        //si estoy en una reserva del medio
+                    ingreso.equals(reservas.get(i).getFechaSalida())) &&                           //verifico si ingreso es <=a la fecha de salida
+                    (salida.isEqual(reservas.get(i + 1).getFechaIngreso()) ||                      //de la reserva y <= a la fecha de ingreso de
+                            salida.isBefore(reservas.get(i + 1).getFechaIngreso()))) {
+                libre = true;
+            }
+        }
+        return libre;
     }
 
     /*
@@ -258,6 +290,7 @@ public class Hotel implements Serializable {
             return habitaciones;
         }
     */
+
     public Ocupacion buscarOcupacionPorHabitacion(int numeroHab) {
         Ocupacion ocupacion = null;
         if (!this.listaOcupaciones.isEmpty()) {
@@ -309,15 +342,15 @@ public class Hotel implements Serializable {
         System.out.println("Ingrese fecha de salida de la nueva reserva (AAAA-MM-DD)");
         salida = LocalDate.parse(scanner.nextLine());
 
-        List<Integer> libres = this.habitacionesLibres(ingreso, salida);
+        List<Integer> libres = this.habitacionesLibres(ingreso, salida);  //busco las habitaciones libres por las fechas indicadas
         if (libres.isEmpty()) {
             System.out.println("No hay habitaciones disponibles en las fechas indicadas");
         } else {
-            Reserva reserva = new Reserva();
+            Reserva reserva = new Reserva();  //se genera reserva
             System.out.println("\nIndique el número de la habitación elegida");
             nroHab = scanner.nextInt();
             for (Integer lista : libres) {
-                if (lista == nroHab) {
+                if (lista == nroHab) { //verifico que la hab elegida esté en ese listado de hab libres
                     reserva.cargarReserva(reserva, nroHab, ingreso, salida);
                     System.out.println("Reserva cargada satisfactoriamente");
                     System.out.println(reserva);
@@ -383,8 +416,8 @@ public class Hotel implements Serializable {
                 System.out.println("No hay reservas que coincidan con el id indicado");
             }
         } else {
-            Boolean res = nuevaReserva();  //si no tiene reserva, se genera una al momento del ingreso
-            if (res == true) {
+            boolean res = nuevaReserva();  //si no tiene reserva, se genera una al momento del ingreso
+            if (res) {
                 nuevaOcupacion(listaReservas.get(listaReservas.size() - 1));  //y se genera una nueva ocupación a partir de la reserva
             } else {
                 System.out.println("no se pudo realizar check in");
@@ -696,55 +729,32 @@ public class Hotel implements Serializable {
         return habitacion;
     }
 
-
-    // CREAR NUEVA HABITACION, LA CREA EN EL INTERIOR DEL METODO
-
-    public void crearNuevaHabitacion() {
+    public void llamadaNuevaHabitacion() {
         Habitacion habitacion = new Habitacion();
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Nueva habitacion:\n");
-
-        System.out.println("Numero de habitacion:");
-        habitacion.setNumero(scanner.nextInt());
-        System.out.println("Piso:");
-        habitacion.setPiso(scanner.nextInt());
-        System.out.println("Tarifa:");
-        habitacion.indicarTipoHabitacion();
-        System.out.println("Estado de la habitacion:");
-        habitacion.indicarEstadoHabitacion();
-
-        System.out.println("Datos nueva habitacion: ");
-        System.out.println(habitacion);
+        habitacion.nuevaHabitacion(habitacion);
+        this.listaHabitaciones.add(habitacion);
     }
 
-    //CREA UNA HABITACION Y LA DEVUELVE
-
-    public Habitacion crearYdevolverHabitacion() {
-
-        Habitacion habitacion = new Habitacion();
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Nueva habitacion:\n");
-
-        System.out.println("Numero de habitacion:");
-        habitacion.setNumero(scanner.nextInt());
-        System.out.println("Piso:");
-        habitacion.setPiso(scanner.nextInt());
-        System.out.println("Tarifa:");
-        habitacion.indicarTipoHabitacion();
-        System.out.println("Estado de la habitacion:");
-        habitacion.indicarEstadoHabitacion();
-
-
-        System.out.println("Datos nueva habitacion: ");
-        System.out.println(habitacion);
-
-        return habitacion;
+    public void llamadaModificarHabitacion(int nroHabitacion, Empleado empleado) {
+        boolean encontrada = false;
+        if (!this.listaHabitaciones.isEmpty()) {
+            for (Habitacion lista : this.listaHabitaciones) {
+                if (lista.getNumero() == nroHabitacion) {
+                    if(empleado instanceof Recepcionista){
+                        ((Recepcionista) empleado).modificarHabitacion(lista);
+                    }else{
+                        ((Administrador) empleado).modificarHabitacion(lista);
+                    }
+                    encontrada = true;
+                }
+            }
+            if (!encontrada) {
+                System.out.println("No se encontraron coincidencia con el número de habotación indicada");
+            }
+        } else {
+            System.out.println("No hay habitaciones cargadas");
+        }
     }
-
-
-    //MENU MODIFICAR HABITACION
 
     //MUESTRA EL LISTADO DE RESERVAS X HABITACION
 
@@ -752,7 +762,7 @@ public class Hotel implements Serializable {
         if (!this.listaReservas.isEmpty()) {
             for (Reserva reserva : listaReservas) { //busca en la lista de reservas
                 System.out.println("\nReservas de Habitacion numero " + numeroHab + "\n");
-                if (reserva.getNumeroHabitacion() == numeroHab) { //coincidencias en num d ehab
+                if (reserva.getNumeroHabitacion() == numeroHab) { //coincidencias en num de hab
                     System.out.println(reserva);
                 }
             }
@@ -760,7 +770,6 @@ public class Hotel implements Serializable {
             System.out.println("La habitacion numero " + numeroHab + " no tiene reservas");
         }
     }
-
 
     public Reserva proximaOcupacionDeHabitacion(int numeroHab) {
         List<Reserva> listReservaHab = new ArrayList<>();
@@ -782,237 +791,216 @@ public class Hotel implements Serializable {
     }
 
     //FUNCION MODIFICAR DATOS RESERVA
-
     public void menuModificarReserva() {
-
-        System.out.println("1: Nombre");
-        System.out.println("2: Apellido");
-        System.out.println("3: Dni");
-        System.out.println("4: Numero de telefono");
-        System.out.println("5: Numero de pasajeros");
-        System.out.println("6: Fecha de Ingreso");
-        System.out.println("7: Fecha de salida");
-        System.out.println("8: Numero de habitacion");
-        System.out.println("9: Deposito");
-
-        System.out.println("\n0 para finalizar");
-
+        System.out.println("1- Nombre");
+        System.out.println("2- Apellido");
+        System.out.println("3- Dni");
+        System.out.println("4- Numero de telefono");
+        System.out.println("5- Numero de pasajeros");
+        System.out.println("6- Fecha de Ingreso/Salida");
+        System.out.println("7- Numero de habitacion");
+        System.out.println("8- Deposito");
     }
 
-    //////////////////////// METODO MODIFICAR RESERVA TIENE ERROR AL LEER STRINGS 
-
-    public void modificarReserva(Reserva reserva) {
-
-
-        String continuar= "s";
-        int opcion = 0;
+    //////////////////////// METODO MODIFICAR RESERVA TIENE ERROR AL LEER STRINGS
+    public void modificarReserva() {
         Scanner scanner = new Scanner(System.in);
-        do {
-            System.out.println("Indique que datos desea modificar: ");
-
-
-            menuModificarReserva();
-
-            opcion = scanner.nextInt();
-
-            scanner.nextLine();
-            switch (opcion) {
-                case 1:
-                    scanner.nextLine();
-                    System.out.println("Indique el Nombre:");
-                    reserva.setPasajeroNombre(scanner.nextLine());
-                    break;
-                case 2:
-                    System.out.println("Indique el Apellido:");
-                    reserva.setPasajeroApellido(scanner.nextLine());
-                    break;
-                case 3:
-                    System.out.println("Indique el Dni:");
-                    reserva.setPasajeroDni(scanner.nextLine());
-                    break;
-                case 4:
-                    System.out.println("Numero de telefono:");
-                    reserva.setTelefono(scanner.nextLine());
-                    break;
-                case 5:
-                    System.out.println("Numero de pasajeros:");
-                    reserva.setNumeroPasajeros(scanner.nextInt());
-                    break;
-                case 6:
-                    System.out.println("Fecha de ingreso:");
-                    reserva.setFechaIngreso(LocalDate.parse(scanner.next(), DateTimeFormatter.BASIC_ISO_DATE));
-                    break;
-                case 7:
-                    System.out.println("Fecha de salida:");
-                    reserva.setFechaSalida(LocalDate.parse(scanner.next(), DateTimeFormatter.BASIC_ISO_DATE));
-                    break;
-                case 8:
-                    System.out.println("Numero de habitacion:");
-
-                    List<Integer> listHabLibres = habitacionesLibres(reserva.getFechaIngreso(), reserva.getFechaSalida());
-
-                    if (listHabLibres.isEmpty()) {
-                        System.out.println("No hay habitaciones disponibles en las fechas indicadas");
-                    } else {
-                        int habAnterior = reserva.getNumeroHabitacion();  // guarda num de hab original
-                        System.out.println("Indique el numero de habitacion que desea reservar: ");
-                        int numeroHab = scanner.nextInt();
-
-                        reserva.setNumeroHabitacion(numeroHab);
-                    }
-                    break;
-                case 9:
-                    System.out.println("Deposito:");
-                    reserva.setDeposito(scanner.nextDouble());
-                    break;
-
-                default:
-                    System.out.println("Opcion incorrecta, ingrese nuevamente");
-                    break;
+        int idReserva;
+        Reserva reserva = null;
+        System.out.println("Indique el número de reserva que desea modificar");
+        idReserva = scanner.nextInt();
+        if (!listaReservas.isEmpty()) {
+            for (Reserva lista : this.listaReservas) {
+                if (lista.getNumeroReserva() == idReserva) {
+                    reserva = lista;
+                }
             }
+        }
+        if (reserva != null) {
+            String continuar = "s";
+            do {
+                int opcion = 0;
+                System.out.println(reserva);
+                System.out.println("Indique qué dato desea modificar:");
+                menuModificarReserva();
+                opcion = scanner.nextInt();
+                scanner.nextLine();
+                switch (opcion) {
+                    case 1:
+                        System.out.println("Indique el nombre:");
+                        reserva.setPasajeroNombre(scanner.nextLine());
+                        break;
+                    case 2:
+                        System.out.println("Indique el apellido:");
+                        reserva.setPasajeroApellido(scanner.nextLine());
+                        break;
+                    case 3:
+                        System.out.println("Indique el Dni:");
+                        reserva.setPasajeroDni(scanner.nextLine());
+                        break;
+                    case 4:
+                        System.out.println("Numero de telefono:");
+                        reserva.setTelefono(scanner.nextLine());
+                        break;
+                    case 5:
+                        System.out.println("Numero de pasajeros:");
+                        reserva.setNumeroPasajeros(scanner.nextInt());
+                        break;
+                    case 6:
+                        LocalDate ingreso;
+                        LocalDate salida;
+                        System.out.println("Ingrese la nueva fecha de ingreso:");
+                        ingreso = LocalDate.parse(scanner.nextLine());
+                        System.out.println("Ingrese la nueva fecha de salida:");
+                        salida = LocalDate.parse(scanner.nextLine());
+                        if (habitacionLibre(ingreso, salida, reserva.getNumeroHabitacion())) {
+                            reserva.setFechaIngreso(ingreso);
+                            reserva.setFechaSalida(salida);
+                        } else {
+                            System.out.println("La habitación no está disponible en las fechas indicadas");
+                        }
+                        break;
+                    case 7:
+                        System.out.println("Habitaciones disponibles para las fechas de la reserva:");
+                        List<Integer> listaHabLibres = habitacionesLibres(reserva.getFechaIngreso(), reserva.getFechaSalida());
+                        if (listaHabLibres.isEmpty()) {
+                            System.out.println("No hay habitaciones disponibles en las fechas indicadas");
+                        } else {
+                            System.out.println("Indique el número de la nueva habitacion que desea para esta reserva:");
+                            int numeroHab = scanner.nextInt();
+                            for (Integer lista : listaHabLibres) {
+                                if (numeroHab == lista) {
+                                    reserva.setNumeroHabitacion(numeroHab);
+                                }
+                            }
+                        }
+                        break;
+                    case 8:
+                        System.out.println("Depósito:");
+                        reserva.setDeposito(scanner.nextDouble());
+                        break;
+                    default:
+                        System.out.println("Opcion incorrecta, ingrese nuevamente");
+                        break;
+                }
 
-            scanner.nextLine();
-            System.out.println("Desea modificar otro dato? ");
-            continuar= scanner.nextLine();
+                System.out.println(reserva);
+                scanner.nextLine();
+                System.out.println("Desea modificar otro dato? ");
+                continuar = scanner.nextLine();
 
-        } while (continuar.compareTo("s")==0);
+            } while (continuar.equalsIgnoreCase("s"));
+        }
 
-        System.out.println(reserva);
     }
 
     //ELIMINAR RESERVA
 
-    public void eliminarReserva (Long id){
-       if(!listaReservas.isEmpty()){
-           for(int i=0; i < listaReservas.size(); i++){
-               if(listaReservas.get(i).getNumeroReserva()== id){
-                   listaReservas.remove(1);
-                   System.out.println("Reserva eliminada");
-               }else{
-                   System.out.println("no se encontro reserva con id "+ id);
-               }
-           }
-       }
+    public void eliminarReserva(Long id) {
+        boolean encontrada = false;
+        if (!listaReservas.isEmpty()) {
+            int i = 0;
+            while (!encontrada && i < listaReservas.size()) {
+                if (listaReservas.get(i).getNumeroReserva() == id) {
+                    listaReservas.remove(listaReservas.get(i));
+                    System.out.println("Reserva eliminada");
+                    encontrada = true;
+                }
+                i++;
+            }
+            if (!encontrada) {
+                System.out.println("No se encontró reserva con el ID " + id);
+            }
+        }else{
+            System.out.println("El hotel no posee reservas");
+        }
     }
 
     //ELIMINAR EMPLEADO
 
-    public void eliminarEmpleado (String dni){
-        if(!empleados.isEmpty()){
-            for(int i=0; i < empleados.size(); i++){
-                if(empleados.get(i).getDni().compareTo(dni) == 0){
-                    empleados.remove(1);
+    public void eliminarEmpleado(String dni) {
+        boolean encontrado = false;
+        if (!this.empleados.isEmpty()) {
+            int i = 0;
+            while (!encontrado && i < empleados.size()) {
+                if (empleados.get(i).getDni() == dni) {
+                    empleados.remove(empleados.get(i));
                     System.out.println("Empleado eliminado");
-                }else{
-                    System.out.println("no se encontro empleado con dni "+ dni);
+                    encontrado = true;
                 }
+                i++;
             }
+            if (!encontrado) {
+                System.out.println("No se encontró empleado con el DNI " + dni);
+            }
+        }else{
+            System.out.println("El hotel no posee empleados cargados");
         }
+    }
+
+    public boolean verificarReservasHabitacion (int numero){
+        boolean tieneReservas = false;
+        if(!this.listaReservas.isEmpty()){
+            int i=0;
+            while (!tieneReservas && i<this.listaReservas.size()){
+                if(listaReservas.get(i).getNumeroHabitacion()==numero){
+                    tieneReservas=true;
+                }
+                i++;
+            }
+
+        }
+        return tieneReservas;
     }
 
     //ELIMINAR HABITACION
-
-    public void eliminarHabitacion (int numero){
-        if(!listaHabitaciones.isEmpty()){
-            for(int i=0; i < listaHabitaciones.size(); i++){
-                if(listaHabitaciones.get(i).getNumero() == numero){
-                    listaHabitaciones.remove(1);
-                    System.out.println("Habitacion eliminada");
-                }else{
-                    System.out.println("no se encontro habitacion numero "+ numero);
+    public void eliminarHabitacion(int numero) {
+        boolean encontrada = false;
+        if(!verificarReservasHabitacion(numero)){  //verifico si la habitación tiene reservas, si tiene, no permite eliminar
+            if (!this.listaHabitaciones.isEmpty()) {
+                int i = 0;
+                while (!encontrada && i < listaHabitaciones.size()) {
+                    if (listaHabitaciones.get(i).getNumero() == numero) {
+                        listaHabitaciones.remove(listaHabitaciones.get(i));
+                        System.out.println("Habitación eliminada");
+                        encontrada = true;
+                    }
+                    i++;
                 }
+                if (!encontrada) {
+                    System.out.println("No se encontró la habitación indicada");
+                }
+            }else{
+                System.out.println("El hotel no posee habitaciones cargadas");
             }
+        }else{
+            System.out.println("La habitación indicada tiene reservas asignadas, no se puede eliminar.");
+            System.out.println("\nReasigne las reservas e intente nuevamente");
         }
     }
 
-
-    public void generarNuevoEmpleado() {
-        Scanner scanner = new Scanner(System.in);
-        String nombre, apellido, telefono, dni;
-        int opcion;
-
-        System.out.println("Nombre:");
-        nombre = scanner.nextLine();
-        System.out.println("Apellio:");
-        apellido = scanner.nextLine();
-        System.out.println("Dni:");
-        dni = scanner.nextLine();
-        System.out.println("Telefono:");
-        telefono = scanner.nextLine();
-
-        System.out.println("Indique:  1= Recepcionista   2= Administrador");
-        opcion = scanner.nextInt();
-
-        if (opcion == 1) {
-
-            Recepcionista recepcionista = new Recepcionista(nombre, apellido, telefono, dni);
-
-            empleados.add(recepcionista);
-        } else {
-
-            Administrador administrador = new Administrador(nombre, apellido, telefono, dni);
-
-            empleados.add(administrador);
-
-        }
-
-    }
-
-
-
-
-    public Empleado generarYdevolverNuevoEmpleado() {
-        Scanner scanner = new Scanner(System.in);
-        String nombre, apellido, telefono, dni;
-        int opcion;
-
-        System.out.println("Nombre:");
-        nombre = scanner.nextLine();
-        System.out.println("Apellio:");
-        apellido = scanner.nextLine();
-        System.out.println("Dni:");
-        dni = scanner.nextLine();
-        System.out.println("Telefono:");
-        telefono = scanner.nextLine();
-
-        System.out.println("Indique:  1= Recepcionista   2= Administrador");
-        opcion = scanner.nextInt();
-
-        if (opcion == 1) {
-
-            Recepcionista recepcionista = new Recepcionista(nombre, apellido, telefono, dni);
-
-            empleados.add(recepcionista);
-            return recepcionista;
-        } else {
-
-            Administrador administrador = new Administrador(nombre, apellido, telefono, dni);
-
-            empleados.add(administrador);
-
-            return administrador;
-        }
-    }
-
-    public Empleado verificarUsuarioyContrasenia(String usuario, String clave){
+    public void llamadaNuevoEmpleado(){
         Empleado empleado=null;
-        if(!this.empleados.isEmpty()){
-            for(Empleado lista : this.empleados){
-                if(lista.getUsuario().compareTo(usuario)==0){
-                    if(lista.getClave().compareTo(clave)==0){
-                        empleado=lista;
-                    }else{
+        empleados.add(empleado.nuevoEmpleado());
+    }
+
+    public Empleado verificarUsuarioyContrasenia(String usuario, String clave) {
+        Empleado empleado = null;
+        if (!this.empleados.isEmpty()) {
+            for (Empleado lista : this.empleados) {
+                if (lista.getUsuario().compareTo(usuario) == 0) {
+                    if (lista.getClave().compareTo(clave) == 0) {
+                        empleado = lista;
+                    } else {
                         System.out.println("\nContraseña incorrecta. Intente nuevamente");
                     }
-                }else{
+                } else {
                     System.out.println("\nUsuario incorrecto. Intente nuevamente");
                 }
             }
         }
         return empleado;
     }
-
-
 
 
 }

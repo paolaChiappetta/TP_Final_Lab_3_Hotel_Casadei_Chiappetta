@@ -219,7 +219,7 @@ for(HabPrueba h : habPrueba2){
         System.out.println("Reserva: ");
         System.out.println(reserva);
 
-        hotel.modificarReserva(reserva);
+        hotel.modificarReserva();
 
   /*      Habitacion habitacion= new Habitacion();
         habitacion= hotel.crearYdevolverHabitacion();

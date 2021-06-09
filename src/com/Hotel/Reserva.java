@@ -122,8 +122,6 @@ public class Reserva implements Comparable<Reserva> {
         this.telefono = telefono;
     }
 
-
-
     public void cargarReserva(Reserva reserva, int numeroHabitacion, LocalDate ingreso, LocalDate salida) {
         Scanner scanner = new Scanner(System.in);
         reserva.setNumeroHabitacion(numeroHabitacion);

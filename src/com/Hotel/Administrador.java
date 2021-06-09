@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class Administrador extends Empleado implements InterfazAccion, Serializable {
+public class Administrador extends Empleado implements Serializable {
 
     //constructor vacío
     public Administrador() {
@@ -21,107 +21,51 @@ public class Administrador extends Empleado implements InterfazAccion, Serializa
         super(nombre, apellido, numerotel, dni, usuario, clave);
     }
 
-    ///Override de la interfazAccion
-
-
-@Override
     public void menuModificarHabitacion() {
 
-        System.out.println("1: Numero habitacion");
-        System.out.println("2: Piso");
-        System.out.println("3: Tipo de Habitacion- Tarifa");
-        System.out.println("4: Estado de habitacion");
-
-        System.out.println("\n0 para finalizar");
-
+        System.out.println("1- Número habitación");
+        System.out.println("2- Piso");
+        System.out.println("3- Tipo de Habitación - Tarifa");
+        System.out.println("4- Estado de habitación");
     }
 
-    //MODIFICAR UNA HABITACION, la recibe por parametro
-    @Override
+//MODIFICAR UNA HABITACION, la recibe por parametro
+
     public void modificarHabitacion(Habitacion habitacion) {
-
+        String continuar = "s";
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Indique que datos desea modificar: ");
         int opcion = 0;
 
-
         do {
+            System.out.println("Indique la opción que desea modificar: ");
             menuModificarHabitacion();
             opcion = scanner.nextInt();
+            scanner.nextLine();
             switch (opcion) {
                 case 1:
-                    System.out.println("Numero:");
+                    System.out.println("Ingrese el nuevo número:");
                     habitacion.setNumero(scanner.nextInt());
                     break;
                 case 2:
-                    System.out.println("Piso:");
+                    System.out.println("Ingrese el piso:");
                     habitacion.setPiso(scanner.nextInt());
                     break;
                 case 3:
-                    System.out.println("Tarifa:");
                     habitacion.indicarTipoHabitacion();
                     break;
                 case 4:
-                    System.out.println("Estado:");
+                    System.out.println("Ingrese el estado:");
                     habitacion.indicarEstadoHabitacion();
                     break;
-
                 default:
-                    System.out.println("Opcion incorrecta, ingrese nuevamente");
+                    System.out.println("Opción incorrecta. Ingrese nuevamente");
                     break;
             }
-        } while (opcion != 0);
-    }
+            scanner.nextLine();
+            System.out.println("Desea modificar otro dato? s/n");
+            continuar=scanner.nextLine();
 
-
-
-
-    public void menuModificarEmpleado() {
-        System.out.println("1: Nombre");
-        System.out.println("2: Apellido");
-        System.out.println("3: Dni");
-        System.out.println("4: Telefono");
-
-
-        System.out.println("\n0 para finalizar");
-    }
-
-
-    public void modificarEmpleado(Empleado empleado) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Indique que datos desea modificar: ");
-        int opcion = 0;
-
-
-        do {
-            menuModificarEmpleado();
-            opcion = scanner.nextInt();
-            switch (opcion) {
-                case 1:
-                    System.out.println("Nombre:");
-                    empleado.setNombre(scanner.nextLine());
-                    break;
-                case 2:
-                    System.out.println("Apellido:");
-                    empleado.setApellido(scanner.nextLine());
-                    break;
-                case 3:
-                    System.out.println("Dni:");
-                    empleado.setDni(scanner.nextLine());
-                    break;
-                case 4:
-                    System.out.println("Telefono:");
-                    empleado.setNumeroTel(scanner.nextLine());
-                    break;
-
-
-                default:
-                    System.out.println("Opcion incorrecta, ingrese nuevamente");
-                    break;
-            }
-        } while (opcion != 0);
+        } while (continuar.equalsIgnoreCase("s"));
     }
 
 }

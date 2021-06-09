@@ -10,13 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.json.JSONException;
-import org.json.simple.JSONObject;
-
-
 
 public class Habitacion implements Serializable {
-
     private Integer numero;
     private Integer piso;
     private EstadoHabitacion estado;
@@ -78,47 +73,49 @@ public class Habitacion implements Serializable {
     }
 
 
-    ///agrego funciones para asignar tipo y etsaod de habitaciones
+    public Habitacion nuevaHabitacion(Habitacion habitacion) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese el número de la habitación:");
+        habitacion.setNumero(scanner.nextInt());
+        System.out.println("Ingrese el piso:");
+        habitacion.setPiso(scanner.nextInt());
+        System.out.println("Ingrese el tipo de habitación:");
+        habitacion.indicarTipoHabitacion();
+        System.out.println("Ingrese el estado de la habitación:");
+        habitacion.indicarEstadoHabitacion();
+        System.out.println("Nueva habitación:\n");
+        System.out.println(habitacion);
 
-
-    ///agrego funciones para asignar tipo y etsaod de habitaciones
-
-    Scanner scanner = new Scanner(System.in);
-
-
-    public void menuTipoHabitacion() {
-
-        System.out.println("1: Single standard");
-        System.out.println("2: Single superior");
-        System.out.println("3: Doble standard");
-        System.out.println("4: Doble superior");
-        System.out.println("5: Triple standard");
-        System.out.println("6: Departamento 4 pasajeros");
-        System.out.println("7: Departamento 6 pasajeros");
-        System.out.println("8: Suite");
-
+        return habitacion;
     }
 
+    public void menuTipoHabitacion() {
+        System.out.println("1- Single standard");
+        System.out.println("2- Single superior");
+        System.out.println("3- Doble standard");
+        System.out.println("4- Doble superior");
+        System.out.println("5- Triple standard");
+        System.out.println("6- Departamento 4 pasajeros");
+        System.out.println("7- Departamento 6 pasajeros");
+        System.out.println("8- Suite");
+    }
 
     public void indicarTipoHabitacion() {
-        System.out.println("Indique tipo de habitacion: ");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Indique el tipo de habitacion");
         int opcion = 0;
-
         menuTipoHabitacion();
         opcion = scanner.nextInt();
-
         switch (opcion) {
             case 1:
                 this.setTarifa(Tarifa.SINGLE_STANDAR);
                 break;
-
             case 2:
                 this.setTarifa(Tarifa.SINGLE_SUPERIOR);
                 break;
             case 3:
                 this.setTarifa(Tarifa.DOBLE_STANDAR);
                 break;
-
             case 4:
                 this.setTarifa(Tarifa.DOBLE_SUPERIOR);
                 break;
@@ -134,38 +131,29 @@ public class Habitacion implements Serializable {
             case 8:
                 this.setTarifa(Tarifa.SUITE);
                 break;
-
             default:
                 this.setTarifa(Tarifa.DOBLE_STANDAR);
                 break;
-
-
         }
     }
+
     public void menuEstadoHabitacion() {
 
-        System.out.println("1: Disponible");
-        System.out.println("2: Ocupada");
-        System.out.println("3: Fuera de servicio");
-
+        System.out.println("1- Disponible");
+        System.out.println("2- Ocupada");
+        System.out.println("3- Fuera de servicio");
     }
 
-
-
-
     public void indicarEstadoHabitacion() {
-
-
-        System.out.println("Indique estado de habitacion: ");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Indique el estado de la habitación");
         int opcion = 0;
-
         menuEstadoHabitacion();
         opcion = scanner.nextInt();
         switch (opcion) {
             case 1:
                 this.setEstado(EstadoHabitacion.DISPONIBLE);
                 break;
-
             case 2:
                 this.setEstado(EstadoHabitacion.OCUPADA);
                 break;
@@ -174,96 +162,12 @@ public class Habitacion implements Serializable {
                 break;
             default:
                 this.setEstado(EstadoHabitacion.DISPONIBLE);
-
                 break;
-
         }
-
     }
 
 
 
-
-/*
-    public JSONObject crearJson (){
-        JSONObject habitacion = new JSONObject();
-try {
-    habitacion.put("Numero", this.getNumero());
-    habitacion.put("Piso", this.getPiso());
-    habitacion.put("Estado", this.getEstado());
-    habitacion.put("Tarifa", this.getTarifa());
-    habitacion.put("Fecha", this.fechaProximaOcupacion);
-}catch(Exception e){
-            e.printStackTrace();
-        }
-
-        return habitacion;
-    }
-
-
-    public void writerArchivoHab(String archivo, JSONObject jsonHabitacion) {
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
-                .create();
-
-        BufferedWriter writer = null;
-
-        try {
-            writer = new BufferedWriter(new FileWriter(archivo));
-
-            gson.toJson(jsonHabitacion);
-
-        } catch (
-                IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }
-
-    public Habitacion readerArchivoHab(String archivo) {
-
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter().nullSafe())
-                .create();
-
-        BufferedReader reader = null;
-        Habitacion habitacion = null;
-
-
-        try {
-            reader = new BufferedReader(new FileReader(archivo));
-
-
-            habitacion = gson.fromJson(reader, Habitacion.class);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return habitacion;
-    }*/
 
 
     @Override

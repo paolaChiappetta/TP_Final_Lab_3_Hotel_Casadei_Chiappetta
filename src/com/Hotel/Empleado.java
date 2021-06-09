@@ -30,17 +30,7 @@ public class Empleado extends Persona implements Serializable {
         this.clave = clave;
     }
 
-    //genero usuario concatenando primeras letra del nombre + el apellido, se mantienen las mayusculas
-
-    public void generarUsuarioyClave() {
-        GeneradorClaveUsuario claveUsuario= new GeneradorClaveUsuario();
-        String usuarioNuevo= claveUsuario.crearStringUsuario(this);
-        this.usuario = usuarioNuevo;
-        String claveNueva = claveUsuario.crarContrasenia();
-        this.clave=claveNueva;
-    }
-
-    //getters y setters
+   //getters y setters
 
     public String getClave() {     return clave;  }
 
@@ -50,6 +40,38 @@ public class Empleado extends Persona implements Serializable {
 
     public String getUsuario() {   return usuario; }
 
+    //genero usuario concatenando primeras letra del nombre + el apellido, se mantienen las mayusculas
+    public void generarUsuarioyClave() {
+        GeneradorClaveUsuario claveUsuario= new GeneradorClaveUsuario();
+        String usuarioNuevo= claveUsuario.crearStringUsuario(this);
+        this.usuario = usuarioNuevo;
+        String claveNueva = claveUsuario.crarContrasenia();
+        this.clave=claveNueva;
+    }
+
+    public Empleado nuevoEmpleado() {
+        Scanner scanner = new Scanner(System.in);
+        String nombre, apellido, telefono, dni;
+        int opcion;
+        System.out.println("Ingrese el nombre:");
+        nombre = scanner.nextLine();
+        System.out.println("Ingrese el apellido:");
+        apellido = scanner.nextLine();
+        System.out.println("Ingrese el dni:");
+        dni = scanner.nextLine();
+        System.out.println("Ingrese el teléfono:");
+        telefono = scanner.nextLine();
+
+        System.out.println("Indique:\n1- Recepcionista\n2- Administrador");
+        opcion = scanner.nextInt();
+        if (opcion == 1) {
+            Recepcionista recepcionista = new Recepcionista(nombre, apellido, telefono, dni);
+            return recepcionista;
+        } else {
+            Administrador administrador = new Administrador(nombre, apellido, telefono, dni);
+            return administrador;
+        }
+    }
 
     /// para modificar clave comparo si coincide el dato anterior con el actual,
     // en ese caso se modifica
@@ -68,6 +90,50 @@ public class Empleado extends Persona implements Serializable {
         } else {
             System.out.println("Su contraseña actual es incorrecta");
         }
+    }
+
+    public void menuModificarEmpleado() {
+        System.out.println("1- Nombre");
+        System.out.println("2- Apellido");
+        System.out.println("3- Dni");
+        System.out.println("4- Telefono");
+    }
+
+    public void modificarEmpleado(Empleado empleado){
+        Scanner scanner = new Scanner(System.in);
+        String continuar = "s";
+
+        int opcion = 0;
+        do {
+            System.out.println("Indique el dato que desea modificar");
+            menuModificarEmpleado();
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    System.out.println("Nombre:");
+                    empleado.setNombre(scanner.nextLine());
+                    break;
+                case 2:
+                    System.out.println("Apellido:");
+                    empleado.setApellido(scanner.nextLine());
+                    break;
+                case 3:
+                    System.out.println("Dni:");
+                    empleado.setDni(scanner.nextLine());
+                    break;
+                case 4:
+                    System.out.println("Telefono:");
+                    empleado.setNumeroTel(scanner.nextLine());
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta, ingrese nuevamente");
+                    break;
+            }
+            scanner.nextLine();
+            System.out.println("Desea modificar otro dato?");
+            continuar=scanner.nextLine();
+
+        } while (continuar.equalsIgnoreCase("s"));
     }
 
 }

@@ -1,15 +1,9 @@
 package com.Hotel;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import org.json.simple.JSONObject;
-
 import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class Recepcionista extends Empleado implements InterfazAccion, Serializable {
+public class Recepcionista extends Empleado implements Serializable, InterfazAccion {
 
     //constructor vacío
     public Recepcionista() {
@@ -31,13 +25,8 @@ public class Recepcionista extends Empleado implements InterfazAccion, Serializa
 
     @Override
     public void menuModificarHabitacion() {
-
-        System.out.println("1: Estado");
-
-        System.out.println("0 para Finalizar");
-
+        System.out.println("1- Estado");
     }
-
 
     @Override
     public void modificarHabitacion(Habitacion habitacion) {
