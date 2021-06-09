@@ -26,6 +26,7 @@ public class Hotel implements Serializable {
         this.empleados = new ArrayList<>();
         this.pasajeros = new ArrayList<>();
         this.shop = new Shop();
+        this.facturasEmitidas=new ArrayList<>();
     }
 
     public Hotel(List<Habitacion> listaHabitaciones, List<Reserva> listaReservas,
@@ -181,33 +182,41 @@ public class Hotel implements Serializable {
     }
 
 //Busca si una habitación en particular está libre en determinada fecha para modificar las fechas de la reserva
-    public boolean habitacionLibre(LocalDate ingreso, LocalDate salida, int nroHabitacion) {
+    public boolean habitacionLibre(LocalDate ingreso, LocalDate salida, int nroHabitacion, long idReserva) {
         boolean libre = false;
         List<Reserva> reservas = new ArrayList<>();
         for (Reserva lista : this.listaReservas) {
             if (lista.getNumeroHabitacion() == nroHabitacion) {
-                reservas.add(lista);
+                if(lista.getNumeroReserva()!=idReserva){
+                    reservas.add(lista);
+                }
+
             }
         }
         Collections.sort(reservas);
-        for (int i = 0; i < reservas.size(); i++) {  //a partir de ahí se busca el espacio
+        if(!reservas.isEmpty()){
+            for (int i = 0; i < reservas.size(); i++) {  //a partir de ahí se busca el espacio
 
-            if (i == 0 && salida.isBefore(reservas.get(i).getFechaIngreso()) || //si es la 1er reserva y salida
-                    salida.isEqual(reservas.get(i).getFechaIngreso())) {         //es <= que la fecha de ingreso de la reserva
-                libre = true;
+                if (i == 0 && salida.isBefore(reservas.get(i).getFechaIngreso()) || //si es la 1er reserva y salida
+                        salida.isEqual(reservas.get(i).getFechaIngreso())) {         //es <= que la fecha de ingreso de la reserva
+                    libre = true;
 
-            } else if (!libre && i == reservas.size() - 1 &&       //si es la última reserva e ingreso es >=
-                    ingreso.isAfter(reservas.get(i).getFechaSalida()) ||        //a la fecha de salida de la reserva
-                    ingreso.isEqual(reservas.get(i).getFechaSalida())) {
+                } else if (!libre && i == reservas.size() - 1 &&       //si es la última reserva e ingreso es >=
+                        ingreso.isAfter(reservas.get(i).getFechaSalida()) ||        //a la fecha de salida de la reserva
+                        ingreso.isEqual(reservas.get(i).getFechaSalida())) {
 
-                libre = true;
+                    libre = true;
 
-            } else if (!libre && (ingreso.isAfter(reservas.get(i).getFechaSalida()) ||        //si estoy en una reserva del medio
-                    ingreso.equals(reservas.get(i).getFechaSalida())) &&                           //verifico si ingreso es <=a la fecha de salida
-                    (salida.isEqual(reservas.get(i + 1).getFechaIngreso()) ||                      //de la reserva y <= a la fecha de ingreso de
-                            salida.isBefore(reservas.get(i + 1).getFechaIngreso()))) {
-                libre = true;
-            }
+                } else if (!libre && (ingreso.isAfter(reservas.get(i).getFechaSalida()) ||        //si estoy en una reserva del medio
+                        ingreso.equals(reservas.get(i).getFechaSalida())) &&                           //verifico si ingreso es <=a la fecha de salida
+                        (salida.isEqual(reservas.get(i + 1).getFechaIngreso()) ||                      //de la reserva y <= a la fecha de ingreso de
+                                salida.isBefore(reservas.get(i + 1).getFechaIngreso()))) {
+                    libre = true;
+                }
+        }
+
+        }else{
+            libre=true;
         }
         return libre;
     }
@@ -440,12 +449,12 @@ public class Hotel implements Serializable {
 
                 if (this.listaOcupaciones.get(i).getNroHabitacion() == nroHabitacion) { //cuando la encuentra
                     Factura nuevaFactura = new Factura();                                    //genera nueva factura
-                    String factura;
                     nuevaFactura.setOcupacion(this.listaOcupaciones.get(i));                 //le paso la ocupacion a la factura
                     int tipoFactura = 0;
                     System.out.println("\nQué tipo de factura desea emitir?");               //solicito el tipo de factura a emitir
                     System.out.println("\n1- Factura Tipo A\n2- Factura Tipo B\n3- Factura Tipo C");
                     tipoFactura = scanner.nextInt();
+                    scanner.nextLine();
                     if (tipoFactura == 1) {                                                      //le paso el tipo a la factura
                         nuevaFactura.setTipoFactura(TipoFactura.FACTURA_A);
                     } else if (tipoFactura == 2) {
@@ -454,8 +463,8 @@ public class Hotel implements Serializable {
                         nuevaFactura.setTipoFactura(TipoFactura.FACTURA_C);
                     }
                     System.out.println(nuevaFactura);                                      //muestro la factura
-                    facturasEmitidas.add(factura = nuevaFactura.toString());                 //la guardo como string en el listado de facturas del hotel
-                    this.listaOcupaciones.remove(this.listaOcupaciones.get(i));            //elimino la ocupación de la lista
+                    facturasEmitidas.add(nuevaFactura.toString());                 //la guardo como string en el listado de facturas del hotel
+                               //elimino la ocupación de la lista
 
                     if (!this.listaReservas.isEmpty()) {
                         int j = 0;
@@ -472,6 +481,7 @@ public class Hotel implements Serializable {
                             j++;
                         }
                     }
+                    this.listaOcupaciones.remove(this.listaOcupaciones.get(i));
                     ocupacionEncontrada = true;
                 }
                 i++;
@@ -854,7 +864,7 @@ public class Hotel implements Serializable {
                         ingreso = LocalDate.parse(scanner.nextLine());
                         System.out.println("Ingrese la nueva fecha de salida:");
                         salida = LocalDate.parse(scanner.nextLine());
-                        if (habitacionLibre(ingreso, salida, reserva.getNumeroHabitacion())) {
+                        if (habitacionLibre(ingreso, salida, reserva.getNumeroHabitacion(), reserva.getNumeroReserva())){
                             reserva.setFechaIngreso(ingreso);
                             reserva.setFechaSalida(salida);
                         } else {
