@@ -215,13 +215,13 @@ for(HabPrueba h : habPrueba2){
     System.out.println(h);}*/
 
         Archivo archivo99 = new Archivo();
-        List<Shop>shop1=new ArrayList<>();
-        List<Shop>shop2=new ArrayList<>();
-        shop1.add(shop);
-        archivo99.writerArchivoShop("shop.json", shop1);
+        Shop shop2=null;
+        archivo99.writerArchivoShop("shop.json", shop);
         shop2=archivo99.readerArchivoShop("shop.json");
-        for(Shop h : shop2){
-            System.out.println(h);}
+
+            System.out.println(shop2);
+
+
 }
 
 

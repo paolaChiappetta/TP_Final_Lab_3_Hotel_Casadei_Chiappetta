@@ -148,7 +148,9 @@ public class Menu {
 
 
 
-    public void inicio(Empleado empleado) {
+    public void inicio (Empleado empleado) {
+        Archivo archivo=new Archivo();
+        hotel.setEmpleados(archivo.readerArchivoEmpleado("empleado.json"));
         String usuario, contrasenia;
         do {
             ingreso();
@@ -164,10 +166,13 @@ public class Menu {
                     System.out.println("Ingrese su contraseña");
                     contrasenia = scanner.nextLine();
                     this.setEmpleadoActual(empleado);
-                    if (empleadoActual instanceof Recepcionista) {
-                        menuInicioRecepcionista();
-                    } else {
-                        menuInicioAdministrador();
+                    if(empleadoActual!=null){
+                        cargaListas();
+                        if (empleadoActual instanceof Recepcionista) {
+                            menuInicioRecepcionista();
+                        } else {
+                            menuInicioAdministrador();
+                        }
                     }
                     break;
                 default:
@@ -577,12 +582,14 @@ public class Menu {
                     System.exit(0);
                     break;
                 case 1:
-                    //nuevo hab
+                    hotel.crearNuevaHabitacion();
                     break;
                 case 2:
-                    //modif hab
+                    System.out.println("\nIngrese el número de habitación que desea modificar");
+                    //hotel.modificarHabitacion(scanner.nextInt());
                     break;
                 case 3:
+                    System.out.println("\nIngrese el número de habitación que desea eliminar");
                     //eliminar hab
                     break;
                 case 4:
@@ -640,5 +647,16 @@ public class Menu {
         } while (continuar.equalsIgnoreCase("s"));
 
         inicio(empleadoActual);
+    }
+
+    public void cargaListas (){
+        Archivo archivo = new Archivo();
+        hotel.setListaHabitaciones(archivo.readerArchivoHabitaciones("habitacion.json"));
+        hotel.setListaReservas(archivo.readerArchivoReserva("reserva.json"));
+        hotel.setListaOcupaciones(archivo.readerArchivoOcupaciones("ocupacion.json"));
+        hotel.setPasajeros(archivo.readerArchivoPasajeros("pasajero.json"));
+        hotel.setFacturasEmitidas(archivo.readerArchivoFacturas("factura.json"));
+        hotel.setShop(archivo.readerArchivoShop("shop.json"));
+
     }
 }

@@ -336,7 +336,61 @@ public class Archivo {
         return lista;
     }
 
-    public void writerArchivoShop(String archivo, List<Shop> lista) {
+    public void writerArchivoShop(String archivo, Shop shop) {
+        BufferedWriter writer = null;
+
+        try {
+            writer = new BufferedWriter(new FileWriter(archivo));
+
+            gson.toJson(shop, shop.getClass(), writer);
+
+
+
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public Shop readerArchivoShop(String archivo) {
+        BufferedReader reader = null;
+        Shop shop=null;
+
+        try {
+            reader = new BufferedReader(new FileReader(archivo));
+
+
+            shop = gson.fromJson(reader, Shop.class);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return shop;
+    }
+
+    public void writerArchivoFacturas(String archivo, List<String> lista) {
         BufferedWriter writer = null;
 
         try {
@@ -362,15 +416,15 @@ public class Archivo {
 
     }
 
-    public List<Shop> readerArchivoShop(String archivo) {
+    public List<String> readerArchivoFacturas(String archivo) {
         BufferedReader reader = null;
-        List<Shop>lista=null;
+        List<String>lista=null;
 
         try {
             reader = new BufferedReader(new FileReader(archivo));
 
 
-            lista = gson.fromJson(reader, (new TypeToken<List<Shop>>() {}.getType()));
+            lista = gson.fromJson(reader, (new TypeToken<List<String>>() {}.getType()));
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -388,7 +442,6 @@ public class Archivo {
         }
         return lista;
     }
-
 
 
 
