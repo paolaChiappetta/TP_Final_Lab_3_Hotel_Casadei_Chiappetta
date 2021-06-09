@@ -66,5 +66,4 @@ public class Recepcionista extends Empleado implements InterfazAccion, Serializa
 
     }
 
-
 }

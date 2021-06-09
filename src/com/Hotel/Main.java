@@ -213,14 +213,31 @@ public class Main {
         habPrueba2=archivo8.readerArchivoHabPrueba("habnueva.json");
 for(HabPrueba h : habPrueba2){
     System.out.println(h);}*/
-
+/*
         Archivo archivo99 = new Archivo();
         Shop shop2=null;
         archivo99.writerArchivoShop("shop.json", shop);
         shop2=archivo99.readerArchivoShop("shop.json");
 
             System.out.println(shop2);
+*/
+        Hotel hotel= new Hotel();
 
+        System.out.println("Reserva: ");
+        System.out.println(reserva);
+
+        hotel.modificarReserva(reserva);
+
+  /*      Habitacion habitacion= new Habitacion();
+        habitacion= hotel.crearYdevolverHabitacion();
+        System.out.println(habitacion);
+        hotel.modificarHabitacion(habitacion);
+        System.out.println(habitacion);
+*/
+/*
+        Empleado empleado= hotel.generarYdevolverNuevoEmpleado();
+        System.out.println(empleado);
+*/
 
 }
 
