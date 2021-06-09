@@ -157,6 +157,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion) {
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -198,6 +199,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -230,6 +232,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -266,6 +269,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -315,6 +319,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -347,6 +352,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -382,6 +388,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -423,6 +430,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -466,6 +474,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -522,6 +531,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -561,6 +571,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -596,6 +607,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -635,6 +647,7 @@ public class Menu {
             scanner.nextLine();
             switch (opcion){
                 case 0:
+                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -674,8 +687,18 @@ public class Menu {
         hotel.setListaReservas(archivo.readerArchivoReserva("reservas.json"));
         hotel.setListaOcupaciones(archivo.readerArchivoOcupaciones("ocupacion.json"));
         hotel.setPasajeros(archivo.readerArchivoPasajeros("pasajero.json"));
-        //hotel.setFacturasEmitidas(archivo.readerArchivoFacturas("factura.json"));
+        hotel.setFacturasEmitidas(archivo.readerArchivoFacturas("factura.json"));
         hotel.setShop(archivo.readerArchivoShop("shop.json"));
 
     }
+    public void guardarListas(){
+        Archivo archivo=new Archivo();
+        archivo.writerArchivoHabitaciones("habitacion.json", hotel.getListaHabitaciones());
+        archivo.writerArchivoReserva("reservas.json", hotel.getListaReservas());
+        archivo.writerArchivoOcupaciones("ocupacion.json", hotel.getListaOcupaciones());
+        archivo.writerArchivoPasajeros("pasajero.json", hotel.getPasajeros());
+        archivo.writerArchivoFacturas("factura.json", hotel.getFacturasEmitidas());
+        archivo.writerArchivoShop("shop.json", hotel.getShop());
+    }
+
 }

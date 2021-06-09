@@ -3,6 +3,7 @@ package com.Hotel;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -341,16 +342,28 @@ public class Hotel implements Serializable {
 
     public boolean nuevaReserva() {
         Scanner scanner = new Scanner(System.in);
-        LocalDate ingreso;
-        LocalDate salida;
+        LocalDate ingreso = null;
+        LocalDate salida=null;
         int nroHab;
         String continuar = "s";
         boolean habLibre = false;
         boolean reservaCargada = false;
 
+        do{
+            try{
+                System.out.println("Ingrese fecha de ingreso de la nueva reserva (AAAA-MM-DD)");
+                ingreso = LocalDate.parse(scanner.nextLine());
+            }catch (DateTimeParseException e){
+                System.out.println("Ingrese la fecha nuevamente en el formato indicado");
+               e.printStackTrace();
+               ingreso=null;
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
 
-        System.out.println("Ingrese fecha de ingreso de la nueva reserva (AAAA-MM-DD)");
-        ingreso = LocalDate.parse(scanner.nextLine());
+            }
+        }while (ingreso==null);
+
         System.out.println("Ingrese fecha de salida de la nueva reserva (AAAA-MM-DD)");
         salida = LocalDate.parse(scanner.nextLine());
 
@@ -896,7 +909,6 @@ public class Hotel implements Serializable {
                 }
 
                 System.out.println(reserva);
-                scanner.nextLine();
                 System.out.println("Desea modificar otro dato? ");
                 continuar = scanner.nextLine();
 
