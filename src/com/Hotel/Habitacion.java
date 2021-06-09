@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-public class Habitacion implements Serializable {
+public class Habitacion implements Serializable, Comparable<Habitacion> {
     private Integer numero;
     private Integer piso;
     private EstadoHabitacion estado;
@@ -79,9 +79,7 @@ public class Habitacion implements Serializable {
         habitacion.setNumero(scanner.nextInt());
         System.out.println("Ingrese el piso:");
         habitacion.setPiso(scanner.nextInt());
-        System.out.println("Ingrese el tipo de habitación:");
         habitacion.indicarTipoHabitacion();
-        System.out.println("Ingrese el estado de la habitación:");
         habitacion.indicarEstadoHabitacion();
         System.out.println("Nueva habitación:\n");
         System.out.println(habitacion);
@@ -102,7 +100,7 @@ public class Habitacion implements Serializable {
 
     public void indicarTipoHabitacion() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Indique el tipo de habitacion");
+        System.out.println("Indique el tipo de habitacion:");
         int opcion = 0;
         menuTipoHabitacion();
         opcion = scanner.nextInt();
@@ -176,7 +174,17 @@ public class Habitacion implements Serializable {
                 "\nPiso: " + this.piso +
                 "\nDescripción: " + this.tarifa.getNombre() +
                 "\nTarifa: $" + this.tarifa.getPrecio() +
-                "\nEstado: " + this.estado +
-                "\nPróxima ocupación: " + this.fechaProximaOcupacion;
+                "\nEstado: " + this.estado;
+    }
+
+    @Override
+    public int compareTo(Habitacion o) {
+        if (numero<o.getNumero()) {
+            return -1;
+        }
+        if (numero>o.getNumero()) {
+            return 1;
+        }
+        return 0;
     }
 }

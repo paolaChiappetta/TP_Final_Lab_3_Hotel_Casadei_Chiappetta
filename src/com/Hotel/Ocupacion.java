@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Ocupacion implements Serializable {
+public class Ocupacion implements Serializable, Comparable<Ocupacion> {
     private static long ocupacionId = 0;
 
     private long idReserva = 0;  /// Si es 0, es porque no se realizó reserva anticipada
@@ -148,6 +148,19 @@ public class Ocupacion implements Serializable {
         this.deposito = deposito;
     }
 
+
+    public void setTarifa(Tarifa tarifa) {
+        this.tarifa = tarifa;
+    }
+
+    public Long getNumeroOcupacion() {
+        return numeroOcupacion;
+    }
+
+    public void setNumeroOcupacion(Long numeroOcupacion) {
+        this.numeroOcupacion = numeroOcupacion;
+    }
+
     public void verListaPaxsHabitacion() {
         for (Pasajero lista : this.listaPaxs) {
             if (lista != null) {
@@ -186,6 +199,7 @@ public class Ocupacion implements Serializable {
         Scanner scanner = new Scanner(System.in);
         menuTipoPension();
         opcion = scanner.nextInt();
+        scanner.nextLine();
         switch (opcion) {
             case 1:
                 this.setTipoPension(TipoPension.DESAYUNO);
@@ -280,6 +294,7 @@ public class Ocupacion implements Serializable {
                     if (pasajeros.get(i).getDni() == dni) {
                         encontrado = true;
                     }
+                    i++;
                 }
                 return encontrado;
             }
@@ -309,4 +324,15 @@ public class Ocupacion implements Serializable {
                         "\nCantidad de cocheras: " + this.cochera +
                         "\nPasajeros: " + this.mostrarListaPaxs();
             }
+
+    @Override
+    public int compareTo(Ocupacion o) {
+        if (numeroOcupacion<o.getNumeroOcupacion()) {
+            return -1;
         }
+        if (numeroOcupacion>o.getNumeroOcupacion()) {
+            return 1;
+        }
+        return 0;
+    }
+}
