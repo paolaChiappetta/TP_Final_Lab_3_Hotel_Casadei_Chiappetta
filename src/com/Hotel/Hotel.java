@@ -1,14 +1,13 @@
 package com.Hotel;
 
+import jdk.jshell.Snippet;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Hotel implements Serializable {
 
@@ -340,11 +339,17 @@ public class Hotel implements Serializable {
         return ocupacionEncontrada;
     }
 
-    public boolean nuevaReserva() {
+    public void analizarFechaSalida (LocalDate ingreso, LocalDate salida) throws ExcepcionSalidaAnteriorIngreso{
+        if(salida.isBefore(ingreso)){
+            throw new ExcepcionSalidaAnteriorIngreso("La fecha de salida no puede ser anterior al ingreso. Ingrese nuevamente");
+        }
+    }
+
+    public boolean nuevaReserva (){
         Scanner scanner = new Scanner(System.in);
         LocalDate ingreso = null;
         LocalDate salida=null;
-        int nroHab;
+        int nroHab=0;
         String continuar = "s";
         boolean habLibre = false;
         boolean reservaCargada = false;
@@ -354,26 +359,58 @@ public class Hotel implements Serializable {
                 System.out.println("Ingrese fecha de ingreso de la nueva reserva (AAAA-MM-DD)");
                 ingreso = LocalDate.parse(scanner.nextLine());
             }catch (DateTimeParseException e){
-                System.out.println("Ingrese la fecha nuevamente en el formato indicado");
-               e.printStackTrace();
-               ingreso=null;
+                System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
+                ingreso=null;
             }catch (Exception e){
-                e.printStackTrace();
+                System.out.println("\nIngrese la fecha nuevamente");
+                ingreso=null;
             }finally {
-
             }
         }while (ingreso==null);
+        do{
+            try{
+                System.out.println("Ingrese fecha de salida de la nueva reserva (AAAA-MM-DD)");
+                salida = LocalDate.parse(scanner.nextLine());
+                analizarFechaSalida(ingreso, salida);
+            }catch (DateTimeParseException e){
+                System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
+               salida=null;
 
-        System.out.println("Ingrese fecha de salida de la nueva reserva (AAAA-MM-DD)");
-        salida = LocalDate.parse(scanner.nextLine());
+                }catch (ExcepcionSalidaAnteriorIngreso e){
+
+            }catch (Exception e){
+                System.out.println("\nIngrese la fecha nuevamente");
+                salida=null;
+            }finally {
+            }
+        }while (salida==null);
 
         List<Integer> libres = this.habitacionesLibres(ingreso, salida);  //busco las habitaciones libres por las fechas indicadas
         if (libres.isEmpty()) {
             System.out.println("No hay habitaciones disponibles en las fechas indicadas");
         } else {
-            Reserva reserva = new Reserva();  //se genera reserva
-            System.out.println("\nIndique el número de la habitación elegida");
-            nroHab = scanner.nextInt();
+
+            Reserva reserva = new Reserva();  //se genera
+            do{
+                try{
+                    System.out.println("\nIndique el número de la habitación elegida");
+                    nroHab = scanner.nextInt();
+
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    nroHab=5;
+                    scanner.nextLine();
+
+                }catch (Exception e){
+                    System.out.println("Debe ingresar un número");
+                    nroHab=5;
+                    scanner.nextLine();;
+
+                }finally {
+
+                }
+            }while(nroHab==5);
+
             for (Integer lista : libres) {
                 if (lista == nroHab) { //verifico que la hab elegida esté en ese listado de hab libres
                     reserva.cargarReserva(reserva, nroHab, ingreso, salida);
