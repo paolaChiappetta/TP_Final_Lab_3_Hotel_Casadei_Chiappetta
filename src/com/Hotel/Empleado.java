@@ -51,25 +51,22 @@ public class Empleado extends Persona implements Serializable {
     public String getUsuario() {   return usuario; }
 
 
-    /// para modificar usuario y clave comparo si coincide el dato anterior con el actual,
+    /// para modificar clave comparo si coincide el dato anterior con el actual,
     // en ese caso se modifica
 
     public void modificarClave(Empleado empleado, String claveAnterior, String nuevaClave) {
+        Scanner scanner = new Scanner(System.in);
         if (empleado.getClave().compareTo(claveAnterior) == 0) {
+            System.out.println("Ingrese nuevamente su nueva clave para confirmar");
+            if(scanner.nextLine().compareTo(nuevaClave)==0){
+                empleado.setClave(nuevaClave);
+                System.out.println("Su contraseña se modificó correctamente");
+            }else{
+                System.out.println("La confirmación de la nueva contraseña es incorrecta");
+            }
 
-            empleado.setClave(nuevaClave);
         } else {
-            System.out.println("Clave incorrecta");
-
-        }
-    }
-
-    public void modificarUsuario(Empleado empleado, String usuarioAnterior, String nuevoUsuario) {
-
-        if (empleado.getUsuario().compareTo(usuarioAnterior) == 0) {
-            empleado.setUsuario(nuevoUsuario);
-        } else {
-            System.out.println("Usuario incorrecto");
+            System.out.println("Su contraseña actual es incorrecta");
         }
     }
 
