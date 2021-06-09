@@ -23,35 +23,12 @@ public class Recepcionista extends Empleado implements Serializable, InterfazAcc
 
     /// modificar estado de habitacion
 
-    @Override
-    public void menuModificarHabitacion() {
-        System.out.println("1- Estado");
-    }
+
 
     @Override
     public void modificarHabitacion(Habitacion habitacion) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Indique el dato que desea modificar: ");
-        int opcion = 0;
-
-
-        do {
-            menuModificarHabitacion();
-            opcion = scanner.nextInt();
-            switch (opcion) {
-
-                case 1:
-                    System.out.println("Estado:");
-                    habitacion.indicarEstadoHabitacion();
-                    break;
-
-
-                default:
-                    System.out.println("Opcion incorrecta, ingrese nuevamente");
-                    break;
-            }
-
-        } while (opcion != 0);
+        System.out.println(habitacion);
+        habitacion.indicarEstadoHabitacion();
 
     }
 

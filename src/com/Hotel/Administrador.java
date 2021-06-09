@@ -37,10 +37,12 @@ public class Administrador extends Empleado implements Serializable {
         int opcion = 0;
 
         do {
-            System.out.println("Indique la opción que desea modificar: ");
+            System.out.println(" ");
+            System.out.println(habitacion);
+            System.out.println("\nIndique la opción que desea modificar: ");
             menuModificarHabitacion();
             opcion = scanner.nextInt();
-            scanner.nextLine();
+            scanner.reset();
             switch (opcion) {
                 case 1:
                     System.out.println("Ingrese el nuevo número:");
@@ -61,8 +63,10 @@ public class Administrador extends Empleado implements Serializable {
                     System.out.println("Opción incorrecta. Ingrese nuevamente");
                     break;
             }
+            System.out.println(" ");
+            System.out.println(habitacion);
             scanner.nextLine();
-            System.out.println("Desea modificar otro dato? s/n");
+            System.out.println("\nDesea modificar otro dato? s/n");
             continuar=scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));

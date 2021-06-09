@@ -49,29 +49,7 @@ public class Empleado extends Persona implements Serializable {
         this.clave=claveNueva;
     }
 
-    public Empleado nuevoEmpleado() {
-        Scanner scanner = new Scanner(System.in);
-        String nombre, apellido, telefono, dni;
-        int opcion;
-        System.out.println("Ingrese el nombre:");
-        nombre = scanner.nextLine();
-        System.out.println("Ingrese el apellido:");
-        apellido = scanner.nextLine();
-        System.out.println("Ingrese el dni:");
-        dni = scanner.nextLine();
-        System.out.println("Ingrese el teléfono:");
-        telefono = scanner.nextLine();
 
-        System.out.println("Indique:\n1- Recepcionista\n2- Administrador");
-        opcion = scanner.nextInt();
-        if (opcion == 1) {
-            Recepcionista recepcionista = new Recepcionista(nombre, apellido, telefono, dni);
-            return recepcionista;
-        } else {
-            Administrador administrador = new Administrador(nombre, apellido, telefono, dni);
-            return administrador;
-        }
-    }
 
     /// para modificar clave comparo si coincide el dato anterior con el actual,
     // en ese caso se modifica
@@ -105,6 +83,8 @@ public class Empleado extends Persona implements Serializable {
 
         int opcion = 0;
         do {
+            System.out.println(" ");
+            System.out.println(empleado);
             System.out.println("Indique el dato que desea modificar");
             menuModificarEmpleado();
             opcion = scanner.nextInt();
@@ -129,6 +109,8 @@ public class Empleado extends Persona implements Serializable {
                     System.out.println("Opcion incorrecta, ingrese nuevamente");
                     break;
             }
+            System.out.println(" ");
+            System.out.println(empleado);
             scanner.nextLine();
             System.out.println("Desea modificar otro dato?");
             continuar=scanner.nextLine();
