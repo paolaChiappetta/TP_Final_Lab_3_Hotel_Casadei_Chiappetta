@@ -339,6 +339,7 @@ public class Shop {
             nombre = scanner.nextLine();                       //lo comparten
             System.out.println("Ingrese el precio");
             precio = scanner.nextDouble();
+            scanner.nextLine();
 
             switch (opcion) {  //según el tipo son distintos los demás datos
                 case 1:
@@ -348,7 +349,7 @@ public class Shop {
                     Servicio servicio = new Servicio(nombre, precio, empleado); //se genera el nuevo extra
                     this.servicios.add(servicio);  //se carga a la lista correspondiente
                     System.out.println("\nSe cargó exitosamente el siguiente servicio: ");
-                    servicio.mostrarExtra();  //lo muestro
+                    System.out.println(servicio.mostrarExtra());//lo muestro
                     break;
                 case 2:
                     String descripcion, horario;
@@ -359,7 +360,7 @@ public class Shop {
                     Amenitie amenitie = new Amenitie(nombre, precio, descripcion, horario); //se genera el nuevo extra
                     this.amenities.add(amenitie); //se carga a la lista correspondiente
                     System.out.println("\nSe cargó exitosamente la siguiente amenitie: ");
-                    amenitie.mostrarExtra(); //lo muestro
+                    System.out.println(amenitie.mostrarExtra()); //lo muestro
                     break;
                 case 3:
                     String marca;
@@ -368,7 +369,7 @@ public class Shop {
                     ProductoMinibar producto = new ProductoMinibar(nombre, precio, marca); //se genera el nuevo extra
                     this.minibar.add(producto); //se carga a la lista correspondiente
                     System.out.println("\nSe cargó exitosamente el siguiente producto: ");
-                    producto.mostrarExtra(); //lo muestro
+                    System.out.println(producto.mostrarExtra()); //lo muestro
                     break;
                 case 4:
                     String causa;
@@ -377,14 +378,13 @@ public class Shop {
                     Rotura rotura = new Rotura(nombre, precio, causa); //se genera el nuevo extra
                     this.roturas.add(rotura); //se carga a la lista correspondiente
                     System.out.println("\nSe cargó exitosamente la siguiente rotura: ");
-                    rotura.mostrarExtra(); //lo muestro
+                    System.out.println(rotura.mostrarExtra()); //lo muestro
                     break;
                 default:
                     System.out.println("La opción ingresada es incorrecta. Ingrese nuevamente");
                     break;
             }
 
-            scanner.nextLine();
             System.out.println("Desea cargar otro extra? s/n");
             continuar=scanner.nextLine();
 
@@ -588,7 +588,7 @@ public class Shop {
                         while (!encontrado && i < servicios.size()) {
                             if (servicios.get(i).getNombre().compareTo(nombre)==0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    servicios.get(i).mostrarExtra();
+                                    System.out.println(servicios.get(i).mostrarExtra());
                                     opcionesModificarExtra();
                                     System.out.println("3- Empleado a cargo");
                                     opcion = scanner.nextInt();
@@ -614,7 +614,7 @@ public class Shop {
                         while (!encontrado && i < amenities.size()) {
                             if (amenities.get(i).getNombre().compareTo(nombre)==0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    amenities.get(i).mostrarExtra();
+                                    System.out.println(amenities.get(i).mostrarExtra());
                                     opcionesModificarExtra();
                                     System.out.println("3- Descripción");
                                     System.out.println("4- Horario");
@@ -641,7 +641,7 @@ public class Shop {
                         while (!encontrado && i < minibar.size()) {
                             if (minibar.get(i).getNombre().compareTo(nombre)==0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    minibar.get(i).mostrarExtra();
+                                    System.out.println(minibar.get(i).mostrarExtra());
                                     opcionesModificarExtra();
                                     System.out.println("3- Marca");
                                     opcion = scanner.nextInt();
@@ -667,7 +667,7 @@ public class Shop {
                         while (!encontrado && i < roturas.size()) {
                             if (roturas.get(i).getNombre().compareTo(nombre)==0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    roturas.get(i).mostrarExtra();
+                                    System.out.println(roturas.get(i).mostrarExtra());
                                     opcionesModificarExtra();
                                     System.out.println("3- Causa");
                                     opcion = scanner.nextInt();

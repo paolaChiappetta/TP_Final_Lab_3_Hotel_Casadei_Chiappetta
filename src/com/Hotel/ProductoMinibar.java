@@ -3,7 +3,7 @@ package com.Hotel;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class ProductoMinibar extends Extra implements Serializable, InterfazExtra  {
+public class ProductoMinibar extends Extra implements Serializable{
     
     private String marca;
 

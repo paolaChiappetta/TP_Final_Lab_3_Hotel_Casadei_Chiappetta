@@ -3,7 +3,7 @@ package com.Hotel;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class Amenitie extends Extra implements Serializable, InterfazExtra  {
+public class Amenitie extends Extra implements Serializable {
 
     private String descripcion;
     private String horario;
@@ -38,6 +38,7 @@ public class Amenitie extends Extra implements Serializable, InterfazExtra  {
     public void setHorario(String horario) {
         this.horario = horario;
     }
+
 
     @Override
     public String mostrarExtra() {

@@ -5,7 +5,7 @@ import org.w3c.dom.ls.LSOutput;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class Servicio extends Extra  implements Serializable, InterfazExtra {
+public class Servicio extends Extra  implements Serializable {
 
     private String empleadoEncargado;
 
