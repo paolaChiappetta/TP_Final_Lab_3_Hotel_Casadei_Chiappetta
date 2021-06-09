@@ -1,8 +1,9 @@
 package com.Hotel;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
-public class ProductoMinibar extends Extra implements Serializable {
+public class ProductoMinibar extends Extra implements Serializable, InterfazExtra  {
     
     private String marca;
 
@@ -30,5 +31,18 @@ public class ProductoMinibar extends Extra implements Serializable {
     @Override
     public String mostrarExtra() {
         return super.mostrarExtra() + "Marca: " + this.marca + "\n";
+    }
+
+    @Override
+    public void modificarExtra(Extra extra, int opcion) {
+
+        if(opcion==1 || opcion==2){
+            super.modificarExtra(extra, opcion);
+        }else {
+            Scanner scanner = new Scanner(System.in);
+            ProductoMinibar producto= (ProductoMinibar) extra;
+            System.out.println("Ingrese la nueva marca");
+            producto.setMarca(scanner.nextLine());
+        }
     }
 }

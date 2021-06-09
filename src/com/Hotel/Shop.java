@@ -560,6 +560,12 @@ public class Shop {
 
     }
 
+    public void opcionesModificarExtra (){
+        System.out.println("Qué desea modificar: ");
+        System.out.println("1- Nombre");
+        System.out.println("2- Precio");
+    }
+
     //MODIFICAR DATOS DE EXTRAS YA CREADOS
     public void modificarExtra() {
         Scanner scanner = new Scanner(System.in);
@@ -576,199 +582,108 @@ public class Shop {
             System.out.println("Ingrese el nombre del extra"); //busco por nombre
             nombre = scanner.nextLine();
             int i = 0;
-
-
             switch (opcion) {
                 case 1:
                     if (!this.servicios.isEmpty()) {
                         while (!encontrado && i < servicios.size()) {
-                            if (servicios.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                            if (servicios.get(i).getNombre().compareTo(nombre)==0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    System.out.println("Qué desea modificar: ");
-                                    System.out.println("1- Nombre");
-                                    System.out.println("2- Precio");
+                                    servicios.get(i).mostrarExtra();
+                                    opcionesModificarExtra();
                                     System.out.println("3- Empleado a cargo");
                                     opcion = scanner.nextInt();
                                     scanner.nextLine();
-                                    switch (opcion) {
-                                        case 1:
-                                            System.out.println("Ingrese el nuevo nombre");
-                                            servicios.get(i).setNombre(scanner.nextLine());
-                                            break;
-                                        case 2:
-                                            System.out.println("Ingrese el nuevo precio");
-                                            servicios.get(i).setPrecio(scanner.nextDouble());
-                                            break;
-                                        case 3:
-                                            System.out.println("Ingrese el nuevo empleado a cargo");
-                                            servicios.get(i).setEmpleadoEncargado(scanner.nextLine());
-                                            break;
-                                        default:
-                                            System.out.println("Opción incorrecta. Ingrese nuevamente");
-                                            break;
-                                    }
-                                    if (encontrado == true) {
-                                        System.out.println("El extra fue modificado correctamente");
-                                    } else {
-                                        System.out.println("No se encontraron coincidencias con el nombre indicado");
-                                    }
-
+                                    servicios.get(i).modificarExtra(servicios.get(i), opcion);
+                                    encontrado = true;
+                                    System.out.println("El extra fue modificado correctamente");
                                     scanner.nextLine();
                                     System.out.println("Desea hacer otra modificación sobre este producto? s/n");
                                     continuar = scanner.nextLine();
-
                                 } while (continuar.equalsIgnoreCase("s"));
-
-                                encontrado = true;
-
                             }
                             i++;
                         }
+                        if(!encontrado){
+                            System.out.println("No se encontraron coincidencias con el nombre indicado");
+                        }
+
                     }
                     break;
                 case 2:
                     if (!this.amenities.isEmpty()) {
                         while (!encontrado && i < amenities.size()) {
-                            if (amenities.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                            if (amenities.get(i).getNombre().compareTo(nombre)==0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    System.out.println("Qué desea modificar: ");
-                                    System.out.println("1- Nombre");
-                                    System.out.println("2- Precio");
+                                    amenities.get(i).mostrarExtra();
+                                    opcionesModificarExtra();
                                     System.out.println("3- Descripción");
                                     System.out.println("4- Horario");
                                     opcion = scanner.nextInt();
                                     scanner.nextLine();
-                                    switch (opcion) {
-                                        case 1:
-                                            System.out.println("Ingrese el nuevo nombre");
-                                            amenities.get(i).setNombre(scanner.nextLine());
-                                            break;
-                                        case 2:
-                                            System.out.println("Ingrese el nuevo precio");
-                                            amenities.get(i).setPrecio(scanner.nextDouble());
-                                            break;
-                                        case 3:
-                                            System.out.println("Ingrese la nueva descripción");
-                                            amenities.get(i).setDescripcion(scanner.nextLine());
-                                            break;
-                                        case 4:
-                                            System.out.println("Ingrese el nuevo horario");
-                                            amenities.get(i).setHorario(scanner.nextLine());
-                                        default:
-                                            System.out.println("Opción incorrecta. Ingrese nuevamente");
-                                            break;
-                                    }
-                                    if (encontrado == true) {
-                                        System.out.println("El extra fue modificado correctamente");
-                                    } else {
-                                        System.out.println("No se encontraron coincidencias con el nombre indicado");
-                                    }
-
+                                    amenities.get(i).modificarExtra(amenities.get(i), opcion);
+                                    encontrado = true;
+                                    System.out.println("El extra fue modificado correctamente");
                                     scanner.nextLine();
                                     System.out.println("Desea hacer otra modificación sobre este producto? s/n");
                                     continuar = scanner.nextLine();
-
                                 } while (continuar.equalsIgnoreCase("s"));
-
-                                encontrado = true;
 
                             }
                             i++;
+                        }
+                        if(!encontrado){
+                            System.out.println("No se encontraron coincidencias con el nombre indicado");
                         }
                     }
                     break;
                 case 3:
                     if (!this.minibar.isEmpty()) {
                         while (!encontrado && i < minibar.size()) {
-                            if (minibar.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                            if (minibar.get(i).getNombre().compareTo(nombre)==0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    System.out.println("Qué desea modificar: ");
-                                    System.out.println("1- Nombre");
-                                    System.out.println("2- Precio");
+                                    minibar.get(i).mostrarExtra();
+                                    opcionesModificarExtra();
                                     System.out.println("3- Marca");
                                     opcion = scanner.nextInt();
                                     scanner.nextLine();
-                                    switch (opcion) {
-                                        case 1:
-                                            System.out.println("Ingrese el nuevo nombre");
-                                            minibar.get(i).setNombre(scanner.nextLine());
-                                            break;
-                                        case 2:
-                                            System.out.println("Ingrese el nuevo precio");
-                                            minibar.get(i).setPrecio(scanner.nextDouble());
-                                            break;
-                                        case 3:
-                                            System.out.println("Ingrese la nueva marca");
-                                            minibar.get(i).setMarca(scanner.nextLine());
-                                            break;
-                                        default:
-                                            System.out.println("Opción incorrecta. Ingrese nuevamente");
-                                            break;
-                                    }
-                                    if (encontrado == true) {
-                                        System.out.println("El extra fue modificado correctamente");
-                                    } else {
-                                        System.out.println("No se encontraron coincidencias con el nombre indicado");
-                                    }
-
+                                    minibar.get(i).modificarExtra(minibar.get(i), opcion);
+                                    encontrado = true;
+                                    System.out.println("El extra fue modificado correctamente");
                                     scanner.nextLine();
                                     System.out.println("Desea hacer otra modificación sobre este producto? s/n");
                                     continuar = scanner.nextLine();
 
                                 } while (continuar.equalsIgnoreCase("s"));
-
-                                encontrado = true;
-
                             }
                             i++;
                         }
+                        if(!encontrado){
+                            System.out.println("No se encontraron coincidencias con el nombre indicado");
+                        }
                     }
                     break;
-
                 case 4:
                     if (!this.roturas.isEmpty()) {
                         while (!encontrado && i < roturas.size()) {
-                            if (roturas.get(i).getNombre().equalsIgnoreCase(nombre)) {
+                            if (roturas.get(i).getNombre().compareTo(nombre)==0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    System.out.println("Qué desea modificar: ");
-                                    System.out.println("1- Nombre");
-                                    System.out.println("2- Precio");
+                                    roturas.get(i).mostrarExtra();
+                                    opcionesModificarExtra();
                                     System.out.println("3- Causa");
                                     opcion = scanner.nextInt();
+                                    roturas.get(i).modificarExtra(roturas.get(i), opcion);
                                     scanner.nextLine();
-                                    switch (opcion) {
-                                        case 1:
-                                            System.out.println("Ingrese el nuevo nombre");
-                                            roturas.get(i).setNombre(scanner.nextLine());
-                                            break;
-                                        case 2:
-                                            System.out.println("Ingrese el nuevo precio");
-                                            roturas.get(i).setPrecio(scanner.nextDouble());
-                                            break;
-                                        case 3:
-                                            System.out.println("Ingrese la nueva causa");
-                                            roturas.get(i).setCausa(scanner.nextLine());
-                                            break;
-                                        default:
-                                            System.out.println("Opción incorrecta. Ingrese nuevamente");
-                                            break;
-                                    }
-                                    if (encontrado) {
-                                        System.out.println("El extra fue modificado correctamente");
-                                    } else {
-                                        System.out.println("No se encontraron coincidencias con el nombre indicado");
-                                    }
-
+                                    encontrado = true;
+                                    System.out.println("El extra fue modificado correctamente");
                                     scanner.nextLine();
                                     System.out.println("Desea hacer otra modificación sobre este producto? s/n");
                                     continuar = scanner.nextLine();
-
                                 } while (continuar.equalsIgnoreCase("s"));
-
-                                encontrado = true;
-
                             }
                             i++;
+                        }
+                        if(!encontrado){
+                            System.out.println("No se encontraron coincidencias con el nombre indicado");
                         }
                     }
                     break;
@@ -781,8 +696,6 @@ public class Shop {
             continuar=scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
-
-
     }
 
     //DAR DE ALTA EXTRA QUE SE DIO DE BAJA EN ALGUN MOMENTO (EJ: POR FALTA DE STOCK)

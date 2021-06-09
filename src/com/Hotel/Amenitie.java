@@ -1,8 +1,9 @@
 package com.Hotel;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
-public class Amenitie extends Extra  implements Serializable {
+public class Amenitie extends Extra implements Serializable, InterfazExtra  {
 
     private String descripcion;
     private String horario;
@@ -42,5 +43,23 @@ public class Amenitie extends Extra  implements Serializable {
     public String mostrarExtra() {
         return super.mostrarExtra() + "Descripción: " + this.descripcion +
                 "\nHorario: " + this.horario + "\n";
+    }
+
+    @Override
+    public void modificarExtra(Extra extra, int opcion) {
+
+        if(opcion==1 || opcion==2){
+            super.modificarExtra(extra, opcion);
+        }else if (opcion==3){
+            Scanner scanner = new Scanner(System.in);
+            Amenitie amenitie= (Amenitie) extra;
+            System.out.println("Ingrese la nueva descripción");
+            amenitie.setDescripcion(scanner.nextLine());
+        }else{
+            Scanner scanner = new Scanner(System.in);
+            Amenitie amenitie= (Amenitie) extra;
+            System.out.println("Ingrese el nuevo horario");
+            amenitie.setHorario(scanner.nextLine());
+        }
     }
 }

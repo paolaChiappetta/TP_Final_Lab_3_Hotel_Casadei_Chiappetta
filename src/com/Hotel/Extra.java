@@ -1,6 +1,7 @@
 package com.Hotel;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Extra implements Serializable {
 
@@ -66,6 +67,17 @@ public class Extra implements Serializable {
         return this.nombre + "\nPrecio $" + this.precio + "\n";
     }
 
+    public void modificarExtra (Extra extra, int opcion){
+        Scanner scanner = new Scanner(System.in);
+        if(opcion==1){
+            System.out.println("Ingrese el nuevo nombre");
+            extra.setNombre(scanner.nextLine());
+        }else{
+            System.out.println("Ingrese el nuevo precio");
+            extra.setPrecio(scanner.nextDouble());
+        }
+
+    }
 
     @Override
     public String toString() {

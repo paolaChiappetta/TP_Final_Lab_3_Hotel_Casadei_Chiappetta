@@ -3,8 +3,9 @@ package com.Hotel;
 import org.w3c.dom.ls.LSOutput;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
-public class Servicio extends Extra  implements Serializable {
+public class Servicio extends Extra  implements Serializable, InterfazExtra {
 
     private String empleadoEncargado;
 
@@ -29,6 +30,18 @@ public class Servicio extends Extra  implements Serializable {
         this.empleadoEncargado = empleadoEncargado;
     }
 
+    @Override
+    public void modificarExtra(Extra extra, int opcion) {
+
+        if(opcion==1 || opcion==2){
+            super.modificarExtra(extra, opcion);
+        }else{
+            Scanner scanner = new Scanner(System.in);
+            Servicio servicio= (Servicio) extra;
+            System.out.println("Ingrese el nuevo empleado a cargo");
+            servicio.setEmpleadoEncargado(scanner.nextLine());
+        }
+    }
 
     @Override
     public String mostrarExtra() {

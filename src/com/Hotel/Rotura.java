@@ -1,8 +1,9 @@
 package com.Hotel;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
-public class Rotura extends Extra  implements Serializable {
+public class Rotura extends Extra  implements Serializable, InterfazExtra  {
 
     private String causa;
 
@@ -30,5 +31,18 @@ public class Rotura extends Extra  implements Serializable {
     @Override
     public String mostrarExtra() {
         return this.causa + " de " + super.mostrarExtra();
+    }
+
+    @Override
+    public void modificarExtra(Extra extra, int opcion) {
+
+        if(opcion==1 || opcion==2){
+            super.modificarExtra(extra, opcion);
+        }else{
+            Scanner scanner = new Scanner(System.in);
+            Rotura rotura= (Rotura)  extra;
+            System.out.println("Ingrese la nueva causa");
+            rotura.setCausa(scanner.nextLine());
+        }
     }
 }
