@@ -282,6 +282,10 @@ public class Hotel implements Serializable {
             try {
                 System.out.println("Ingrese fecha de ingreso de la nueva reserva (AAAA-MM-DD)");
                 ingreso = LocalDate.parse(scanner.nextLine());
+                if(ingreso.isBefore(LocalDate.now())){
+                    System.out.println("La fecha de ingreso debe ser posterior al día de hoy");
+                    ingreso=null;
+                }
             } catch (DateTimeParseException e) {
                 System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
                 ingreso = null;
@@ -940,6 +944,10 @@ public class Hotel implements Serializable {
                             try {
                                 System.out.println("Ingrese la nueva fecha de ingreso (AAAA-MM-DD)");
                                 ingreso = LocalDate.parse(scanner.nextLine());
+                                if(ingreso.isBefore(LocalDate.now())){
+                                    System.out.println("La fecha debe ser posterior al día de hoy");
+                                    ingreso=null;
+                                }
                             } catch (DateTimeParseException e) {
                                 System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
                                 ingreso = null;
