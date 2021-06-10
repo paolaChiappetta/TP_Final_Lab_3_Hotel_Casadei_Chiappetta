@@ -3,6 +3,7 @@ package com.Hotel;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Administrador extends Empleado implements Serializable {
@@ -45,12 +46,38 @@ public class Administrador extends Empleado implements Serializable {
             scanner.reset();
             switch (opcion) {
                 case 1:
-                    System.out.println("Ingrese el nuevo número:");
-                    habitacion.setNumero(scanner.nextInt());
+                     int numero= 0;
+                    do{
+                        try{
+                            System.out.println("Ingrese el nuevo número de la habitación:");
+                            numero= scanner.nextInt();
+                            habitacion.setNumero(numero);
+                        }catch (InputMismatchException e){
+                            System.out.println("Dato incorrecto");
+                            scanner.nextLine();
+                        }catch (Exception e){
+                            System.out.println("Problema detecatdo");
+                            scanner.nextLine();
+                        }
+                    }while (numero== 0);
+
                     break;
                 case 2:
-                    System.out.println("Ingrese el piso:");
-                    habitacion.setPiso(scanner.nextInt());
+                    int piso= 0;
+                    do{
+                        try{
+                            System.out.println("Ingrese el piso:");
+                            piso= scanner.nextInt();
+                            habitacion.setPiso(piso);
+                        }catch (InputMismatchException e){
+                            System.out.println("Dato incorrecto");
+                            scanner.nextLine();
+                        }catch (Exception e){
+                            System.out.println("Problema detecatdo");
+                            scanner.nextLine();
+                        }
+                    }while (piso== 0);
+
                     break;
                 case 3:
                     habitacion.indicarTipoHabitacion();
