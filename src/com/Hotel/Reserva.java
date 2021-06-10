@@ -1,6 +1,7 @@
 package com.Hotel;
 
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -122,24 +123,7 @@ public class Reserva implements Comparable<Reserva> {
         this.telefono = telefono;
     }
 
-    public void cargarReserva(Reserva reserva, int numeroHabitacion, LocalDate ingreso, LocalDate salida) {
-        Scanner scanner = new Scanner(System.in);
-        reserva.setNumeroHabitacion(numeroHabitacion);
-        reserva.setFechaIngreso(ingreso);
-        reserva.setFechaSalida(salida);
-        System.out.println("Ingrese el nombre del pasajero");
-        reserva.setPasajeroNombre(scanner.nextLine());
-        System.out.println("Ingrese el apellido del pasajero");
-        reserva.setPasajeroApellido(scanner.nextLine());
-        System.out.println("Ingrese el DNI del pasajero");
-        reserva.setPasajeroDni(scanner.nextLine());
-        System.out.println("Ingrese el teléfono");
-        reserva.setTelefono(scanner.nextLine());
-        System.out.println("Ingrese la cantidad de pasajeros");
-        reserva.setNumeroPasajeros(scanner.nextInt());
-        System.out.println("Ingrese el monto del depósito");
-        reserva.setDeposito(scanner.nextDouble());
-    }
+
 
 
 

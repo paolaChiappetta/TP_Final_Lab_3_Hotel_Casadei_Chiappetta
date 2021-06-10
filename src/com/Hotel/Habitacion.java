@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -75,10 +76,36 @@ public class Habitacion implements Serializable, Comparable<Habitacion> {
 
     public Habitacion nuevaHabitacion(Habitacion habitacion) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el número de la habitación:");
-        habitacion.setNumero(scanner.nextInt());
-        System.out.println("Ingrese el piso:");
-        habitacion.setPiso(scanner.nextInt());
+        int numero= 0;
+        int piso= 0;
+        do{
+            try{
+                System.out.println("Ingrese el número de la habitación:");
+                numero= scanner.nextInt();
+                habitacion.setNumero(numero);
+            }catch (InputMismatchException e){
+                System.out.println("Dato incorrecto");
+                scanner.nextLine();
+            }catch (Exception e){
+                System.out.println("Problema detecatdo");
+                scanner.nextLine();
+            }
+        }while (numero== 0);
+
+        do{
+            try{
+                System.out.println("Ingrese el piso:");
+                piso= scanner.nextInt();
+                habitacion.setPiso(piso);
+            }catch (InputMismatchException e){
+                System.out.println("Dato incorrecto");
+                scanner.nextLine();
+            }catch (Exception e){
+                System.out.println("Problema detecatdo");
+                scanner.nextLine();
+            }
+        }while (piso== 0);
+
         habitacion.indicarTipoHabitacion();
         habitacion.indicarEstadoHabitacion();
         System.out.println("Nueva habitación:\n");

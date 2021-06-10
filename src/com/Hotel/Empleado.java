@@ -70,52 +70,6 @@ public class Empleado extends Persona implements Serializable {
         }
     }
 
-    public void menuModificarEmpleado() {
-        System.out.println("1- Nombre");
-        System.out.println("2- Apellido");
-        System.out.println("3- Dni");
-        System.out.println("4- Telefono");
-    }
 
-    public void modificarEmpleado(Empleado empleado){
-        Scanner scanner = new Scanner(System.in);
-        String continuar = "s";
-
-        int opcion = 0;
-        do {
-            System.out.println(" ");
-            System.out.println(empleado);
-            System.out.println("Indique el dato que desea modificar");
-            menuModificarEmpleado();
-            opcion = scanner.nextInt();
-            switch (opcion) {
-                case 1:
-                    System.out.println("Nombre:");
-                    empleado.setNombre(scanner.nextLine());
-                    break;
-                case 2:
-                    System.out.println("Apellido:");
-                    empleado.setApellido(scanner.nextLine());
-                    break;
-                case 3:
-                    System.out.println("Dni:");
-                    empleado.setDni(scanner.nextLine());
-                    break;
-                case 4:
-                    System.out.println("Telefono:");
-                    empleado.setNumeroTel(scanner.nextLine());
-                    break;
-                default:
-                    System.out.println("Opcion incorrecta, ingrese nuevamente");
-                    break;
-            }
-            System.out.println(" ");
-            System.out.println(empleado);
-            scanner.nextLine();
-            System.out.println("Desea modificar otro dato?");
-            continuar=scanner.nextLine();
-
-        } while (continuar.equalsIgnoreCase("s"));
-    }
 
 }
