@@ -3,6 +3,8 @@ package com.Hotel;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -151,8 +153,7 @@ public class Menu {
 
     public void inicio () {
         Archivo archivo=new Archivo();
-        hotel.setEmpleados(archivo.readerArchivoEmpleado("empleado.json"));
-        String usuario, contrasenia;
+        hotel.setEmpleados(archivo.readerArchivoEmpleado("empleado.json")); //al ingreso se cargan las listas de empleados p/verificar usuario y contraseña
         do {
             ingreso();
             opcion = scanner.nextInt();
@@ -163,7 +164,7 @@ public class Menu {
                     System.exit(0);
                     break;
                 case 1:
-                    scanner.reset();
+                    String usuario, contrasenia;
                     /*
                     System.out.println("Ingrese nombre de usuario");
                     usuario = scanner.nextLine();
@@ -173,7 +174,7 @@ public class Menu {
                     Administrador administrador = new Administrador();
                     this.setEmpleadoActual(administrador);
                     if(empleadoActual!=null){
-                        cargaListas();
+                        cargaListas();  //si pudo ingresar un empleado, se cargan las demás listas del hotel
                         if (empleadoActual instanceof Recepcionista) {
                             menuInicioRecepcionista();
                         } else {
@@ -279,22 +280,53 @@ public class Menu {
                     break;
                 case 2:
                     System.out.println("Check-Out");
-                    System.out.println("\nIngrese el número de habitación: ");
-                    hotel.checkOut(scanner.nextInt());
-                    scanner.nextLine();
+                    int nroHabitacion=0;
+                    do{
+                        try{
+                            System.out.println("\nIngrese el número de habitación: ");
+                            nroHabitacion= scanner.nextInt();
+                            scanner.nextLine();
+                        }catch (InputMismatchException e){
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        }catch (Exception e){
+                            System.out.println("Problema detectado");
+                        }
+                    }while (nroHabitacion==0);
+                    hotel.checkOut(nroHabitacion);
                     break;
                 case 3:
                     menuReservas();
                     break;
                 case 4:
-                    int numero;
-                    int noches;
-                    System.out.println("Ingrese el número de habitación que desea extender la salida");
-                    numero=scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Ingrese cuántas noches desea extender la salida");
-                    noches=scanner.nextInt();
-                    scanner.nextLine();
+                    int numero=0;
+                    int noches=0;
+                    do{
+                        try{
+                            System.out.println("Ingrese el número de habitación que desea extender la salida");
+                            numero=scanner.nextInt();
+                            scanner.nextLine();
+                        }catch (InputMismatchException e){
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        }catch (Exception e){
+                            System.out.println("Problema detectado");
+                            scanner.nextLine();
+                        }
+                    }while (numero==0);
+                    do{
+                        try{
+                            System.out.println("Ingrese cuántas noches desea extender la salida");
+                            noches=scanner.nextInt();
+                            scanner.nextLine();
+                        }catch (InputMismatchException e){
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        }catch (Exception e){
+                            System.out.println("Problema detectado");
+                            scanner.nextLine();
+                        }
+                    }while (noches==0);
                     hotel.extenderFechaSalida(numero, noches);
                     break;
                 case 5:
@@ -315,7 +347,6 @@ public class Menu {
                     break;
 
             }
-
 
             System.out.println("\nDesea ver otra opción?? s/n");
             continuar = scanner.nextLine();
@@ -411,17 +442,41 @@ public class Menu {
                     hotel.modificarReserva();
                     break;
                 case 3:
-                    System.out.println("Ingrese el ID de la reserva que desea eliminar");
-                   hotel.eliminarReserva(scanner.nextLong());
-                    scanner.nextLine();
+                    long idReserva=0;
+                    do{
+                        try{
+                            System.out.println("Ingrese el ID de la reserva que desea eliminar");
+                            hotel.eliminarReserva(scanner.nextLong());
+                            scanner.nextLine();
+                        }catch (InputMismatchException e){
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        }catch (Exception e){
+                            System.out.println("Problema detectado");
+                            scanner.nextLine();
+                        }
+                    }while (idReserva==0);
                     break;
                 case 4:
                     System.out.println("\nIngrese el Dni del pasajero");
                     hotel.listadoReservasPorDni(scanner.nextLine());
                     break;
                 case 5:
-                    System.out.println("Ingrese el número de la habitación de la que desea ver las reservas");
-                    hotel.listadoReservasPorHabitacion(scanner.nextInt());
+                    int nroHabitacion=0;
+                    do{
+                        try{
+                            System.out.println("Ingrese el número de la habitación de la que desea ver las reservas");
+                            nroHabitacion=scanner.nextInt();
+                            scanner.nextLine();
+                        }catch (InputMismatchException e){
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        }catch (Exception e){
+                            System.out.println("Problema detectado");
+                            scanner.nextLine();
+                        }
+                    }while (nroHabitacion==0);
+                    hotel.listadoReservasPorHabitacion(nroHabitacion);
                     break;
                 case 6:
                     menuHotel();
@@ -501,27 +556,63 @@ public class Menu {
                     hotel.listadoEgresosDelDia();
                     break;
                 case 3:
-                    System.out.println("Ingrese la fecha que desea ver (AAAA-MM-DD)");
-                    hotel.listadoIngresosDeReservasDeDiaDeterminado(LocalDate.parse(scanner.nextLine()));
+                    LocalDate fechaIngresos=null;
+                    do{
+                        try{
+                            System.out.println("Ingrese la fecha que desea ver (AAAA-MM-DD)");
+                            fechaIngresos=LocalDate.parse(scanner.nextLine());
+                        } catch (DateTimeParseException e) {
+                            System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
+                            fechaIngresos= null;
+                        } catch (Exception e) {
+                            System.out.println("\nIngrese la fecha nuevamente");
+                            fechaIngresos = null;
+                        }
+                    }while (fechaIngresos==null);
+                    hotel.listadoIngresosDeReservasDeDiaDeterminado(fechaIngresos);
                     break;
                 case 4:
-                    System.out.println("Ingrese la fecha que desea ver (AAAA-MM-DD)");
-                    hotel.listadoEgresosDeDiaDeterminado(LocalDate.parse(scanner.nextLine()));
+                    LocalDate fechaEgresos=null;
+                    do{
+                        try{
+                            System.out.println("Ingrese la fecha que desea ver (AAAA-MM-DD)");
+                            fechaEgresos=LocalDate.parse(scanner.nextLine());
+                        } catch (DateTimeParseException e) {
+                            System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
+                            fechaEgresos= null;
+                        } catch (Exception e) {
+                            System.out.println("\nIngrese la fecha nuevamente");
+                            fechaEgresos = null;
+                        }
+                    }while (fechaEgresos==null);
+                    hotel.listadoEgresosDeDiaDeterminado(fechaEgresos);
                     break;
                 case 5:
                     hotel.listadoHabitaciones();
                     break;
                 case 6:
-                    System.out.println("\nPara qué tipo de estado desea ver habitaciones?");
-                    System.out.println("\n1- DISPONIBLE\n2- OCUPADA\n3- FUERA DE SERVICIO\n");
-                    if(scanner.nextInt()==1){
+                    int estado=0;
+                    do{
+                        try{
+                            System.out.println("\nPara qué tipo de estado desea ver habitaciones?");
+                            System.out.println("\n1- DISPONIBLE\n2- OCUPADA\n3- FUERA DE SERVICIO\n");
+                            estado=scanner.nextInt();
+                            scanner.nextLine();
+                        }catch (InputMismatchException e){
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        }catch (Exception e){
+                            System.out.println("Problema detectado");
+                            scanner.nextLine();
+                        }
+                    }while (estado!=1 && estado!=2 && estado!=3);
+                    if(estado==1){
                         hotel.listadoHabitacionesPorEstado(EstadoHabitacion.DISPONIBLE);
-                    }else if(scanner.nextInt()==2){
+                    }else if(estado==2){
                         hotel.listadoHabitacionesPorEstado(EstadoHabitacion.OCUPADA);
                     }else{
                         hotel.listadoHabitacionesPorEstado(EstadoHabitacion.FUERA_DE_SERVICIO);
                     }
-                    scanner.nextLine();
                     break;
                 case 7:
                     hotel.listadoOcupaciones();
@@ -631,13 +722,38 @@ public class Menu {
                     hotel.llamadaNuevaHabitacion();
                     break;
                 case 2:
-                    System.out.println("\nIngrese el número de habitación que desea modificar");
-                  hotel.llamadaModificarHabitacion(scanner.nextInt(), empleadoActual);
-                    scanner.nextLine();
+                    int nroHabitacion=0;
+                    do{
+                        try{
+                            System.out.println("\nIngrese el número de habitación que desea modificar");
+                            nroHabitacion=scanner.nextInt();
+                            scanner.nextLine();
+                        }catch (InputMismatchException e){
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        }catch (Exception e){
+                            System.out.println("Problema detectado");
+                            scanner.nextLine();
+                        }
+                    }while (nroHabitacion==0);
+                  hotel.llamadaModificarHabitacion(nroHabitacion, empleadoActual);
                     break;
                 case 3:
-                    System.out.println("\nIngrese el número de habitación que desea eliminar");
-                    hotel.eliminarHabitacion(scanner.nextInt());
+                    int habitacion=0;
+                    do{
+                        try{
+                            System.out.println("\nIngrese el número de habitación que desea eliminar");
+                            habitacion=scanner.nextInt();
+                            scanner.nextLine();
+                        }catch (InputMismatchException e){
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        }catch (Exception e){
+                            System.out.println("Problema detectado");
+                            scanner.nextLine();
+                        }
+                    }while (habitacion==0);
+                    hotel.eliminarHabitacion(habitacion);
                     scanner.nextLine();
                     break;
                 case 4:
@@ -716,6 +832,7 @@ public class Menu {
         archivo.writerArchivoPasajeros("pasajero.json", hotel.getPasajeros());
         archivo.writerArchivoFacturas("factura.json", hotel.getFacturasEmitidas());
         archivo.writerArchivoShop("shop.json", hotel.getShop());
+        archivo.writerArchivoEmpleado("empleado.json", hotel.getEmpleados());
     }
 
 }

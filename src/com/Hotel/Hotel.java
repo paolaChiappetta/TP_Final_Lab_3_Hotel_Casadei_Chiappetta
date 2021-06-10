@@ -377,7 +377,7 @@ public class Hotel implements Serializable {
                 System.out.println("Ingrese fecha de salida de la nueva reserva (AAAA-MM-DD)");
                 salida = LocalDate.parse(scanner.nextLine());
                 if (salida.isBefore(ingreso)) {
-                    System.out.println("\nLa fecha de salida no puede ser anterior al inreso");
+                    System.out.println("\nLa fecha de salida no puede ser anterior al ingreso");
                     salida = null;
                 }
             } catch (DateTimeParseException e) {
@@ -399,20 +399,16 @@ public class Hotel implements Serializable {
                 try {
                     System.out.println("\nIndique el número de la habitación elegida");
                     nroHab = scanner.nextInt();
+                    scanner.nextLine();
 
                 } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
-                    nroHab = 5;
                     scanner.nextLine();
-
                 } catch (Exception e) {
-                    System.out.println("Debe ingresar un número");
-                    nroHab = 5;
+                    System.out.println("Problema detectado");
                     scanner.nextLine();
-                    ;
-
                 }
-            } while (nroHab == 5);
+            } while (nroHab == 0);
 
             for (Integer lista : libres) {
                 if (lista == nroHab) { //verifico que la hab elegida esté en ese listado de hab libres
@@ -462,6 +458,7 @@ public class Hotel implements Serializable {
             try {
                 System.out.println("Indique si el pasajero tiene reserva: \n1- Si\n2- No"); //se consulta si el pasajero tiene reserva
                 tieneReserva = scanner.nextInt();
+                scanner.nextLine();
 
             } catch (InputMismatchException e) {
                 System.out.println("Opcion incorrecta");
@@ -478,6 +475,7 @@ public class Hotel implements Serializable {
                 try {
                     System.out.println("Indique el Id de la reserva: ");  //se solicita el id al recepcionista
                     idReserva = scanner.nextLong();
+                    scanner.nextLine();
                 } catch (InputMismatchException e) {
                     System.out.println("El dato es incorrecto");
                     scanner.nextLine();
@@ -578,7 +576,7 @@ public class Hotel implements Serializable {
             System.out.println("El hotel no tiene habitaciones ocupadas");
         }
         if (!ocupacionEncontrada) {
-            System.out.println("No se encontró la ocupación");
+            System.out.println("No se encontró la ocupación con ek número de habitación ingresado");
         }
     }
 
