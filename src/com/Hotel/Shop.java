@@ -1,5 +1,6 @@
 package com.Hotel;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -155,144 +156,184 @@ public class Shop {
     //CARGAR UN EXTRA AL LISTADO DE LA HABITACION OCUPADA
     public void cargarExtraHabitacion(Hotel hotel, Empleado empleado) {
         Scanner scanner = new Scanner(System.in);
-        int opcion;
         Extra extra = null;
         String continuar = "s";
         String nombre;
-        int nroHabitacion;
+        int nroHabitacion = 0;
         int cantidad;
         boolean habEncontrada = false;
         boolean ocupacionEncontrada = false;
-
-        System.out.println("Ingrese el número de la habitación"); //Se pide el numero de habitación a la que se le cargará el extra
-        nroHabitacion = scanner.nextInt();
-
-        habEncontrada=hotel.verificarHabitacionExistente(nroHabitacion);
-
-        if (habEncontrada) { //si existe la hab verifico que haya ocupación
-            ocupacionEncontrada= hotel.verificarOcupacionExistente(nroHabitacion);
-        }
-
-        if (habEncontrada && ocupacionEncontrada) { //verifico que exista la ocupacion y el nro de hab a la que se le cargará el extra
-            do {
-
-                System.out.println("Qué tipo de extra desea cargar?"); //Consulto el tipo de extra p/revisar buscarlo solo en esa lista
-                opcionesExtras();
-                opcion = scanner.nextInt();
-                nombre = scanner.nextLine();
-                if (opcion == 1) {
-                    verListaServicios(empleado);
-                } else if (opcion == 2) {
-                    verListaAmenities(empleado);
-                } else if (opcion == 3) {
-                    verListaMinibar(empleado);
-                } else {
-                    verListaRotura(empleado);
-                }
-                System.out.println("\nIngrese el nombre del extra"); //Se busca por nombre
-                nombre = scanner.nextLine();
-                System.out.println("Ingrese la cantidad"); //Se pide cantidad p/no repetir la búsqueda si se necesitan cargar más de una unidad del mismo producto
-                cantidad = scanner.nextInt();
-
-                switch (opcion) {
-                    case 1:
-                        if (!this.servicios.isEmpty()) {
-                            for (Servicio lista : servicios) {
-                                if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
-                                    if (lista.isAlta()) {
-                                        extra = lista;  //si está de alta guarda el producto en extra
-                                    }
-
-                                }
-                            }
-                        } else {
-                            System.out.println("No hay servicios cargados");
-                        }
-                        break;
-                    case 2:
-                        if (!this.amenities.isEmpty()) {
-                            for (Amenitie lista : this.amenities) {
-                                if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
-                                    if (lista.isAlta()) {
-                                        extra = lista; //si está de alta guarda el producto en extra
-                                    }
-                                }
-                            }
-                        } else {
-                            System.out.println("No hay amenities cargadas");
-                        }
-                        break;
-                    case 3:
-                        if (!this.minibar.isEmpty()) {
-                            for (ProductoMinibar lista : minibar) {
-                                if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
-                                    if (lista.isAlta()) {
-                                        extra = lista; //si está de alta guarda el producto en extra
-                                    }
-                                }
-                            }
-                        } else {
-                            System.out.println("No hay productos cargados");
-                        }
-                        break;
-                    case 4:
-                        if (!this.roturas.isEmpty()) {
-                            for (Rotura lista : roturas) {
-                                if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
-                                    if (lista.isAlta()) {
-                                        extra = lista; //si está de alta guarda el producto en extra
-                                    }
-                                }
-                            }
-                        } else {
-                            System.out.println("No hay roturas cargadas");
-                        }
-                        break;
-                    default:
-                        System.out.println("Opción incorrecta, intente nuevamente");
-                        break;
-                }
-                if (extra != null) { //si encontró el extra buscado
-                    int i = 0;
-                    while (i < cantidad) { //lo carga tantas veces como cantidad se haya indicado
-                        hotel.buscarOcupacionPorHabitacion(nroHabitacion).getExtras().add(extra); //dentro de la lista de extras de la ocupación, según el nro de habitación
-                        i++;
-                    }
-                }
-
+        do {
+            try {
+                System.out.println("Ingrese el número de la habitación"); //Se pide el numero de habitación a la que se le cargará el extra
+                nroHabitacion = scanner.nextInt();
                 scanner.nextLine();
-                System.out.println("Desea seguir cargando? s/n");
-                continuar = scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Debe ingresar un número");
+                scanner.nextLine();
+            } catch (Exception e) {
+                System.out.println("Problema detectado");
+                scanner.nextLine();
+            }
+        } while (nroHabitacion == 0);
 
-            } while (continuar.equalsIgnoreCase("s"));
+    habEncontrada=hotel.verificarHabitacionExistente(nroHabitacion);
 
-        } else if (!habEncontrada && !ocupacionEncontrada) {
-            System.out.println("Ocupación y habitación inexistentes");
-        } else if (ocupacionEncontrada) {
-            System.out.println("Habitación inexistente");
-        } else {
-            System.out.println("Ocupación inexistente");
-        }
+        if(habEncontrada)
 
-
+    { //si existe la hab verifico que haya ocupación
+        ocupacionEncontrada = hotel.verificarOcupacionExistente(nroHabitacion);
     }
+
+        if(habEncontrada && ocupacionEncontrada)
+
+    { //verifico que exista la ocupacion y el nro de hab a la que se le cargará el extra
+        do {
+            int opcion=0;
+            do{
+                try{
+                    System.out.println("Qué tipo de extra desea cargar?"); //Consulto el tipo de extra p/revisar buscarlo solo en esa lista
+                    opcionesExtras();
+                    opcion = scanner.nextInt();
+                    nombre = scanner.nextLine();
+                }catch (InputMismatchException e) {
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            } while (opcion == 0);
+
+            if (opcion == 1) {
+                verListaServicios(empleado);
+            } else if (opcion == 2) {
+                verListaAmenities(empleado);
+            } else if (opcion == 3) {
+                verListaMinibar(empleado);
+            } else {
+                verListaRotura(empleado);
+            }
+            System.out.println("\nIngrese el nombre del extra"); //Se busca por nombre
+            nombre = scanner.nextLine();
+            System.out.println("Ingrese la cantidad"); //Se pide cantidad p/no repetir la búsqueda si se necesitan cargar más de una unidad del mismo producto
+            cantidad = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    if (!this.servicios.isEmpty()) {
+                        for (Servicio lista : servicios) {
+                            if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
+                                if (lista.isAlta()) {
+                                    extra = lista;  //si está de alta guarda el producto en extra
+                                }
+
+                            }
+                        }
+                    } else {
+                        System.out.println("No hay servicios cargados");
+                    }
+                    break;
+                case 2:
+                    if (!this.amenities.isEmpty()) {
+                        for (Amenitie lista : this.amenities) {
+                            if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
+                                if (lista.isAlta()) {
+                                    extra = lista; //si está de alta guarda el producto en extra
+                                }
+                            }
+                        }
+                    } else {
+                        System.out.println("No hay amenities cargadas");
+                    }
+                    break;
+                case 3:
+                    if (!this.minibar.isEmpty()) {
+                        for (ProductoMinibar lista : minibar) {
+                            if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
+                                if (lista.isAlta()) {
+                                    extra = lista; //si está de alta guarda el producto en extra
+                                }
+                            }
+                        }
+                    } else {
+                        System.out.println("No hay productos cargados");
+                    }
+                    break;
+                case 4:
+                    if (!this.roturas.isEmpty()) {
+                        for (Rotura lista : roturas) {
+                            if (lista.getNombre().compareTo(nombre) == 0) { //busco por nombre en la lista
+                                if (lista.isAlta()) {
+                                    extra = lista; //si está de alta guarda el producto en extra
+                                }
+                            }
+                        }
+                    } else {
+                        System.out.println("No hay roturas cargadas");
+                    }
+                    break;
+                default:
+                    System.out.println("Opción incorrecta, intente nuevamente");
+                    break;
+            }
+            if (extra != null) { //si encontró el extra buscado
+                int i = 0;
+                while (i < cantidad) { //lo carga tantas veces como cantidad se haya indicado
+                    hotel.buscarOcupacionPorHabitacion(nroHabitacion).getExtras().add(extra); //dentro de la lista de extras de la ocupación, según el nro de habitación
+                    i++;
+                }
+            }
+
+            scanner.nextLine();
+            System.out.println("Desea seguir cargando? s/n");
+            continuar = scanner.nextLine();
+
+        } while (continuar.equalsIgnoreCase("s"));
+
+    } else if(!habEncontrada &&!ocupacionEncontrada)
+
+    {
+        System.out.println("Ocupación y habitación inexistentes");
+    } else if(ocupacionEncontrada)
+
+    {
+        System.out.println("Habitación inexistente");
+    } else
+
+    {
+        System.out.println("Ocupación inexistente");
+    }
+
+
+}
 
     //ELIMINAR UN EXTRA CARGADO EN UNA HABITACION (EJ: SE CARGÓ EN UNA HAB POR ERROR - SE CARGÓ MAL EL EXTRA)
     public void eliminarExtraHabitacion(Hotel hotel) {
         Scanner scanner = new Scanner(System.in);
-        int nroHab;
         String nombre;
         boolean habEncontrada = false;
         boolean ocupacionEncontrada = false;
+        int nroHab=0;
+        do{
 
-        System.out.println("Ingrese el número de habitación");
-        nroHab = scanner.nextInt();
-        scanner.nextLine();
+            try{
+                System.out.println("Ingrese el número de habitación");
+                nroHab = scanner.nextInt();
+                scanner.nextLine();
+            }catch (InputMismatchException e) {
+                System.out.println("Debe ingresar un número");
+                scanner.nextLine();
+            } catch (Exception e) {
+                System.out.println("Problema detectado");
+                scanner.nextLine();
+            }
+        } while (nroHab == 0);
 
-        habEncontrada=hotel.verificarHabitacionExistente(nroHab);
+        habEncontrada = hotel.verificarHabitacionExistente(nroHab);
 
         if (habEncontrada) { //si existe la hab verifico que haya ocupación
-            ocupacionEncontrada= hotel.verificarOcupacionExistente(nroHab);
+            ocupacionEncontrada = hotel.verificarOcupacionExistente(nroHab);
         }
 
         if (habEncontrada && ocupacionEncontrada) {
@@ -312,7 +353,7 @@ public class Shop {
             } else {
                 System.out.println("No hay extras cargados en esta habitación");
             }
-        }else if (!habEncontrada && !ocupacionEncontrada) {
+        } else if (!habEncontrada && !ocupacionEncontrada) {
             System.out.println("Ocupación y habitación inexistentes");
         } else if (ocupacionEncontrada) {
             System.out.println("Habitación inexistente");
@@ -327,14 +368,26 @@ public class Shop {
         Scanner scanner = new Scanner(System.in);
         String nombre;
         Double precio;
-        int opcion;
+
         String continuar = "s";
 
         do {
-            System.out.println("Qué tipo de extra desea cargar?");
-            opcionesExtras(); //ve la lista de tipos de extra
-            opcion = scanner.nextInt();
-            scanner.nextLine();
+            int opcion=0;
+            do{
+                try{
+                    System.out.println("Qué tipo de extra desea cargar?");
+                    opcionesExtras(); //ve la lista de tipos de extra
+                    opcion = scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e) {
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            } while (opcion == 0);
+            
             System.out.println("Ingrese el nombre del extra"); //se pide aquí el nombre y precio ya que todos los extras
             nombre = scanner.nextLine();                       //lo comparten
             System.out.println("Ingrese el precio");
@@ -386,7 +439,7 @@ public class Shop {
             }
 
             System.out.println("Desea cargar otro extra? s/n");
-            continuar=scanner.nextLine();
+            continuar = scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
 
@@ -470,7 +523,7 @@ public class Shop {
             }
             scanner.nextLine();
             System.out.println("Desea dar de baja otro extra? s/n");
-            continuar=scanner.nextLine();
+            continuar = scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
     }
@@ -553,14 +606,14 @@ public class Shop {
             }
             scanner.nextLine();
             System.out.println("Desea eliminar otro extra? s/n");
-            continuar=scanner.nextLine();
+            continuar = scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
 
 
     }
 
-    public void opcionesModificarExtra (){
+    public void opcionesModificarExtra() {
         System.out.println("Qué desea modificar: ");
         System.out.println("1- Nombre");
         System.out.println("2- Precio");
@@ -586,7 +639,7 @@ public class Shop {
                 case 1:
                     if (!this.servicios.isEmpty()) {
                         while (!encontrado && i < servicios.size()) {
-                            if (servicios.get(i).getNombre().compareTo(nombre)==0) {
+                            if (servicios.get(i).getNombre().compareTo(nombre) == 0) {
                                 do { //según el tipo, se puden modificar distintos atributos
                                     System.out.println(servicios.get(i).mostrarExtra());
                                     opcionesModificarExtra();
@@ -603,7 +656,7 @@ public class Shop {
                             }
                             i++;
                         }
-                        if(!encontrado){
+                        if (!encontrado) {
                             System.out.println("No se encontraron coincidencias con el nombre indicado");
                         }
 
@@ -612,7 +665,7 @@ public class Shop {
                 case 2:
                     if (!this.amenities.isEmpty()) {
                         while (!encontrado && i < amenities.size()) {
-                            if (amenities.get(i).getNombre().compareTo(nombre)==0) {
+                            if (amenities.get(i).getNombre().compareTo(nombre) == 0) {
                                 do { //según el tipo, se puden modificar distintos atributos
                                     System.out.println(amenities.get(i).mostrarExtra());
                                     opcionesModificarExtra();
@@ -631,7 +684,7 @@ public class Shop {
                             }
                             i++;
                         }
-                        if(!encontrado){
+                        if (!encontrado) {
                             System.out.println("No se encontraron coincidencias con el nombre indicado");
                         }
                     }
@@ -639,7 +692,7 @@ public class Shop {
                 case 3:
                     if (!this.minibar.isEmpty()) {
                         while (!encontrado && i < minibar.size()) {
-                            if (minibar.get(i).getNombre().compareTo(nombre)==0) {
+                            if (minibar.get(i).getNombre().compareTo(nombre) == 0) {
                                 do { //según el tipo, se puden modificar distintos atributos
                                     System.out.println(minibar.get(i).mostrarExtra());
                                     opcionesModificarExtra();
@@ -657,7 +710,7 @@ public class Shop {
                             }
                             i++;
                         }
-                        if(!encontrado){
+                        if (!encontrado) {
                             System.out.println("No se encontraron coincidencias con el nombre indicado");
                         }
                     }
@@ -665,7 +718,7 @@ public class Shop {
                 case 4:
                     if (!this.roturas.isEmpty()) {
                         while (!encontrado && i < roturas.size()) {
-                            if (roturas.get(i).getNombre().compareTo(nombre)==0) {
+                            if (roturas.get(i).getNombre().compareTo(nombre) == 0) {
                                 do { //según el tipo, se puden modificar distintos atributos
                                     System.out.println(roturas.get(i).mostrarExtra());
                                     opcionesModificarExtra();
@@ -682,7 +735,7 @@ public class Shop {
                             }
                             i++;
                         }
-                        if(!encontrado){
+                        if (!encontrado) {
                             System.out.println("No se encontraron coincidencias con el nombre indicado");
                         }
                     }
@@ -693,7 +746,7 @@ public class Shop {
             }
             scanner.nextLine();
             System.out.println("Desea modificar otro extra? s/n");
-            continuar=scanner.nextLine();
+            continuar = scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
     }
@@ -776,7 +829,7 @@ public class Shop {
             }
             scanner.nextLine();
             System.out.println("Desea dar de alta otro extra? s/n");
-            continuar=scanner.nextLine();
+            continuar = scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
     }
