@@ -98,7 +98,6 @@ public class Hotel implements Serializable {
     }
 
 
-
     ///METODO PARA EXCEPTION DE VERIFICAR SI HAY DATOS VACIOS
 
     public void examinaDatosCompletos(String dato) throws ExcepcionDatoVacio {
@@ -724,7 +723,6 @@ public class Hotel implements Serializable {
     }
 
 
-
     /// Nueva ocupacion con reserva previa (si el pasajero no tiene, se genera una en el momento del ingreso
 
 
@@ -942,165 +940,165 @@ public class Hotel implements Serializable {
                         } while (nombre.compareTo("") == 0);
 
 
-                break;
-                case 2:
-                    String apellido = "";
-                    do {
-                        try {
-                            System.out.println("Indique el apellido:");
-                            apellido = scanner.nextLine();
-                            examinaDatosCompletos(apellido);
-                            reserva.setPasajeroApellido(apellido);
-                        } catch (ExcepcionDatoVacio e) {
-                            System.out.println("Este dato debe ser cargado");
+                        break;
+                    case 2:
+                        String apellido = "";
+                        do {
+                            try {
+                                System.out.println("Indique el apellido:");
+                                apellido = scanner.nextLine();
+                                examinaDatosCompletos(apellido);
+                                reserva.setPasajeroApellido(apellido);
+                            } catch (ExcepcionDatoVacio e) {
+                                System.out.println("Este dato debe ser cargado");
 
-                        } catch (Exception e) {
+                            } catch (Exception e) {
 
-                            System.out.println("No se ha podido registrar");
+                                System.out.println("No se ha podido registrar");
 
-                        }
-                    } while (apellido.compareTo("") == 0);
+                            }
+                        } while (apellido.compareTo("") == 0);
 
 
-                    break;
-                case 3:
-                    String dni = "";
-                    do {
-                        try {
-                            System.out.println("Indique el dni:");
-                            dni = scanner.nextLine();
-                            examinaDatosCompletos(dni);
-                            reserva.setPasajeroDni(dni);
-                        } catch (ExcepcionDatoVacio e) {
-                            System.out.println("Este dato debe ser cargado");
+                        break;
+                    case 3:
+                        String dni = "";
+                        do {
+                            try {
+                                System.out.println("Indique el dni:");
+                                dni = scanner.nextLine();
+                                examinaDatosCompletos(dni);
+                                reserva.setPasajeroDni(dni);
+                            } catch (ExcepcionDatoVacio e) {
+                                System.out.println("Este dato debe ser cargado");
 
-                        } catch (Exception e) {
+                            } catch (Exception e) {
 
-                            System.out.println("No se ha podido registrar");
+                                System.out.println("No se ha podido registrar");
 
-                        }
-                    } while (dni.compareTo("") == 0);
+                            }
+                        } while (dni.compareTo("") == 0);
 
-                    break;
-                case 4:
-                    String tel = "";
-                    do {
-                        try {
-                            System.out.println("Indique el telefono:");
-                            tel = scanner.nextLine();
-                            examinaDatosCompletos(tel);
-                            reserva.setPasajeroNombre(tel);
-                        } catch (ExcepcionDatoVacio e) {
-                            System.out.println("Este dato debe ser cargado");
+                        break;
+                    case 4:
+                        String tel = "";
+                        do {
+                            try {
+                                System.out.println("Indique el telefono:");
+                                tel = scanner.nextLine();
+                                examinaDatosCompletos(tel);
+                                reserva.setPasajeroNombre(tel);
+                            } catch (ExcepcionDatoVacio e) {
+                                System.out.println("Este dato debe ser cargado");
 
-                        } catch (Exception e) {
+                            } catch (Exception e) {
 
-                            System.out.println("No se ha podido registrar");
+                                System.out.println("No se ha podido registrar");
 
-                        }
-                    } while (tel.compareTo("") == 0);
+                            }
+                        } while (tel.compareTo("") == 0);
 
-                    break;
-                case 5:
-                    int numero= 0;
-                    do{
-                        try{
-                            System.out.println("Numero de pasajeros:");
-                            numero= scanner.nextInt();
-                            reserva.setNumeroPasajeros(numero);
-                        }catch(InputMismatchException e){
-                            System.out.println("No se ha podido registrar este dato");
-                        }catch(Exception e){
-                            System.out.println("No se ha podido registrar este dato");
-                        }
-                    }while (numero ==0 );
+                        break;
+                    case 5:
+                        int numero = 0;
+                        do {
+                            try {
+                                System.out.println("Numero de pasajeros:");
+                                numero = scanner.nextInt();
+                                reserva.setNumeroPasajeros(numero);
+                            } catch (InputMismatchException e) {
+                                System.out.println("No se ha podido registrar este dato");
+                            } catch (Exception e) {
+                                System.out.println("No se ha podido registrar este dato");
+                            }
+                        } while (numero == 0);
 
-                    break;
-                case 6:
-                    LocalDate ingreso;
-                    LocalDate salida;
-                    do {
-                        try {
-                            System.out.println("Ingrese la nueva fecha de ingreso (AAAA-MM-DD)");
-                            ingreso = LocalDate.parse(scanner.nextLine());
-                        } catch (DateTimeParseException e) {
-                            System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
-                            ingreso = null;
-                        } catch (Exception e) {
-                            System.out.println("\nIngrese la fecha nuevamente");
-                            ingreso = null;
-                        }
-                    } while (ingreso == null);
+                        break;
+                    case 6:
+                        LocalDate ingreso;
+                        LocalDate salida;
+                        do {
+                            try {
+                                System.out.println("Ingrese la nueva fecha de ingreso (AAAA-MM-DD)");
+                                ingreso = LocalDate.parse(scanner.nextLine());
+                            } catch (DateTimeParseException e) {
+                                System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
+                                ingreso = null;
+                            } catch (Exception e) {
+                                System.out.println("\nIngrese la fecha nuevamente");
+                                ingreso = null;
+                            }
+                        } while (ingreso == null);
 
-                    do {
-                        try {
-                            System.out.println("Ingrese la nueva fecha de salida (AAAA-MM-DD)");
-                            salida = LocalDate.parse(scanner.nextLine());
-                            if (salida.isBefore(ingreso)) {
-                                System.out.println("\nLa fecha de salida no puede ser anterior al inreso");
+                        do {
+                            try {
+                                System.out.println("Ingrese la nueva fecha de salida (AAAA-MM-DD)");
+                                salida = LocalDate.parse(scanner.nextLine());
+                                if (salida.isBefore(ingreso)) {
+                                    System.out.println("\nLa fecha de salida no puede ser anterior al inreso");
+                                    salida = null;
+                                }
+                            } catch (DateTimeParseException e) {
+                                System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
+                                salida = null;
+                            } catch (Exception e) {
+                                System.out.println("\nIngrese la fecha nuevamente");
                                 salida = null;
                             }
-                        } catch (DateTimeParseException e) {
-                            System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
-                            salida = null;
-                        } catch (Exception e) {
-                            System.out.println("\nIngrese la fecha nuevamente");
-                            salida = null;
-                        }
-                    } while (salida == null);
+                        } while (salida == null);
 
-                    if (habitacionLibre(ingreso, salida, reserva.getNumeroHabitacion(), reserva.getNumeroReserva())) {
-                        reserva.setFechaIngreso(ingreso);
-                        reserva.setFechaSalida(salida);
-                    } else {
-                        System.out.println("La habitación no está disponible en las fechas indicadas");
-                    }
-                    break;
-                case 7:
-                    System.out.println("Habitaciones disponibles para las fechas de la reserva:");
-                    List<Integer> listaHabLibres = habitacionesLibres(reserva.getFechaIngreso(), reserva.getFechaSalida());
-                    if (listaHabLibres.isEmpty()) {
-                        System.out.println("No hay habitaciones disponibles en las fechas indicadas");
-                    } else {
-                        System.out.println("Indique el número de la nueva habitacion que desea para esta reserva:");
-                        int numeroHab = scanner.nextInt();
-                        for (Integer lista : listaHabLibres) {
-                            if (numeroHab == lista) {
-                                reserva.setNumeroHabitacion(numeroHab);
+                        if (habitacionLibre(ingreso, salida, reserva.getNumeroHabitacion(), reserva.getNumeroReserva())) {
+                            reserva.setFechaIngreso(ingreso);
+                            reserva.setFechaSalida(salida);
+                        } else {
+                            System.out.println("La habitación no está disponible en las fechas indicadas");
+                        }
+                        break;
+                    case 7:
+                        System.out.println("Habitaciones disponibles para las fechas de la reserva:");
+                        List<Integer> listaHabLibres = habitacionesLibres(reserva.getFechaIngreso(), reserva.getFechaSalida());
+                        if (listaHabLibres.isEmpty()) {
+                            System.out.println("No hay habitaciones disponibles en las fechas indicadas");
+                        } else {
+                            System.out.println("Indique el número de la nueva habitacion que desea para esta reserva:");
+                            int numeroHab = scanner.nextInt();
+                            for (Integer lista : listaHabLibres) {
+                                if (numeroHab == lista) {
+                                    reserva.setNumeroHabitacion(numeroHab);
+                                }
                             }
                         }
-                    }
-                    break;
-                case 8:
-                    Double deposito = 0D;
-                    do {
-                        try {
-                            System.out.println("Depósito:");
-                            deposito = scanner.nextDouble();
-                            reserva.setDeposito(deposito);
-                        } catch (InputMismatchException e) {
-                            System.out.println("dato incorrecto");
-                            scanner.nextLine();
-                        } catch (Exception e) {
-                            System.out.println("Problema detectado");
-                            scanner.nextLine();
-                        }
-                    } while (deposito == 0);
+                        break;
+                    case 8:
+                        Double deposito = 0D;
+                        do {
+                            try {
+                                System.out.println("Depósito:");
+                                deposito = scanner.nextDouble();
+                                reserva.setDeposito(deposito);
+                            } catch (InputMismatchException e) {
+                                System.out.println("dato incorrecto");
+                                scanner.nextLine();
+                            } catch (Exception e) {
+                                System.out.println("Problema detectado");
+                                scanner.nextLine();
+                            }
+                        } while (deposito == 0);
 
-                    break;
-                default:
-                    System.out.println("Opcion incorrecta, ingrese nuevamente");
-                    break;
-            }
+                        break;
+                    default:
+                        System.out.println("Opcion incorrecta, ingrese nuevamente");
+                        break;
+                }
 
-            System.out.println(reserva);
-            System.out.println("Desea modificar otro dato? ");
-            continuar = scanner.nextLine();
+                System.out.println(reserva);
+                System.out.println("Desea modificar otro dato? ");
+                continuar = scanner.nextLine();
 
-        } while (continuar.equalsIgnoreCase("s")) ;
+            } while (continuar.equalsIgnoreCase("s"));
+        }
+
     }
-
-}
 
     //ELIMINAR RESERVA
 
@@ -1268,19 +1266,19 @@ public class Hotel implements Serializable {
 
     public void llamadaModificarEmpleado(Empleado empleado) {
         Scanner scanner = new Scanner(System.in);
-        String dni= "";
+        String dni = "";
         boolean encontrado = false;
-       do{
-           try{
-               System.out.println("Ingrese el DNI del empleado que desea modificar");
-               dni = scanner.nextLine();
-               examinaDatosCompletos(dni);
-           }catch (ExcepcionDatoVacio e){
-               System.out.println("no indico ningun dato");
-           }catch(Exception e){
-               System.out.println("Problema detectado");
-           }
-       }while (dni.compareTo("")==0);
+        do {
+            try {
+                System.out.println("Ingrese el DNI del empleado que desea modificar");
+                dni = scanner.nextLine();
+                examinaDatosCompletos(dni);
+            } catch (ExcepcionDatoVacio e) {
+                System.out.println("no indico ningun dato");
+            } catch (Exception e) {
+                System.out.println("Problema detectado");
+            }
+        } while (dni.compareTo("") == 0);
 
         if (!this.empleados.isEmpty()) {
             for (Empleado lista : this.empleados) {
@@ -1314,6 +1312,7 @@ public class Hotel implements Serializable {
         }
         return empleado;
     }
+
     public void menuModificarEmpleado() {
         System.out.println("1- Nombre");
         System.out.println("2- Apellido");
@@ -1321,7 +1320,7 @@ public class Hotel implements Serializable {
         System.out.println("4- Telefono");
     }
 
-    public void modificarEmpleado(Empleado empleado){
+    public void modificarEmpleado(Empleado empleado) {
         Scanner scanner = new Scanner(System.in);
         String continuar = "s";
 
@@ -1335,7 +1334,7 @@ public class Hotel implements Serializable {
             scanner.nextLine();
             switch (opcion) {
                 case 1:
-                    String nombre= "";
+                    String nombre = "";
                     do {
                         try {
                             System.out.println("Ingrese el nombre:");
@@ -1353,7 +1352,7 @@ public class Hotel implements Serializable {
                     break;
 
                 case 2:
-                    String apellido= "";
+                    String apellido = "";
                     do {
                         try {
                             System.out.println("Ingrese el apellido:");
@@ -1372,7 +1371,7 @@ public class Hotel implements Serializable {
 
                     break;
                 case 3:
-                    String dni= "";
+                    String dni = "";
                     do {
                         try {
                             System.out.println("Ingrese el dni:");
@@ -1391,7 +1390,7 @@ public class Hotel implements Serializable {
 
                     break;
                 case 4:
-                    String telefono= "";
+                    String telefono = "";
                     do {
                         try {
                             System.out.println("Ingrese numero de telefono:");
@@ -1417,7 +1416,7 @@ public class Hotel implements Serializable {
             System.out.println(empleado);
             scanner.nextLine();
             System.out.println("Desea modificar otro dato?");
-            continuar=scanner.nextLine();
+            continuar = scanner.nextLine();
 
         } while (continuar.equalsIgnoreCase("s"));
     }
@@ -1428,8 +1427,8 @@ public class Hotel implements Serializable {
         String apellido = "";
         String dni = "";
         String tel = "";
-        int numero= 0;
-        int pasajeros= 0;
+        int numero = 0;
+        int pasajeros = 0;
         Double deposito = 0D;
         reserva.setNumeroHabitacion(numeroHabitacion);
         reserva.setFechaIngreso(ingreso);
@@ -1502,20 +1501,6 @@ public class Hotel implements Serializable {
         } while (tel.compareTo("") == 0);
 
 
-        do{
-            try{
-                System.out.println("Numero de pasajeros:");
-                numero= scanner.nextInt();
-                reserva.setNumeroPasajeros(numero);
-            }catch(InputMismatchException e){
-                System.out.println("No se ha podido registrar este dato");
-            }catch(Exception e){
-                System.out.println("No se ha podido registrar este dato");
-            }
-        }while (numero ==0 );
-
-
-
         do {
             try {
                 System.out.println("Ingrese la cantidad de pasajeros:");
@@ -1545,5 +1530,222 @@ public class Hotel implements Serializable {
         } while (deposito == 0);
 
     }
+
+    public Pasajero cargarPasajeroAcompaniante(Pasajero pasajero) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Nombre:");
+        pasajero.setNombre(scanner.nextLine());
+        System.out.println("Apellido:");
+        pasajero.setApellido(scanner.nextLine());
+        System.out.println("Telefono:");
+        pasajero.setNumeroTel(scanner.nextLine());
+        pasajero.setTitularreserva(false);
+
+        return pasajero;
+    }
+
+    //FUNCION MODIFICAR DATOS PASAJERO
+
+    public void menuModificarPasajero() {
+
+        System.out.println("1: Nombre");
+        System.out.println("2: Apellido");
+        System.out.println("3: Dni");
+        System.out.println("4: Fecha de nacimiento");
+        System.out.println("5: Profesion-ocupacion");
+        System.out.println("6: Nacionalidad");
+        System.out.println("7: Numero de telefono");
+        System.out.println("8: Calle");
+        System.out.println("9: Numero");
+        System.out.println("10: Piso");
+        System.out.println("11: Departamento");
+        System.out.println("12: Ciudad");
+        System.out.println("13: Provincia");
+        System.out.println("14: Pais");
+        System.out.println("15: Titular reserva");
+
+        System.out.println("\n0 para finalizar");
+
+    }
+
+
+    public void modificarPasajero(Pasajero pasajero) {
+
+        System.out.println("Indique que datos desea modificar: ");
+        int opcion = 0;
+        Scanner scanner = new Scanner(System.in);
+
+
+        do {
+            menuModificarPasajero();
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    String nombre = "";
+                    do {
+                        try {
+                            System.out.println("Ingrese el nombre:");
+                            nombre = scanner.nextLine();
+                            examinaDatosCompletos(nombre);
+                            pasajero.setNombre(nombre);
+
+                        } catch (ExcepcionDatoVacio e) {
+
+                            System.out.println("No se ha podido registrar");
+
+                        } catch (Exception e) {
+
+                        }
+                    } while (nombre.compareTo("") == 0);
+
+                    break;
+                case 2:
+                    String apellido = "";
+                    do {
+                        try {
+                            System.out.println("Ingrese el apellido:");
+                            apellido = scanner.nextLine();
+                            examinaDatosCompletos(apellido);
+                            pasajero.setApellido(apellido);
+                        } catch (ExcepcionDatoVacio e) {
+                            System.out.println("Este dato debe ser cargado");
+
+                        } catch (Exception e) {
+
+                            System.out.println("No se ha podido registrar");
+
+                        }
+                    } while (apellido.compareTo("") == 0);
+
+                    break;
+                case 3:
+                    String dni = "";
+                    do {
+                        try {
+                            System.out.println("Indique el Dni:");
+                            dni = scanner.nextLine();
+                            examinaDatosCompletos(dni);
+                            pasajero.setDni(dni);
+                        } catch (ExcepcionDatoVacio e) {
+                            System.out.println("Este dato debe ser cargado");
+
+                        } catch (Exception e) {
+
+                            System.out.println("No se ha podido registrar");
+
+                        }
+                    } while (dni.compareTo("") == 0);
+
+                    break;
+                case 4:
+                    LocalDate fecha = null;
+                    do {
+                        try {
+                            System.out.println("Ingrese fecha de nacimiento (AAAA-MM-DD)");
+                            fecha = LocalDate.parse(scanner.nextLine());
+                            pasajero.setFechaNacimiento(fecha);
+                        } catch (DateTimeParseException e) {
+                            System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
+
+                        } catch (Exception e) {
+                            System.out.println("\nIngrese la fecha nuevamente");
+
+                        }
+                    } while (fecha == null);
+                    System.out.println("Indique la fecha de nacimiento:");
+
+                    break;
+                case 5:
+                    System.out.println("Indique la profesion u ocupacion:");
+                    pasajero.setProfesion_ocupacion(scanner.next());
+                    break;
+                case 6:
+                    System.out.println("Indique la Nacionalidad:");
+                    pasajero.setNacionalidad(scanner.next());
+                    break;
+                case 7:
+                    String tel = "";
+                    do {
+                        try {
+                            System.out.println("Indique el Dni:");
+                            tel = scanner.nextLine();
+                            examinaDatosCompletos(tel);
+                            pasajero.setNumeroTel(tel);
+                        } catch (ExcepcionDatoVacio e) {
+                            System.out.println("Este dato debe ser cargado");
+
+                        } catch (Exception e) {
+
+                            System.out.println("No se ha podido registrar");
+
+                        }
+                    } while (tel.compareTo("") == 0);
+
+                    break;
+                case 8:
+                    System.out.println("Indique la Calle:");
+                    pasajero.setCalle(scanner.next());
+                    break;
+                case 9:
+                    int num = 0;
+                    do {
+                        try {
+                            System.out.println("Indique el Numero:");
+                            num = scanner.nextInt();
+                            pasajero.setNumero(num);
+                        } catch (InputMismatchException e) {
+                            System.out.println("Dato incorrecto");
+                            scanner.nextLine();
+                        } catch (Exception e) {
+                            System.out.println("Problema detectado");
+                        }
+                    } while (num == 0);
+
+                    break;
+                case 10:
+                    int piso = 0;
+                    do {
+                        try {
+                            System.out.println("Indique el Piso:");
+                            piso = scanner.nextInt();
+                            pasajero.setPiso(piso);
+                        } catch (InputMismatchException e) {
+                            System.out.println("Dato incorrecto");
+                            scanner.nextLine();
+                        } catch (Exception e) {
+                            System.out.println("Problema detectado");
+                        }
+                    } while (piso == 0);
+
+                    break;
+                case 11:
+                    System.out.println("Indique el departamento:");
+                    pasajero.setDepartamento(scanner.next());
+                    break;
+                case 12:
+                    System.out.println("Indique la Ciudad:");
+                    pasajero.setCiudad(scanner.next());
+                    break;
+                case 13:
+                    System.out.println("Indique la Provincia:");
+                    pasajero.setProvincia(scanner.next());
+                    break;
+                case 14:
+                    System.out.println("Indique el Pais:");
+                    pasajero.setPais(scanner.next());
+                    break;
+                case 15:
+                    System.out.println("Es titular de reserva? si: 1  / no: 0  ");
+                    pasajero.setTitularreserva(scanner.nextBoolean());
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta, ingrese nuevamente");
+                    break;
+            }
+        } while (opcion != 0);
+    }
+
 
 }
