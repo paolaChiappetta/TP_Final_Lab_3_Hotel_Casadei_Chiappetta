@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Factura {
-    //ATRIBUTOS
+
+    //Atributos
 
     private static int idFactura = 0;
 
@@ -15,12 +16,13 @@ public class Factura {
     private TipoFactura tipoFactura;
     private Ocupacion ocupacion;
 
-    //Constructor vacío
+    //Constructor vacío - día de hoy y asignación de nro de factura
     public Factura() {
         this.numeroFactura = idFactura + 1;
         this.fechaEmision = LocalDate.now();
     }
-    //Constructor con día de hoy y asignación de nro de factura
+
+    //Constructor con algunos datos - día de hoy y asignación de nro de factura
     public Factura(TipoFactura tipoFactura, Ocupacion ocupacion) {
         this.fechaEmision = LocalDate.now();
         this.tipoFactura = tipoFactura;
@@ -28,7 +30,7 @@ public class Factura {
         this.numeroFactura = idFactura + 1;
 
     }
-    //constructor completo
+    //Constructor completo
     public Factura(int numeroFactura, LocalDate fechaEmision, TipoFactura tipoFactura, Ocupacion ocupacion) {
         this.numeroFactura = numeroFactura;
         this.fechaEmision = fechaEmision;
@@ -36,7 +38,7 @@ public class Factura {
         this.ocupacion = ocupacion;
     }
 
-    //GETTERS Y SETTERS
+    //Getters Y Setters
     public LocalDate getFechaEmision() {
         return fechaEmision;
     }
@@ -131,7 +133,7 @@ public class Factura {
 
     //CALCULA EL IVA SOBRE EL TOTAL DE LA OCUPACION
     public double calculoIva() {
-        return calculoFinalOcupacionSinIva() * 0.21;  ///debería poner iva según factura
+        return calculoFinalOcupacionSinIva() * 0.21;
     }
 
     //CALCULA EL TOTAL DE LA OCUPACION + IVA

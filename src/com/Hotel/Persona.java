@@ -5,20 +5,24 @@ import java.time.LocalDate;
 
 public abstract class Persona implements Serializable {
 
+    //Atributos
     private String nombre;
     private String apellido;
     private String numeroTel;
     private String dni;
 
-
+//Cosntructor vacío
     public Persona() {}
 
+    //Constructor completo
     public Persona(String nombre, String apellido, String numeroTel, String dni) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.numeroTel = numeroTel;
         this.dni = dni;
     }
+
+    //Getters y setters
 
     public String getNombre() {  return nombre;    }
 

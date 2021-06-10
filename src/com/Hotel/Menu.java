@@ -11,8 +11,7 @@ public class Menu {
     private Hotel hotel = new Hotel();
     private Empleado empleadoActual;
     private Scanner scanner = new Scanner(System.in);
-    private String continuar = "n";
-    private int opcion;
+
 
     public Menu() {
     }
@@ -154,10 +153,22 @@ public class Menu {
     public void inicio () {
         Archivo archivo=new Archivo();
         hotel.setEmpleados(archivo.readerArchivoEmpleado("empleado.json")); //al ingreso se cargan las listas de empleados p/verificar usuario y contraseña
+        String continuar = "n";
         do {
-            ingreso();
-            opcion = scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    ingreso();
+                    opcion = scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
             switch (opcion) {
                 case 0:
                     this.guardarListas();
@@ -196,10 +207,22 @@ public class Menu {
     }
 
     public void menuInicioRecepcionista() {
+        String continuar = "n";
         do {
-            opcionesInicioRecepcionista();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesInicioRecepcionista();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -229,10 +252,22 @@ public class Menu {
     }
 
     public void menuInicioAdministrador() {
+        String continuar = "n";
         do {
-            opcionesInicioAdministrador();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesInicioAdministrador();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -245,7 +280,9 @@ public class Menu {
                     menuMisDatos();
                     break;
                 case 3:
-                    //backup
+                    Archivo archivo=new Archivo();
+                    archivo.writerArchivoHotel("hotel.json", hotel);
+                    System.out.println("Backup realizado correctamente");
                     break;
                 case 4:
                     inicio();
@@ -266,10 +303,23 @@ public class Menu {
     }
 
     public void menuHotel() {
+        String continuar = "n";
         do {
-            opcionesHotel();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesHotel();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
+
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -291,6 +341,7 @@ public class Menu {
                             scanner.nextLine();
                         }catch (Exception e){
                             System.out.println("Problema detectado");
+                            scanner.nextLine();
                         }
                     }while (nroHabitacion==0);
                     hotel.checkOut(nroHabitacion);
@@ -357,10 +408,23 @@ public class Menu {
     }
 
     public void menuAdministracionHotelAdministrador(){
+        String continuar = "n";
         do {
-            opcionesAdministracionHotelAdministrador();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesAdministracionHotelAdministrador();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
+
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -390,10 +454,23 @@ public class Menu {
     }
 
     public void menuAdministracionAdministrador (){
+        String continuar = "n";
         do {
-            opcionesAdministracionAdministrador();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesAdministracionAdministrador();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
+
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -426,10 +503,23 @@ public class Menu {
     }
 
     public void menuReservas (){
+        String continuar = "n";
         do {
-            opcionesReservas();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesReservas();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
+
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -496,10 +586,23 @@ public class Menu {
     }
 
     public void menuShop (){
+        String continuar = "n";
         do {
-            opcionesShop();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesShop();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
+
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -540,10 +643,23 @@ public class Menu {
     }
 
     public void menuListados (){
+        String continuar = "n";
         do {
-            opcionesListados();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesListados();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
+
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -633,10 +749,23 @@ public class Menu {
     }
 
     public void menuMisDatos (){
+        String continuar = "n";
         do {
-            opcionesMisDatos();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesMisDatos();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
+
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -673,10 +802,23 @@ public class Menu {
 
 
     public void menuEmpleadosAdministrador (){
+        String continuar = "n";
         do {
-            opcionesEmpleadosAdministrador();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesEmpleadosAdministrador();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
+
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -709,10 +851,23 @@ public class Menu {
     }
 
     public void menuHabitacionesAdministrador (){
+        String continuar = "n";
         do {
-            opcionesHabitacionesAdministrador();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesHabitacionesAdministrador();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
+
             switch (opcion){
                 case 0:
                     this.guardarListas();
@@ -774,10 +929,23 @@ public class Menu {
     }
 
     public void menuShopAdministrador (){
+        String continuar = "n";
         do {
-            opcionesShopAdministracionAdministrador();
-            opcion=scanner.nextInt();
-            scanner.nextLine();
+            int opcion=-1;
+            do{
+                try{
+                    opcionesShopAdministracionAdministrador();
+                    opcion=scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (opcion==-1);
+
             switch (opcion){
                 case 0:
                     this.guardarListas();

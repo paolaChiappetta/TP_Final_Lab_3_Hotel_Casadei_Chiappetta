@@ -5,13 +5,16 @@ import org.w3c.dom.ls.LSOutput;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Ocupacion implements Serializable, Comparable<Ocupacion> {
+
+    //Atributos
     private static long ocupacionId = 0;
 
-    private long idReserva = 0;  /// Si es 0, es porque no se realizó reserva anticipada
+    private long idReserva = 0;
     private LocalDate fechaIngreso;
     private LocalDate fechaSalida;
     private List<Extra> extras;
@@ -24,10 +27,12 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
     private List<Pasajero> listaPaxs = new ArrayList<>();
     private Double deposito;
 
+    //Constructor vacío - con asignación de id
     public Ocupacion() {
-        this.numeroOcupacion = ocupacionId++;
+        this.numeroOcupacion = ocupacionId+1;
     }
 
+    //Cosntructor con datos + asignacion ID
     public Ocupacion(long idReserva, LocalDate fechaIngreso,
                      LocalDate fechaSalida, List<Extra> extras,
                      int cochera, Integer nroHabitacion, Tarifa tarifa, int cantidadPax,
@@ -43,9 +48,10 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
         this.tipoPension = tipoPension;
         this.listaPaxs = listaPaxs;
         this.deposito = deposito;
-        this.numeroOcupacion = ocupacionId++;
+        this.numeroOcupacion = ocupacionId+1;
     }
 
+    //Cosntructor completo
     public Ocupacion(long idReserva, LocalDate fechaIngreso,
                      LocalDate fechaSalida, List<Extra> extras, Integer cochera,
                      Integer nroHabitacion, Tarifa tarifa, Integer cantidadPax, TipoPension tipoPension,
@@ -64,6 +70,7 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
         this.deposito = deposito;
     }
 
+    //Getters y Setters
     public long getIdReserva() {
         return idReserva;
     }
@@ -161,7 +168,9 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
         this.numeroOcupacion = numeroOcupacion;
     }
 
-    public void verListaPaxsHabitacion() {
+    //Métodos
+
+    public void verListaPaxsHabitacion() {  //muestra la lista de pasajeros alojados en la habitación
         for (Pasajero lista : this.listaPaxs) {
             if (lista != null) {
                 System.out.println(lista);
@@ -169,11 +178,12 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
         }
     }
 
-    public Pasajero titularHabitacion() {
+
+    public Pasajero titularHabitacion() {  //indica quién es el titular de la reserva p/emitir la factura luego
         Pasajero titular = null;
         for (Pasajero lista : this.listaPaxs) {
             if (this.listaPaxs != null) {
-                if (lista.getTitularreserva() == true) {
+                if (lista.getTitularreserva()) {
                     titular = lista;
                 }
             }
@@ -182,9 +192,7 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
     }
 
 
-
-
-    /// metodos para asignar tipo de pension en ocupacion
+    /// Métodos para asignar tipo de pension en ocupacion
 
     public void menuTipoPension() {
         System.out.println("1: Desayuno");
@@ -195,11 +203,22 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
     }
 
     public void asignarTipoPension() {
-        int opcion = 0;
         Scanner scanner = new Scanner(System.in);
-        menuTipoPension();
-        opcion = scanner.nextInt();
-        scanner.nextLine();
+        int opcion = 0;
+        do {
+            try {
+                menuTipoPension();
+                opcion = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Debe ingresar un número");
+                scanner.nextLine();
+            } catch (Exception e) {
+                System.out.println("Problema detectado");
+                scanner.nextLine();
+            }
+        } while (opcion == 0);
+
         switch (opcion) {
             case 1:
                 this.setTipoPension(TipoPension.DESAYUNO);
@@ -219,118 +238,177 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
 
     }
 
+    //Agrega el pasajero titular de la reserva
     public void agregarPasajerosLista(Reserva reserva, List<Pasajero> pasajeros) {
         Scanner scanner = new Scanner(System.in);
         boolean encontrado = false;
         int i = 0;
-        boolean existe = buscarPasajeroDni(reserva.getPasajeroDni(), pasajeros);
+        boolean existe = buscarPasajeroDni(reserva.getPasajeroDni(), pasajeros); //se busca si el pasajero se alojó anteriormente en el hotel y tenemos sus datos
 
         if (existe) {
             while (!encontrado && i < pasajeros.size()) {
                 if (reserva.getPasajeroDni() == pasajeros.get(i).getDni()) {
-                    if (pasajeros.get(i).getTitularreserva()) {
-                        this.listaPaxs.add(pasajeros.get(i));
-                    } else {
+                    if (!pasajeros.get(i).getTitularreserva()) {
                         pasajeros.get(i).setTitularreserva(true);
-                        System.out.println(pasajeros.get(i));
-                        System.out.println("\nDesea modificar algún dato?\n1-Si\n2-No");
-                        if (scanner.nextInt() == 1) {
-                            pasajeros.get(i).modificarPasajero(pasajeros.get(i));
-                        }
-                        this.listaPaxs.add(pasajeros.get(i));
-
                     }
+                    System.out.println(pasajeros.get(i));
+                    int modificar = 0;
+                    do {
+                        try {
+                            System.out.println("\nDesea modificar algún dato?\n1-Si\n2-No");
+                            modificar = scanner.nextInt();
+                            scanner.nextLine();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        } catch (Exception e) {
+                            System.out.println("Problema detectado");
+                            scanner.nextLine();
+                        }
+                    } while (modificar != 1 && modificar != 2);
+
+                    if (modificar == 1) {
+                        pasajeros.get(i).modificarPasajero(pasajeros.get(i));
+                    }
+                    this.listaPaxs.add(pasajeros.get(i));
+                    encontrado = true;
 
                 }
                 i++;
             }
+
         }
         Pasajero pasajero = new Pasajero();
         this.listaPaxs.add(pasajero.cargarPasajeroTitular(reserva));
-
     }
 
+    public void examinaDatosCompletos(String dato) throws ExcepcionDatoVacio {
+
+        if (dato.compareTo("") == 0) {                                   //COMPARA EL DATO RECIBIDO POR PARAMETRO CON ""
+            throw new ExcepcionDatoVacio("El dato no está completo");
+
+        }
+    }
+
+    //Agrega acompañantes
     public void agregarPasajerosLista(List<Pasajero> pasajeros) {
         Scanner scanner = new Scanner(System.in);
         int rta = 0;
         boolean encontrado = false;
         int i = 0;
-        System.out.println("\nDesea agregar acompañantes?\n1- Si\n2- No");
-        scanner.nextInt();
-
-        if(rta==1){
-            do {
+        do {
+            try {
+                System.out.println("\nDesea agregar acompañantes?\n1- Si\n2- No");
+                rta = scanner.nextInt();
                 scanner.nextLine();
-                String dni;
-                System.out.println("\nIngrese el Dni:");
-                dni = scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Debe ingresar un número");
+                scanner.nextLine();
+            } catch (Exception e) {
+                System.out.println("Problema detectado");
+                scanner.nextLine();
+            }
+        } while (rta == 0);
+
+        if (rta == 1) {
+            do {
+                String dni = "";
+                do {
+                    try {
+                        System.out.println("\nIngrese el Dni:");
+                        dni = scanner.nextLine();
+                        examinaDatosCompletos(dni);
+                    } catch (ExcepcionDatoVacio e) {
+                        System.out.println("Este dato debe ser cargado");
+
+                    } catch (Exception e) {
+                        System.out.println("No se ha podido registrar");
+                    }
+                } while (dni.compareTo("") == 0);
+
                 boolean existe = buscarPasajeroDni(dni, pasajeros);
                 if (existe) {
                     while (!encontrado && i < pasajeros.size()) {
                         if (dni == pasajeros.get(i).getDni()) {
                             pasajeros.get(i).setTitularreserva(false);
                             this.listaPaxs.add(pasajeros.get(i));
+                            encontrado = true;
                         }
+                        i++;
                     }
-                    i++;
+
                 } else {
                     Pasajero pasajero = new Pasajero();
                     this.listaPaxs.add(pasajero.cargarPasajeroAcompaniante());
                 }
-                System.out.println("\nDesea agregar otro acompañante?:\n1- Si\n2- No");
-                rta = scanner.nextInt();
+                do {
+                    rta = 0;
+                    try {
+                        System.out.println("\nDesea agregar otro acompañante?:\n1- Si\n2- No");
+                        rta = scanner.nextInt();
+                        scanner.nextLine();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Debe ingresar un número");
+                        scanner.nextLine();
+                    } catch (Exception e) {
+                        System.out.println("Problema detectado");
+                        scanner.nextLine();
+                    }
+                } while (rta != 1 && rta != 2);
 
             } while (rta == 1);
         }
 
     }
 
-            public boolean buscarPasajeroDni (String dni, List < Pasajero > pasajeros){
-                int i = 0;
-                boolean encontrado = false;
+    public boolean buscarPasajeroDni(String dni, List<Pasajero> pasajeros) {
+        int i = 0;
+        boolean encontrado = false;
 
-                while (!encontrado && i < pasajeros.size()) {
+        while (!encontrado && i < pasajeros.size()) {
 
-                    if (pasajeros.get(i).getDni() == dni) {
-                        encontrado = true;
-                    }
-                    i++;
-                }
-                return encontrado;
+            if (pasajeros.get(i).getDni() == dni) {
+                encontrado = true;
             }
+            i++;
+        }
+        return encontrado;
+    }
 
-            public String mostrarListaPaxs () {
-                String s = "";
-                for (Pasajero lista : this.listaPaxs) {
-                    if (lista.getTitularreserva()) {
-                        s = "\nTitular: " + lista.getNombre() + " " + lista.getApellido();
-                    }
-                }
-                for (Pasajero lista : this.listaPaxs) {
-                    if (!lista.getTitularreserva()) {
-                        s += "\nAcompañante: " + lista.getNombre() + " " + lista.getApellido();
-                    }
-                }
-                return s;
+    public String mostrarListaPaxs() {
+        String string = "";
+        for (Pasajero lista : this.listaPaxs) {
+            if (lista.getTitularreserva()) {
+                string = "\nTitular: " + lista.getNombre() + " " + lista.getApellido();
             }
-
-
-            @Override
-            public String toString () {
-                return "Ocupación: \nHabitación: " +this.nroHabitacion +
-                        "\nFecha de ingreso: " + this.fechaIngreso +
-                        "\nFecha de Salida: " + this.fechaSalida +
-                        "\nTipo de pensión: " + this.tipoPension.getNombre() +
-                        "\nCantidad de cocheras: " + this.cochera +
-                        "\nPasajeros: " + this.mostrarListaPaxs();
+        }
+        for (Pasajero lista : this.listaPaxs) {
+            if (!lista.getTitularreserva()) {
+                string += "\nAcompañante: " + lista.getNombre() + " " + lista.getApellido();
             }
+        }
+        return string;
+    }
+
 
     @Override
+    public String toString() {
+        return "Ocupación: \nHabitación: " + this.nroHabitacion +
+                "\nFecha de ingreso: " + this.fechaIngreso +
+                "\nFecha de Salida: " + this.fechaSalida +
+                "\nTipo de pensión: " + this.tipoPension.getNombre() +
+                "\nCantidad de cocheras: " + this.cochera +
+                "\nPasajeros: " + this.mostrarListaPaxs();
+    }
+
+
+    //Ordena ocupaciones por ID
+    @Override
     public int compareTo(Ocupacion o) {
-        if (numeroOcupacion<o.getNumeroOcupacion()) {
+        if (numeroOcupacion < o.getNumeroOcupacion()) {
             return -1;
         }
-        if (numeroOcupacion>o.getNumeroOcupacion()) {
+        if (numeroOcupacion > o.getNumeroOcupacion()) {
             return 1;
         }
         return 0;

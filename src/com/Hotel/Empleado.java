@@ -4,33 +4,31 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public class Empleado extends Persona implements Serializable {
-
     //esta clase debería ser abstracta, pero se sacó para poder leer el archivo
 
+    //Atributos
     private String usuario;
     private String clave;
 
-    //constructor vacío
-
-
+    //Constructor vacío
     public Empleado() {
     }
 
-    //constructor con datos y generación de usuario y contraseña
+    //Constructor con datos y generación de usuario y contraseña
     public Empleado(String nombre, String apellido, String numeroTel, String dni) {
 
         super(nombre, apellido, numeroTel, dni);
         this.generarUsuarioyClave();
     }
 
-    //constructor completo
+    //Constructor completo
     public Empleado(String nombre, String apellido, String numerotel, String dni, String usuario, String clave) {
         super(nombre, apellido, numerotel, dni);
         this.usuario = usuario;
         this.clave = clave;
     }
 
-   //getters y setters
+   //Getters y Setters
 
     public String getClave() {     return clave;  }
 
@@ -40,16 +38,14 @@ public class Empleado extends Persona implements Serializable {
 
     public String getUsuario() {   return usuario; }
 
-    //genero usuario concatenando primeras letra del nombre + el apellido, se mantienen las mayusculas
+    //Métodos
+
+    //Se genera usuario concatenando la primera letra del nombre + el apellido, se mantienen las mayúsculas
     public void generarUsuarioyClave() {
         GeneradorClaveUsuario claveUsuario= new GeneradorClaveUsuario();
-        String usuarioNuevo= claveUsuario.crearStringUsuario(this);
-        this.usuario = usuarioNuevo;
-        String claveNueva = claveUsuario.crarContrasenia();
-        this.clave=claveNueva;
+        this.usuario = claveUsuario.crearStringUsuario(this);
+        this.clave= claveUsuario.crarContrasenia();
     }
-
-
 
     /// para modificar clave comparo si coincide el dato anterior con el actual,
     // en ese caso se modifica

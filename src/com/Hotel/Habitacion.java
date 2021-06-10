@@ -13,16 +13,19 @@ import java.util.Scanner;
 
 
 public class Habitacion implements Serializable, Comparable<Habitacion> {
+
+    //Atributos
     private Integer numero;
     private Integer piso;
     private EstadoHabitacion estado;
     private Tarifa tarifa;
     private LocalDate fechaProximaOcupacion;
 
-
+    //Constructor vacío
     public Habitacion() {
     }
 
+    //Constructor completo
     public Habitacion(Integer numero, Integer piso,
                       EstadoHabitacion estado, Tarifa tarifa,
                       LocalDate fechaProximaOcupacion) {
@@ -33,6 +36,7 @@ public class Habitacion implements Serializable, Comparable<Habitacion> {
         this.fechaProximaOcupacion = fechaProximaOcupacion;
     }
 
+    //Getters y Setters
     public Integer getNumero() {
         return numero;
     }
@@ -73,6 +77,7 @@ public class Habitacion implements Serializable, Comparable<Habitacion> {
         this.fechaProximaOcupacion = fechaProximaOcupacion;
     }
 
+    //Métodos
 
     public Habitacion nuevaHabitacion(Habitacion habitacion) {
         Scanner scanner = new Scanner(System.in);
@@ -127,10 +132,21 @@ public class Habitacion implements Serializable, Comparable<Habitacion> {
 
     public void indicarTipoHabitacion() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Indique el tipo de habitacion:");
         int opcion = 0;
-        menuTipoHabitacion();
-        opcion = scanner.nextInt();
+        do{
+            try{
+                System.out.println("Indique el tipo de habitacion:");
+                menuTipoHabitacion();
+                opcion = scanner.nextInt();
+                scanner.nextLine();
+            }catch (InputMismatchException e){
+                System.out.println("Debe ingresar un número");
+                scanner.nextLine();
+            }catch (Exception e){
+                System.out.println("Problema detectado");
+                scanner.nextLine();
+            }
+        }while (opcion==0);
         switch (opcion) {
             case 1:
                 this.setTarifa(Tarifa.SINGLE_STANDAR);
@@ -171,10 +187,21 @@ public class Habitacion implements Serializable, Comparable<Habitacion> {
 
     public void indicarEstadoHabitacion() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Indique el estado de la habitación");
         int opcion = 0;
-        menuEstadoHabitacion();
-        opcion = scanner.nextInt();
+        do{
+            try{
+                System.out.println("Indique el estado de la habitación");
+                menuEstadoHabitacion();
+                opcion = scanner.nextInt();
+                scanner.nextLine();
+            }catch (InputMismatchException e){
+                System.out.println("Debe ingresar un número");
+                scanner.nextLine();
+            }catch (Exception e){
+                System.out.println("Problema detectado");
+                scanner.nextLine();
+            }
+        }while (opcion==0);
         switch (opcion) {
             case 1:
                 this.setEstado(EstadoHabitacion.DISPONIBLE);
@@ -190,9 +217,6 @@ public class Habitacion implements Serializable, Comparable<Habitacion> {
                 break;
         }
     }
-
-
-
 
 
     @Override

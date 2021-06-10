@@ -392,6 +392,57 @@ public class Archivo {
         return lista;
     }
 
+    public void writerArchivoHotel(String archivo, Hotel hotel){
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new FileWriter(archivo));
+
+            gson.toJson(hotel, hotel.getClass(), writer);
+
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+
+    public Hotel readerArchivoHotel(String archivo) {
+        BufferedReader reader = null;
+        Hotel hotel=null;
+
+        try {
+            reader = new BufferedReader(new FileReader(archivo));
+
+
+            hotel = gson.fromJson(reader, Hotel.class);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return hotel;
+    }
+
 
 
 }

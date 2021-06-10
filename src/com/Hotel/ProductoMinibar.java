@@ -4,17 +4,21 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 public class ProductoMinibar extends Extra implements Serializable{
-    
+
+    //Atributos
     private String marca;
 
+    //Constructor vacío
     public ProductoMinibar() {
     }
 
+    //Constructor con algunos datos
     public ProductoMinibar(String nombre, Double precio, String marca) {
         super(nombre, precio);
         this.marca = marca;
     }
 
+    //Constructor completo
     public ProductoMinibar(String nombre, Double precio, boolean alta, Integer cantidad, String marca) {
         super(nombre, precio, alta, cantidad);
         this.marca = marca;

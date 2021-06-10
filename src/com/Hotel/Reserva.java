@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Reserva implements Comparable<Reserva> {
 
-
+//Atributos
     private static long reservaId = 1;
 
     private String pasajeroNombre;
@@ -22,17 +22,18 @@ public class Reserva implements Comparable<Reserva> {
     private String telefono;
 
 
-    //constructores
+    //Constructor vacío - asigna id
 
     public Reserva() {
         this.numeroReserva = reservaId++;
     }
 
+    //Constructor con algunos datos - asigna id
     public Reserva(String pasajeroNombre, String pasajeroApellido, String pasajeroDni,
                    Integer numeroHabitacion, Integer numeroPasajeros, Double deposito,
                    LocalDate fechaIngreso, LocalDate fechaSalida, String telefono) {
 
-        this.numeroReserva = reservaId++;                // se asigna num de reserva
+        this.numeroReserva = reservaId++;
         this.pasajeroNombre = pasajeroNombre;
         this.pasajeroApellido = pasajeroApellido;
         this.pasajeroDni = pasajeroDni;
@@ -44,8 +45,24 @@ public class Reserva implements Comparable<Reserva> {
         this.telefono = telefono;
     }
 
+    //Constructor completo
+    public Reserva(String pasajeroNombre, String pasajeroApellido,
+                   String pasajeroDni, Integer numeroHabitacion,
+                   Integer numeroPasajeros, Double deposito, LocalDate fechaIngreso,
+                   LocalDate fechaSalida, Long numeroReserva, String telefono) {
+        this.pasajeroNombre = pasajeroNombre;
+        this.pasajeroApellido = pasajeroApellido;
+        this.pasajeroDni = pasajeroDni;
+        this.numeroHabitacion = numeroHabitacion;
+        this.numeroPasajeros = numeroPasajeros;
+        this.deposito = deposito;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaSalida = fechaSalida;
+        this.numeroReserva = numeroReserva;
+        this.telefono = telefono;
+    }
 
-    ///getters y setters
+    //Getters y setters
 
     public String getPasajeroNombre() {
         return pasajeroNombre;
@@ -124,9 +141,6 @@ public class Reserva implements Comparable<Reserva> {
     }
 
 
-
-
-
     @Override
     public String toString() {
         return "Reserva ID: " + this.numeroReserva +
@@ -139,6 +153,7 @@ public class Reserva implements Comparable<Reserva> {
                 "\nDepósito: $" + this.deposito + "\n";
     }
 
+    //Ordena reservas cronológicamente por fecha de ingreso
     @Override
     public int compareTo(Reserva o) {
         if (fechaIngreso.isBefore(o.getFechaIngreso())) {

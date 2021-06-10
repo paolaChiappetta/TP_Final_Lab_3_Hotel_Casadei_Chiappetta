@@ -19,11 +19,6 @@ public class Recepcionista extends Empleado implements Serializable, InterfazAcc
         super(nombre, apellido, numerotel, dni, usuario, clave);
     }
 
-    //Overrides de InterfazAccion
-
-    /// modificar estado de habitacion
-
-
 
     @Override
     public void modificarHabitacion(Habitacion habitacion) {

@@ -1,24 +1,30 @@
 package com.Hotel;
 
 import java.io.Serializable;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Extra implements Serializable {
+    //esta clase debería ser abstracta, pero se sacó para poder leer el archivo
 
+    //Atributod
     private String nombre;
     private Double precio;
     private boolean alta = true;
     private Integer cantidad = 1;
 
+    //Cosntructor vacío
     public Extra() {
     }
 
+    //Constructor con algunos datos
     public Extra(String nombre, Double precio) {
         this.nombre = nombre;
         this.precio = precio;
 
     }
 
+    //Constructor completo
     public Extra(String nombre, Double precio, boolean alta, Integer cantidad) {
         this.nombre = nombre;
         this.precio = precio;
@@ -26,6 +32,7 @@ public class Extra implements Serializable {
         this.cantidad = cantidad;
     }
 
+    //Getters y Setters
     public String getNombre() {
         return nombre;
     }
@@ -63,6 +70,7 @@ public class Extra implements Serializable {
 
     }
 
+    //Métodos
     public String mostrarExtra (){
         return this.nombre + "\nPrecio $" + this.precio + "\n";
     }
@@ -73,8 +81,21 @@ public class Extra implements Serializable {
             System.out.println("Ingrese el nuevo nombre");
             extra.setNombre(scanner.nextLine());
         }else{
-            System.out.println("Ingrese el nuevo precio");
-            extra.setPrecio(scanner.nextDouble());
+            do{
+                double precio=0;
+                try{
+                    System.out.println("Ingrese el nuevo precio");
+                    precio=scanner.nextDouble();
+                    scanner.nextLine();
+                }catch (InputMismatchException e){
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                }catch (Exception e){
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (precio==0);
+            extra.setPrecio(precio);
         }
 
     }
