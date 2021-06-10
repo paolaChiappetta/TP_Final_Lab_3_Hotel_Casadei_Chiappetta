@@ -52,9 +52,10 @@ public class Menu {
         System.out.println("1- Check-in");
         System.out.println("2- Check-out");
         System.out.println("3- Reservas");
-        System.out.println("4- Shop");
-        System.out.println("5- Listados");
-        System.out.println("6- Volver al menú anterior");
+        System.out.println("4- Extender estadía");
+        System.out.println("5- Shop");
+        System.out.println("6- Listados");
+        System.out.println("7- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
 
@@ -64,7 +65,8 @@ public class Menu {
         System.out.println("2- Modificar una reserva");
         System.out.println("3- Eliminar una reserva");
         System.out.println("4- Ver una reserva");
-        System.out.println("5- Volver al menú anterior");
+        System.out.println("5- Ver lista de reservas por habitación");
+        System.out.println("6- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
 
@@ -285,12 +287,23 @@ public class Menu {
                     menuReservas();
                     break;
                 case 4:
-                    menuShop();
+                    int numero;
+                    int noches;
+                    System.out.println("Ingrese el número de habitación que desea extender la salida");
+                    numero=scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Ingrese cuántas noches desea extender la salida");
+                    noches=scanner.nextInt();
+                    scanner.nextLine();
+                    hotel.extenderFechaSalida(numero, noches);
                     break;
                 case 5:
-                    menuListados();
+                    menuShop();
                     break;
                 case 6:
+                    menuListados();
+                    break;
+                case 7:
                     if(empleadoActual instanceof Recepcionista){
                         menuInicioRecepcionista();
                     }else {
@@ -407,6 +420,10 @@ public class Menu {
                     hotel.listadoReservasPorDni(scanner.nextLine());
                     break;
                 case 5:
+                    System.out.println("Ingrese el número de la habitación de la que desea ver las reservas");
+                    hotel.listadoReservasPorHabitacion(scanner.nextInt());
+                    break;
+                case 6:
                     menuHotel();
                     break;
                 default:

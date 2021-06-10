@@ -71,6 +71,9 @@ public class Factura {
 
     //CALCULA LA CANTIDAD DE NOCHES x LA TARIFA DE LA HABITACION
     public Double calculoAlojamiento() {
+        if(this.ocupacion.getFechaSalida().isBefore(LocalDate.now())){ //en el caso de que se retiren dias antes de la fecha de salida
+            this.ocupacion.setFechaSalida(LocalDate.now());  //modifico al dia actual la fecha de salida, ya que la factura es llamda en el momento que se hace el check out
+        }
         return this.calculoCantidadNoches() * this.ocupacion.getTarifa().getPrecio();
     }
 

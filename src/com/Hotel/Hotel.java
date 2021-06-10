@@ -339,13 +339,7 @@ public class Hotel implements Serializable {
         return ocupacionEncontrada;
     }
 
-    public void analizarFechaSalida (LocalDate ingreso, LocalDate salida) throws ExcepcionSalidaAnteriorIngreso{
-        if(salida.isBefore(ingreso)){
-            throw new ExcepcionSalidaAnteriorIngreso("La fecha de salida no puede ser anterior al ingreso. Ingrese nuevamente");
-        }
-    }
-
-    public boolean nuevaReserva (){
+        public boolean nuevaReserva (){
         Scanner scanner = new Scanner(System.in);
         LocalDate ingreso = null;
         LocalDate salida=null;
@@ -371,13 +365,13 @@ public class Hotel implements Serializable {
             try{
                 System.out.println("Ingrese fecha de salida de la nueva reserva (AAAA-MM-DD)");
                 salida = LocalDate.parse(scanner.nextLine());
-                analizarFechaSalida(ingreso, salida);
+                if(salida.isBefore(ingreso)){
+                    System.out.println("\nLa fecha de salida no puede ser anterior al inreso");
+                    salida=null;
+                }
             }catch (DateTimeParseException e){
                 System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
                salida=null;
-
-                }catch (ExcepcionSalidaAnteriorIngreso e){
-
             }catch (Exception e){
                 System.out.println("\nIngrese la fecha nuevamente");
                 salida=null;
@@ -623,75 +617,59 @@ public class Hotel implements Serializable {
             System.out.println("El hotel no tiene habitaciones ocupadas");
         }
     }
-/*
-    public LocalDate fechaProximaOcupacion(int nroHabitacion) {
-        LocalDate proxima = null;
 
-        for (Habitacion listaHab : this.listaHabitaciones) {  //Busco la habitación
-            if (listaHab.getNumero() == nroHabitacion) {
-                Collections.sort(listaHab.getReservasHab()); //ordeno sus reservas
-                if (listaHab.getEstado().compareTo(EstadoHabitacion.OCUPADA) == 0) { //si la habitación está ocupada
-                    boolean encontrada = false;
-                    int i = 0;
-                    while (!encontrada && i < listaHab.getReservasHab().size()) {  //busca en su lista de reservas el próximo ingreso
-                        for (Ocupacion listaOcup : this.listaOcupaciones) {
-                            if (listaOcup.getIdReserva() == listaHab.getReservasHab().get(i).getNumeroReserva()) {
-                                proxima = listaHab.getReservasHab().get(i + 1).getFechaIngreso(); //si no hay proxima, queda en null
-                                encontrada = true;
-                            }
-                        }
-                        i++;
-                    }
-                } else if (listaHab.getEstado().compareTo(EstadoHabitacion.DISPONIBLE) == 0) { //si está disponible
-                    proxima = listaHab.getReservasHab().get(0).getFechaIngreso();   //se indica la primer reserva, si no hay queda en null
+    public LocalDate fechaProximaOcupacion (int nroHabitacion) {
+        LocalDate proxima = null;
+        List<Reserva> reservasHab = new ArrayList<>();
+        if (!this.listaReservas.isEmpty()) {
+            for (Reserva lista : this.listaReservas) {
+                if (lista.getNumeroHabitacion() == nroHabitacion) {
+                    reservasHab.add(lista);
                 }
             }
+            Collections.sort(reservasHab);
+            Habitacion habitacion = buscarHabPorNro(nroHabitacion);
+            if (habitacion.getEstado().compareTo(EstadoHabitacion.OCUPADA) == 0) {
+                proxima = reservasHab.get(1).getFechaIngreso();
+            } else if (habitacion.getEstado().compareTo(EstadoHabitacion.DISPONIBLE) == 0) { //si está disponible
+                proxima = reservasHab.get(0).getFechaIngreso();  //se indica la primer reserva, si no hay queda en null
+            }
+
+
         }
         return proxima;
     }
 
-    public void extenderFechaSalida(int nroHabitacion, long nochesExtra) {
+
+
+    public void extenderFechaSalida(int nroHabitacion, int nochesExtra) {
         LocalDate fecha = fechaProximaOcupacion(nroHabitacion);
         boolean posible = false;
         long diasExtendibles = 0;
-        if (fecha == null) {
-            for (Ocupacion ocupacion : this.listaOcupaciones) {
-                if (ocupacion.getHabitacion().getNumero() == nroHabitacion) {
-                    diasExtendibles = 300;
+        if (fecha == null) {  //si la habitación no tiene reservas próximas
+                    diasExtendibles = 300;  //se pone un monto grande, factible de ser mayor que las noches extras
                     posible = true;
-                }
-            }
         } else {
-            for (Ocupacion ocupacion : this.listaOcupaciones) {
-                if (ocupacion.getHabitacion().getNumero() == nroHabitacion) {
-                    diasExtendibles = ChronoUnit.DAYS.between(ocupacion.getFechaSalida(), fecha);
-                    posible = true;
+            for (Ocupacion ocupacion : this.listaOcupaciones) {  ///si tiene próximas reservas
+                if (ocupacion.getNroHabitacion() == nroHabitacion) {
+                    diasExtendibles = ChronoUnit.DAYS.between(ocupacion.getFechaSalida(), fecha); //calculo la diferencia entre la fecha de salida actual
+                    posible = true;                                                               //y la fecha de ingreso de la proxima reserva
                 }
             }
         }
-
-        if (posible) {
-            if (fecha == null || diasExtendibles >= nochesExtra) {
+        if (posible) {  //si es posible ingreso
+            if (fecha == null || diasExtendibles >= nochesExtra) {  //si se da alguna de las dos alternativas posteriores
                 for (Ocupacion listaOcup : this.listaOcupaciones) {
-                    if (listaOcup.getHabitacion().getNumero() == nroHabitacion) {
-                        listaOcup.setFechaSalida(listaOcup.getFechaSalida().plusDays(nochesExtra));
+                    if (listaOcup.getNroHabitacion() == nroHabitacion) {
+                        listaOcup.setFechaSalida(listaOcup.getFechaSalida().plusDays(nochesExtra)); //extiendo la fecha de salida
                         for (Reserva listaRva : this.listaReservas) {
                             if (listaRva.getNumeroReserva() == listaOcup.getIdReserva()) {
                                 listaRva.setFechaSalida(listaRva.getFechaSalida().plusDays(nochesExtra));
-                                for (Habitacion listaHabs : this.listaHabitaciones) {
-                                    for (Reserva reservas : listaHabs.getReservasHab()) {
-                                        if (reservas.getNumeroReserva() == listaRva.getNumeroReserva()) {
-                                            reservas.setFechaSalida(reservas.getFechaSalida().plusDays(nochesExtra));
-                                            System.out.println("\nSe extendió existosamente la fecha de salida");
-                                            System.out.println(listaOcup);
-                                        }
-                                    }
-                                }
+                                System.out.println("Fecha de salida extendida");
+                                System.out.println(listaOcup);
                             }
                         }
-
                     }
-
                 }
             } else {
                 System.out.println("La habitación no posee " + nochesExtra + " noches disponibles");
@@ -700,7 +678,6 @@ public class Hotel implements Serializable {
             System.out.println("La habitación indicada no se encuentra ocupada");
         }
     }
-    */
 
 
     /// Nueva ocupacion con reserva previa (si el pasajero no tiene, se genera una en el momento del ingreso
@@ -831,7 +808,7 @@ public class Hotel implements Serializable {
             System.out.println("La habitacion numero " + numeroHab + " no tiene reservas");
         }
     }
-
+/*
     public Reserva proximaOcupacionDeHabitacion(int numeroHab) {
         List<Reserva> listReservaHab = new ArrayList<>();
 
@@ -850,7 +827,7 @@ public class Hotel implements Serializable {
         }
         return listReservaHab.get(0);           //devuelve lña primera reserva
     }
-
+*/
     //FUNCION MODIFICAR DATOS RESERVA
     public void menuModificarReserva() {
         System.out.println("1- Nombre");

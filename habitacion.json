@@ -9,7 +9,7 @@
   {
     "numero": 102,
     "piso": 1,
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
     "tarifa": "DOBLE_STANDAR",
     "fechaProximaOcupacion": "2021-05-31"
   }

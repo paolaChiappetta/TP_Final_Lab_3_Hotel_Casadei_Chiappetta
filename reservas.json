@@ -22,5 +22,17 @@
     "fechaSalida": "2021-06-28",
     "numeroReserva": 2,
     "telefono": ""
+  },
+  {
+    "pasajeroNombre": "pp",
+    "pasajeroApellido": "gg",
+    "pasajeroDni": "",
+    "numeroHabitacion": 102,
+    "numeroPasajeros": 2,
+    "deposito": 300.0,
+    "fechaIngreso": "2021-05-01",
+    "fechaSalida": "2021-06-05",
+    "numeroReserva": 5,
+    "telefono": "ggg"
   }
 ]
