@@ -1,0 +1,323 @@
+{
+  "listaHabitaciones": [
+    {
+      "numero": 101,
+      "piso": 1,
+      "estado": "DISPONIBLE",
+      "tarifa": "SINGLE_STANDAR"
+    },
+    {
+      "numero": 102,
+      "piso": 1,
+      "estado": "DISPONIBLE",
+      "tarifa": "SINGLE_SUPERIOR"
+    },
+    {
+      "numero": 103,
+      "piso": 1,
+      "estado": "DISPONIBLE",
+      "tarifa": "DOBLE_STANDAR"
+    },
+    {
+      "numero": 104,
+      "piso": 1,
+      "estado": "DISPONIBLE",
+      "tarifa": "DOBLE_SUPERIOR"
+    },
+    {
+      "numero": 105,
+      "piso": 1,
+      "estado": "DISPONIBLE",
+      "tarifa": "TRIPLE_STANDAR"
+    },
+    {
+      "numero": 106,
+      "piso": 1,
+      "estado": "DISPONIBLE",
+      "tarifa": "DEPARTAMENTO_4PAX"
+    },
+    {
+      "numero": 107,
+      "piso": 1,
+      "estado": "DISPONIBLE",
+      "tarifa": "DEPARTAMENTO_6PAX"
+    },
+    {
+      "numero": 108,
+      "piso": 1,
+      "estado": "DISPONIBLE",
+      "tarifa": "SUITE"
+    },
+    {
+      "numero": 201,
+      "piso": 2,
+      "estado": "DISPONIBLE",
+      "tarifa": "SINGLE_STANDAR"
+    },
+    {
+      "numero": 202,
+      "piso": 2,
+      "estado": "DISPONIBLE",
+      "tarifa": "SINGLE_SUPERIOR"
+    },
+    {
+      "numero": 203,
+      "piso": 3,
+      "estado": "DISPONIBLE",
+      "tarifa": "DOBLE_STANDAR"
+    },
+    {
+      "numero": 204,
+      "piso": 2,
+      "estado": "DISPONIBLE",
+      "tarifa": "DOBLE_SUPERIOR"
+    },
+    {
+      "numero": 205,
+      "piso": 2,
+      "estado": "DISPONIBLE",
+      "tarifa": "TRIPLE_STANDAR"
+    },
+    {
+      "numero": 206,
+      "piso": 2,
+      "estado": "DISPONIBLE",
+      "tarifa": "DEPARTAMENTO_4PAX"
+    },
+    {
+      "numero": 207,
+      "piso": 2,
+      "estado": "DISPONIBLE",
+      "tarifa": "DEPARTAMENTO_6PAX"
+    },
+    {
+      "numero": 208,
+      "piso": 2,
+      "estado": "DISPONIBLE",
+      "tarifa": "SUITE"
+    },
+    {
+      "numero": 301,
+      "piso": 3,
+      "estado": "DISPONIBLE",
+      "tarifa": "SINGLE_STANDAR"
+    },
+    {
+      "numero": 302,
+      "piso": 3,
+      "estado": "DISPONIBLE",
+      "tarifa": "SINGLE_SUPERIOR"
+    },
+    {
+      "numero": 303,
+      "piso": 3,
+      "estado": "DISPONIBLE",
+      "tarifa": "DOBLE_STANDAR"
+    },
+    {
+      "numero": 304,
+      "piso": 3,
+      "estado": "DISPONIBLE",
+      "tarifa": "DOBLE_SUPERIOR"
+    },
+    {
+      "numero": 306,
+      "piso": 3,
+      "estado": "DISPONIBLE",
+      "tarifa": "DEPARTAMENTO_4PAX"
+    },
+    {
+      "numero": 307,
+      "piso": 3,
+      "estado": "DISPONIBLE",
+      "tarifa": "DEPARTAMENTO_6PAX"
+    },
+    {
+      "numero": 308,
+      "piso": 3,
+      "estado": "DISPONIBLE",
+      "tarifa": "SUITE"
+    }
+  ],
+  "listaReservas": [],
+  "empleados": [
+    {
+      "usuario": "Administrador",
+      "clave": "nhzC2K",
+      "nombre": "A",
+      "apellido": "dministrador",
+      "numeroTel": "155987415",
+      "dni": "35418021"
+    }
+  ],
+  "pasajeros": [
+    {
+      "fechaNacimiento": "1980-06-01",
+      "profesion_ocupacion": "Locutora",
+      "nacionalidad": "Argentina",
+      "calle": "Gascón",
+      "numero": 2530,
+      "piso": 2,
+      "departamento": "F",
+      "ciudad": "Olavarría",
+      "provincia": "Buenos Aires",
+      "pais": "Argetina",
+      "id": 0,
+      "titularReserva": true,
+      "ocupacionesAnteriores": [],
+      "nombre": "Carla",
+      "apellido": "Martinez",
+      "numeroTel": "155699874",
+      "dni": "3356988"
+    }
+  ],
+  "listaOcupaciones": [],
+  "shop": {
+    "roturas": [
+      {
+        "causa": "Rotura",
+        "nombre": "Ventana",
+        "precio": 2500.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "causa": "Rotura",
+        "nombre": "Espejo",
+        "precio": 1900.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "causa": "Pérdida",
+        "nombre": "Toalla",
+        "precio": 600.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "causa": "Rotura",
+        "nombre": "TV",
+        "precio": 5000.0,
+        "alta": true,
+        "cantidad": 1
+      }
+    ],
+    "servicios": [
+      {
+        "empleadoEncargado": "Mucama",
+        "nombre": "Planchado",
+        "precio": 300.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "empleadoEncargado": "Mucama",
+        "nombre": "Bata",
+        "precio": 400.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "empleadoEncargado": "Recepcionista",
+        "nombre": "Late check-out",
+        "precio": 700.0,
+        "alta": true,
+        "cantidad": 1
+      }
+    ],
+    "amenities": [
+      {
+        "descripcion": "Descontracturante",
+        "horario": "De 10 a 18hs",
+        "nombre": "Masaje 1",
+        "precio": 1200.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "descripcion": "Relajante",
+        "horario": "De 10 a 18hs",
+        "nombre": "Masaje 2",
+        "precio": 1200.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "descripcion": "Con piedras calientes",
+        "horario": "De 10 a 18hs",
+        "nombre": "Masaje 3",
+        "precio": 1500.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "descripcion": "Seco/Húmedo",
+        "horario": "De 8 a 20hs",
+        "nombre": "Sauna",
+        "precio": 700.0,
+        "alta": true,
+        "cantidad": 1
+      }
+    ],
+    "minibar": [
+      {
+        "marca": "Paso de los Toros",
+        "nombre": "Gaseosa Pomelo",
+        "precio": 150.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "marca": "Coca-cola",
+        "nombre": "Gaseosa Cola",
+        "precio": 150.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "marca": "Fanta",
+        "nombre": "Gaseosa naranja",
+        "precio": 150.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "marca": "Aquarius",
+        "nombre": "Agua saborizada pomelo",
+        "precio": 150.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "marca": "Aquarius",
+        "nombre": "Agua saborizada manzana",
+        "precio": 150.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "marca": "Latitud 33",
+        "nombre": "Vino tinto",
+        "precio": 380.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "marca": "Latitud 33",
+        "nombre": "Vino blanco",
+        "precio": 390.0,
+        "alta": true,
+        "cantidad": 1
+      },
+      {
+        "marca": "Chandon",
+        "nombre": "Champagne",
+        "precio": 640.0,
+        "alta": true,
+        "cantidad": 1
+      }
+    ]
+  },
+  "facturasEmitidas": []
+}
