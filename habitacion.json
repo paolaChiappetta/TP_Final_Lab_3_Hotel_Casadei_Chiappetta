@@ -2,13 +2,13 @@
   {
     "numero": 101,
     "piso": 1,
-    "estado": "OCUPADA",
+    "estado": "DISPONIBLE",
     "tarifa": "SINGLE_STANDAR"
   },
   {
     "numero": 102,
     "piso": 1,
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
     "tarifa": "SINGLE_SUPERIOR"
   },
   {
@@ -134,7 +134,7 @@
   {
     "numero": 308,
     "piso": 3,
-    "estado": "OCUPADA",
+    "estado": "DISPONIBLE",
     "tarifa": "SUITE"
   }
 ]

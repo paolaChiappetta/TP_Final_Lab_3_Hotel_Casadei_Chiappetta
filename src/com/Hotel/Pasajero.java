@@ -27,7 +27,7 @@ public class Pasajero extends Persona implements Serializable {
     private String mail;
     private Integer id;
     private Boolean titularReserva;
-    private List<Ocupacion>ocupacionesAnteriores;
+    private List<Reserva>ocupacionesAnteriores;
 
 
     //constructor vacío con asignación de ID
@@ -68,7 +68,7 @@ public class Pasajero extends Persona implements Serializable {
                     String nacionalidad, String calle, Integer numero,
                     Integer piso, String departamento, String ciudad, String provincia,
                     String pais, String mail, Integer id, Boolean titularreserva,
-                    List<Ocupacion>ocupacionesAnteriores) {
+                    List<Reserva>ocupacionesAnteriores) {
 
         super(nombre, apellido, numeroTel, dni);
         this.id = id;
@@ -201,11 +201,11 @@ public class Pasajero extends Persona implements Serializable {
         this.titularReserva = titularReserva;
     }
 
-    public List<Ocupacion> getOcupacionesAnteriores() {
+    public List<Reserva> getOcupacionesAnteriores() {
         return ocupacionesAnteriores;
     }
 
-    public void setOcupacionesAnteriores(List<Ocupacion> ocupacionesAnteriores) {
+    public void setOcupacionesAnteriores(List<Reserva> ocupacionesAnteriores) {
         this.ocupacionesAnteriores = ocupacionesAnteriores;
     }
 
