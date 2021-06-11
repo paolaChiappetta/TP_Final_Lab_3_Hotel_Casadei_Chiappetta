@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "usuario": "PCH",
+    "clave": "EDZUDe",
+    "nombre": "Paola",
+    "apellido": "CH",
+    "numeroTel": "11",
+    "dni": "25566333"
+  },
+  {
+    "usuario": "Administrador",
+    "clave": "nJgn4m",
+    "nombre": "A",
+    "apellido": "dministrador",
+    "numeroTel": "155698745",
+    "dni": "35410148"
+  }
+]

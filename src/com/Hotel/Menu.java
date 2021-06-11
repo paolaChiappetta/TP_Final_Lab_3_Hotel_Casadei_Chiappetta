@@ -191,14 +191,14 @@ public class Menu {
                 case 1:
                     Archivo archivo = new Archivo();
                     hotel.setEmpleados(archivo.readerArchivoEmpleado("empleado.json")); //al ingreso se cargan las listas de empleados p/verificar usuario y contraseña
-                    String usuario, contrasenia;
-
-                    System.out.println("Ingrese nombre de usuario");
-                    usuario = scanner.nextLine();
-                    System.out.println("Ingrese su contraseña");
-                    contrasenia = scanner.nextLine();
-                    this.setEmpleadoActual(hotel.verificarUsuarioyContrasenia(usuario, contrasenia));
-                    this.setEmpleadoActual(empleadoActual);
+                    //String usuario, contrasenia;
+                   // System.out.println("Ingrese nombre de usuario");
+                    //usuario = scanner.nextLine();
+                    //System.out.println("Ingrese su contraseña");
+                   // contrasenia = scanner.nextLine();
+                    //this.setEmpleadoActual(hotel.verificarUsuarioyContrasenia(usuario, contrasenia));
+                    Administrador admi = new Administrador();
+                    this.setEmpleadoActual(admi);
                     if (empleadoActual != null) {
                         cargaListas();  //si pudo ingresar un empleado, se cargan las demás listas del hotel
                         if (empleadoActual instanceof Recepcionista) {
@@ -1089,12 +1089,13 @@ public class Menu {
 
     public void cargaListas() {
         Archivo archivo = new Archivo();
-        hotel.setListaHabitaciones(archivo.readerArchivoHabitaciones("habitacion.json"));
-        hotel.setListaReservas(archivo.readerArchivoReserva("reserva.json"));
-        hotel.setListaOcupaciones(archivo.readerArchivoOcupaciones("ocupacion.json"));
-        hotel.setPasajeros(archivo.readerArchivoPasajeros("pasajero.json"));
-        hotel.setFacturasEmitidas(archivo.readerArchivoFacturas("factura.json"));
-        hotel.setShop(archivo.readerArchivoShop("shop.json"));
+
+       hotel.setListaHabitaciones(archivo.readerArchivoHabitaciones("habitacion.json"));
+       hotel.setListaReservas(archivo.readerArchivoReserva("reserva.json"));
+       hotel.setListaOcupaciones(archivo.readerArchivoOcupaciones("ocupacion.json"));
+       hotel.setPasajeros(archivo.readerArchivoPasajeros("pasajero.json"));
+       hotel.setFacturasEmitidas(archivo.readerArchivoFacturas("factura.json"));
+       hotel.setShop(archivo.readerArchivoShop("shop.json"));
 
     }
 
