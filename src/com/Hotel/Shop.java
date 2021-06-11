@@ -201,7 +201,7 @@ public class Shop {
                     System.out.println("Qué tipo de extra desea cargar?"); //Consulto el tipo de extra p/revisar buscarlo solo en esa lista
                     opcionesExtras();
                     opcion = scanner.nextInt();
-                    nombre = scanner.nextLine();
+                  scanner.nextLine();
                 }catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
