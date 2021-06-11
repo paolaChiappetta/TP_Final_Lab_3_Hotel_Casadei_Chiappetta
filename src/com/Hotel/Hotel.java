@@ -817,10 +817,22 @@ public class Hotel implements Serializable {
     //////////////////////// METODO MODIFICAR RESERVA TIENE ERROR AL LEER STRINGS
     public void modificarReserva() {
         Scanner scanner = new Scanner(System.in);
-        int idReserva;
+        int idReserva= 0;
         Reserva reserva = null;
-        System.out.println("Indique el número de reserva que desea modificar");
-        idReserva = scanner.nextInt();
+       do{
+           try{
+               System.out.println("Indique el número de reserva que desea modificar");
+               idReserva = scanner.nextInt();
+               scanner.nextLine();
+           }catch(InputMismatchException e){
+               System.out.println("Debe ingresar un numero");
+               scanner.nextLine();
+           }catch(Exception e){
+               System.out.println("Problema detectado" );
+               scanner.nextLine();
+           }
+       }while (idReserva ==0);
+
         if (!listaReservas.isEmpty()) {
             for (Reserva lista : this.listaReservas) {
                 if (lista.getNumeroReserva() == idReserva) {
@@ -1258,9 +1270,21 @@ public class Hotel implements Serializable {
         do {
             System.out.println(" ");
             System.out.println(empleado);
-            System.out.println("Indique el dato que desea modificar");
-            menuModificarEmpleado();
-            opcion = scanner.nextInt();
+           do{
+               try{
+                   System.out.println("Indique el dato que desea modificar");
+                   menuModificarEmpleado();
+                   opcion = scanner.nextInt();
+                   scanner.nextLine();
+               }catch (InputMismatchException e){
+                   System.out.println("Debe ingresar un numero");
+                   scanner.nextLine();
+               }catch(Exception e){
+                   System.out.println("Problema detectado");
+                   scanner.nextLine();
+               }
+           }while (opcion== 0);
+
             scanner.nextLine();
             switch (opcion) {
                 case 1:
