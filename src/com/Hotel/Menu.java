@@ -134,7 +134,8 @@ public class Menu {
         System.out.println("1- Nuevo empleado");
         System.out.println("2- Modificar datos empleado");
         System.out.println("3- Eliminar empleado");
-        System.out.println("4- Volver al menú anterior");
+        System.out.println("4- Lista empleados");
+        System.out.println("5- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
 
@@ -937,6 +938,9 @@ public class Menu {
                     hotel.eliminarEmpleado(scanner.nextLine());
                     break;
                 case 4:
+                    hotel.listaEmpleados();
+                    break;
+                case 5:
                     menuAdministracionAdministrador();
                     break;
                 default:
@@ -1087,7 +1091,7 @@ public class Menu {
     public void cargaListas() {
         Archivo archivo = new Archivo();
         hotel.setListaHabitaciones(archivo.readerArchivoHabitaciones("habitacion.json"));
-        hotel.setListaReservas(archivo.readerArchivoReserva("reserva.json"));
+        //hotel.setListaReservas(archivo.readerArchivoReserva("reserva.json"));
         hotel.setListaOcupaciones(archivo.readerArchivoOcupaciones("ocupacion.json"));
         hotel.setPasajeros(archivo.readerArchivoPasajeros("pasajero.json"));
         hotel.setFacturasEmitidas(archivo.readerArchivoFacturas("factura.json"));

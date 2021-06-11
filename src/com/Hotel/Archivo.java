@@ -78,6 +78,7 @@ public class Archivo {
         try {
             writer = new BufferedWriter(new FileWriter(archivo));
 
+
             gson.toJson(lista, lista.getClass(), writer);
 
 

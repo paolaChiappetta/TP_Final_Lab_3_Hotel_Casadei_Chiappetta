@@ -481,6 +481,11 @@ public class Hotel implements Serializable {
                         while (!reservaEncontrada && j < this.listaReservas.size()) {
 
                             if (this.listaReservas.get(j).getNumeroReserva() == this.listaOcupaciones.get(i).getIdReserva()) { //busco reserva por id
+                                for(Pasajero pax : this.listaOcupaciones.get(i).getListaPaxs()){
+                                    pax.getOcupacionesAnteriores().add(this.listaReservas.get(j));
+                                }
+
+
                                 this.listaReservas.remove(this.listaReservas.get(j));       //elimino la reserva de la lista general de reservas
                                 reservaEncontrada = true;
 
@@ -489,9 +494,9 @@ public class Hotel implements Serializable {
                             j++;
                         }
                     }
-                    for(Pasajero pax : this.listaOcupaciones.get(i).getListaPaxs()){
-                        pax.getOcupacionesAnteriores().add(this.listaOcupaciones.get(i));
-                    }
+
+                    Habitacion hab = buscarHabPorNro(nroHabitacion);
+                    hab.setEstado(EstadoHabitacion.DISPONIBLE);
                     this.listaOcupaciones.remove(this.listaOcupaciones.get(i));
                     ocupacionEncontrada = true;
                 }
@@ -793,26 +798,7 @@ public class Hotel implements Serializable {
         }
     }
 
-    /*
-        public Reserva proximaOcupacionDeHabitacion(int numeroHab) {
-            List<Reserva> listReservaHab = new ArrayList<>();
 
-            if (!this.listaReservas.isEmpty()) {
-                for (Reserva lista : listaReservas) { //busca en la lista de reservas
-                    System.out.println("\nReservas de Habitacion numero " + numeroHab + "\n");
-                    if (lista.getNumeroHabitacion() == numeroHab) { //coincidencias en la fecha de ingreso indicada
-                        listReservaHab.add(lista);
-                    }
-                }
-
-                Collections.sort(listReservaHab);                   //ordena la lista de las reservas de esa hab
-
-            } else {
-                System.out.println("La habitacion numero " + numeroHab + " no tiene reservas");
-            }
-            return listReservaHab.get(0);           //devuelve lña primera reserva
-        }
-    */
     //FUNCION MODIFICAR DATOS RESERVA
     public void menuModificarReserva() {
         System.out.println("1- Nombre");
@@ -1196,6 +1182,15 @@ public class Hotel implements Serializable {
         }
     }
 
+    public void listaEmpleados(){
+        if(!this.empleados.isEmpty()){
+            for(Empleado e : this.empleados){
+                System.out.println(e);
+                System.out.println("\n");
+            }
+        }
+    }
+
     public void llamadaModificarEmpleado(Empleado empleado) {
         Scanner scanner = new Scanner(System.in);
         String dni = "";
@@ -1549,8 +1544,10 @@ public class Hotel implements Serializable {
         if(!this.pasajeros.isEmpty()){
             for(Pasajero pax : this.pasajeros){
                 if(pax.getDni().compareTo(dni)==0){
-                    for(Ocupacion ocup : pax.getOcupacionesAnteriores()){
-                        System.out.println(ocup);
+                    for(Reserva rva : pax.getOcupacionesAnteriores()){
+                        System.out.println("\nHabitación: " + rva.getNumeroHabitacion() +
+                                "\nFecha de ingreso: " + rva.getFechaIngreso() +
+                                "\nFecha de salida: " + rva.getFechaSalida());
                     }
                     encontrado=true;
                 }

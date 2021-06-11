@@ -331,6 +331,7 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
 
                 } else {
                     Pasajero pasajero = new Pasajero();
+                    pasajero.setDni(dni);
                     this.listaPaxs.add(pasajero.cargarPasajeroAcompaniante(pasajeros));
                 }
                 do {

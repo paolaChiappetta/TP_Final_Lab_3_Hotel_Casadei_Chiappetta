@@ -66,6 +66,10 @@ public class Empleado extends Persona implements Serializable {
         }
     }
 
-
-
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\nUsuario: " + this.usuario +
+                "\nContraseña: " + this.clave;
+    }
 }
