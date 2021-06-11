@@ -29,15 +29,15 @@ public class Archivo {
 
         } catch (
                 IOException e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } finally {
             if (writer != null) {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    System.out.println("Problema detectado al cerrar el archivo");
+                    e.printStackTrace();
                 }
             }
         }
@@ -56,9 +56,9 @@ public class Archivo {
             lista = gson.fromJson(reader, (new TypeToken<List<Reserva>>() {}.getType()));
 
         } catch (FileNotFoundException e) {
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
 
         } finally {
             try {
@@ -66,7 +66,7 @@ public class Archivo {
                     reader.close();
                 }
             } catch (IOException e) {
-                System.out.println("Problema detectado al cerrar el archivo");
+                e.printStackTrace();
             }
         }
         return lista;
@@ -83,15 +83,15 @@ public class Archivo {
 
         } catch (
                 IOException e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } finally {
             if (writer != null) {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    System.out.println("Problema detectado al leer el archivo");
+                    e.printStackTrace();
                 }
             }
         }
@@ -109,17 +109,17 @@ public class Archivo {
             lista = gson.fromJson(reader, (new TypeToken<List<Empleado>>() {}.getType()));
 
         } catch (FileNotFoundException e) {
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
 
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } finally {
             try {
                 if (reader != null) {
                     reader.close();
                 }
             } catch (IOException e) {
-                System.out.println("Problema detectado al cerrar el archivo");
+                e.printStackTrace();
             }
         }
         return lista;
@@ -137,15 +137,16 @@ public class Archivo {
 
         } catch (
                 IOException e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } finally {
             if (writer != null) {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    System.out.println("Problema detectado al cerrar el archivo");                }
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -162,17 +163,17 @@ public class Archivo {
             lista = gson.fromJson(reader, (new TypeToken<List<Habitacion>>() {}.getType()));
 
         } catch (FileNotFoundException e) {
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
 
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } finally {
             try {
                 if (reader != null) {
                     reader.close();
                 }
             } catch (IOException e) {
-                System.out.println("Problema detectado al cerrar el archivo");
+                e.printStackTrace();
             }
         }
         return lista;
@@ -189,15 +190,15 @@ public class Archivo {
 
         } catch (
                 IOException e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } finally {
             if (writer != null) {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    System.out.println("Problema detectado al cerrar el archivo");
+                    e.printStackTrace();
                 }
             }
         }
@@ -215,17 +216,17 @@ public class Archivo {
             lista = gson.fromJson(reader, (new TypeToken<List<Ocupacion>>() {}.getType()));
 
         } catch (FileNotFoundException e) {
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
 
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } finally {
             try {
                 if (reader != null) {
                     reader.close();
                 }
             } catch (IOException e) {
-                System.out.println("Problema detectado al cerrar el archivo");
+                e.printStackTrace();
             }
         }
         return lista;
@@ -242,15 +243,15 @@ public class Archivo {
 
         } catch (
                 IOException e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } finally {
             if (writer != null) {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    System.out.println("Problema detectado al cerrar el archivo");
+                    e.printStackTrace();
                 }
             }
         }
@@ -268,17 +269,17 @@ public class Archivo {
             lista = gson.fromJson(reader, (new TypeToken<List<Pasajero>>() {}.getType()));
 
         } catch (FileNotFoundException e) {
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
 
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } finally {
             try {
                 if (reader != null) {
                     reader.close();
                 }
             } catch (IOException e) {
-                System.out.println("Problema detectado al cerrar el archivo");
+                e.printStackTrace();
             }
         }
         return lista;
@@ -296,15 +297,15 @@ public class Archivo {
 
         } catch (
                 IOException e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } finally {
             if (writer != null) {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    System.out.println("Problema detectado al cerrar el archivo");
+                    e.printStackTrace();
                 }
             }
         }
@@ -322,17 +323,17 @@ public class Archivo {
             shop = gson.fromJson(reader, Shop.class);
 
         } catch (FileNotFoundException e) {
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
 
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } finally {
             try {
                 if (reader != null) {
                     reader.close();
                 }
             } catch (IOException e) {
-                System.out.println("Problema detectado al cerrar el archivo");
+                e.printStackTrace();
             }
         }
         return shop;
@@ -349,15 +350,15 @@ public class Archivo {
 
         } catch (
                 IOException e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } finally {
             if (writer != null) {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    System.out.println("Problema detectado al cerrar el archivo");
+                    e.printStackTrace();
                 }
             }
         }
@@ -375,17 +376,17 @@ public class Archivo {
             lista = gson.fromJson(reader, (new TypeToken<List<String>>() {}.getType()));
 
         } catch (FileNotFoundException e) {
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
 
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } finally {
             try {
                 if (reader != null) {
                     reader.close();
                 }
             } catch (IOException e) {
-                System.out.println("Problema detectado al cerrar el archivo");
+                e.printStackTrace();
             }
         }
         return lista;
@@ -400,15 +401,15 @@ public class Archivo {
 
         } catch (
                 IOException e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("Problema detectado al escribir el archivo");
+            e.printStackTrace();
         } finally {
             if (writer != null) {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    System.out.println("Problema detectado al cerrar el archivo");
+                    e.printStackTrace();
                 }
             }
         }
@@ -426,17 +427,17 @@ public class Archivo {
             hotel = gson.fromJson(reader, Hotel.class);
 
         } catch (FileNotFoundException e) {
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } catch (Exception e) {
 
-            System.out.println("Problema detectado al leer el archivo");
+            e.printStackTrace();
         } finally {
             try {
                 if (reader != null) {
                     reader.close();
                 }
             } catch (IOException e) {
-                System.out.println("Problema detectado al cerrar el archivo");
+                e.printStackTrace();
             }
         }
         return hotel;
