@@ -2,7 +2,7 @@
   {
     "numero": 101,
     "piso": 1,
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
     "tarifa": "SINGLE_STANDAR"
   },
   {
@@ -32,7 +32,7 @@
   {
     "numero": 106,
     "piso": 1,
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
     "tarifa": "DEPARTAMENTO_4PAX"
   },
   {
@@ -92,13 +92,13 @@
   {
     "numero": 208,
     "piso": 2,
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
     "tarifa": "SUITE"
   },
   {
     "numero": 301,
     "piso": 3,
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
     "tarifa": "SINGLE_STANDAR"
   },
   {
@@ -128,13 +128,13 @@
   {
     "numero": 307,
     "piso": 3,
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
     "tarifa": "DEPARTAMENTO_6PAX"
   },
   {
     "numero": 308,
     "piso": 3,
-    "estado": "DISPONIBLE",
+    "estado": "OCUPADA",
     "tarifa": "SUITE"
   }
 ]

@@ -235,6 +235,7 @@ public class Pasajero extends Persona implements Serializable {
                 nacimiento=LocalDate.parse(scanner.nextLine());
             }catch (DateTimeParseException e) {
                 System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
+
                 nacimiento = null;
             } catch (Exception e) {
                 System.out.println("\nIngrese la fecha nuevamente");
