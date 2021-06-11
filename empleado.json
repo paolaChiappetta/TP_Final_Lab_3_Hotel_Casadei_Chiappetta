@@ -1,18 +1,26 @@
 [
   {
-    "usuario": "PCH",
-    "clave": "EDZUDe",
-    "nombre": "Paola",
-    "apellido": "CH",
-    "numeroTel": "11",
-    "dni": "25566333"
-  },
-  {
     "usuario": "Administrador",
     "clave": "adm",
     "nombre": "A",
     "apellido": "dministrador",
     "numeroTel": "155698745",
     "dni": "35410148"
+  },
+  {
+    "usuario": "Recepcionista",
+    "clave": "rec",
+    "nombre": "R",
+    "apellido": "ecepcionista",
+    "numeroTel": "156698",
+    "dni": "2266558"
+  },
+  {
+    "usuario": "CGomez",
+    "clave": "fYiIEL",
+    "nombre": "Carla",
+    "apellido": "Gomez",
+    "numeroTel": "155987415",
+    "dni": "35698874"
   }
 ]
