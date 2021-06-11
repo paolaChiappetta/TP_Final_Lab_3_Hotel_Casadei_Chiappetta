@@ -342,7 +342,7 @@ public class Hotel implements Serializable {
                     reservaCargada = true;
                 }
             }
-            if (habLibre == false) {
+            if (!habLibre) {
                 System.out.println("La habitación no existe o no está libre en las fechas indicadas");
             }
 
@@ -489,6 +489,9 @@ public class Hotel implements Serializable {
                             j++;
                         }
                     }
+                    for(Pasajero pax : this.listaOcupaciones.get(i).getListaPaxs()){
+                        pax.getOcupacionesAnteriores().add(this.listaOcupaciones.get(i));
+                    }
                     this.listaOcupaciones.remove(this.listaOcupaciones.get(i));
                     ocupacionEncontrada = true;
                 }
@@ -498,7 +501,7 @@ public class Hotel implements Serializable {
             System.out.println("El hotel no tiene habitaciones ocupadas");
         }
         if (!ocupacionEncontrada) {
-            System.out.println("No se encontró la ocupación con ek número de habitación ingresado");
+            System.out.println("No se encontró la ocupación con el número de habitación ingresado");
         }
     }
 
@@ -564,6 +567,7 @@ public class Hotel implements Serializable {
             System.out.println("Listado de habitaciones\n");
             for (Habitacion lista : listaHabitaciones) {
                 System.out.println(lista);
+                System.out.println("\n");
             }
         } else {
             System.out.println("El hotel no tiene habitaciones cargadas");
@@ -649,7 +653,7 @@ public class Hotel implements Serializable {
     public void nuevaOcupacion(Reserva reserva) {
         Scanner scanner = new Scanner(System.in);
         Ocupacion ocupacion = new Ocupacion();
-        int cochera = 0;
+        int cochera = -1;
 
         ocupacion.setIdReserva(reserva.getNumeroReserva());  //se toman estos datos de la reserva
         ocupacion.setFechaIngreso(reserva.getFechaIngreso());
@@ -667,15 +671,15 @@ public class Hotel implements Serializable {
                 System.out.println("Problema detectado");
             }
 
-        } while (cochera == 0);
+        } while (cochera == -1);
 
         boolean encontrada = false;
         int i = 0;
         while (!encontrada && i < this.listaHabitaciones.size()) {
-            if (this.listaHabitaciones.get(i).getNumero() == reserva.getNumeroHabitacion()) {
-                ocupacion.setNroHabitacion(this.listaHabitaciones.get(i).getNumero());  //se le agrega la hab a la ocupación
+            if (this.listaHabitaciones.get(i).getNumero().equals(reserva.getNumeroHabitacion())) {
+                ocupacion.setNroHabitacion(listaHabitaciones.get(i).getNumero());  //se le agrega la hab a la ocupación
                 this.listaHabitaciones.get(i).setEstado(EstadoHabitacion.OCUPADA); //cambio el estado de la hab
-                ocupacion.setTarifa(this.listaHabitaciones.get(i).getTarifa());
+                ocupacion.setTarifa(listaHabitaciones.get(i).getTarifa());
                 encontrada=true;
             }
             i++;
@@ -777,10 +781,11 @@ public class Hotel implements Serializable {
 
     public void listadoReservasPorHabitacion(int numeroHab) {
         if (!this.listaReservas.isEmpty()) {
+            System.out.println("\nReservas de Habitacion numero " + numeroHab + "\n");
             for (Reserva reserva : listaReservas) { //busca en la lista de reservas
-                System.out.println("\nReservas de Habitacion numero " + numeroHab + "\n");
                 if (reserva.getNumeroHabitacion() == numeroHab) { //coincidencias en num de hab
                     System.out.println(reserva);
+                    System.out.println("\n");
                 }
             }
         } else {
@@ -1182,11 +1187,11 @@ public class Hotel implements Serializable {
         System.out.println("Nuevo empleado: \n");
         if (opcion == 1) {
             Recepcionista recepcionista = new Recepcionista(nombre, apellido, telefono, dni);
-            empleados.add(recepcionista);
+            this.empleados.add(recepcionista);
             System.out.println(recepcionista);
         } else {
             Administrador administrador = new Administrador(nombre, apellido, telefono, dni);
-            empleados.add(administrador);
+            this.empleados.add(administrador);
             System.out.println(administrador);
         }
     }
@@ -1416,7 +1421,7 @@ public class Hotel implements Serializable {
                 System.out.println("Ingrese el telefono del pasajero:");
                 tel = scanner.nextLine();
                 examinaDatosCompletos(tel);
-                reserva.setPasajeroNombre(tel);
+                reserva.setTelefono(tel);
             } catch (ExcepcionDatoVacio e) {
                 System.out.println("Este dato debe ser cargado");
 
@@ -1458,221 +1463,117 @@ public class Hotel implements Serializable {
 
     }
 
-    public Pasajero cargarPasajeroAcompaniante(Pasajero pasajero) {
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Nombre:");
-        pasajero.setNombre(scanner.nextLine());
-        System.out.println("Apellido:");
-        pasajero.setApellido(scanner.nextLine());
-        System.out.println("Telefono:");
-        pasajero.setNumeroTel(scanner.nextLine());
-        pasajero.setTitularreserva(false);
-
-        return pasajero;
-    }
-
-    //FUNCION MODIFICAR DATOS PASAJERO
-
-    public void menuModificarPasajero() {
-
-        System.out.println("1: Nombre");
-        System.out.println("2: Apellido");
-        System.out.println("3: Dni");
-        System.out.println("4: Fecha de nacimiento");
-        System.out.println("5: Profesion-ocupacion");
-        System.out.println("6: Nacionalidad");
-        System.out.println("7: Numero de telefono");
-        System.out.println("8: Calle");
-        System.out.println("9: Numero");
-        System.out.println("10: Piso");
-        System.out.println("11: Departamento");
-        System.out.println("12: Ciudad");
-        System.out.println("13: Provincia");
-        System.out.println("14: Pais");
-        System.out.println("15: Titular reserva");
-
-        System.out.println("\n0 para finalizar");
-
-    }
-
-
-    public void modificarPasajero(Pasajero pasajero) {
-
-        System.out.println("Indique que datos desea modificar: ");
-        int opcion = 0;
-        Scanner scanner = new Scanner(System.in);
-
-
-        do {
-            menuModificarPasajero();
-            opcion = scanner.nextInt();
-            switch (opcion) {
-                case 1:
-                    String nombre = "";
-                    do {
-                        try {
-                            System.out.println("Ingrese el nombre:");
-                            nombre = scanner.nextLine();
-                            examinaDatosCompletos(nombre);
-                            pasajero.setNombre(nombre);
-
-                        } catch (ExcepcionDatoVacio e) {
-
-                            System.out.println("No se ha podido registrar");
-
-                        } catch (Exception e) {
-
-                        }
-                    } while (nombre.compareTo("") == 0);
-
-                    break;
-                case 2:
-                    String apellido = "";
-                    do {
-                        try {
-                            System.out.println("Ingrese el apellido:");
-                            apellido = scanner.nextLine();
-                            examinaDatosCompletos(apellido);
-                            pasajero.setApellido(apellido);
-                        } catch (ExcepcionDatoVacio e) {
-                            System.out.println("Este dato debe ser cargado");
-
-                        } catch (Exception e) {
-
-                            System.out.println("No se ha podido registrar");
-
-                        }
-                    } while (apellido.compareTo("") == 0);
-
-                    break;
-                case 3:
-                    String dni = "";
-                    do {
-                        try {
-                            System.out.println("Indique el Dni:");
-                            dni = scanner.nextLine();
-                            examinaDatosCompletos(dni);
-                            pasajero.setDni(dni);
-                        } catch (ExcepcionDatoVacio e) {
-                            System.out.println("Este dato debe ser cargado");
-
-                        } catch (Exception e) {
-
-                            System.out.println("No se ha podido registrar");
-
-                        }
-                    } while (dni.compareTo("") == 0);
-
-                    break;
-                case 4:
-                    LocalDate fecha = null;
-                    do {
-                        try {
-                            System.out.println("Ingrese fecha de nacimiento (AAAA-MM-DD)");
-                            fecha = LocalDate.parse(scanner.nextLine());
-                            pasajero.setFechaNacimiento(fecha);
-                        } catch (DateTimeParseException e) {
-                            System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
-
-                        } catch (Exception e) {
-                            System.out.println("\nIngrese la fecha nuevamente");
-
-                        }
-                    } while (fecha == null);
-                    System.out.println("Indique la fecha de nacimiento:");
-
-                    break;
-                case 5:
-                    System.out.println("Indique la profesion u ocupacion:");
-                    pasajero.setProfesion_ocupacion(scanner.next());
-                    break;
-                case 6:
-                    System.out.println("Indique la Nacionalidad:");
-                    pasajero.setNacionalidad(scanner.next());
-                    break;
-                case 7:
-                    String tel = "";
-                    do {
-                        try {
-                            System.out.println("Indique el Dni:");
-                            tel = scanner.nextLine();
-                            examinaDatosCompletos(tel);
-                            pasajero.setNumeroTel(tel);
-                        } catch (ExcepcionDatoVacio e) {
-                            System.out.println("Este dato debe ser cargado");
-
-                        } catch (Exception e) {
-
-                            System.out.println("No se ha podido registrar");
-
-                        }
-                    } while (tel.compareTo("") == 0);
-
-                    break;
-                case 8:
-                    System.out.println("Indique la Calle:");
-                    pasajero.setCalle(scanner.next());
-                    break;
-                case 9:
-                    int num = 0;
-                    do {
-                        try {
-                            System.out.println("Indique el Numero:");
-                            num = scanner.nextInt();
-                            pasajero.setNumero(num);
-                        } catch (InputMismatchException e) {
-                            System.out.println("Dato incorrecto");
-                            scanner.nextLine();
-                        } catch (Exception e) {
-                            System.out.println("Problema detectado");
-                        }
-                    } while (num == 0);
-
-                    break;
-                case 10:
-                    int piso = 0;
-                    do {
-                        try {
-                            System.out.println("Indique el Piso:");
-                            piso = scanner.nextInt();
-                            pasajero.setPiso(piso);
-                        } catch (InputMismatchException e) {
-                            System.out.println("Dato incorrecto");
-                            scanner.nextLine();
-                        } catch (Exception e) {
-                            System.out.println("Problema detectado");
-                        }
-                    } while (piso == 0);
-
-                    break;
-                case 11:
-                    System.out.println("Indique el departamento:");
-                    pasajero.setDepartamento(scanner.next());
-                    break;
-                case 12:
-                    System.out.println("Indique la Ciudad:");
-                    pasajero.setCiudad(scanner.next());
-                    break;
-                case 13:
-                    System.out.println("Indique la Provincia:");
-                    pasajero.setProvincia(scanner.next());
-                    break;
-                case 14:
-                    System.out.println("Indique el Pais:");
-                    pasajero.setPais(scanner.next());
-                    break;
-                case 15:
-                    System.out.println("Es titular de reserva? si: 1  / no: 0  ");
-                    pasajero.setTitularreserva(scanner.nextBoolean());
-                    break;
-                default:
-                    System.out.println("Opcion incorrecta, ingrese nuevamente");
-                    break;
+    public void llamadaModificarPasajero(String dni){
+        if(!this.pasajeros.isEmpty()){
+            for(Pasajero pax : this.pasajeros){
+                if(pax.getDni().compareTo(dni)==0){
+                    pax.modificarPasajero(pax);
+                }
             }
-        } while (opcion != 0);
+        }
+
+    }
+    public void tarifas(){
+        for (Tarifa t : Tarifa.values()){
+            System.out.println("Tarifa: " + t.getNombre() + "\nDescripción: " + t.getDescripcion() + "\nPrecio: " + t.getPrecio() + "\n");
+        }
     }
 
+    public void pensiones(){
+        for (TipoPension t : TipoPension.values()){
+            System.out.println("Pensión: " + t.getNombre() + "\nPrecio: " + t.getPrecio() + "\n");
+        }
+    }
 
+    public void buscarOcupacionPasajeroAlojadoPorDNI(String dni){
+        boolean encontrado = false;
+        if(!this.listaOcupaciones.isEmpty()){
+            for(Ocupacion ocup : this.listaOcupaciones){
+                for(Pasajero pax : ocup.getListaPaxs()){
+                    if(pax.getDni().compareTo(dni)==0){
+                        System.out.println(ocup);
+                        encontrado=true;
+                    }
+                }
+            }
+            if(!encontrado){
+                System.out.println("No se encontró pasajero con el DNI indicado");
+            }
+        }else{
+            System.out.println("No hay habitaciones ocupadas en este momento");
+        }
+    }
+
+    public void buscarOcupacionPasajeroAlojadoPorNombreYApellido(String nombre, String apellido){
+        boolean encontrado = false;
+        if(!this.listaOcupaciones.isEmpty()){
+            for(Ocupacion ocup : this.listaOcupaciones){
+                for(Pasajero pax : ocup.getListaPaxs()){
+                    if((pax.getNombre().compareTo(nombre)==0) && (pax.getApellido().compareTo(apellido)==0)){
+                        System.out.println(ocup);
+                        encontrado=true;
+                    }
+                }
+            }
+            if(!encontrado){
+                System.out.println("No se encontró pasajero con el nombre y apellido indicado");
+            }
+        }else{
+            System.out.println("No hay habitaciones ocupadas en este momento");
+        }
+    }
+
+    public void cantidadPorTipoDePension(){
+        int contadorDesayuno=0;
+        int contadorMediaPension=0;
+        int contadorPensionCompleta=0;
+        if(!this.listaOcupaciones.isEmpty()){
+            for (Ocupacion ocup : this.listaOcupaciones){
+                if(ocup.getTipoPension().compareTo(TipoPension.DESAYUNO)==0){
+                    contadorDesayuno++;
+                }else if(ocup.getTipoPension().compareTo(TipoPension.MEDIA_PENSION)==0){
+                    contadorMediaPension++;
+                }else {
+                    contadorPensionCompleta++;
+                }
+            }
+            System.out.println("Cantidad de pensiones actuales:");
+            System.out.println("Desayuno: " + contadorDesayuno + "\nMedia pensión: "
+                    + contadorMediaPension + "\nPensión completa: " + contadorPensionCompleta);
+        }System.out.println("No hay habitaciones ocupadas en este momento");
+    }
+
+    public void verHistoricoPasajeroListaGeneral(String dni){
+        boolean encontrado = false;
+        if(!this.pasajeros.isEmpty()){
+            for(Pasajero pax : this.pasajeros){
+                if(pax.getDni().compareTo(dni)==0){
+                    for(Ocupacion ocup : pax.getOcupacionesAnteriores()){
+                        System.out.println(ocup);
+                    }
+                    encontrado=true;
+                }
+
+            }
+            if(!encontrado){
+                System.out.println("No se encontró pasajero con el DNI indicado");
+            }
+        }else{
+            System.out.println("No hay habitaciones ocupadas en este momento");
+        }
+    }
+/*
+    public void verHabitacionesPorTarifa(Tarifa tarifa){
+        if(!this.listaHabitaciones.isEmpty()){
+            System.out.println("Habitaciones " + tarifa.getNombre());
+            for(Habitacion hab : this.listaHabitaciones){
+                if(hab.getTarifa().compareTo(tarifa)==0){
+                    System.out.println(hab);
+                    System.out.println("\n");
+                }
+            }
+        }
+    }
+*/
 }
