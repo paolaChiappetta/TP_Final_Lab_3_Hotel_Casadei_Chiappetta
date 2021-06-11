@@ -120,18 +120,6 @@
     "telefono": "155748962"
   },
   {
-    "pasajeroNombre": "Paula ",
-    "pasajeroApellido": "Chaio",
-    "pasajeroDni": "21874521",
-    "numeroHabitacion": 307,
-    "numeroPasajeros": 2,
-    "deposito": 200.0,
-    "fechaIngreso": "2021-06-11",
-    "fechaSalida": "2021-06-15",
-    "numeroReserva": 11,
-    "telefono": "155748962"
-  },
-  {
     "pasajeroNombre": "Tamara",
     "pasajeroApellido": "Cordoba",
     "pasajeroDni": "26847512",

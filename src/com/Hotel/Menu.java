@@ -58,11 +58,12 @@ public class Menu {
         System.out.println(" 4- Extender estadía");
         System.out.println(" 5- Shop");
         System.out.println(" 6- Pasajeros");
-        System.out.println(" 7- Ver tarifas");
-        System.out.println(" 8- Ver tipos de pensiones");
-        System.out.println(" 9- Ver cálculo de pensiones actuales");
-        System.out.println("10- Listados");
-        System.out.println("11- Volver al menú anterior");
+        System.out.println(" 7- Modificar habitaciones");
+        System.out.println(" 8- Ver tarifas");
+        System.out.println(" 9- Ver tipos de pensiones");
+        System.out.println("10- Ver cálculo de pensiones actuales");
+        System.out.println("11- Listados");
+        System.out.println("12- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
 
@@ -82,7 +83,7 @@ public class Menu {
         System.out.println("1- Nueva reserva");
         System.out.println("2- Modificar una reserva");
         System.out.println("3- Eliminar una reserva");
-        System.out.println("4- Ver una reserva");
+        System.out.println("4- Ver reservas por pasajero");
         System.out.println("5- Ver lista de reservas por habitación");
         System.out.println("6- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
@@ -409,18 +410,34 @@ public class Menu {
                     menuPasajero();
                     break;
                 case 7:
+                    int nroHab = 0;
+                    do {
+                        try {
+                            System.out.println("\nIngrese el número de habitación que desea modificar");
+                            nroHab = scanner.nextInt();
+                            scanner.nextLine();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        } catch (Exception e) {
+                            System.out.println("Problema detectado");
+                            scanner.nextLine();
+                        }
+                    } while (nroHab == 0);
+                    hotel.llamadaModificarHabitacion(nroHab, empleadoActual);
+                case 8:
                     hotel.tarifas();
                     break;
-                case 8:
+                case 9:
                     hotel.pensiones();
                     break;
-                case 9:
+                case 10:
                     hotel.cantidadPorTipoDePension();
                     break;
-                case 10:
+                case 11:
                     menuListados();
                     break;
-                case 11:
+                case 12:
                     if (empleadoActual instanceof Recepcionista) {
                         menuInicioRecepcionista();
                     } else {

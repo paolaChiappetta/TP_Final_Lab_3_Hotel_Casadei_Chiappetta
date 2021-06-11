@@ -19,7 +19,7 @@ public class Habitacion implements Serializable, Comparable<Habitacion> {
     private Integer piso;
     private EstadoHabitacion estado;
     private Tarifa tarifa;
-    private LocalDate fechaProximaOcupacion;
+
 
     //Constructor vacío
     public Habitacion() {
@@ -27,13 +27,11 @@ public class Habitacion implements Serializable, Comparable<Habitacion> {
 
     //Constructor completo
     public Habitacion(Integer numero, Integer piso,
-                      EstadoHabitacion estado, Tarifa tarifa,
-                      LocalDate fechaProximaOcupacion) {
+                      EstadoHabitacion estado, Tarifa tarifa) {
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
         this.tarifa = tarifa;
-        this.fechaProximaOcupacion = fechaProximaOcupacion;
     }
 
     //Getters y Setters
@@ -69,13 +67,7 @@ public class Habitacion implements Serializable, Comparable<Habitacion> {
         this.tarifa = tarifa;
     }
 
-    public LocalDate getFechaProximaOcupacion(LocalDate parse) {
-        return fechaProximaOcupacion;
-    }
 
-    public void setFechaProximaOcupacion(LocalDate fechaProximaOcupacion) {
-        this.fechaProximaOcupacion = fechaProximaOcupacion;
-    }
 
     //Métodos
 

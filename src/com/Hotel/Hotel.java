@@ -1587,17 +1587,5 @@ public class Hotel implements Serializable {
             System.out.println("No hay habitaciones ocupadas en este momento");
         }
     }
-/*
-    public void verHabitacionesPorTarifa(Tarifa tarifa){
-        if(!this.listaHabitaciones.isEmpty()){
-            System.out.println("Habitaciones " + tarifa.getNombre());
-            for(Habitacion hab : this.listaHabitaciones){
-                if(hab.getTarifa().compareTo(tarifa)==0){
-                    System.out.println(hab);
-                    System.out.println("\n");
-                }
-            }
-        }
-    }
-*/
+
 }
