@@ -1,5 +1,6 @@
 package com.Hotel;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -10,7 +11,12 @@ public class Shop {
     private List<Amenitie> amenities;
     private List<ProductoMinibar> minibar;
 
+
     public Shop() {
+        this.roturas = new ArrayList<>();
+        this.servicios = new ArrayList<>();
+        this.amenities = new ArrayList<>();
+        this.minibar = new ArrayList<>();
     }
 
     public Shop(List<Rotura> roturas, List<Servicio> servicios, List<Amenitie> amenities, List<ProductoMinibar> minibar) {
@@ -160,7 +166,7 @@ public class Shop {
         String continuar = "s";
         String nombre;
         int nroHabitacion = 0;
-        int cantidad;
+
         boolean habEncontrada = false;
         boolean ocupacionEncontrada = false;
         do {
@@ -216,8 +222,20 @@ public class Shop {
             }
             System.out.println("\nIngrese el nombre del extra"); //Se busca por nombre
             nombre = scanner.nextLine();
-            System.out.println("Ingrese la cantidad"); //Se pide cantidad p/no repetir la búsqueda si se necesitan cargar más de una unidad del mismo producto
-            cantidad = scanner.nextInt();
+            int cantidad=0;
+            do{
+                try{
+                    System.out.println("Ingrese la cantidad"); //Se pide cantidad p/no repetir la búsqueda si se necesitan cargar más de una unidad del mismo producto
+                    cantidad = scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e) {
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            } while (cantidad== 0);
 
             switch (opcion) {
                 case 1:
@@ -283,9 +301,10 @@ public class Shop {
                     hotel.buscarOcupacionPorHabitacion(nroHabitacion).getExtras().add(extra); //dentro de la lista de extras de la ocupación, según el nro de habitación
                     i++;
                 }
+            }else{
+                System.out.println("No se encontró el extra indicado. Ingrese nuevamente");
             }
 
-            scanner.nextLine();
             System.out.println("Desea seguir cargando? s/n");
             continuar = scanner.nextLine();
 
@@ -367,7 +386,7 @@ public class Shop {
     public void nuevoExtra() {
         Scanner scanner = new Scanner(System.in);
         String nombre;
-        Double precio;
+
 
         String continuar = "s";
 
@@ -389,10 +408,22 @@ public class Shop {
             } while (opcion == 0);
             
             System.out.println("Ingrese el nombre del extra"); //se pide aquí el nombre y precio ya que todos los extras
-            nombre = scanner.nextLine();                       //lo comparten
-            System.out.println("Ingrese el precio");
-            precio = scanner.nextDouble();
-            scanner.nextLine();
+            nombre = scanner.nextLine();//lo comparten
+
+            double precio=0.0;
+            do{
+                try{
+                    System.out.println("Ingrese el precio");
+                    precio = scanner.nextDouble();
+                    scanner.nextLine();
+                }catch (InputMismatchException e) {
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            }while (precio==0.0);
 
             switch (opcion) {  //según el tipo son distintos los demás datos
                 case 1:
@@ -449,15 +480,27 @@ public class Shop {
     public void bajaExtra() {
         Scanner scanner = new Scanner(System.in);
         String nombre;
-        int opcion;
+
         String continuar = "s";
         boolean encontrado = false;
 
         do {
-            System.out.println("Qué tipo de extra desea dar de baja?");
-            opcionesExtras(); //solicito el tipo de extra para buscar solo en la lista correspondiente
-            opcion = scanner.nextInt();
-            scanner.nextLine();
+            int opcion=0;
+            do{
+                try{
+                    System.out.println("Qué tipo de extra desea dar de baja?");
+                    opcionesExtras(); //solicito el tipo de extra para buscar solo en la lista correspondiente
+                    opcion = scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e) {
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            } while (opcion == 0);
+
             System.out.println("Ingrese el nombre del extra"); //busco por nombre
             nombre = scanner.nextLine();
             int i = 0;
@@ -532,15 +575,25 @@ public class Shop {
     public void eliminarExtra() {
         Scanner scanner = new Scanner(System.in);
         String nombre;
-        int opcion;
         String continuar = "s";
         boolean encontrado = false;
 
         do {
-            System.out.println("Qué tipo de extra desea eliminar?");
-            opcionesExtras(); //solicito el tipo para buscar en la lista correspondiente
-            opcion = scanner.nextInt();
-            scanner.nextLine();
+            int opcion=0;
+            do{
+                try{
+                    System.out.println("Qué tipo de extra desea eliminar?");
+                    opcionesExtras(); //solicito el tipo para buscar en la lista correspondiente
+                    opcion = scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e) {
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            } while (opcion == 0);
             System.out.println("Ingrese el nombre del extra"); //busco por nombre
             nombre = scanner.nextLine();
             int i = 0;
@@ -623,15 +676,26 @@ public class Shop {
     public void modificarExtra() {
         Scanner scanner = new Scanner(System.in);
         String nombre;
-        int opcion;
-        String continuar = "s";
+        String continuar = "n";
         boolean encontrado = false;
 
         do {
-            System.out.println("Qué tipo de extra desea modificar?");
-            opcionesExtras(); //solicito tipo para buscar en la lista correspondiente
-            opcion = scanner.nextInt();
-            scanner.nextLine();
+            int opcion=0;
+            do{
+                try{
+                    System.out.println("Qué tipo de extra desea modificar?");
+                    opcionesExtras(); //solicito tipo para buscar en la lista correspondiente
+                    opcion = scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e) {
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            } while (opcion == 0);
+
             System.out.println("Ingrese el nombre del extra"); //busco por nombre
             nombre = scanner.nextLine();
             int i = 0;
@@ -641,15 +705,26 @@ public class Shop {
                         while (!encontrado && i < servicios.size()) {
                             if (servicios.get(i).getNombre().compareTo(nombre) == 0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    System.out.println(servicios.get(i).mostrarExtra());
-                                    opcionesModificarExtra();
-                                    System.out.println("3- Empleado a cargo");
-                                    opcion = scanner.nextInt();
-                                    scanner.nextLine();
-                                    servicios.get(i).modificarExtra(servicios.get(i), opcion);
-                                    encontrado = true;
-                                    System.out.println("El extra fue modificado correctamente");
-                                    scanner.nextLine();
+                                    int opcion1=0;
+                                    do{
+                                       try{
+                                           System.out.println(servicios.get(i).mostrarExtra());
+                                           opcionesModificarExtra();
+                                           System.out.println("3- Empleado a cargo");
+                                           opcion1 = scanner.nextInt();
+                                           scanner.nextLine();
+                                           servicios.get(i).modificarExtra(servicios.get(i), opcion1);
+                                           encontrado = true;
+                                           System.out.println("El extra fue modificado correctamente");
+                                       }catch (InputMismatchException e) {
+                                           System.out.println("Debe ingresar un número");
+                                           scanner.nextLine();
+                                       } catch (Exception e) {
+                                           System.out.println("Problema detectado");
+                                           scanner.nextLine();
+                                       }
+                                   } while (opcion1 == 0);
+
                                     System.out.println("Desea hacer otra modificación sobre este producto? s/n");
                                     continuar = scanner.nextLine();
                                 } while (continuar.equalsIgnoreCase("s"));
@@ -667,16 +742,27 @@ public class Shop {
                         while (!encontrado && i < amenities.size()) {
                             if (amenities.get(i).getNombre().compareTo(nombre) == 0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    System.out.println(amenities.get(i).mostrarExtra());
-                                    opcionesModificarExtra();
-                                    System.out.println("3- Descripción");
-                                    System.out.println("4- Horario");
-                                    opcion = scanner.nextInt();
-                                    scanner.nextLine();
-                                    amenities.get(i).modificarExtra(amenities.get(i), opcion);
-                                    encontrado = true;
-                                    System.out.println("El extra fue modificado correctamente");
-                                    scanner.nextLine();
+                                    int opcion2=0;
+                                    do{
+                                        try{
+                                            System.out.println(amenities.get(i).mostrarExtra());
+                                            opcionesModificarExtra();
+                                            System.out.println("3- Descripción");
+                                            System.out.println("4- Horario");
+                                            opcion2 = scanner.nextInt();
+                                            scanner.nextLine();
+                                            amenities.get(i).modificarExtra(amenities.get(i), opcion2);
+                                            encontrado = true;
+                                            System.out.println("El extra fue modificado correctamente");
+                                        }catch (InputMismatchException e) {
+                                            System.out.println("Debe ingresar un número");
+                                            scanner.nextLine();
+                                        } catch (Exception e) {
+                                            System.out.println("Problema detectado");
+                                            scanner.nextLine();
+                                        }
+                                    } while (opcion2 == 0);
+
                                     System.out.println("Desea hacer otra modificación sobre este producto? s/n");
                                     continuar = scanner.nextLine();
                                 } while (continuar.equalsIgnoreCase("s"));
@@ -694,15 +780,26 @@ public class Shop {
                         while (!encontrado && i < minibar.size()) {
                             if (minibar.get(i).getNombre().compareTo(nombre) == 0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    System.out.println(minibar.get(i).mostrarExtra());
-                                    opcionesModificarExtra();
-                                    System.out.println("3- Marca");
-                                    opcion = scanner.nextInt();
-                                    scanner.nextLine();
-                                    minibar.get(i).modificarExtra(minibar.get(i), opcion);
-                                    encontrado = true;
-                                    System.out.println("El extra fue modificado correctamente");
-                                    scanner.nextLine();
+                                    int opcion3=0;
+                                    do{
+                                        try{
+                                            System.out.println(minibar.get(i).mostrarExtra());
+                                            opcionesModificarExtra();
+                                            System.out.println("3- Marca");
+                                            opcion3 = scanner.nextInt();
+                                            scanner.nextLine();
+                                            minibar.get(i).modificarExtra(minibar.get(i), opcion3);
+                                            encontrado = true;
+                                            System.out.println("El extra fue modificado correctamente");
+                                        }catch (InputMismatchException e) {
+                                            System.out.println("Debe ingresar un número");
+                                            scanner.nextLine();
+                                        } catch (Exception e) {
+                                            System.out.println("Problema detectado");
+                                            scanner.nextLine();
+                                        }
+                                    } while (opcion3 == 0);
+
                                     System.out.println("Desea hacer otra modificación sobre este producto? s/n");
                                     continuar = scanner.nextLine();
 
@@ -720,15 +817,26 @@ public class Shop {
                         while (!encontrado && i < roturas.size()) {
                             if (roturas.get(i).getNombre().compareTo(nombre) == 0) {
                                 do { //según el tipo, se puden modificar distintos atributos
-                                    System.out.println(roturas.get(i).mostrarExtra());
-                                    opcionesModificarExtra();
-                                    System.out.println("3- Causa");
-                                    opcion = scanner.nextInt();
-                                    roturas.get(i).modificarExtra(roturas.get(i), opcion);
-                                    scanner.nextLine();
-                                    encontrado = true;
-                                    System.out.println("El extra fue modificado correctamente");
-                                    scanner.nextLine();
+                                    int opcion4=0;
+                                    do{
+                                        try{
+                                            System.out.println(roturas.get(i).mostrarExtra());
+                                            opcionesModificarExtra();
+                                            System.out.println("3- Causa");
+                                            opcion4 = scanner.nextInt();
+                                            roturas.get(i).modificarExtra(roturas.get(i), opcion4);
+                                            scanner.nextLine();
+                                            encontrado = true;
+                                            System.out.println("El extra fue modificado correctamente");
+                                        }catch (InputMismatchException e) {
+                                            System.out.println("Debe ingresar un número");
+                                            scanner.nextLine();
+                                        } catch (Exception e) {
+                                            System.out.println("Problema detectado");
+                                            scanner.nextLine();
+                                        }
+                                    } while (opcion4 == 0);
+
                                     System.out.println("Desea hacer otra modificación sobre este producto? s/n");
                                     continuar = scanner.nextLine();
                                 } while (continuar.equalsIgnoreCase("s"));
@@ -744,7 +852,6 @@ public class Shop {
                     System.out.println("La opción ingresada es incorrecta. Ingrese nuevamente");
                     break;
             }
-            scanner.nextLine();
             System.out.println("Desea modificar otro extra? s/n");
             continuar = scanner.nextLine();
 
@@ -755,15 +862,27 @@ public class Shop {
     public void altaExtra() {
         Scanner scanner = new Scanner(System.in);
         String nombre;
-        int opcion;
+
         String continuar = "s";
         boolean encontrado = false;
 
         do {
-            System.out.println("Qué tipo de extra desea dar de alta?");
-            opcionesExtras(); //solicito tipo para buscar solo en esa lista
-            opcion = scanner.nextInt();
-            scanner.nextLine();
+            int opcion=0;
+            do{
+                try{
+                    System.out.println("Qué tipo de extra desea dar de alta?");
+                    opcionesExtras(); //solicito tipo para buscar solo en esa lista
+                    opcion = scanner.nextInt();
+                    scanner.nextLine();
+                }catch (InputMismatchException e) {
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            } while (opcion == 0);
+
             System.out.println("Ingrese el nombre del extra"); //busco por nombre
             nombre = scanner.nextLine();
             int i = 0;
