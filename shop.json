@@ -1,23 +1,30 @@
 {
   "roturas": [
     {
-      "causa": " ",
-      "nombre": "Vidrio",
-      "precio": 300.0,
+      "causa": "Rotura",
+      "nombre": "Ventana",
+      "precio": 2500.0,
       "alta": true,
       "cantidad": 1
     },
     {
-      "causa": " ",
+      "causa": "Rotura",
       "nombre": "Espejo",
-      "precio": 300.0,
+      "precio": 1900.0,
       "alta": true,
       "cantidad": 1
     },
     {
-      "causa": " ",
+      "causa": "Pérdida",
       "nombre": "Toalla",
-      "precio": 300.0,
+      "precio": 600.0,
+      "alta": true,
+      "cantidad": 1
+    },
+    {
+      "causa": "Rotura",
+      "nombre": "TV",
+      "precio": 5000.0,
       "alta": true,
       "cantidad": 1
     }
@@ -25,71 +32,114 @@
   "servicios": [
     {
       "empleadoEncargado": "Mucama",
-      "nombre": "Plancha",
-      "precio": 400.0,
+      "nombre": "Planchado",
+      "precio": 300.0,
       "alta": true,
       "cantidad": 1
     },
     {
       "empleadoEncargado": "Mucama",
       "nombre": "Bata",
-      "precio": 200.0,
+      "precio": 400.0,
       "alta": true,
       "cantidad": 1
     },
     {
-      "empleadoEncargado": "Mucama",
-      "nombre": "Toalla",
-      "precio": 150.0,
+      "empleadoEncargado": "Recepcionista",
+      "nombre": "Late check-out",
+      "precio": 700.0,
       "alta": true,
       "cantidad": 1
     }
   ],
   "amenities": [
     {
-      "descripcion": "con piedras calientes",
-      "horario": "de 10 a 18",
-      "nombre": "Masaje",
+      "descripcion": "Descontracturante",
+      "horario": "De 10 a 18hs",
+      "nombre": "Masaje 1",
+      "precio": 1200.0,
+      "alta": true,
+      "cantidad": 1
+    },
+    {
+      "descripcion": "Relajante",
+      "horario": "De 10 a 18hs",
+      "nombre": "Masaje 2",
+      "precio": 1200.0,
+      "alta": true,
+      "cantidad": 1
+    },
+    {
+      "descripcion": "Con piedras calientes",
+      "horario": "De 10 a 18hs",
+      "nombre": "Masaje 3",
       "precio": 1500.0,
       "alta": true,
       "cantidad": 1
     },
     {
-      "descripcion": "seco",
-      "horario": "de 10 a 18",
-      "nombre": "Sauna 1",
-      "precio": 800.0,
-      "alta": true,
-      "cantidad": 1
-    },
-    {
-      "descripcion": "húmedo",
-      "horario": "de 10 a 18",
-      "nombre": "Sauna 2",
-      "precio": 800.0,
+      "descripcion": "Seco/Húmedo",
+      "horario": "De 8 a 20hs",
+      "nombre": "Sauna",
+      "precio": 700.0,
       "alta": true,
       "cantidad": 1
     }
   ],
   "minibar": [
     {
-      "marca": "Coca Cola",
-      "nombre": "Gaseosa",
-      "precio": 110.0,
+      "marca": "Paso de los Toros",
+      "nombre": "Gaseosa Pomelo",
+      "precio": 150.0,
+      "alta": true,
+      "cantidad": 1
+    },
+    {
+      "marca": "Coca-cola",
+      "nombre": "Gaseosa Cola",
+      "precio": 150.0,
       "alta": true,
       "cantidad": 1
     },
     {
       "marca": "Fanta",
-      "nombre": "Gaseosa",
-      "precio": 120.0,
+      "nombre": "Gaseosa naranja",
+      "precio": 150.0,
       "alta": true,
       "cantidad": 1
     },
     {
-      "marca": "Sprite",
-      "nombre": "Gaseosa",
-      "precio": 115.0,
+      "marca": "Aquarius",
+      "nombre": "Agua saborizada pomelo",
+      "precio": 150.0,
+      "alta": true,
+      "cantidad": 1
+    },
+    {
+      "marca": "Aquarius",
+      "nombre": "Agua saborizada manzana",
+      "precio": 150.0,
+      "alta": true,
+      "cantidad": 1
+    },
+    {
+      "marca": "Latitud 33",
+      "nombre": "Vino tinto",
+      "precio": 380.0,
+      "alta": true,
+      "cantidad": 1
+    },
+    {
+      "marca": "Latitud 33",
+      "nombre": "Vino blanco",
+      "precio": 390.0,
+      "alta": true,
+      "cantidad": 1
+    },
+    {
+      "marca": "Chandon",
+      "nombre": "Champagne",
+      "precio": 640.0,
       "alta": true,
       "cantidad": 1
     }

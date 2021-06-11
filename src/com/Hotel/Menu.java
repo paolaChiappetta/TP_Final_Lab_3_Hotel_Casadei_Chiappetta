@@ -50,14 +50,29 @@ public class Menu {
 
     public void opcionesHotel() {
         System.out.println("Ingrese una opción");
-        System.out.println("1- Check-in");
-        System.out.println("2- Check-out");
-        System.out.println("3- Reservas");
-        System.out.println("4- Extender estadía");
-        System.out.println("5- Shop");
-        System.out.println("6- Listados");
-        System.out.println("7- Volver al menú anterior");
+        System.out.println(" 1- Check-in");
+        System.out.println(" 2- Check-out");
+        System.out.println(" 3- Reservas");
+        System.out.println(" 4- Extender estadía");
+        System.out.println(" 5- Shop");
+        System.out.println(" 6- Pasajeros");
+        System.out.println(" 7- Ver tarifas");
+        System.out.println(" 8- Ver tipos de pensiones");
+        System.out.println(" 9- Ver cálculo de pensiones actuales");
+        System.out.println("10- Listados");
+        System.out.println("11- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
+    }
+
+    public void opcionesPasajero() {
+        System.out.println("Ingrese una opción");
+        System.out.println("1- Buscar habitación pasajero alojado");
+        System.out.println("2- Buscar alojamiento histórico pasajero");
+        System.out.println("3- Modificar datos de pasajero");
+        System.out.println("4- Volver al menú anterior");
+        System.out.println("Ingrese 0 para salir");
+
+
     }
 
     public void opcionesReservas() {
@@ -76,7 +91,7 @@ public class Menu {
         System.out.println("1- Cargar extra a una habitación");
         System.out.println("2- Eliminar extra de una habitación");
         System.out.println("3- Ver lista de servicios");
-        System.out.println("4- Ver Ver lista de amenities");
+        System.out.println("4- Ver lista de amenities");
         System.out.println("5- Ver lista de productos del minibar");
         System.out.println("6- Ver lista de roturas");
         System.out.println("7- Volver al menú anterior");
@@ -143,32 +158,32 @@ public class Menu {
         System.out.println("Ingrese 0 para salir");
     }
 
-    public void opcionesMisDatos(){
+    public void opcionesMisDatos() {
         System.out.println("Ingrese una opción");
         System.out.println("1- Modificar contraseña");
         System.out.println("2- Volver al menú anterior");
         System.out.println("Ingrese 0 para salir");
     }
 
-    public void inicio () {
-        Archivo archivo=new Archivo();
-        hotel.setEmpleados(archivo.readerArchivoEmpleado("empleado.json")); //al ingreso se cargan las listas de empleados p/verificar usuario y contraseña
+    public void inicio() {
+        Archivo archivo = new Archivo();
+       hotel.setEmpleados(archivo.readerArchivoEmpleado("empleado.json")); //al ingreso se cargan las listas de empleados p/verificar usuario y contraseña
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     ingreso();
                     opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
             switch (opcion) {
                 case 0:
                     this.guardarListas();
@@ -184,7 +199,7 @@ public class Menu {
                     this.setEmpleadoActual(hotel.verificarUsuarioyContrasenia(usuario, contrasenia));*/
                     Administrador administrador = new Administrador();
                     this.setEmpleadoActual(administrador);
-                    if(empleadoActual!=null){
+                    if (empleadoActual != null) {
                         cargaListas();  //si pudo ingresar un empleado, se cargan las demás listas del hotel
                         if (empleadoActual instanceof Recepcionista) {
                             menuInicioRecepcionista();
@@ -209,21 +224,21 @@ public class Menu {
     public void menuInicioRecepcionista() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesInicioRecepcionista();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
-            switch (opcion){
+            } while (opcion == -1);
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -254,21 +269,21 @@ public class Menu {
     public void menuInicioAdministrador() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesInicioAdministrador();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
-            switch (opcion){
+            } while (opcion == -1);
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -280,7 +295,7 @@ public class Menu {
                     menuMisDatos();
                     break;
                 case 3:
-                    Archivo archivo=new Archivo();
+                    Archivo archivo = new Archivo();
                     archivo.writerArchivoHotel("hotel.json", hotel);
                     System.out.println("Backup realizado correctamente");
                     break;
@@ -305,22 +320,22 @@ public class Menu {
     public void menuHotel() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesHotel();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
 
-            switch (opcion){
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -330,66 +345,78 @@ public class Menu {
                     break;
                 case 2:
                     System.out.println("Check-Out");
-                    int nroHabitacion=0;
-                    do{
-                        try{
+                    int nroHabitacion = 0;
+                    do {
+                        try {
                             System.out.println("\nIngrese el número de habitación: ");
-                            nroHabitacion= scanner.nextInt();
+                            nroHabitacion = scanner.nextInt();
                             scanner.nextLine();
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Debe ingresar un número");
                             scanner.nextLine();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Problema detectado");
                             scanner.nextLine();
                         }
-                    }while (nroHabitacion==0);
+                    } while (nroHabitacion == 0);
                     hotel.checkOut(nroHabitacion);
                     break;
                 case 3:
                     menuReservas();
                     break;
                 case 4:
-                    int numero=0;
-                    int noches=0;
-                    do{
-                        try{
+                    int numero = 0;
+                    int noches = 0;
+                    do {
+                        try {
                             System.out.println("Ingrese el número de habitación que desea extender la salida");
-                            numero=scanner.nextInt();
+                            numero = scanner.nextInt();
                             scanner.nextLine();
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Debe ingresar un número");
                             scanner.nextLine();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Problema detectado");
                             scanner.nextLine();
                         }
-                    }while (numero==0);
-                    do{
-                        try{
+                    } while (numero == 0);
+                    do {
+                        try {
                             System.out.println("Ingrese cuántas noches desea extender la salida");
-                            noches=scanner.nextInt();
+                            noches = scanner.nextInt();
                             scanner.nextLine();
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Debe ingresar un número");
                             scanner.nextLine();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Problema detectado");
                             scanner.nextLine();
                         }
-                    }while (noches==0);
+                    } while (noches == 0);
                     hotel.extenderFechaSalida(numero, noches);
                     break;
                 case 5:
                     menuShop();
                     break;
                 case 6:
-                    menuListados();
+                    menuPasajero();
                     break;
                 case 7:
-                    if(empleadoActual instanceof Recepcionista){
+                    hotel.tarifas();
+                    break;
+                case 8:
+                    hotel.pensiones();
+                    break;
+                case 9:
+                    hotel.cantidadPorTipoDePension();
+                    break;
+                case 10:
+                    menuListados();
+                    break;
+                case 11:
+                    if (empleadoActual instanceof Recepcionista) {
                         menuInicioRecepcionista();
-                    }else {
+                    } else {
                         menuAdministracionHotelAdministrador();
                     }
                     break;
@@ -407,25 +434,100 @@ public class Menu {
         inicio();
     }
 
-    public void menuAdministracionHotelAdministrador(){
+    public void menuPasajero() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
-                    opcionesAdministracionHotelAdministrador();
-                    opcion=scanner.nextInt();
+            int opcion = -1;
+            do {
+                try {
+                    opcionesPasajero();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
 
-            switch (opcion){
+            switch (opcion) {
+                case 0:
+                    this.guardarListas();
+                    System.exit(0);
+                    break;
+                case 1:
+                    int metodo = 0;
+                    do {
+                        try {
+                            System.out.println("Ingrese el método de búsqueda del pasajero: \n1- Por DNI\n2- Por nombre completo");
+                            metodo = scanner.nextInt();
+                            scanner.nextLine();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Debe ingresar un número");
+                            scanner.nextLine();
+                        } catch (Exception e) {
+                            System.out.println("Problema detectado");
+                            scanner.nextLine();
+                        }
+                    } while (metodo != 1 && metodo != 2);
+                    if (metodo == 1) {
+                        System.out.println("Ingrese el DNI del pasajero");
+                        hotel.buscarOcupacionPasajeroAlojadoPorDNI(scanner.nextLine());
+                    } else {
+                        String nombre, apellido;
+                        System.out.println("Ingrese el nombre del pasajero");
+                        nombre = scanner.nextLine();
+                        System.out.println("Ingrese el apellido");
+                        apellido = scanner.nextLine();
+                        hotel.buscarOcupacionPasajeroAlojadoPorNombreYApellido(nombre, apellido);
+                    }
+                    break;
+                case 2:
+                    System.out.println("Ingrese el DNI del pasajero");
+                    hotel.verHistoricoPasajeroListaGeneral(scanner.nextLine());
+                    break;
+                case 3:
+                    System.out.println("Ingrese el DNI del pasajero a modificar");
+                    hotel.llamadaModificarPasajero(scanner.nextLine());
+                    break;
+                case 4:
+                    menuHotel();
+                    break;
+                default:
+                    System.out.println("Opción incorrecta. Ingrese nuevamente");
+                    break;
+
+            }
+
+            System.out.println("\nDesea ver otra opción?? s/n");
+            continuar = scanner.nextLine();
+
+        } while (continuar.equalsIgnoreCase("s"));
+
+        inicio();
+    }
+
+    public void menuAdministracionHotelAdministrador() {
+        String continuar = "n";
+        do {
+            int opcion = -1;
+            do {
+                try {
+                    opcionesAdministracionHotelAdministrador();
+                    opcion = scanner.nextInt();
+                    scanner.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("Debe ingresar un número");
+                    scanner.nextLine();
+                } catch (Exception e) {
+                    System.out.println("Problema detectado");
+                    scanner.nextLine();
+                }
+            } while (opcion == -1);
+
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -453,25 +555,25 @@ public class Menu {
         inicio();
     }
 
-    public void menuAdministracionAdministrador (){
+    public void menuAdministracionAdministrador() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesAdministracionAdministrador();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
 
-            switch (opcion){
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -502,25 +604,25 @@ public class Menu {
         inicio();
     }
 
-    public void menuReservas (){
+    public void menuReservas() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesReservas();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
 
-            switch (opcion){
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -532,40 +634,40 @@ public class Menu {
                     hotel.modificarReserva();
                     break;
                 case 3:
-                    long idReserva=0;
-                    do{
-                        try{
+                    long idReserva = 0;
+                    do {
+                        try {
                             System.out.println("Ingrese el ID de la reserva que desea eliminar");
                             hotel.eliminarReserva(scanner.nextLong());
                             scanner.nextLine();
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Debe ingresar un número");
                             scanner.nextLine();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Problema detectado");
                             scanner.nextLine();
                         }
-                    }while (idReserva==0);
+                    } while (idReserva == 0);
                     break;
                 case 4:
                     System.out.println("\nIngrese el Dni del pasajero");
                     hotel.listadoReservasPorDni(scanner.nextLine());
                     break;
                 case 5:
-                    int nroHabitacion=0;
-                    do{
-                        try{
+                    int nroHabitacion = 0;
+                    do {
+                        try {
                             System.out.println("Ingrese el número de la habitación de la que desea ver las reservas");
-                            nroHabitacion=scanner.nextInt();
+                            nroHabitacion = scanner.nextInt();
                             scanner.nextLine();
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Debe ingresar un número");
                             scanner.nextLine();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Problema detectado");
                             scanner.nextLine();
                         }
-                    }while (nroHabitacion==0);
+                    } while (nroHabitacion == 0);
                     hotel.listadoReservasPorHabitacion(nroHabitacion);
                     break;
                 case 6:
@@ -585,25 +687,25 @@ public class Menu {
         inicio();
     }
 
-    public void menuShop (){
+    public void menuShop() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesShop();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
 
-            switch (opcion){
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -642,25 +744,25 @@ public class Menu {
         inicio();
     }
 
-    public void menuListados (){
+    public void menuListados() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesListados();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
 
-            switch (opcion){
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -672,61 +774,61 @@ public class Menu {
                     hotel.listadoEgresosDelDia();
                     break;
                 case 3:
-                    LocalDate fechaIngresos=null;
-                    do{
-                        try{
+                    LocalDate fechaIngresos = null;
+                    do {
+                        try {
                             System.out.println("Ingrese la fecha que desea ver (AAAA-MM-DD)");
-                            fechaIngresos=LocalDate.parse(scanner.nextLine());
+                            fechaIngresos = LocalDate.parse(scanner.nextLine());
                         } catch (DateTimeParseException e) {
                             System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
-                            fechaIngresos= null;
+                            fechaIngresos = null;
                         } catch (Exception e) {
                             System.out.println("\nIngrese la fecha nuevamente");
                             fechaIngresos = null;
                         }
-                    }while (fechaIngresos==null);
+                    } while (fechaIngresos == null);
                     hotel.listadoIngresosDeReservasDeDiaDeterminado(fechaIngresos);
                     break;
                 case 4:
-                    LocalDate fechaEgresos=null;
-                    do{
-                        try{
+                    LocalDate fechaEgresos = null;
+                    do {
+                        try {
                             System.out.println("Ingrese la fecha que desea ver (AAAA-MM-DD)");
-                            fechaEgresos=LocalDate.parse(scanner.nextLine());
+                            fechaEgresos = LocalDate.parse(scanner.nextLine());
                         } catch (DateTimeParseException e) {
                             System.out.println("\nIngrese la fecha nuevamente en el formato indicado");
-                            fechaEgresos= null;
+                            fechaEgresos = null;
                         } catch (Exception e) {
                             System.out.println("\nIngrese la fecha nuevamente");
                             fechaEgresos = null;
                         }
-                    }while (fechaEgresos==null);
+                    } while (fechaEgresos == null);
                     hotel.listadoEgresosDeDiaDeterminado(fechaEgresos);
                     break;
                 case 5:
                     hotel.listadoHabitaciones();
                     break;
                 case 6:
-                    int estado=0;
-                    do{
-                        try{
+                    int estado = 0;
+                    do {
+                        try {
                             System.out.println("\nPara qué tipo de estado desea ver habitaciones?");
                             System.out.println("\n1- DISPONIBLE\n2- OCUPADA\n3- FUERA DE SERVICIO\n");
-                            estado=scanner.nextInt();
+                            estado = scanner.nextInt();
                             scanner.nextLine();
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Debe ingresar un número");
                             scanner.nextLine();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Problema detectado");
                             scanner.nextLine();
                         }
-                    }while (estado!=1 && estado!=2 && estado!=3);
-                    if(estado==1){
+                    } while (estado != 1 && estado != 2 && estado != 3);
+                    if (estado == 1) {
                         hotel.listadoHabitacionesPorEstado(EstadoHabitacion.DISPONIBLE);
-                    }else if(estado==2){
+                    } else if (estado == 2) {
                         hotel.listadoHabitacionesPorEstado(EstadoHabitacion.OCUPADA);
-                    }else{
+                    } else {
                         hotel.listadoHabitacionesPorEstado(EstadoHabitacion.FUERA_DE_SERVICIO);
                     }
                     break;
@@ -748,25 +850,25 @@ public class Menu {
         inicio();
     }
 
-    public void menuMisDatos (){
+    public void menuMisDatos() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesMisDatos();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
 
-            switch (opcion){
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -775,15 +877,15 @@ public class Menu {
                     String claveActual;
                     String claveNueva;
                     System.out.println("Ingrese su contraseña actual");
-                    claveActual=scanner.nextLine();
+                    claveActual = scanner.nextLine();
                     System.out.println("Ingrese la nueva contraseña");
-                    claveNueva=scanner.nextLine();
+                    claveNueva = scanner.nextLine();
                     empleadoActual.modificarClave(empleadoActual, claveActual, claveNueva);
                     break;
                 case 2:
-                    if(empleadoActual instanceof Recepcionista){
+                    if (empleadoActual instanceof Recepcionista) {
                         menuInicioRecepcionista();
-                    }else{
+                    } else {
                         menuInicioAdministrador();
                     }
                     break;
@@ -801,31 +903,31 @@ public class Menu {
     }
 
 
-    public void menuEmpleadosAdministrador (){
+    public void menuEmpleadosAdministrador() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesEmpleadosAdministrador();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
 
-            switch (opcion){
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
-                   hotel.nuevoEmpleado();
+                    hotel.nuevoEmpleado();
                     break;
                 case 2:
                     hotel.llamadaModificarEmpleado(empleadoActual);
@@ -850,25 +952,25 @@ public class Menu {
         inicio();
     }
 
-    public void menuHabitacionesAdministrador (){
+    public void menuHabitacionesAdministrador() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesHabitacionesAdministrador();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
 
-            switch (opcion){
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -877,37 +979,37 @@ public class Menu {
                     hotel.llamadaNuevaHabitacion();
                     break;
                 case 2:
-                    int nroHabitacion=0;
-                    do{
-                        try{
+                    int nroHabitacion = 0;
+                    do {
+                        try {
                             System.out.println("\nIngrese el número de habitación que desea modificar");
-                            nroHabitacion=scanner.nextInt();
+                            nroHabitacion = scanner.nextInt();
                             scanner.nextLine();
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Debe ingresar un número");
                             scanner.nextLine();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Problema detectado");
                             scanner.nextLine();
                         }
-                    }while (nroHabitacion==0);
-                  hotel.llamadaModificarHabitacion(nroHabitacion, empleadoActual);
+                    } while (nroHabitacion == 0);
+                    hotel.llamadaModificarHabitacion(nroHabitacion, empleadoActual);
                     break;
                 case 3:
-                    int habitacion=0;
-                    do{
-                        try{
+                    int habitacion = 0;
+                    do {
+                        try {
                             System.out.println("\nIngrese el número de habitación que desea eliminar");
-                            habitacion=scanner.nextInt();
+                            habitacion = scanner.nextInt();
                             scanner.nextLine();
-                        }catch (InputMismatchException e){
+                        } catch (InputMismatchException e) {
                             System.out.println("Debe ingresar un número");
                             scanner.nextLine();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Problema detectado");
                             scanner.nextLine();
                         }
-                    }while (habitacion==0);
+                    } while (habitacion == 0);
                     hotel.eliminarHabitacion(habitacion);
                     scanner.nextLine();
                     break;
@@ -928,25 +1030,25 @@ public class Menu {
         inicio();
     }
 
-    public void menuShopAdministrador (){
+    public void menuShopAdministrador() {
         String continuar = "n";
         do {
-            int opcion=-1;
-            do{
-                try{
+            int opcion = -1;
+            do {
+                try {
                     opcionesShopAdministracionAdministrador();
-                    opcion=scanner.nextInt();
+                    opcion = scanner.nextInt();
                     scanner.nextLine();
-                }catch (InputMismatchException e){
+                } catch (InputMismatchException e) {
                     System.out.println("Debe ingresar un número");
                     scanner.nextLine();
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("Problema detectado");
                     scanner.nextLine();
                 }
-            }while (opcion==-1);
+            } while (opcion == -1);
 
-            switch (opcion){
+            switch (opcion) {
                 case 0:
                     this.guardarListas();
                     System.exit(0);
@@ -982,20 +1084,21 @@ public class Menu {
         inicio();
     }
 
-    public void cargaListas (){
+    public void cargaListas() {
         Archivo archivo = new Archivo();
         hotel.setListaHabitaciones(archivo.readerArchivoHabitaciones("habitacion.json"));
-        hotel.setListaReservas(archivo.readerArchivoReserva("reservas.json"));
+        hotel.setListaReservas(archivo.readerArchivoReserva("reserva.json"));
         hotel.setListaOcupaciones(archivo.readerArchivoOcupaciones("ocupacion.json"));
         hotel.setPasajeros(archivo.readerArchivoPasajeros("pasajero.json"));
         hotel.setFacturasEmitidas(archivo.readerArchivoFacturas("factura.json"));
         hotel.setShop(archivo.readerArchivoShop("shop.json"));
 
     }
-    public void guardarListas(){
-        Archivo archivo=new Archivo();
+
+    public void guardarListas() {
+        Archivo archivo = new Archivo();
         archivo.writerArchivoHabitaciones("habitacion.json", hotel.getListaHabitaciones());
-        archivo.writerArchivoReserva("reservas.json", hotel.getListaReservas());
+        archivo.writerArchivoReserva("reserva.json", hotel.getListaReservas());
         archivo.writerArchivoOcupaciones("ocupacion.json", hotel.getListaOcupaciones());
         archivo.writerArchivoPasajeros("pasajero.json", hotel.getPasajeros());
         archivo.writerArchivoFacturas("factura.json", hotel.getFacturasEmitidas());

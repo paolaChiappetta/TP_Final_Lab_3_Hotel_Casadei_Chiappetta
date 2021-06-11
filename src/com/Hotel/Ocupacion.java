@@ -170,16 +170,7 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
 
     //Métodos
 
-    public void verListaPaxsHabitacion() {  //muestra la lista de pasajeros alojados en la habitación
-        for (Pasajero lista : this.listaPaxs) {
-            if (lista != null) {
-                System.out.println(lista);
-            }
-        }
-    }
-
-
-    public Pasajero titularHabitacion() {  //indica quién es el titular de la reserva p/emitir la factura luego
+      public Pasajero titularHabitacion() {  //indica quién es el titular de la reserva p/emitir la factura luego
         Pasajero titular = null;
         for (Pasajero lista : this.listaPaxs) {
             if (this.listaPaxs != null) {
@@ -195,9 +186,9 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
     /// Métodos para asignar tipo de pension en ocupacion
 
     public void menuTipoPension() {
-        System.out.println("1: Desayuno");
-        System.out.println("2: Media pension");
-        System.out.println("3: Pension Completa");
+        System.out.println("1- Desayuno");
+        System.out.println("2- Media pension");
+        System.out.println("3- Pension Completa");
 
 
     }
@@ -279,7 +270,7 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
 
         }
         Pasajero pasajero = new Pasajero();
-        this.listaPaxs.add(pasajero.cargarPasajeroTitular(reserva));
+        this.listaPaxs.add(pasajero.cargarPasajeroTitular(reserva, pasajeros));
     }
 
     public void examinaDatosCompletos(String dato) throws ExcepcionDatoVacio {
@@ -333,13 +324,14 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
                             pasajeros.get(i).setTitularreserva(false);
                             this.listaPaxs.add(pasajeros.get(i));
                             encontrado = true;
+                            System.out.println("El pasajero se encuentra en nuestros registros, fue cargado a la habitación");
                         }
                         i++;
                     }
 
                 } else {
                     Pasajero pasajero = new Pasajero();
-                    this.listaPaxs.add(pasajero.cargarPasajeroAcompaniante());
+                    this.listaPaxs.add(pasajero.cargarPasajeroAcompaniante(pasajeros));
                 }
                 do {
                     rta = 0;

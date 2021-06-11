@@ -97,6 +97,7 @@ public class Habitacion implements Serializable, Comparable<Habitacion> {
             }
         }while (numero== 0);
 
+
         do{
             try{
                 System.out.println("Ingrese el piso:");

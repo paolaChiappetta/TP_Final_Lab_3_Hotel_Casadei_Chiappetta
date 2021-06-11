@@ -1,0 +1,74 @@
+[
+  {
+    "pasajeroNombre": "Carlos",
+    "pasajeroApellido": "Perez",
+    "pasajeroDni": "5662255",
+    "numeroHabitacion": 308,
+    "numeroPasajeros": 2,
+    "deposito": 1500.0,
+    "fechaIngreso": "2021-06-15",
+    "fechaSalida": "2021-06-25",
+    "numeroReserva": 1,
+    "telefono": "155985263"
+  },
+  {
+    "pasajeroNombre": "Lucas",
+    "pasajeroApellido": "Dominguez",
+    "pasajeroDni": "25698741",
+    "numeroHabitacion": 101,
+    "numeroPasajeros": 1,
+    "deposito": 800.0,
+    "fechaIngreso": "2021-07-01",
+    "fechaSalida": "2021-07-08",
+    "numeroReserva": 2,
+    "telefono": "25568888"
+  },
+  {
+    "pasajeroNombre": "Lucia",
+    "pasajeroApellido": "Garcia",
+    "pasajeroDni": "25569966",
+    "numeroHabitacion": 307,
+    "numeroPasajeros": 5,
+    "deposito": 2500.0,
+    "fechaIngreso": "2021-08-07",
+    "fechaSalida": "2021-08-18",
+    "numeroReserva": 3,
+    "telefono": "12566332"
+  },
+  {
+    "pasajeroNombre": "Patricia",
+    "pasajeroApellido": "Gomez",
+    "pasajeroDni": "35698852",
+    "numeroHabitacion": 308,
+    "numeroPasajeros": 2,
+    "deposito": 1500.0,
+    "fechaIngreso": "2021-06-11",
+    "fechaSalida": "2021-06-21",
+    "numeroReserva": 4,
+    "telefono": "2266666"
+  },
+  {
+    "pasajeroNombre": "Facundo",
+    "pasajeroApellido": "Ríos",
+    "pasajeroDni": "35221225",
+    "numeroHabitacion": 303,
+    "numeroPasajeros": 2,
+    "deposito": 2600.0,
+    "fechaIngreso": "2021-08-05",
+    "fechaSalida": "2021-08-08",
+    "numeroReserva": 5,
+    "telefono": "155699885"
+  },
+  {
+    "pasajeroNombre": "k",
+    "pasajeroApellido": "k",
+    "pasajeroDni": "k",
+    "numeroHabitacion": 101,
+    "numeroPasajeros": 1,
+    "deposito": 300.0,
+    "fechaIngreso": "2021-06-11",
+    "fechaSalida": "2021-06-12",
+    "numeroReserva": 6,
+    "telefono": "3k"
+  }
+]

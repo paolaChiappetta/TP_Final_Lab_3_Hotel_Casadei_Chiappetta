@@ -1,7 +1,7 @@
 package com.Hotel;
 
 public enum TipoPension {
-    DESAYUNO ("     Desayuno",500),
+    DESAYUNO (" Desayuno",500),
     MEDIA_PENSION ("Media pensión", 1500),
     PENSION_COMPLETA ("Pensión completa",2500);
 
