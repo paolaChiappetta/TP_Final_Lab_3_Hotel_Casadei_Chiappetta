@@ -839,21 +839,10 @@ public class Hotel implements Serializable {
             do {
                 int opcion = 0;
                 System.out.println(reserva);
-                do{
-                    try{
-                        System.out.println("Indique qué dato desea modificar:");
-                        menuModificarReserva();
-                        opcion = scanner.nextInt();
-                        scanner.nextLine();
-                    }catch(InputMismatchException e){
-                        System.out.println("Debe ingresar un numero");
-                        scanner.nextLine();
-                    }catch(Exception e){
-                        System.out.println("Problema detectado");
-                        scanner.nextLine();
-                    }
-                }while(opcion== 0);
-
+                System.out.println("Indique qué dato desea modificar:");
+                menuModificarReserva();
+                opcion = scanner.nextInt();
+                scanner.nextLine();
                 switch (opcion) {
                     case 1:
                         String nombre = "";
@@ -1030,7 +1019,7 @@ public class Hotel implements Serializable {
                 }
 
                 System.out.println(reserva);
-                System.out.println("Desea modificar otro dato? s/n");
+                System.out.println("Desea modificar otro dato? ");
                 continuar = scanner.nextLine();
 
             } while (continuar.equalsIgnoreCase("s"));
@@ -1262,29 +1251,14 @@ public class Hotel implements Serializable {
         Scanner scanner = new Scanner(System.in);
         String continuar = "s";
 
-
-        do{
-            int opcion = 0;
-
-            do{
-                try{
-                    System.out.println(" ");
-
-                    System.out.println(empleado);
-                    System.out.println("Indique el dato que desea modificar");
-                    menuModificarEmpleado();
-                    opcion = scanner.nextInt();
-                    scanner.nextLine();
-                }catch(InputMismatchException e){
-                    System.out.println("Debe ingresar un numero");
-                    scanner.nextLine();
-                }catch(Exception e){
-                    System.out.println("problema detectado");
-                    scanner.nextLine();
-                }
-
-        }while (opcion== 0);
-
+        int opcion = 0;
+        do {
+            System.out.println(" ");
+            System.out.println(empleado);
+            System.out.println("Indique el dato que desea modificar");
+            menuModificarEmpleado();
+            opcion = scanner.nextInt();
+            scanner.nextLine();
             switch (opcion) {
                 case 1:
                     String nombre = "";
@@ -1532,19 +1506,8 @@ public class Hotel implements Serializable {
 
 
         do {
-            do{
-                try{
-                    menuModificarPasajero();
-                    opcion = scanner.nextInt();
-                    scanner.nextLine();
-                }catch (InputMismatchException e){
-                    System.out.println("Debe ingresar un numero");
-                    scanner.nextLine();
-                }catch (Exception e){
-                    System.out.println("Problema detectado");
-                }
-            }while (opcion==0);
-
+            menuModificarPasajero();
+            opcion = scanner.nextInt();
             switch (opcion) {
                 case 1:
                     String nombre = "";
