@@ -3,7 +3,7 @@ package com.Hotel;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class Empleado extends Persona implements Serializable {
+public class Empleado extends Persona implements Serializable{
     //esta clase debería ser abstracta, pero se sacó para poder leer el archivo
 
     //Atributos
@@ -72,4 +72,6 @@ public class Empleado extends Persona implements Serializable {
                 "\nUsuario: " + this.usuario +
                 "\nContraseña: " + this.clave;
     }
+
+
 }

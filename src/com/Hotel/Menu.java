@@ -10,6 +10,8 @@ import java.util.Scanner;
 public class Menu {
     private Hotel hotel = new Hotel();
     private Empleado empleadoActual;
+    private Administrador administrador;
+    private Recepcionista recepcionista;
     private Scanner scanner = new Scanner(System.in);
 
 
@@ -191,19 +193,21 @@ public class Menu {
                 case 1:
                     Archivo archivo = new Archivo();
                     hotel.setEmpleados(archivo.readerArchivoEmpleado("empleado.json")); //al ingreso se cargan las listas de empleados p/verificar usuario y contraseña
-                    //String usuario, contrasenia;
-                   // System.out.println("Ingrese nombre de usuario");
-                    //usuario = scanner.nextLine();
-                    //System.out.println("Ingrese su contraseña");
-                   // contrasenia = scanner.nextLine();
-                    //this.setEmpleadoActual(hotel.verificarUsuarioyContrasenia(usuario, contrasenia));
-                    Administrador admi = new Administrador();
-                    this.setEmpleadoActual(admi);
+                    String usuario, contrasenia;
+                   System.out.println("Ingrese nombre de usuario");
+                    usuario = scanner.nextLine();
+                    System.out.println("Ingrese su contraseña");
+                   contrasenia = scanner.nextLine();
+                    this.setEmpleadoActual(hotel.verificarUsuarioyContrasenia(usuario, contrasenia));
                     if (empleadoActual != null) {
                         cargaListas();  //si pudo ingresar un empleado, se cargan las demás listas del hotel
                         if (empleadoActual instanceof Recepcionista) {
+                            Recepcionista rec = new Recepcionista();
+                            this.setEmpleadoActual(rec);
                             menuInicioRecepcionista();
                         } else {
+                            Administrador adm= new Administrador();
+                            this.setEmpleadoActual(adm);
                             menuInicioAdministrador();
                         }
                     }

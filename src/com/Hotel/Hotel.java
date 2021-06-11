@@ -513,8 +513,8 @@ public class Hotel implements Serializable {
     //MUESTRA EL LISTADO DE INGRESOS DEL DIA DE HOY
     public void listadoIngresosDelDia() {
         if (!this.listaReservas.isEmpty()) { //busca en la lista de reservas
+            System.out.println("\nIngresos del día\n");
             for (Reserva lista : listaReservas) {
-                System.out.println("\nIngresos del día\n");
                 if (lista.getFechaIngreso().isEqual(LocalDate.now())) { //coincidencias en la fecha de ingreso
                     System.out.println(lista);
                 }
@@ -527,8 +527,9 @@ public class Hotel implements Serializable {
     //MUESTRA EL LISTADO DE EGRESOS DEL DIA DE HOY
     public void listadoEgresosDelDia() {
         if (!this.listaOcupaciones.isEmpty()) {
+            System.out.println("\nEgresos del día\n");
             for (Ocupacion lista : listaOcupaciones) { //busca en la lista de ocupaciones
-                System.out.println("\nEgresos del día\n");
+
                 if (lista.getFechaSalida().isEqual(LocalDate.now())) { //coincidencias en la fecha de salida
                     System.out.println(lista);
                 }
@@ -541,8 +542,9 @@ public class Hotel implements Serializable {
     //MUESTRA EL LISTADO DE INGRESOS DE UN DIA DETERMINADO
     public void listadoIngresosDeReservasDeDiaDeterminado(LocalDate dia) {
         if (!this.listaReservas.isEmpty()) {
+            System.out.println("\nIngresos del día: " + dia + "\n");
             for (Reserva lista : listaReservas) { //busca en la lista de reservas
-                System.out.println("\nIngresos del día: " + dia + "\n");
+
                 if (lista.getFechaIngreso().isEqual(dia)) { //coincidencias en la fecha de ingreso indicada
                     System.out.println(lista);
                 }
@@ -555,8 +557,9 @@ public class Hotel implements Serializable {
     //MUESTRA EL LISTADO DE EGRESOS DE UN DIA DETERMINADO
     public void listadoEgresosDeDiaDeterminado(LocalDate dia) {
         if (!this.listaReservas.isEmpty()) {
+            System.out.println("\nEgresos del día: " + dia + "\n");
             for (Reserva lista : listaReservas) { //busca en la lista de reservas
-                System.out.println("\nEgresos del día: " + dia + "\n");
+
                 if (lista.getFechaSalida().isEqual(dia)) { //coincidencias en la fecha de egreso indicada
                     System.out.println(lista);
                 }
