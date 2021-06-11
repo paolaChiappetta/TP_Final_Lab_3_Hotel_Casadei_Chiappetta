@@ -238,7 +238,7 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
 
         if (existe) {
             while (!encontrado && i < pasajeros.size()) {
-                if (reserva.getPasajeroDni() == pasajeros.get(i).getDni()) {
+                if (reserva.getPasajeroDni().compareTo(pasajeros.get(i).getDni())==0) {
                     if (!pasajeros.get(i).getTitularreserva()) {
                         pasajeros.get(i).setTitularreserva(true);
                     }
@@ -320,7 +320,7 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
                 boolean existe = buscarPasajeroDni(dni, pasajeros);
                 if (existe) {
                     while (!encontrado && i < pasajeros.size()) {
-                        if (dni == pasajeros.get(i).getDni()) {
+                        if (dni.compareTo(pasajeros.get(i).getDni())==0) {
                             pasajeros.get(i).setTitularreserva(false);
                             this.listaPaxs.add(pasajeros.get(i));
                             encontrado = true;
@@ -360,7 +360,7 @@ public class Ocupacion implements Serializable, Comparable<Ocupacion> {
 
         while (!encontrado && i < pasajeros.size()) {
 
-            if (pasajeros.get(i).getDni() == dni) {
+            if (pasajeros.get(i).getDni().compareTo(dni)==0) {
                 encontrado = true;
             }
             i++;

@@ -187,7 +187,6 @@ public class Menu {
             } while (opcion == -1);
             switch (opcion) {
                 case 0:
-                    this.guardarListas();
                     System.exit(0);
                     break;
                 case 1:
@@ -254,6 +253,7 @@ public class Menu {
                     menuMisDatos();
                     break;
                 case 3:
+                    this.guardarListas();
                     inicio();
                     break;
                 default:
@@ -267,6 +267,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -304,6 +305,7 @@ public class Menu {
                     System.out.println("Backup realizado correctamente");
                     break;
                 case 4:
+                    this.guardarListas();
                     inicio();
                     break;
                 default:
@@ -318,6 +320,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -435,6 +438,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -510,6 +514,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -556,6 +561,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -605,6 +611,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -688,6 +695,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -745,6 +753,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -851,6 +860,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -903,6 +913,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -956,6 +967,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -1034,6 +1046,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 
@@ -1088,6 +1101,7 @@ public class Menu {
 
         } while (continuar.equalsIgnoreCase("s"));
 
+        this.guardarListas();
         inicio();
     }
 

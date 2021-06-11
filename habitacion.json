@@ -134,7 +134,7 @@
   {
     "numero": 308,
     "piso": 3,
-      "estado": "DISPONIBLE",
+    "estado": "DISPONIBLE",
     "tarifa": "SUITE"
   }
 ]
