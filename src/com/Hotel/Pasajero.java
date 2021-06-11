@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -26,12 +27,14 @@ public class Pasajero extends Persona implements Serializable {
     private String mail;
     private Integer id;
     private Boolean titularReserva;
+    private List<Ocupacion>ocupacionesAnteriores;
 
 
     //constructor vacío con asignación de ID
 
     public Pasajero() {
         this.id = identificador++;
+        this.ocupacionesAnteriores=new ArrayList<>();
     }
 
     //constructor con datos y asignación de ID
@@ -56,6 +59,7 @@ public class Pasajero extends Persona implements Serializable {
         this.pais = pais;
         this.mail = mail;
         this.titularReserva = titularreserva;
+        this.ocupacionesAnteriores=new ArrayList<>();
     }
 
     //constructor completo
@@ -63,7 +67,8 @@ public class Pasajero extends Persona implements Serializable {
                     LocalDate fechaNacimiento, String profesion_ocupacion,
                     String nacionalidad, String calle, Integer numero,
                     Integer piso, String departamento, String ciudad, String provincia,
-                    String pais, String mail, Integer id, Boolean titularreserva) {
+                    String pais, String mail, Integer id, Boolean titularreserva,
+                    List<Ocupacion>ocupacionesAnteriores) {
 
         super(nombre, apellido, numeroTel, dni);
         this.id = id;
@@ -79,6 +84,7 @@ public class Pasajero extends Persona implements Serializable {
         this.pais = pais;
         this.mail = mail;
         this.titularReserva = titularreserva;
+        this.ocupacionesAnteriores=ocupacionesAnteriores;
     }
 
     //getters y setters
@@ -183,6 +189,25 @@ public class Pasajero extends Persona implements Serializable {
         this.ciudad = ciudad;
     }
 
+   public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Boolean getTitularReserva() {
+        return titularReserva;
+    }
+
+    public void setTitularReserva(Boolean titularReserva) {
+        this.titularReserva = titularReserva;
+    }
+
+    public List<Ocupacion> getOcupacionesAnteriores() {
+        return ocupacionesAnteriores;
+    }
+
+    public void setOcupacionesAnteriores(List<Ocupacion> ocupacionesAnteriores) {
+        this.ocupacionesAnteriores = ocupacionesAnteriores;
+    }
 
     public void examinaDatosCompletos(String dato) throws ExcepcionDatoVacio {
 
@@ -194,7 +219,7 @@ public class Pasajero extends Persona implements Serializable {
 
     //FUNCION CARGA DE PASAJERO, pide datos devuelve pasajero
 
-    public Pasajero cargarPasajeroTitular(Reserva reserva) {
+    public Pasajero cargarPasajeroTitular(Reserva reserva, List<Pasajero>pasajeros) {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -308,11 +333,12 @@ public class Pasajero extends Persona implements Serializable {
         this.setPais(scanner.nextLine());
 
         this.setTitularreserva(true);
+        pasajeros.add(this);
 
         return this;
     }
 
-    public Pasajero cargarPasajeroAcompaniante() {
+    public Pasajero cargarPasajeroAcompaniante(List<Pasajero>pasajeros) {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -362,6 +388,7 @@ public class Pasajero extends Persona implements Serializable {
         this.setNumeroTel(telefono);
 
         this.setTitularreserva(false);
+        pasajeros.add(this);
 
         return this;
     }
